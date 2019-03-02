@@ -1,0 +1,16 @@
+class CreateAddresses < ActiveRecord::Migration[5.2]
+  def change
+    create_table :addresses do |t|
+      t.string :street, null: false
+      t.string :number, null: false
+      t.string :neighborhood, null: false
+      t.string :city, default: 'Porto Velho'
+      t.string :state, default: 'Rondônia'
+      t.string :country, default: 'Brasil'
+      t.string :zipcode
+      t.references :establishment, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end

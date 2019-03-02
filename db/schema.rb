@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_190618) do
+ActiveRecord::Schema.define(version: 2019_03_02_194816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,71 @@ ActiveRecord::Schema.define(version: 2019_03_02_190618) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "street", null: false
+    t.string "number", null: false
+    t.string "neighborhood", null: false
+    t.string "city", default: "Porto Velho"
+    t.string "state", default: "Rondônia"
+    t.string "country", default: "Brasil"
+    t.string "zipcode"
+    t.bigint "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_addresses_on_establishment_id"
+  end
+
+  create_table "bank_dates", force: :cascade do |t|
+    t.string "cpf_cnpj", null: false
+    t.string "holder", null: false
+    t.integer "bank_code", null: false
+    t.string "agency", null: false
+    t.string "account_number", null: false
+    t.bigint "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_bank_dates_on_establishment_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "establishments", force: :cascade do |t|
+    t.string "cpf_cnpj", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.string "timetable", null: false
+    t.string "photo"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_establishments_on_user_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.decimal "amount", null: false
+    t.integer "duration", null: false
+    t.bigint "category_id"
+    t.json "linked_services"
+    t.json "schedules"
+    t.bigint "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_services_on_category_id"
+    t.index ["establishment_id"], name: "index_services_on_establishment_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "name", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -49,4 +111,9 @@ ActiveRecord::Schema.define(version: 2019_03_02_190618) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "establishments"
+  add_foreign_key "bank_dates", "establishments"
+  add_foreign_key "establishments", "users"
+  add_foreign_key "services", "categories"
+  add_foreign_key "services", "establishments"
 end
