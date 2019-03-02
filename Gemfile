@@ -5,6 +5,7 @@ ruby '2.5.3'
 
 gem 'devise'
 gem 'jbuilder', '~> 2.5'
+gem "mini_magick"
 gem 'rails', '~> 5.2.2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
