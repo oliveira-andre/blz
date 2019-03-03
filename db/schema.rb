@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 2019_03_02_194816) do
 
   create_table "services", force: :cascade do |t|
     t.string "title", null: false
+    t.integer "status", default: 2, null: false
+    t.integer "local_type", null: false
     t.text "description", null: false
     t.decimal "amount", null: false
     t.integer "duration", null: false
