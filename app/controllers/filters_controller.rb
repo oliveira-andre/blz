@@ -3,12 +3,12 @@ class FiltersController < ApplicationController
 
   def index
     @filter = filter_params
-    @services = FilterServices.execute(@filter) || Service.approved
+    @services = FiltersService.execute(@filter) || Service.approved
   end
 
   def destroy
     @filter = filter_params
-    @services = FilterServices.execute(@filter) || Service.approved
+    @services = FiltersService.execute(@filter) || Service.approved
   end
 
   private
