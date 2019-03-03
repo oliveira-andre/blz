@@ -3,3 +3,19 @@
     margin: 7px 0px 7px 0px;
   }
 }
+
+.services_form {
+  figure {
+    img {
+      min-height: 128px;
+      max-height: 128px;
+      min-width: 128px;
+      max-width: 128px;
+
+      margin-left: 5px;
+      margin-bottom: 5px;
+
+      border: 1px solid #ccc;
+    }
+  }
+}
