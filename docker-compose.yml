@@ -18,6 +18,10 @@ services:
       - 'box:/box'
     stdin_open: true
     tty: true
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
  
   box:
     image: busybox
