@@ -6,10 +6,6 @@ class ServicesController < ApplicationController
     @services = @establishment.services
   end
 
-  def new; end
-
-  def create; end
-
   private
 
   def service_scope
