@@ -6,7 +6,6 @@ class CreateEstablishments < ActiveRecord::Migration[5.2]
       t.string :email, null: false
       t.string :phone, null: false
       t.string :timetable, null: false
-      t.string :photo
       t.references :user, foreign_key: true
 
       t.timestamps
