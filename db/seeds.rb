@@ -17,50 +17,47 @@ if user.nil?
   user.save!
 end
 
-user_1 = User.find_by email: "root@root.com"
-User.create!(name: "root", email: "root@root.com", password: "123456") if user_1.nil?
-
 ## Categories
 
 Category.find_or_create_by!(
-  name: 'Cabelos',
-  description: 'Breve descrição'
+    name: 'Cabelos',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Esmalteria',
-  description: 'Breve descrição'
+    name: 'Esmalteria',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Depilação',
-  description: 'Breve descrição'
+    name: 'Depilação',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Penteados e maquiagens',
-  description: 'Breve descrição'
+    name: 'Penteados e maquiagens',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Massagem',
-  description: 'Breve descrição'
+    name: 'Massagem',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Pele',
-  description: 'Breve descrição'
+    name: 'Pele',
+    description: 'Breve descrição'
 )
 
 ## EStablichment
 
 Establishment.find_or_create_by!(
-  cpf_cnpj: '510165056165161',
-  name: 'Raiz',
-  email: 'lugarbeleza@blz.life',
-  phone: '9698989989898',
-  timetable: '9:00 - 18:00',
-  user_id: User.first.id
+    cpf_cnpj: '510165056165161',
+    name: 'Raiz',
+    email: 'lugarbeleza@blz.life',
+    phone: '9698989989898',
+    timetable: '9:00 - 18:00',
+    user_id: User.first.id
 )
 
 ## Services
@@ -68,73 +65,89 @@ Establishment.find_or_create_by!(
 categories_ids = Category.ids
 
 Service.find_or_create_by!(
-  title: 'Corte feminino',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Corte feminino',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
 
 Service.find_or_create_by!(
-  title: 'Massagem nas costas',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Massagem nas costas',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
 
 Service.find_or_create_by!(
-  title: 'Unhas perfeitas',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Unhas perfeitas',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
 
 Service.find_or_create_by!(
-  title: 'Maquiagem completa',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Maquiagem completa',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
 
 Service.find_or_create_by!(
-  title: 'Penteado para casamento',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Penteado para casamento',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
 
 Service.find_or_create_by!(
-  title: 'Depilação a Laser',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Depilação a Laser',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
 
 Service.find_or_create_by!(
-  title: 'Corte infantil',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Corte infantil',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
 
 Service.find_or_create_by!(
-  title: 'Selagem + corte',
-  description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
-  category_id: categories_ids.sample,
-  amount: 20.0,
-  duration: 30,
-  establishment_id: Establishment.first.id
+    title: 'Selagem + corte',
+    description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
+    category_id: categories_ids.sample,
+    amount: 20.0,
+    status: Service.statuses.keys.sample,
+    local_type: Service.local_types.keys.sample,
+    duration: 30,
+    establishment_id: Establishment.first.id
 )
