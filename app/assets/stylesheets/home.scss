@@ -1,7 +1,5 @@
 .home_page {
   .banner {
-    margin-bottom: 50px;
-
     img {
       max-width: 90%;
     }
@@ -23,6 +21,27 @@
       }
 
       input[type="submit"] {
+        display: inline;
+      }
+    }
+  }
+
+  #filters {
+    background: #f3f3f3;
+    padding-top: 50px;    
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+
+    form.filter_form {
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #dbdbdb;
+    }
+
+    .tags-filtereds {
+      padding-bottom: 6px;
+
+      form {
         display: inline;
       }
     }

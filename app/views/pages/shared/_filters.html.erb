@@ -1,0 +1,49 @@
+<div id="filters">
+  <div class="container">
+     <%= form_with url: '/filters', method: :get, class: 'filter_form' do |f| %>
+      <%= f.hidden_field :query, value: filter['query'] %>
+      <div class="columns">
+        <div class="column">
+          <p class="has-text-weight-semibold">Onde prefere ser atendido ? </p>
+          <div class="control">
+            <label class="radio">
+              <%= f.radio_button :local_type, 'home', checked: filter['local_type'] == 'home' %>
+              Em casa
+            </label>
+            <strong> ou </strong>
+            <label class="radio">
+              <%= f.radio_button :local_type, 'establishment', checked: filter['local_type'] == 'establishment' %>
+              No estabelecimento
+            </label>
+          </div>
+        </div>
+        <div class="column">
+          <p class="has-text-weight-semibold">Qual tipo de serviço esta procurando ? </p>
+          <div class="select">
+            <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] }, prompt: 'Todos', selected: filter['category_id'] %>
+          </div>
+        </div>
+        <div class="column">
+          <%= f.submit 'Filtrar', class: 'button is-info is-rounded', style: 'width: 40%; margin: 0 30%' %>  
+        </div>
+      </div>
+    <% end %>
+
+    <div class="tags-filtereds">
+      <% filter.each do |key, value| %>
+        <% if value.present? %>
+          <%= form_with url: filter_path(id: key), method: :delete do |f| %>
+            <% filter.each do |k, v| %>
+              <%= f.hidden_field k, value: (key == k ? '' : v) %>
+            <% end %>
+            <span class="tag is-info is-medium">
+            <%= value unless category?(key) %>
+            <%= category_name(value) if category?(key) %>
+            <button class="delete is-small"></button>
+          </span>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>  
+  </div>
+</div>
