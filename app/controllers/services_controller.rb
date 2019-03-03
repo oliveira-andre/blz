@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
 
   def index
     authorize @establishment, policy_class: ServicePolicy
-    @services = Service.all
+    @services = @establishment.services
   end
 
   def new; end
