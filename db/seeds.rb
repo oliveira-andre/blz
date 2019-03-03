@@ -17,6 +17,9 @@ if user.nil?
   user.save!
 end
 
+user_1 = User.find_by email: "root@root.com"
+User.create!(name: "root", email: "root@root.com", password: "123456") if user_1.nil?
+
 ## Categories
 
 Category.find_or_create_by!(
