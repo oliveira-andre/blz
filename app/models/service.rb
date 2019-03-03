@@ -1,6 +1,9 @@
 class Service < ApplicationRecord
+  enum status: %i[approved recused awaiting_avaliation archived]
+  enum local_type: %i[home establishment]
+
   belongs_to :category
-  belongs_to :estableshment, required: false
+  belongs_to :establishment
 
   validates :title, presence: true
   validates :description, presence: true
