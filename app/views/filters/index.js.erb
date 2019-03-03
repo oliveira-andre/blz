@@ -1,0 +1,9 @@
+$("#services-list").replaceWith(
+  "<%= j render('pages/shared/services_list', services: @services, filter: @filter) %>"
+);
+
+$("#form_search").replaceWith(
+  "<%= j render('pages/shared/form_search', filter: @filter) %>"
+);
+
+$("#query").val('');
