@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 module Blz
   class Application < Rails::Application
     config.load_defaults 5.2
-
+    config.i18n.default_locale = 'pt-BR'
     config.generators.system_tests = nil
     config.generators.assets = false
     config.generators.helper = false
