@@ -8,10 +8,6 @@ class ServicesController < ApplicationController
 
   private
 
-  def service_scope
-    policy_scope(Service)
-  end
-
   def load_establishment
     @establishment = Establishment.find(params[:establishment_id])
   end
