@@ -11,6 +11,7 @@ pt-BR:
         password: Senha
         email: Email
         password_confirmation: Confirmação de senha
+        current_password: Senha atual
 
       service:
         title: Título
