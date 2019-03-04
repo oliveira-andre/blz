@@ -46,4 +46,40 @@
       }
     }
   }
+
+  #results {
+    .card-content {
+      p:nth-child(1) {
+        line-height: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p:nth-child(2) {
+        margin-bottom: 12px;
+      }
+
+      .media-content {
+        p:nth-child(1) {
+          margin: 0px;
+          padding-bottom: 12px;
+        }
+
+        p:nth-child(2) {
+          margin-top: 0px;
+        }
+
+        span.timetable {
+          margin-left: 15px !important;
+        }
+      }
+
+      .content {
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

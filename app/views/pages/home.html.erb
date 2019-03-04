@@ -1,2 +1,6 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="home_page">
+  <%= render 'pages/shared/header' %>
+  <%= render 'pages/shared/banner' %>
+  <%= render 'pages/shared/filters', filter: @filter || { } %>
+  <%= render 'pages/shared/results', services: @services || [] %>
+</div>
