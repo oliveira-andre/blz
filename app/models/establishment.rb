@@ -10,5 +10,12 @@ class Establishment < ApplicationRecord
   validates :user_id, uniqueness: true
 
   has_many :services
+  has_one :address
   has_one_attached :photo
+
+  accepts_nested_attributes_for :address, allow_destroy: true,
+                                          reject_if: :all_blank
+
+  accepts_nested_attributes_for :user, allow_destroy: true,
+                                       reject_if: :all_blank
 end
