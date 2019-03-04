@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     get 'details' => 'services#details'
     resources :scheduling, only: :new
   end
+  
+  get "/user/:id/dashboard", to: "user_dashboard#index"
+
 end
