@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     resources :services
   end
   resources :services, only: :show
+  get "/user/:id/dashboard", to: "user_dashboard#index"
 end
