@@ -3,11 +3,14 @@ pt-BR:
     models:
       user: Usuário
       service: Serviço
+      establishment: Estabelecimento
+      address: Endereço
     attributes:
       user:
         name: Nome
         password: Senha
         email: Email
+        password_confirmation: Confirmação de senha
 
       service:
         title: Título
@@ -17,6 +20,19 @@ pt-BR:
         category: Categoria
         establishment: Estabelecimento
         local_type: Localidade do Serviço
+
+      establishment:
+        name: Nome
+        email: Email
+        phone: Telefone
+        timetable: Horário de funcionamento
+        cpf_cnpj: CPF ou CNPJ
+        user: Usuário
+
+      address:
+        street: Rua/Logradouro
+        number: Número
+        neighborhood: Bairro
 
     errors:
       messages:
