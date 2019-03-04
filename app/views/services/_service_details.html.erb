@@ -45,6 +45,7 @@
     </div>
   </article>
 </div>
-<%= link_to '#', class: 'button is-info is-rounded' do %>
+<%= link_to service_details_path(service_id: @service.id), remote: true,
+            class: 'button is-info is-rounded' do %>
   <strong>Agendar no primeiro horário disponível</strong> (Hoje - 10:00 ) 
 <% end %>
