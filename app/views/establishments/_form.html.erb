@@ -1,0 +1,180 @@
+<div class="establishment_form">
+  <div class="container">
+    <%= form_with model: @establishment, url: url, local: true do |f| %>
+      <div class="columns is-multiline">
+
+        <div class="column is-12">
+          <% unless @errors.nil? %>
+            <div id="error_explanation">
+              <ul>
+                <% @errors.full_messages.each do |msg| %>
+                  <div class="notification is-danger">
+                    <button class="delete" type="button"></button>
+                    <%= msg %>
+                  </div>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="column is-7 is-offset-5">
+          <div class="field">
+            <div class="file is-warning is-boxed">
+              <label class="file-label">
+                <%= f.file_field :photo, class: "file-input", id: "user-photo-add" %>
+                <figure class="image is-128x128" id="temporary_image">
+                  <% if @establishment.photo.attached? %>
+                    <%= image_tag @establishment.photo, class: "is-rounded" %>
+                  <% else %>
+                    <img class="is-rounded" src="https://placehold.it/128x128">
+                  <% end %>
+                </figure>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-3">
+          <div class="control cpf_cnpj_buttons">
+            <label class="radio">
+              <input type="radio" name="cpf_cnpj" value="CPF" checked>
+              Pessoa Física
+            </label>
+            <label class="radio">
+              <input type="radio" name="cpf_cnpj" value="CNPJ">
+              Pessoa Jurídica
+            </label>
+          </div>
+        </div>
+        <div class="column is-9">
+          <div class="field">
+            <%= f.label "CPF", class: "label is-uppercase", id: "label_cpf_cnpj" %>
+            <div class="control">
+              <%= f.text_field :cpf_cnpj, id: "cpf_cnpj", class: "cpf input" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-12">
+          <div class="field">
+            <%= f.label :nome, class: "label" %>
+            <div class="control">
+              <%= f.text_field :name, class: "input" %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="column is-6">
+          <div class="field">
+            <%= f.label :email, class: "label" %>
+            <div class="control">
+              <%= f.text_field :email, class: "input" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-6">
+          <div class="field">
+            <%= f.label "Telefone", class: "label" %>
+            <div class="control">
+              <%= f.text_field :phone, class: "input phone" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-12">
+          <div class="field">
+            <%= f.label "Horário de Atendimento", class: "label" %>
+            <div class="control">
+              <%= f.text_field :timetable, class: "input" %>
+            </div>
+          </div>
+        </div>
+
+        <%= f.fields_for :address do |ff| %>
+          <div class="column is-6">
+            <div class="field">
+              <%= ff.label "Rua/Logradouro", class: "label" %>
+              <div class="control">
+                <%= ff.text_field :street, class: "input" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-2">
+            <div class="field">
+              <%= ff.label "Nº", class: "label" %>
+              <div class="control">
+                <%= ff.text_field :number, class: "input" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <div class="field">
+              <%= ff.label "CEP", class: "label" %>
+              <div class="control">
+                <%= ff.text_field :zipcode, class: "input cep" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <div class="field">
+              <%= ff.label "Bairro", class: "label" %>
+              <div class="control">
+                <%= ff.text_field :neighborhood, class: "input" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <div class="field">
+              <%= ff.label "Cidade", class: "label" %>
+              <div class="control">
+                <%= ff.text_field :city, class: "input", disabled: true %>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <div class="field">
+              <%= ff.label "UF", class: "label is-uppercase" %>
+              <div class="control">
+                <%= ff.text_field :state, class: "input", disabled: true %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <%= f.fields_for :user do |ff| %>
+          <div class="column is-6">
+            <div class="field">
+              <%= ff.label "Senha", class: "label" %>
+              <div class="control">
+                <%= ff.password_field :password, class: "input" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-6">
+            <div class="field">
+              <%= ff.label "Confirme sua senha", class: "label" %>
+              <div class="control">
+                <%= ff.password_field :password_confirmation, class: "input" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="column is-12">
+          <div class="is-pulled-right">
+            <%= f.submit "Salvar", class: "button is-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
