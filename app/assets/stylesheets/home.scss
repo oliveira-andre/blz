@@ -48,6 +48,12 @@
   }
 
   #results {
+    .card-image {
+      img {
+        object-fit: cover !important;
+      }
+    }
+
     .card-content {
       p:nth-child(1) {
         line-height: 1rem;
@@ -76,7 +82,7 @@
       }
 
       .content {
-        button {
+        a {
           width: 100%;
         }
       }
