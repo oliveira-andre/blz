@@ -1,0 +1,19 @@
+<div class="banner">
+  <div class="container">
+    <div class="columns is-gapless">
+      <div class="column is-5">
+        <%= image_tag 'https://bulma.io/images/placeholders/1280x960.png' %>
+      </div>
+      <div class="column is-7">        
+        <h1 class="is-size-3">
+          O jeito mais rápido de encontrar serviços de beleza
+        </h1>
+        <p class="is-size-5">
+          Encontre o melhor profissional para o que precisa, no seu jeito, do 
+          seu modo e no seu tempo.
+        </p>
+        <%= render 'pages/shared/form_search', filter: @filter || {} %>
+      </div>
+    </div>
+  </div>
+</div>
