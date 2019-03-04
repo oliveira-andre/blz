@@ -9,9 +9,8 @@ Rails.application.routes.draw do
 
   resources :services, only: :show do
     get 'details' => 'services#details'
-    resources :scheduling, only: :new
+    resources :scheduling, only: %i[new create]
   end
-  
-  get "/user/:id/dashboard", to: "user_dashboard#index"
 
+  get '/user/:id/dashboard', to: 'user_dashboard#index', as: :user_dashboard
 end
