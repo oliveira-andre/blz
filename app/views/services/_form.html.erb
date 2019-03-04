@@ -1,6 +1,6 @@
 <div class="services_form">
   <div class="container">
-    <%= form_with model: @service, url: establishment_services_path, local: true do |f| %>
+    <%= form_with model: @service, url: url, local: true do |f| %>
       <div class="columns is-multiline">
         <div class="column is-12">
           <% if @service.errors.any? %>
@@ -41,6 +41,17 @@
             </div>
           </div>
         </div>
+
+        <% unless @service.new_record? %>
+          <% @service.photos.each do |photos| %>
+            <div>
+              <figure>
+                <%= image_tag photos %>
+              </figure>
+            </div>
+          <% end %>
+        <% end %>
+
         <div class="column is-12">
           <div class="field">
             <%= f.label "Título", class: "label" %>
