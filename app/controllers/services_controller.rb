@@ -1,8 +1,8 @@
 class ServicesController < ApplicationController
-  skip_before_action :authenticate_user!, only: :show
+  skip_before_action :authenticate_user!, only: %i[show details]
 
   before_action :load_establishment, only: %i[index new create]
-  before_action :load_service, only: %i[edit update show]
+  before_action :load_service, only: %i[edit update show details]
 
   def index
     authorize @establishment, policy_class: ServicePolicy
@@ -10,6 +10,8 @@ class ServicesController < ApplicationController
   end
 
   def show; end
+
+  def details; end
 
   def new
     authorize @establishment, policy_class: ServicePolicy
@@ -46,7 +48,7 @@ class ServicesController < ApplicationController
   end
 
   def load_service
-    @service = Service.find(params[:id])
+    @service = Service.find(params[:id] || params[:service_id])
   end
 
   def service_params
