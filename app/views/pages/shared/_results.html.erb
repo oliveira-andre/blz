@@ -1,0 +1,9 @@
+<div id="results">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% services.each do |service| %>
+        <%= render 'pages/shared/card', service: service %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="column is-3">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="<%= @imgs.sample %>" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="card-content">
+      <p class="is-size-5 has-text-weight-semibold">
+        <%= service.title %>
+      </p>
+      <p class="is-size-6 has-text-weight-light"><%= service.category.name %></p>
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4 is-size-5 has-text-weight-normal">
+            <%= service.establishment.name %>
+          </p>
+          <p class="subtitle is-6">
+            <span class="amount">
+              <i class="fas fa-money-bill-wave"></i> <%= service.amount %>
+            </span>
+            <span class="timetable is-pull-right">
+              <i class="fas fa-clock"></i> <%= service.establishment.timetable %>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="content">
+        <button class="button">Ver detalhes</button>
+      </div>
+    </div>
+  </div>
+</div>
