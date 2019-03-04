@@ -1,0 +1,8 @@
+$("#details-model-scheduling").replaceWith(
+  "<%= j render('services/details_modal_scheduling')%>"
+);
+
+var btn_close = $('.modal-close');
+btn_close.on('click', function() {
+  btn_close.parent().removeClass('is-active');
+});
