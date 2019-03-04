@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :establishments do
     resources :services
   end
-  resources :services, only: :show
+
+  resources :services, only: :show do
+    get 'details' => 'services#details'
+    resources :scheduling, only: :new
+  end
+  
   get "/user/:id/dashboard", to: "user_dashboard#index"
+
 end
