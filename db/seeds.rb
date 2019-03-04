@@ -72,6 +72,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )
@@ -81,6 +83,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )
@@ -90,6 +94,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )
@@ -99,6 +105,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )
@@ -108,6 +116,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )
@@ -117,6 +127,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )
@@ -126,6 +138,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )
@@ -135,6 +149,8 @@ Service.find_or_create_by!(
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
   amount: 20.0,
+  status: Service.statuses.keys.sample,
+  local_type: Service.local_types.keys.sample,
   duration: 30,
   establishment_id: Establishment.first.id
 )

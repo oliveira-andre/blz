@@ -1,0 +1,13 @@
+<%= form_with url: filters_path, method: :get, id: 'form_search' do |f| %>
+  <%= f.hidden_field :local_type, value: filter['local_type'] %>
+  <%= f.hidden_field :category_id, value: filter['category_id'] %> 
+  <div class="field">
+    <p class="control has-icons-right">
+      <%= f.text_field :query, class: 'input is-rounded', placeholder: 'Esta procurando pelo o que ?' %>
+      <span class="icon is-small is-right">
+        <i class="fas fa-search"></i>
+      </span>
+    </p>
+  </div>
+  <%= f.submit 'Encontrar', class: 'button is-info is-rounded' %>
+<% end %>
