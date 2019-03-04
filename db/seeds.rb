@@ -17,50 +17,47 @@ if user.nil?
   user.save!
 end
 
-user_1 = User.find_by email: "root@root.com"
-User.create!(name: "root", email: "root@root.com", password: "123456") if user_1.nil?
-
 ## Categories
 
 Category.find_or_create_by!(
-  name: 'Cabelos',
-  description: 'Breve descrição'
+    name: 'Cabelos',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Esmalteria',
-  description: 'Breve descrição'
+    name: 'Esmalteria',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Depilação',
-  description: 'Breve descrição'
+    name: 'Depilação',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Penteados e maquiagens',
-  description: 'Breve descrição'
+    name: 'Penteados e maquiagens',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Massagem',
-  description: 'Breve descrição'
+    name: 'Massagem',
+    description: 'Breve descrição'
 )
 
 Category.find_or_create_by!(
-  name: 'Pele',
-  description: 'Breve descrição'
+    name: 'Pele',
+    description: 'Breve descrição'
 )
 
 ## EStablichment
 
 Establishment.find_or_create_by!(
-  cpf_cnpj: '510165056165161',
-  name: 'Raiz',
-  email: 'lugarbeleza@blz.life',
-  phone: '9698989989898',
-  timetable: '9:00 - 18:00',
-  user_id: User.first.id
+    cpf_cnpj: '510165056165161',
+    name: 'Raiz',
+    email: 'lugarbeleza@blz.life',
+    phone: '9698989989898',
+    timetable: '9:00 - 18:00',
+    user_id: User.first.id
 )
 
 ## Services

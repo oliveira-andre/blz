@@ -4,11 +4,20 @@ class ServicePolicy < ApplicationPolicy
     record.user == user
   end
 
-  def create?
-    true
+  def new?
+    record.user == user
   end
 
-  def new?
-    true
+  def create?
+    record.establishment.user == user
   end
+
+  def edit?
+    record.establishment.user == user
+  end
+
+  def update?
+    record.establishment.user == user
+  end
+
 end

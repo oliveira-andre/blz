@@ -11,6 +11,8 @@ class Service < ApplicationRecord
   validates :description, presence: true
   validates :amount, presence: true
   validates :duration, presence: true
+  validates :local_type, presence: true
+  validates :status, presence: true
 
   validates :title, uniqueness: { scope: :establishment_id }
 end

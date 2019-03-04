@@ -44,7 +44,7 @@
               <div class="media-left">
                 <figure class="image is64x64">
                   <% if service.photos.attached? %>
-                    <%= image_tag service.photos.first %>
+                    <%= image_tag service.photos.first, class:'image is-128x128' %>
                   <% else %>
                     <img src="https://bulma.io/images/placeholders/128x128.png">
                   <% end %>

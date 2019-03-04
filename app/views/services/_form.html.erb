@@ -1,0 +1,126 @@
+<div class="services_form">
+  <div class="container">
+    <%= form_with model: @service, url: url, local: true do |f| %>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <% if @service.errors.any? %>
+            <div id="error_explanation">
+              <ul>
+                <% @service.errors.full_messages.each do |msg| %>
+                  <div class="notification is-danger">
+                    <button class="delete" type="button"></button>
+                    <%= msg %>
+                  </div>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+        <div class="column is-12">
+          <% if @service.new_record? %>
+            <h1 class="has-text-centered has-text-weight-bold	is-size-4">Adicionar Serviço</h1>
+          <% else %>
+            <h1 class="has-text-centered has-text-weight-bold	is-size-4">Editar Serviço</h1>
+          <% end %>
+        </div>
+
+        <div class="column is-7 is-offset-5" id="gallery">
+          <div class="field">
+            <div class="file is-warning is-boxed">
+              <label class="file-label">
+                <%= f.file_field :photos, class: "file-input", multiple: true, id: "gallery-photo-add" %>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                  </span>
+                  <span class="file-label">
+                      Enviar fotos
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <% unless @service.new_record? %>
+          <% @service.photos.each do |photos| %>
+            <div>
+              <figure>
+                <%= image_tag photos %>
+              </figure>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="column is-12">
+          <div class="field">
+            <%= f.label "Título", class: "label" %>
+            <div class="control">
+              <%= f.text_field :title, class: "input" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-12">
+          <div class="field">
+            <%= f.label "Descrição", class: "label" %>
+            <div class="control">
+              <%= f.text_area :description, class: "textarea" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-2">
+          <div class="field">
+            <%= f.label "Valor", class: "label" %>
+            <div class="control">
+              <%= f.text_field :amount, class: "input" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-2">
+          <div class="field">
+            <%= f.label "Duração", class: "label" %>
+            <div class="control">
+              <%= f.text_field :duration, class: "input" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-4">
+          <div class="field">
+            <%= f.label "Categoria", class: "label" %>
+            <div class="control">
+              <div class="select">
+                <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id]}, prompt: "Selecione" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-4">
+          <%= f.label "Onde o serviço é feito ?", class: "label" %>
+          <div class="control">
+            <label class="radio">
+              <%= f.radio_button :local_type, 'home' %>
+              Em casa
+            </label>
+            <strong> ou </strong>
+            <label class="radio">
+              <%= f.radio_button :local_type, 'establishment' %>
+              No estabelecimento
+            </label>
+          </div>
+        </div>
+
+        <div class="column is-12">
+          <div class="is-pulled-right">
+            <%= f.submit "Salvar", class: "button is-primary" %>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>
