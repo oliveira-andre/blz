@@ -1,0 +1,116 @@
+<%= render 'pages/shared/header' %>
+<div class="new-scheduling">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-6">
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image">
+                <img src="https://bulma.io/images/placeholders/64x64.png">
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="columns is-multiline">
+                <div class="column is-12">
+                  <div class="content">
+                    <p class="has-text-weight-semibold">
+                      <%= @service.establishment.name %>
+                    </p>
+                    <p>
+                      <i class="fas fa-star is-size-5"></i>
+                      <i class="fas fa-star is-size-5"></i>
+                      <i class="fas fa-star is-size-5"></i>
+                      <i class="far fa-star is-size-5"></i>
+                      <i class="far fa-star is-size-5"></i>  
+                    </p>
+                  </div>
+                </div>
+                <div class="column is-4">
+                    <i class="fas fa-money-bill-wave is-size-4"></i>
+                    R$ <%= @service.amount.to_i %>
+                </div>
+                <div class="column is-4">
+                    <i class="fas fa-hourglass-half is-size-4"></i>
+                    <%= @service.duration %> minutos
+                </div>
+                <div class="column is-4">
+                    <i class="fas fa-clock is-size-4"></i>
+                    <%= '02/03 às 10:00' %>
+                </div>
+                <div class="column is-12">
+                  <span>
+                    <i class="fas fa-map-marker-alt is-size-4"></i>
+                    Rua Tabajara, 2803, Liberdade - Porto Velho / RO
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>   
+      <div class="column is-6">
+        <h2 class="title"> Dados bancários </h2>
+        <%= form_with url: service_scheduling_index_path(service_id: @service.id) do |f| %>
+          <div class="columns is-multiline">
+            <div class="column is-12">
+              <div class="field">
+                <label class="label">Bandeira do cartão</label>
+                <div class="control">
+                  <div class="select">
+                    <%= f.select :card_banner_id, @card_banners.collect { |c| [c.name, c.id] }, prompt: 'Bandeira do cartão' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-8">
+              <div class="field">
+                <label class="label">Número  do cartão</label>
+                <div class="control">
+                  <%= f.text_field :card_number, class: 'input' %>
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">Código de segurança</label>
+                <div class="control">
+                  <%= f.text_field :safe_code_card, class: 'input' %>
+                </div>
+              </div>
+            </div>
+            <div class="column is-8">
+              <div class="field">
+                <label class="label">Títular do cartão</label>
+                <div class="control">
+                  <%= f.text_field :cardholder, class: 'input' %>
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">Data de validade</label>
+                <div class="control">
+                  <%= f.text_field :valid_date_card, class: 'input' %>
+                </div>
+              </div>
+            </div>
+            <div class="column is-12">
+              <div class="field">
+                <label class="label">Quantas vezes deseja parcelar ? </label>
+                <div class="control">
+                  <div class="select">
+                    <%= f.select :times_parcel, @times_parcel.collect { |c| [c.times, c.value] } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-12">
+              <%= f.submit 'Finalizar agendamento', class: 'button is-info is-rounded', style: 'width: 100%;' %>  
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
