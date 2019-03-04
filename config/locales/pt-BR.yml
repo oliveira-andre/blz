@@ -1,8 +1,14 @@
 pt-BR:
   activerecord:
     models:
+      user: Usuário
       service: Serviço
     attributes:
+      user:
+        name: Nome
+        password: Senha
+        email: Email
+
       service:
         title: Título
         description: Descrição
