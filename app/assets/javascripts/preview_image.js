@@ -5,7 +5,7 @@ $(document).on("turbolinks:load", function () {
 
     var gallery = $('#gallery');
 
-    for(var i = 0; i < files.length; i++) {
+    for (var i = 0; i < files.length; i++) {
       var reader = new FileReader();
       reader.onload = function (event) {
         $(`<div>

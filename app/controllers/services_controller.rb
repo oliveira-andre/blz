@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
   before_action :load_establishment, only: %i[index new create]
-  before_action :load_services, only: %i[edit update]
+  before_action :load_service, only: %i[edit update]
 
   def index
     authorize @establishment, policy_class: ServicePolicy
@@ -41,7 +41,7 @@ class ServicesController < ApplicationController
     @establishment = Establishment.find(params[:establishment_id])
   end
 
-  def load_services
+  def load_service
     @service = Service.find(params[:id])
   end
 
