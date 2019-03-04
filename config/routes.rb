@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :establishments do
     resources :services
   end
+  resources :services, only: :show
 end
