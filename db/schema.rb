@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2019_03_02_194816) do
     t.string "email", null: false
     t.string "phone", null: false
     t.string "timetable", null: false
-    t.string "photo"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
