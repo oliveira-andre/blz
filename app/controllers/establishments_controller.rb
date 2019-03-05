@@ -32,8 +32,6 @@ class EstablishmentsController < ApplicationController
     render 'new'
   end
 
-  def dashboard; end
-
   private
 
   def establishment_params
