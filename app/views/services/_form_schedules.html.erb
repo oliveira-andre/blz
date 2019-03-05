@@ -1,0 +1,42 @@
+<%= form_with url: service_office_hours_path(@service.id) do |ff| %>
+  <div class="columns is-multiline">
+    <div class="column is-12">
+      <h1>Horários</h1>
+    </div>
+    <div class="column is-2">
+      <div class="field">
+        <%= ff.label "Dia", class: "label" %>
+        <div class="control">
+          <div class="select">
+            <%= ff.select :week_day, OfficeHour.week_days.keys.map {|w| [w, w]} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-4">
+      <div class="field">
+        <%= ff.label "Inicio", class: "label" %>
+      </div>
+      <div class="control">
+        <%= ff.text_field :hour_begin, class: "input clock", required: true %>
+      </div>
+    </div>
+    <div class="column is-4">
+      <div class="field">
+        <%= ff.label "Fim", class: "label" %>
+        <div class="control">
+          <%= ff.text_field :hour_end, class: "input clock", required: true %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-2" style="margin-top: 30px;">
+      <%= ff.submit "Adicionar", class: "button is-outlined is-primary is-pulled-right" %>
+    </div>
+  </div>
+<% end %>
+<div class="columns">
+  <div class="column is-12">
+    <%= render "services/table_schedules", office_hours: @service.office_hours %>
+  </div>
+</div>
