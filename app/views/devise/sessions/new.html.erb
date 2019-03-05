@@ -28,6 +28,13 @@
                 </label>
               </div>
               <%= f.submit "Entrar", class: "button is-block is-info is-large is-fullwidth" %>
+              <p>Entrar com</p>
+              <%= link_to user_facebook_omniauth_authorize_path, class: "is-size-4" do %>
+                <i class="fab fa-facebook"></i>
+              <% end %>
+              <%= link_to user_google_oauth2_omniauth_authorize_path, class: "is-size-4" do %>
+                <i class="fab fa-google-plus-square"></i>
+              <% end %>
             </div>
             <p class="has-text-grey">
               <%= render "devise/shared/links" %>
