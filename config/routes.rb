@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
 
   get '/user/:id/dashboard', to: 'user_dashboard#index', as: :user_dashboard
+  get '/establishment/:id/dashboard', to: 'establishments_dashboard#index', as: :establishment_dashboard
 end
