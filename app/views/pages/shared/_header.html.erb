@@ -2,8 +2,8 @@
   <div class="container">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        <a class="navbar-item is48x48" href="/">
+          <img src="/logo.jpeg">
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBLZ">
@@ -14,31 +14,21 @@
       </div>
 
       <div id="navbarBLZ" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item">
-            Sobre a BLZ
-          </a>
-
-          <a class="navbar-item">
-            Como funciona
-          </a>
-        </div>
-
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-info is-rounded">
-                <strong>Cadastre seu salão</strong>
-              </a>
               <% if user_signed_in? %>
-                <a class="button is-light is-rounded">Minha conta</a>
+                 <%= link_to "#{current_user.name} (conta)", user_dashboard_path(current_user),
+                            class: 'button is-light is-rounded' %>
                 <%= link_to 'Sair', destroy_user_session_path, method: :delete,
                             class: 'button is-light is-rounded' %>
-              <% else %>
-                
+              <% else %>                
                 <%= link_to 'Entrar', new_user_session_path,
                             class: 'button is-light is-rounded' %>
               <% end %>
+              <a class="button is-info is-rounded">
+                <strong>Cadastre seu salão</strong>
+              </a>
             </div>
           </div>
         </div>
