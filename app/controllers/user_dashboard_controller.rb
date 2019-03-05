@@ -1,3 +1,5 @@
 class UserDashboardController < ApplicationController
-  def index; end
+  def index
+    @scheduling = current_user.scheduling
+  end
 end
