@@ -35,6 +35,9 @@ pt-BR:
         number: Número
         neighborhood: Bairro
 
+      scheduling:
+        timetable: 'Horário'
+
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
@@ -76,6 +79,9 @@ pt-BR:
       default: "%d/%m/%Y"
       long: "%d de %B de %Y"
       short: "%d de %B"
+      week_day: '%a'
+      day_month: '%d/%y'
+      time: '%H:%M'
     month_names:
       -
       - Janeiro
@@ -254,4 +260,7 @@ pt-BR:
       default: "%a, %d de %B de %Y, %H:%M:%S %z"
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
+      week_day: '%a'
+      day_month: '%d/%m'
+      time: '%H:%M'
     pm: ''
