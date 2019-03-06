@@ -85,7 +85,8 @@ ActiveRecord::Schema.define(version: 2019_03_05_030731) do
     t.bigint "user_id"
     t.bigint "service_id"
     t.integer "status", default: 0
-    t.datetime "timetable", null: false
+    t.datetime "begin_time", null: false
+    t.datetime "end_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["service_id"], name: "index_schedulings_on_service_id"
