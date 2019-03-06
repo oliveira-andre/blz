@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_030731) do
+ActiveRecord::Schema.define(version: 2019_03_05_210730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 2019_03_05_030731) do
     t.index ["user_id"], name: "index_establishments_on_user_id"
   end
 
+  create_table "office_hours", force: :cascade do |t|
+    t.integer "hour_begin"
+    t.integer "hour_end"
+    t.bigint "service_id"
+    t.integer "week_day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_office_hours_on_service_id"
+  end
+
   create_table "schedulings", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "service_id"
@@ -101,8 +111,6 @@ ActiveRecord::Schema.define(version: 2019_03_05_030731) do
     t.decimal "amount", null: false
     t.integer "duration", null: false
     t.bigint "category_id"
-    t.json "linked_services"
-    t.json "schedules"
     t.bigint "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -129,6 +137,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_030731) do
   add_foreign_key "addresses", "establishments"
   add_foreign_key "bank_dates", "establishments"
   add_foreign_key "establishments", "users"
+  add_foreign_key "office_hours", "services"
   add_foreign_key "schedulings", "services"
   add_foreign_key "schedulings", "users"
   add_foreign_key "services", "categories"

@@ -113,14 +113,21 @@
             </label>
           </div>
         </div>
+      </div>
 
+      <div class="columns is-multiline">
         <div class="column is-12">
           <div class="is-pulled-right">
             <%= f.submit "Salvar", class: "button is-primary" %>
           </div>
         </div>
-
       </div>
+
     <% end %>
+
+    <% unless @service.new_record? %>
+      <%= render 'form_schedules' %>
+    <% end %>
+
   </div>
 </div>

@@ -7,6 +7,8 @@ class Service < ApplicationRecord
   belongs_to :category
   belongs_to :establishment
 
+  has_many :office_hours
+
   validates :title, presence: true
   validates :description, presence: true
   validates :amount, presence: true
