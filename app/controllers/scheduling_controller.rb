@@ -1,32 +1,27 @@
 class SchedulingController < ApplicationController
-  before_action :load_service
-
-  def new
-    @card_banners = [
-      OpenStruct.new(id: 1, name: 'Visa'),
-      OpenStruct.new(id: 2, name: 'Mastercad'),
-      OpenStruct.new(id: 3, name: 'Elo'),
-      OpenStruct.new(id: 4, name: 'American Express')
-    ]
-
-    @times_parcel = [
-      OpenStruct.new(value: 1, times: '1 x 180,00'),
-      OpenStruct.new(value: 2, times: '2 x 92,00'),
-      OpenStruct.new(value: 3, times: '3 x 63,00')
-    ]
-  end
-
   def create
-    if @service
-      redirect_to user_dashboard_path(current_user)
+    @scheduling = Scheduling.new scheduling_params
+    @scheduling.end_time = @scheduling.begin_time +
+                           @scheduling.service.duration.minutes
+    authorize @scheduling
+
+    if @scheduling.save
+      redirect_to user_dashboard_path(id: @scheduling.user.id)
     else
-      render 'new'
+      add_flash_message
+      redirect_to service_path(id: @scheduling.service.id)
     end
   end
 
   private
 
-  def load_service
-    @service = Service.find(params[:service_id])
+  def scheduling_params
+    params.permit(:service_id, :begin_time).merge(user_id: current_user.id)
+  end
+
+  def add_flash_message
+    @scheduling.errors.full_messages.each do |message|
+      flash[:error] = message
+    end
   end
 end

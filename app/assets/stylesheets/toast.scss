@@ -1,0 +1,25 @@
+.toast {
+  visibility: hidden;
+  margin: auto;
+
+  position: fixed;
+  z-index: 9999;
+  left: 80%;
+  top: 60px;
+}
+
+.toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 1s, fadeout 0.5s 2.5s;
+  animation: fadein 1s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;} 
+  to {top: 60px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 60px; opacity: 1;}
+}

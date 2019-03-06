@@ -9,9 +9,14 @@ class ServicesController < ApplicationController
     @services = @establishment.services
   end
 
-  def show; end
+  def show
+    # TODO: isso é provisorio, remover e aplicar a regra real depois
+    @first_timetable = params[:ftime].to_datetime || '04/03/2019 21:15'.to_datetime
+  end
 
-  def details; end
+  def details
+    @begin_time = params[:timetable].to_datetime
+  end
 
   def new
     authorize @establishment, policy_class: ServicePolicy

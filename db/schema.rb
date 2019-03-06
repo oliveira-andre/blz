@@ -91,6 +91,18 @@ ActiveRecord::Schema.define(version: 2019_03_05_210730) do
     t.index ["service_id"], name: "index_office_hours_on_service_id"
   end
 
+  create_table "schedulings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "service_id"
+    t.integer "status", default: 0
+    t.datetime "begin_time", null: false
+    t.datetime "end_time", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_schedulings_on_service_id"
+    t.index ["user_id"], name: "index_schedulings_on_user_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "title", null: false
     t.integer "status", default: 2, null: false
@@ -126,6 +138,8 @@ ActiveRecord::Schema.define(version: 2019_03_05_210730) do
   add_foreign_key "bank_dates", "establishments"
   add_foreign_key "establishments", "users"
   add_foreign_key "office_hours", "services"
+  add_foreign_key "schedulings", "services"
+  add_foreign_key "schedulings", "users"
   add_foreign_key "services", "categories"
   add_foreign_key "services", "establishments"
 end
