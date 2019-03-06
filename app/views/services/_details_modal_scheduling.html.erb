@@ -34,20 +34,25 @@
             </div>
             <div class="column is-4">
                 <i class="fas fa-clock is-size-4"></i>
-                <%= '02/03 às 10:00' %>
+                <%= "#{day_month(@begin_time)} às #{time(@begin_time)}" %>
             </div>
-            <div class="column is-12">
-              <span>
-                <i class="fas fa-map-marker-alt is-size-4"></i>
-                Rua Tabajara, 2803, Liberdade - Porto Velho / RO
-              </span>
-            </div>
+            <% unless @service.establishment.address.nil? %>
+              <div class="column is-12">
+                <span>
+                  <i class="fas fa-map-marker-alt is-size-4"></i>
+                  <%= @service.establishment.address.full %>
+                </span>
+              </div>
+            <% end %>
           </div>
         </div>
       </article>
-      <%= link_to new_service_scheduling_path(service_id: @service.id),
-                  class: 'button is-info is-rounded' do %>
-        <strong>Continuar agendamento para </strong> (Hoje - 10:00 ) 
+      <%= form_with url: service_scheduling_index_path(service_id: @service.id), local: true do |f| %>
+        <%= f.hidden_field :begin_time, value: @begin_time %>
+        <%= f.button class: 'button is-info is-rounded' do %>
+          <strong>Confirmar agendamento para </strong>
+          <%= "(#{day_month(@begin_time)} - #{time(@begin_time)} )" %>
+        <% end %>
       <% end %>
     </div>
   </div>
