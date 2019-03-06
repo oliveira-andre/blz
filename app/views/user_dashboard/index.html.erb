@@ -60,7 +60,7 @@
                   </div>
                   <div class="column is-4">
                     <i class="fas fa-clock is-size-4"></i>
-                     <%= "#{day_month(schedule.timetable)} - #{time(schedule.timetable)}" %> 
+                     <%= "#{day_month(schedule.begin_time)} - #{time(schedule.begin_time)}" %>
                   </div>
                   <% unless schedule.service.establishment.address.nil? %>
                     <div class="column is-12">
