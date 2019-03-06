@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :services, only: :show do
     get 'details' => 'services#details'
     resources :scheduling, only: %i[new create]
+    resources :office_hours, only: %i[create destroy]
   end
 
   get '/user/:id/dashboard', to: 'user_dashboard#index', as: :user_dashboard

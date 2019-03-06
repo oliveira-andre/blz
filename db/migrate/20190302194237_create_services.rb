@@ -8,8 +8,6 @@ class CreateServices < ActiveRecord::Migration[5.2]
       t.numeric :amount, null: false
       t.integer :duration, null: false
       t.references :category, foreign_key: true
-      t.json :linked_services
-      t.json :schedules
       t.references :establishment, foreign_key: true
 
       t.timestamps
