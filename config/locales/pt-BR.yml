@@ -36,7 +36,8 @@ pt-BR:
         neighborhood: Bairro
 
       scheduling:
-        timetable: 'Horário'
+        begin_time: 'Horário'
+        end_time: 'Horário final'
 
     errors:
       messages:
