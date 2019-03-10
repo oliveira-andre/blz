@@ -1,4 +1,4 @@
-class UserDashboardController < ApplicationController
+class UsersDashboardController < ApplicationController
   def index
     @scheduling = current_user.scheduling
   end
