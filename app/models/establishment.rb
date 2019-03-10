@@ -18,4 +18,8 @@ class Establishment < ApplicationRecord
 
   accepts_nested_attributes_for :user, allow_destroy: true,
                                        reject_if: :all_blank
+
+  def scheduling
+    ::Scheduling.where(user_id: user.id, service_id: services.ids)
+  end
 end
