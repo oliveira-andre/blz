@@ -23,9 +23,11 @@ class EstablishmentsController < ApplicationController
   def edit; end
 
   def update
-    @establishment.update establishment_params.except(:address_attributes, :user_attributes)
-    @address.update establishment_params[:address_attributes]
-    @user.update establishment_params[:user_attributes]
+    @establishment.update(
+      establishment_params.except(:address_attributes, :user_attributes)
+    )
+    @address&.update establishment_params[:address_attributes]
+    @user&.update establishment_params[:user_attributes]
     redirect_to root_path
   rescue ActiveRecord::RecordInvalid => error
     @errors = error.record.errors
@@ -36,9 +38,9 @@ class EstablishmentsController < ApplicationController
 
   def establishment_params
     params.require(:establishment)
-        .permit(:cpf_cnpj, :name, :email, :phone, :timetable, :photo,
-                address_attributes: %i[street number neighborhood zipcode],
-                user_attributes: %i[password password_confirmation])
+          .permit(:cpf_cnpj, :name, :email, :phone, :timetable, :photo,
+                  address_attributes: %i[street number neighborhood zipcode],
+                  user_attributes: %i[password password_confirmation])
   end
 
   def load_establishment
