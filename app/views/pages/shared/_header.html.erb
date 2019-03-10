@@ -19,6 +19,11 @@
             <div class="buttons">
               <% if user_signed_in? %>
                 <% if establishment? %>
+                  <p class="is-size-5">
+                    <span class="is-size-6">Olá, </span>
+                    <%= current_user.establishment.name %>
+                    <span class="is-size-6">:)</span>
+                  </p>
                   <%= link_to "Meus trabalhos",
                               establishments_dashboard_path(
                                 current_user.establishment
@@ -30,6 +35,11 @@
                               ),
                               class: 'button is-light is-rounded' %>
                 <% else %>
+                  <p class="is-size-5">
+                    <span class="is-size-6">Olá, </span>
+                    <%= current_user.name %>
+                    <span class="is-size-6">:)</span>
+                  </p>
                   <%= link_to "Minha conta",
                               users_dashboard_path(current_user),
                               class: 'button is-info is-rounded' %>
