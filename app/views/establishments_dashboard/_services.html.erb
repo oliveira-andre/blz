@@ -1,0 +1,52 @@
+<div class="index-services">
+  <div class="columns is-multiline">
+    <div class="column is-12">
+      <%= link_to new_establishment_service_path(establishment_id: current_user.establishment.id), 
+          class: "button is-primary is-outlined" do %>
+        <i class="fas fa-plus-circle"></i>
+        <span> Novo Serviço</span>
+      <% end %>
+    </div>
+    <% current_user.establishment.services.each do |service| %>
+      <div class="column is-12">
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is64x64">
+                <% if service.photos.attached? %>
+                  <%= image_tag service.photos.first, class:'image is-128x128' %>
+                <% else %>
+                  <img src="https://bulma.io/images/placeholders/128x128.png">
+                <% end %>
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="columns">
+                <div class="column is-10">
+                  <div class="content">
+                    <p class="has-text-weight-semibold"><%= service.title %></p>
+                    <p><%= service.description %></p>
+                  </div>
+                </div>
+                <div class="column is-2 is-size-6">
+                  <p class="level-item is-size-6">
+                    <i class="fas fa-dollar-sign"></i>
+                    <%= service.amount %>
+                  </p>
+                  <p class="level-item text-button">
+                    <i class="fas fa-hourglass-half"></i>
+                    <%= service.duration %> min
+                  </p>
+                  <%= link_to edit_establishment_service_path(service.establishment_id, service.id), class: "level-item button is-link", aria: {label: "reply"} do %>
+                    <i class="fas fa-edit"></i>
+                    <span>Editar</span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
