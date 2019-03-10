@@ -1,11 +1,26 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-## User
+## Establishments
+emails = ['spar@blz.life', 'barber@blz.life', 'saloon@blz.life']
+names = ['Spar delas', 'The barber', 'Centro da beleza']
+(0..2).each do |i|
+  user = User.find_by email: emails[i]
+  if user.nil?
+    user = User.new
+    user.name = names[i]
+    user.email = emails[i]
+    user.password = '123456'
+    user.password_confirmation = '123456'
+    user.save!
+  end
+
+  Establishment.find_or_create_by!(
+    cpf_cnpj: rand(999_999_999_99),
+    name: user.name,
+    email: user.email,
+    phone: '69981001225',
+    timetable: "#{rand(6..9)}:00 - #{rand(16..22)}:00",
+    user: user
+  )
+end
 
 user = User.find_by email: 'rv@gmail.com'
 if user.nil?
@@ -72,7 +87,7 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
 
 Service.find_or_create_by!(
@@ -83,7 +98,7 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
 
 Service.find_or_create_by!(
@@ -94,7 +109,7 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
 
 Service.find_or_create_by!(
@@ -105,7 +120,7 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
 
 Service.find_or_create_by!(
@@ -116,7 +131,7 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
 
 Service.find_or_create_by!(
@@ -127,7 +142,7 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
 
 Service.find_or_create_by!(
@@ -138,7 +153,7 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
 
 Service.find_or_create_by!(
@@ -149,5 +164,5 @@ Service.find_or_create_by!(
   status: Service.statuses.keys.sample,
   local_type: Service.local_types.keys.sample,
   duration: 30,
-  establishment_id: Establishment.first.id
+  establishment_id: Establishment.all.sample.id
 )
