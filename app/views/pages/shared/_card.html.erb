@@ -2,7 +2,11 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="<%= @imgs.sample %>" alt="Placeholder image">
+        <% if service.photos.attached? %>
+          <%= image_tag service.photos.first, class:'image' %>
+        <% else %>
+          <img src="https://bulma.io/images/placeholders/1280x960.png">
+        <% end %>
       </figure>
     </div>
     <div class="card-content">
@@ -13,7 +17,11 @@
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            <% if service.establishment.photo.attached? %>
+              <%= image_tag service.establishment.photo, class:'image' %>
+            <% else %>
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            <% end %>
           </figure>
         </div>
         <div class="media-content">
