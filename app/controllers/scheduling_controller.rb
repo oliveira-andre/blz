@@ -6,7 +6,7 @@ class SchedulingController < ApplicationController
     authorize @scheduling
 
     if @scheduling.save
-      redirect_to user_dashboard_path(id: @scheduling.user.id)
+      redirect_to users_dashboard_path(id: @scheduling.user.id)
     else
       add_flash_message
       redirect_to service_path(id: @scheduling.service.id)

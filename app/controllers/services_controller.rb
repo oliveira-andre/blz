@@ -4,14 +4,10 @@ class ServicesController < ApplicationController
   before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update show details]
 
-  def index
-    authorize @establishment, policy_class: ServicePolicy
-    @services = @establishment.services
-  end
-
   def show
-    # TODO: isso é provisorio, remover e aplicar a regra real depois
-    @first_timetable = params[:ftime].to_datetime || '04/03/2019 21:15'.to_datetime
+    # TODO: isso eh provisorio, remover e aplicar a regra real depois
+    @first_timetable = params[:ftime].to_datetime if params[:ftime]
+    @first_timetable = '04/03/2019 21:15'.to_datetime unless params[:ftime]
   end
 
   def details
@@ -27,7 +23,7 @@ class ServicesController < ApplicationController
     @service = @establishment.services.build(service_params)
     authorize @service
     if @service.save
-      redirect_to establishment_services_path, notice: 'Salvo com sucesso'
+      redirect_to establishments_dashboard_path, notice: 'Salvo com sucesso'
     else
       render 'new'
     end
@@ -40,7 +36,7 @@ class ServicesController < ApplicationController
   def update
     authorize @service
     if @service.update(service_params)
-      redirect_to establishment_services_path, notice: 'Atualizado com sucesso'
+      redirect_to establishments_dashboard_path, notice: 'Atualizado com sucesso'
     else
       render 'edit'
     end
