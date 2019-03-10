@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
   def show
     # TODO: isso eh provisorio, remover e aplicar a regra real depois
     @first_timetable = params[:ftime].to_datetime if params[:ftime]
-    @first_timetable = '04/03/2019 21:15'.to_datetime unless params[:ftime]
+    @first_timetable = '07/03/2019 15:00'.to_datetime unless params[:ftime]
   end
 
   def details
@@ -23,7 +23,8 @@ class ServicesController < ApplicationController
     @service = @establishment.services.build(service_params)
     authorize @service
     if @service.save
-      redirect_to establishments_dashboard_path, notice: 'Salvo com sucesso'
+      redirect_to establishments_dashboard_path(@establishment),
+                  notice: 'Serviço criado com sucesso'
     else
       render 'new'
     end
@@ -36,7 +37,8 @@ class ServicesController < ApplicationController
   def update
     authorize @service
     if @service.update(service_params)
-      redirect_to establishments_dashboard_path(@service.establishment), notice: 'Atualizado com sucesso'
+      redirect_to establishments_dashboard_path(@service.establishment),
+                  notice: 'Serviço atualizado com sucesso'
     else
       render 'edit'
     end

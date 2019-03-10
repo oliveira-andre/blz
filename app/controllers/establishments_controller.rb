@@ -14,7 +14,7 @@ class EstablishmentsController < ApplicationController
     @establishment.address = Address.new establishment_params[:address_attributes]
     @establishment.address.establishment = @establishment
     SaveEstablishmentService.execute @establishment
-    redirect_to root_path
+    redirect_to new_user_session_path, notice: 'Cadastro realizado com sucesso'
   rescue ActiveRecord::RecordInvalid => error
     @errors = error.record.errors
     render 'new'
@@ -28,7 +28,8 @@ class EstablishmentsController < ApplicationController
     )
     @address&.update establishment_params[:address_attributes]
     @user&.update establishment_params[:user_attributes]
-    redirect_to root_path
+    redirect_to establishments_dashboard_path(@establishment),
+                notice: 'Atualização realizada com sucesso'
   rescue ActiveRecord::RecordInvalid => error
     @errors = error.record.errors
     render 'new'
