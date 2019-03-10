@@ -36,7 +36,7 @@ class ServicesController < ApplicationController
   def update
     authorize @service
     if @service.update(service_params)
-      redirect_to establishments_dashboard_path, notice: 'Atualizado com sucesso'
+      redirect_to establishments_dashboard_path(@service.establishment), notice: 'Atualizado com sucesso'
     else
       render 'edit'
     end
