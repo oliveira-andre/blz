@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   root 'pages#home'
-  devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'callbacks',
+    registrations: 'users/registrations'
+  }
 
   resources :filters, only: %i[index destroy]
   resources :establishments do
-    resources :services
+    resources :services, except: :index
   end
 
   resources :services, only: :show do
@@ -13,11 +16,11 @@ Rails.application.routes.draw do
     resources :office_hours, only: %i[create destroy]
   end
 
-  get '/user/:id/dashboard',
-      to: 'user_dashboard#index',
-      as: :user_dashboard
+  get '/users/:id/dashboard',
+      to: 'users_dashboard#index',
+      as: :users_dashboard
 
-  get '/establishment/:id/dashboard',
+  get '/establishments/:id/dashboard',
       to: 'establishments_dashboard#index',
-      as: :establishment_dashboard
+      as: :establishments_dashboard
 end
