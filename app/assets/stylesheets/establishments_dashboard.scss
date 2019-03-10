@@ -1,0 +1,38 @@
+.establishments_dashboard {
+  li {
+    width: 50%;
+  }
+
+  .no-scheduling {
+    margin-top: 10vh;
+  }
+
+  .numbers-cards {
+    height: 280px;
+
+    .column.is-12 {
+      margin-bottom: 30px;
+    }
+
+    .level-left {
+      width: 30%;
+    }
+
+    .level-right {
+      width: 70%;
+
+      p {
+        width: 100%;
+      }
+    }
+  }
+
+  .graph {
+    margin-left: 30px;
+    
+    #curve_chart {
+      height: 280px;
+    }
+  
+  }
+}
