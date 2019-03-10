@@ -1,0 +1,50 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+            html: { method: :put }) do |f| %>
+  <div class="columns is-multiline box">
+    <div class="column is-6">
+      <div class="field">
+        <label class="label">Nome</label>
+        <div class="control">
+          <%= f.text_field :name, class: "input", placeholder: "Seu nome" %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-6">
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <%= f.email_field :email, autocomplete: "email", class: "input", placeholder: "Seu email" %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-4">
+      <div class="field">
+        <label class="label">Senha atual</label>
+        <div class="control">
+          <%= f.password_field :current_password, class: "input", placeholder: "Sua senha atual" %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-4">
+      <label class="label">Nova senha</label>
+      <div class="field">
+        <div class="control">
+          <%= f.password_field :password, class: "input", placeholder: "Senha (Deixe em branco se não quiser mudar)" %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-4">
+      <div class="field">
+        <label class="label">Confirme sua senha</label>
+        <div class="control">
+          <%= f.password_field :password_confirmation, class: "input", placeholder: "Confirme sua senha" %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-12">
+      <div class="actions">
+        <%= f.submit "Atualizar", class: "button is-block is-info is-pulled-right" %>
+      </div>
+    </div>   
+  </div>
+<% end %>
