@@ -1,4 +1,6 @@
 class Scheduling < ApplicationRecord
+  scope :history, -> { where.not(status: %i[in_payment awaiting_service]) }
+
   enum status: %i[in_payment awaiting_service finished canceled]
 
   belongs_to :user, required: false
