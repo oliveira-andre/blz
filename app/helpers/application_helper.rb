@@ -18,4 +18,8 @@ module ApplicationHelper
     value = "00:0#{value.to_s[0, 1]}" if value.to_s.length == 1
     value
   end
+
+  def establishment?
+    !current_user.establishment.nil?
+  end
 end
