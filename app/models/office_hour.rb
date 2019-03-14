@@ -1,5 +1,5 @@
 class OfficeHour < ApplicationRecord
-  belongs_to :service
+  belongs_to :professional_service
   enum week_day: %i[segunda terça quarta quinta sexta sabado domingo]
 
   validates :week_day, presence: true
@@ -8,7 +8,7 @@ class OfficeHour < ApplicationRecord
 
   validate :hour_length
   validate :end_and_begin_hour
-  validate :during_hour_work
+  #validate :during_hour_work
 
   private
 
@@ -29,6 +29,7 @@ class OfficeHour < ApplicationRecord
   end
 
   def end_work
-    @end_work ||= service.office_hours.where(week_day: week_day).order(hour_end: :desc).first&.hour_end || 0
+    @end_work ||= professional_service.office_hours.where(week_day: week_day)
+                                      .order(hour_end: :desc).first&.hour_end || 0
   end
 end

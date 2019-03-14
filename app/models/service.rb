@@ -8,6 +8,7 @@ class Service < ApplicationRecord
   belongs_to :establishment
 
   has_many :office_hours
+  has_many :linked_services
 
   validates :title, presence: true
   validates :description, presence: true
@@ -17,4 +18,9 @@ class Service < ApplicationRecord
   validates :status, presence: true
 
   validates :title, uniqueness: { scope: :establishment_id }
+
+  def links_with_services
+    services_ids = linked_services.pluck(:linked_id) << id
+    LinkedService.where(service_id: services_ids, linked_id: services_ids).uniq
+  end
 end

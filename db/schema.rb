@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_210730) do
+ActiveRecord::Schema.define(version: 2019_03_11_232431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,14 +81,50 @@ ActiveRecord::Schema.define(version: 2019_03_05_210730) do
     t.index ["user_id"], name: "index_establishments_on_user_id"
   end
 
-  create_table "office_hours", force: :cascade do |t|
-    t.integer "hour_begin"
-    t.integer "hour_end"
+  create_table "linked_services", force: :cascade do |t|
     t.bigint "service_id"
-    t.integer "week_day"
+    t.bigint "linked_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["service_id"], name: "index_office_hours_on_service_id"
+    t.index ["linked_id"], name: "index_linked_services_on_linked_id"
+    t.index ["service_id"], name: "index_linked_services_on_service_id"
+  end
+
+  create_table "office_hours", force: :cascade do |t|
+    t.integer "hour_begin", null: false
+    t.integer "hour_end", null: false
+    t.bigint "professional_service_id"
+    t.integer "week_day", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["professional_service_id"], name: "index_office_hours_on_professional_service_id"
+  end
+
+  create_table "professional_services", force: :cascade do |t|
+    t.bigint "professional_id"
+    t.bigint "service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["professional_id"], name: "index_professional_services_on_professional_id"
+    t.index ["service_id"], name: "index_professional_services_on_service_id"
+  end
+
+  create_table "professionals", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_professionals_on_establishment_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.boolean "free", null: false
+    t.datetime "date", null: false
+    t.bigint "professional_service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["professional_service_id"], name: "index_schedules_on_professional_service_id"
   end
 
   create_table "schedulings", force: :cascade do |t|
@@ -137,7 +173,13 @@ ActiveRecord::Schema.define(version: 2019_03_05_210730) do
   add_foreign_key "addresses", "establishments"
   add_foreign_key "bank_dates", "establishments"
   add_foreign_key "establishments", "users"
-  add_foreign_key "office_hours", "services"
+  add_foreign_key "linked_services", "services"
+  add_foreign_key "linked_services", "services", column: "linked_id"
+  add_foreign_key "office_hours", "professional_services"
+  add_foreign_key "professional_services", "professionals"
+  add_foreign_key "professional_services", "services"
+  add_foreign_key "professionals", "establishments"
+  add_foreign_key "schedules", "professional_services"
   add_foreign_key "schedulings", "services"
   add_foreign_key "schedulings", "users"
   add_foreign_key "services", "categories"
