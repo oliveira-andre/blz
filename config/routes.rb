@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'professionals/new'
+  get 'professionals/edit'
+  get 'professionals/create'
+  get 'professionals/update'
   root 'pages#home'
   devise_for :users, controllers: {
     omniauth_callbacks: 'callbacks',
@@ -8,6 +12,7 @@ Rails.application.routes.draw do
   resources :filters, only: %i[index destroy]
   resources :establishments do
     resources :services, except: :index
+    resources :professionals, except: :index
   end
 
   resources :services, only: :show do

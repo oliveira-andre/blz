@@ -10,6 +10,8 @@ class Establishment < ApplicationRecord
   validates :user_id, uniqueness: true
 
   has_many :services
+  has_many :professionals
+
   has_one :address
   has_one_attached :photo
 

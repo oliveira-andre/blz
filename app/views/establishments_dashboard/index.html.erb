@@ -25,6 +25,14 @@
                 <span>Meus serviços</span>
               </a>
             </li>
+            <li class="tab" onclick="openTab(event,'professionals')">
+              <a>
+                <span class="icon is-small">
+                  <i class="fab fa-whmcs"></i>
+                </span>
+                <span>Profissionais</span>
+              </a>
+            </li>
             <li class="tab" onclick="openTab(event,'history')">
               <a>
                 <span class="icon is-small">
@@ -44,6 +52,11 @@
       <div class="column is-12">
         <div  id="services" class="content-tab" style="display:none">
           <%= render 'services' %>
+        </div>
+      </div>
+      <div class="column is-12">
+        <div  id="professionals" class="content-tab" style="display:none">
+          <%= render 'professionals' %>
         </div>
       </div>
       <div class="column is-12">

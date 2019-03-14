@@ -1,6 +1,6 @@
 ## Establishments
-emails = ['spar@blz.life', 'barber@blz.life', 'saloon@blz.life']
-names = ['Spar delas', 'The barber', 'Centro da beleza']
+emails = ['spa@blz.life', 'barber@blz.life', 'saloon@blz.life']
+names = ['Spa delas', 'The barber', 'Centro da beleza']
 (0..2).each do |i|
   user = User.find_by email: emails[i]
   if user.nil?
@@ -12,7 +12,7 @@ names = ['Spar delas', 'The barber', 'Centro da beleza']
     user.save!
   end
 
-  Establishment.find_or_create_by!(
+  e = Establishment.find_or_create_by!(
     cpf_cnpj: rand(999_999_999_99),
     name: user.name,
     email: user.email,
@@ -20,6 +20,9 @@ names = ['Spar delas', 'The barber', 'Centro da beleza']
     timetable: "#{rand(6..9)}:00 - #{rand(16..22)}:00",
     user: user
   )
+
+  p = e.professionals.build name: 'Maria Amanda'
+  p.save!
 end
 
 user = User.find_by email: 'rv@gmail.com'
@@ -62,17 +65,6 @@ Category.find_or_create_by!(
 Category.find_or_create_by!(
     name: 'Pele',
     description: 'Breve descrição'
-)
-
-## EStablichment
-
-Establishment.find_or_create_by!(
-    cpf_cnpj: '510165056165161',
-    name: 'Raiz',
-    email: 'lugarbeleza@blz.life',
-    phone: '9698989989898',
-    timetable: '9:00 - 18:00',
-    user_id: User.first.id
 )
 
 ## Services
