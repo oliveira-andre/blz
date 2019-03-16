@@ -32,6 +32,7 @@ class ServicesController < ApplicationController
 
   def edit
     authorize @service
+    @professionals = @service.professionals_to_link
   end
 
   def update
