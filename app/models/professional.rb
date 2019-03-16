@@ -1,8 +1,5 @@
 class Professional < ApplicationRecord
-	belongs_to :establishment
-
-	has_one_attached :photo
-
-	has_many :professional_services
-
+  belongs_to :establishment
+  has_many :professional_services
+  has_one_attached :photo
 end

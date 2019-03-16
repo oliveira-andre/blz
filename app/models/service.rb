@@ -8,7 +8,8 @@ class Service < ApplicationRecord
   belongs_to :establishment
 
   has_many :office_hours
-  has_many :linked_services
+  has_many :professional_services
+  has_many :professionals, through: :professional_services
 
   validates :title, presence: true
   validates :description, presence: true
@@ -22,5 +23,11 @@ class Service < ApplicationRecord
   def links_with_services
     services_ids = linked_services.pluck(:linked_id) << id
     LinkedService.where(service_id: services_ids, linked_id: services_ids).uniq
+  end
+
+  def professionals_to_link
+    professionals_ids = ProfessionalService.where(service_id: id)
+                                           .pluck(:professional_id)
+    professionals.where.not(id: professionals_ids)
   end
 end
