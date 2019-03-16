@@ -5,17 +5,20 @@
 }
 
 .services_form {
-  figure {
-    img {
-      min-height: 128px;
-      max-height: 128px;
-      min-width: 128px;
-      max-width: 128px;
 
-      margin-left: 5px;
-      margin-bottom: 5px;
+  form:nth-child(1) {
+    figure {
+      img {
+        min-height: 128px;
+        max-height: 128px;
+        min-width: 128px;
+        max-width: 128px;
 
-      border: 1px solid #ccc;
+        margin-left: 5px;
+        margin-bottom: 5px;
+
+        border: 1px solid #ccc;
+      }
     }
   }
 }
