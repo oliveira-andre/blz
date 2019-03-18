@@ -1,1 +1,13 @@
-<%= render "form", url: establishment_service_path %>
+<%= render 'pages/shared/header' %>
+<div class="services_form">
+  <div class="container">
+    <%= render "form", url: establishment_service_path %>
+    <div class="column is-12">
+      <p class="has-text-weight-semibold is-size-4">Profissionais que fazem esse serviço</p>
+    </div>
+   <%= render 'professional_services/form' %>
+    <div class="columns is-multiline">
+      <%= render @service.professional_services %>
+    </div>
+  </div>
+</div>
