@@ -9,3 +9,21 @@
 @import 'users_dashboard';
 @import 'establishments_dashboard';
 @import 'professional_services';
+
+.is-64x64 {
+  img {
+    min-height: 64px;
+    max-height: 64px;
+    min-width: 64px;
+    max-width: 64px;
+  }
+}
+
+.is-128x128 {
+  img {
+    min-height: 128px;
+    max-height: 128px;
+    min-width: 128px;
+    max-width: 128px;
+  }
+}
