@@ -20,14 +20,10 @@ class Service < ApplicationRecord
 
   validates :title, uniqueness: { scope: :establishment_id }
 
-  def links_with_services
-    services_ids = linked_services.pluck(:linked_id) << id
-    LinkedService.where(service_id: services_ids, linked_id: services_ids).uniq
-  end
-
   def professionals_to_link
     professionals_ids = ProfessionalService.where(service_id: id)
                                            .pluck(:professional_id)
-    professionals.where.not(id: professionals_ids)
+    Professional.where(establishment_id: establishment_id)
+                .where.not(id: professionals_ids)
   end
 end
