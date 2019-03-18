@@ -4,10 +4,12 @@ class ProfessionalsController < ApplicationController
 
   def new
     @professional = @establishment.professionals.build
+    authorize @professional
   end
 
   def create
     @professional = Professional.new professional_params
+    authorize @professional
     if @professional.save
       redirect_to establishments_dashboard_path(@establishment),
                   notice: 'Profissional criado com sucesso'
@@ -16,9 +18,12 @@ class ProfessionalsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @professional
+  end
 
   def update
+    authorize @professional
     if @professional.update professional_params
       redirect_to establishments_dashboard_path(@establishment),
                   notice: 'Profissional atualizado com sucesso'
@@ -39,7 +44,7 @@ class ProfessionalsController < ApplicationController
 
   def professional_params
     params.require(:professional)
-          .permit(:name, :description)
+          .permit(:name, :description, :photo)
           .merge(establishment_id: @establishment.id)
   end
 end
