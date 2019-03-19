@@ -93,11 +93,11 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
   create_table "office_hours", force: :cascade do |t|
     t.integer "hour_begin", null: false
     t.integer "hour_end", null: false
-    t.bigint "professional_service_id"
+    t.bigint "professional_id"
     t.integer "week_day", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["professional_service_id"], name: "index_office_hours_on_professional_service_id"
+    t.index ["professional_id"], name: "index_office_hours_on_professional_id"
   end
 
   create_table "professional_services", force: :cascade do |t|
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
   add_foreign_key "establishments", "users"
   add_foreign_key "linked_services", "services"
   add_foreign_key "linked_services", "services", column: "linked_id"
-  add_foreign_key "office_hours", "professional_services"
+  add_foreign_key "office_hours", "professionals"
   add_foreign_key "professional_services", "professionals"
   add_foreign_key "professional_services", "services"
   add_foreign_key "professionals", "establishments"
