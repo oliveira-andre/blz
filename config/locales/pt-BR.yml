@@ -39,6 +39,10 @@ pt-BR:
         begin_time: 'Horário'
         end_time: 'Horário final'
 
+      office_hour:
+        hour_begin: 'Hora inicial'
+        hour_end: 'Hora final'
+
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

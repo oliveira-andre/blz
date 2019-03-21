@@ -1,35 +1,43 @@
 class OfficeHour < ApplicationRecord
+  default_scope { order(:week_day, :hour_begin) }
+
   belongs_to :professional
   enum week_day: %i[segunda terça quarta quinta sexta sabado domingo]
 
   validates :week_day, presence: true
-  validates :hour_begin, presence: true
-  validates :hour_end, presence: true
+  validates :hour_begin, presence: true, length: { in: 1..2359 }
+  validates :hour_end, presence: true, length: { in: 1..2359 }
 
-  validate :hour_length
-  validate :end_and_begin_hour
+  validate :hours_validate
   validate :during_hour_work
 
   private
 
-  def hour_length
-    errors.add(:hour_begin, 'Verifique o horario de inicio') if hour_begin > 2359
-    errors.add(:hour_end, 'Verifique o horario de término') if hour_end > 2359
-  end
-
   def during_hour_work
-    errors.add(:hour_end, 'Seu horário está inválido') if hour_end <= end_work
-    self.hour_begin = end_work if hour_begin < end_work
+    if hour_end > begin_work && hour_end < end_work
+      errors.add(:hour_end, 'já está sendo usada!')
+    end
+
+    if hour_begin < end_work && hour_begin > begin_work
+      errors.add(:hour_begin, 'já está sendo usada!')
+    end
   end
 
-  def end_and_begin_hour
-    errors.add(:hour_end, 'Seu horário é inválido') if hour_end < hour_begin
-    errors.add(:hour_end, 'Seu horário é inválido') if hour_end == hour_begin
-    errors.add(:hour_begin, 'Seu horário é inválido') if hour_begin > hour_end
+  def hours_validate
+    return if hour_end > hour_begin
+
+    errors.add(:hour_begin, 'deve ser menor do que a hora final')
   end
 
   def end_work
-    @end_work ||= professional_service.office_hours.where(week_day: week_day)
-                                      .order(hour_end: :desc).first&.hour_end || 0
+    @end_work ||= professional.office_hours
+                              .where(week_day: week_day)
+                              .last&.hour_end || 0
+  end
+
+  def begin_work
+    @begin_work ||= professional.office_hours
+                                .where(week_day: week_day)
+                                .first&.hour_begin || 0
   end
 end

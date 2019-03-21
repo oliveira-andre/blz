@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'pages#home'
   devise_for :users, controllers: {
     omniauth_callbacks: 'callbacks',
@@ -11,13 +10,14 @@ Rails.application.routes.draw do
     resources :services, except: :index do
       resources :professional_services, only: %i[create destroy]
     end
-    resources :professionals, except: :index
+    resources :professionals, except: :index do
+      resources :office_hours, only: %i[create destroy]
+    end
   end
 
   resources :services, only: :show do
     post 'details' => 'services#details'
     resources :scheduling, only: %i[create]
-    resources :office_hours, only: %i[create destroy]
   end
 
   get '/users/:id/dashboard',

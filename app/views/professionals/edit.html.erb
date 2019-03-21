@@ -1,2 +1,10 @@
 <%= render 'pages/shared/header' %>
 <%= render "form", url: establishment_professional_path(establishment_id: @establishment.id, id: @professional.id) %>
+<div class="container">
+  <%= render 'office_hours/form' %>
+  <div class="columns">
+    <div class="column is-12">
+      <%= render "office_hours/table_list", office_hours: @professional.office_hours %>
+    </div>
+  </div>
+</div>
