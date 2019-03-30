@@ -2,7 +2,7 @@ class OfficeHour < ApplicationRecord
   default_scope { order(:week_day, :hour_begin) }
 
   belongs_to :professional
-  enum week_day: %i[segunda terça quarta quinta sexta sabado domingo]
+  enum week_day: %i[domingo segunda terça quarta quinta sexta sabado]
 
   validates :week_day, presence: true
   validates :hour_begin, presence: true, length: { in: 1..2359 }
@@ -10,6 +10,9 @@ class OfficeHour < ApplicationRecord
 
   validate :hours_validate
   validate :during_hour_work
+
+  after_save :rebuild_schedule
+  after_destroy :rebuild_schedule
 
   private
 
@@ -39,5 +42,9 @@ class OfficeHour < ApplicationRecord
     @begin_work ||= professional.office_hours
                                 .where(week_day: week_day)
                                 .first&.hour_begin || 0
+  end
+
+  def rebuild_schedule
+    professional.professional_services.each { |p_s| Schedule.rebuild(p_s) }
   end
 end
