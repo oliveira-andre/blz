@@ -8,11 +8,25 @@ function openTab(evt, tabName) {
     content_tabs[i].style.display = "none";
   }
   
-  for (var i = 0; i < content_tabs.length; i++) {
+  for (var i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" is-active", "");
   }
 
-  document.getElementById(tabName).style.display = "block";
+  var tabContent = document.getElementById(tabName);
+  if(tabContent) tabContent.style.display = "block";
   
   evt.currentTarget.className += " is-active";
 }
+
+$(document).on("turbolinks:load", function () {
+  var tabs = document.querySelectorAll('.tab');
+  if(tabs.length <= 0) return;
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(e){
+      var element = e.currentTarget;
+      var tabTarget = element.dataset.target;
+      openTab(e, tabTarget);
+    });
+  });
+});
