@@ -22,6 +22,10 @@ class Establishment < ApplicationRecord
                                        reject_if: :all_blank
 
   def scheduling
-    ::Scheduling.where(user_id: user.id, service_id: services.ids)
+    professional_services_ids = ProfessionalService.where(
+      professional_id: professionals.ids,
+      service_id: services.ids
+    ).uniq
+    ::Scheduling.where(professional_service_id: professional_services_ids)
   end
 end

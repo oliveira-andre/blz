@@ -1,94 +1,30 @@
-<h1 class="title has-text-centered">
-  <span class="is-size-3 is-pulled-right"> <i class="fas fa-arrow-right"></i></span> 
-  Horários
-  <span class="is-size-3 is-pulled-left"> <i class="fas fa-arrow-left"></i> </span>
+<h1 class="title has-text-centered has-text-weight-semibold">
+  <span class="is-size-5 is-pulled-right" id="arrow-next"> <i class="fas fa-arrow-right"></i></span>
+    Escolha um horário
+    <span class="is-hidden-tablet"> com <%= professional_service.professional.name %></span>
+  <span class="is-size-5 is-pulled-left" id="arrow-back"> <i class="fas fa-arrow-left"></i> </span>
 </h1>
- 
-<div class="columns">
-  <div class="column is-12">
-    <table class="table table is-fullwidth is-bordered">
-      <thead>
-        <tr>
-          <th class="has-text-centered">
-            02/03</br>
-            <span class="has-text-weight-normal">Seg.</span>
-          </th>
-          <th class="has-text-centered">
-            03/03</br>
-            <span class="has-text-weight-normal">Ter.</span>
-          </th>
-          <th class="has-text-centered has-background-grey-lighter">
-            04/03</br>
-            <span class="has-text-weight-normal">Qua.</span>
-          </th>
-          <th class="has-text-centered">
-            05/03</br>
-            <span class="has-text-weight-normal">Qui.</span>
-          </th>
-          <th class="has-text-centered">
-            06/03</br>
-            <span class="has-text-weight-normal">Sex.</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class='has-text-centered'>9:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>9:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>9:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>9:00</td>
-          <td class='has-text-centered'>9:00</td>
-        </tr>
-        <tr>
-          <td class='has-text-centered has-background-grey-lighter'>11:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>11:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>11:00</td>
-          <td class='has-text-centered'>11:00</td>
-          <td class='has-text-centered'>11:00</td>
-        </tr>
-        <tr>
-          <td class='has-text-centered'>14:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>14:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>14:00</td>
-          <td class='has-text-centered'>14:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>14:00</td>
-        </tr>
-        <tr>
-          <td class='has-text-centered'>16:00</td>
-          <td class='has-text-centered'>16:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>16:00</td>
-          <td class='has-text-centered'>16:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>16:00</td>
-        </tr>
-        <tr>
-          <td class='has-text-centered has-background-grey-lighter'>18:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>18:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>18:00</td>
-          <td class='has-text-centered'>18:00</td>
-          <td class='has-text-centered'>18:00</td>
-        </tr>
-         <tr>
-          <td class='has-text-centered'>20:00</td>
-          <td class='has-text-centered'>20:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>20:00</td>
-          <td class='has-text-centered'>20:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>20:00</td>
-        </tr>
-         <tr>
-          <td class='has-text-centered'>22:00</td>
-          <td class='has-text-centered'>22:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>22:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>22:00</td>
-          <td class='has-text-centered'>22:00</td>
-        </tr>
-         <tr>
-          <td class='has-text-centered has-background-grey-lighter'>23:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>23:00</td>
-          <td class='has-text-centered has-background-grey-lighter'>23:00</td>
-          <td class='has-text-centered'>23:00</td>
-          <td class='has-text-centered'>23:00</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="columns is-mobile is-gapless table-schedule">
+  <% professional_service.table_schedule.each do |schedule| %>
+    <div class="column">
+      <p class="has-text-weight-semibold is-size-6 is-size-7-touch has-text-centered">
+        <%= schedule.keys.first %></br>
+        <span class="has-text-weight-normal">
+          <%= week_day(schedule.values.flatten.first.date) %>
+        </span>
+      </p>
+      <% schedule.values.flatten.each do |s| %>
+        <% if s.free %>
+          <%= link_to time(s.date), new_professional_service_scheduling_path(professional_service_id: professional_service.id, date: s.date),
+                      class: 'button is-size-6 is-size-7-touch has-text-centered is-text', remote: true,
+                      title: 'Horário livre' %>
+        <% else %>
+          <span class="button is-size-6 is-size-7-touch has-text-centered is-text"
+                title="Horário ocupado">
+            <%= time(s.date) %>
+          </span>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

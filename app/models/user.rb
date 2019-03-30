@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   has_many :scheduling
   has_one :establishment
+  has_many :scheduling
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

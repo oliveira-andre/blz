@@ -1,9 +1,9 @@
 class DatePastValidator < ActiveModel::Validator
   def validate(record)
     @record = record
-    return unless @record.begin_time.present?
-    return unless @record.begin_time >= Time.zone.now
+    return unless @record.date.present?
+    return if @record.date >= Time.zone.now
 
-    @record.errors.add(:begin_time, 'não pode ser no passado')
+    @record.errors.add(:date, 'não pode ser no passado')
   end
 end

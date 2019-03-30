@@ -1,11 +1,15 @@
-<div id="details-model-scheduling" class="modal is-active">
+<div id="new-modal-scheduling" class="modal is-active">
   <div class="modal-background"></div>
   <div class="modal-content">
     <div class="box">
       <article class="media">
         <div class="media-left">
-          <figure class="image">
-            <img src="https://bulma.io/images/placeholders/64x64.png">
+          <figure class="image is-64x64">
+            <% if @professional_service.service.establishment.photo.attached? %>
+              <%= image_tag @professional_service.service.establishment.photo, class:'image' %>
+            <% else %>
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            <% end %>
           </figure>
         </div>
         <div class="media-content">
@@ -13,7 +17,7 @@
             <div class="column is-12">
               <div class="content">
                 <p class="has-text-weight-semibold">
-                  <%= @service.establishment.name %>
+                  <%= @professional_service.service.establishment.name %>
                 </p>
                 <p>
                   <i class="fas fa-star is-size-5"></i>
@@ -26,32 +30,32 @@
             </div>
             <div class="column is-4">
                 <i class="fas fa-money-bill-wave is-size-4"></i>
-                R$ <%= @service.amount.to_i %>
+                R$ <%= @professional_service.service.amount.to_i %>
             </div>
             <div class="column is-4">
                 <i class="fas fa-hourglass-half is-size-4"></i>
-                <%= @service.duration %> minutos
+                <%= @professional_service.service.duration %> minutos
             </div>
             <div class="column is-4">
                 <i class="fas fa-clock is-size-4"></i>
-                <%= "#{day_month(@begin_time)} às #{time(@begin_time)}" %>
+                <%= "#{day_month(@date)} às #{time(@date)}" %>
             </div>
-            <% unless @service.establishment.address.nil? %>
+            <% unless @professional_service.service.establishment.address.nil? %>
               <div class="column is-12">
                 <span>
                   <i class="fas fa-map-marker-alt is-size-4"></i>
-                  <%= @service.establishment.address.full %>
+                  <%= @professional_service.service.establishment.address.full %>
                 </span>
               </div>
             <% end %>
           </div>
         </div>
       </article>
-      <%= form_with url: service_scheduling_index_path(service_id: @service.id), local: true do |f| %>
-        <%= f.hidden_field :begin_time, value: @begin_time %>
+      <%= form_with url: professional_service_scheduling_index_path(professional_service_id: @professional_service.id), local: true do |f| %>
+        <%= f.hidden_field :date, value: @date %>
         <%= f.button class: 'button is-info is-rounded' do %>
           <strong>Confirmar agendamento para </strong>
-          <%= "(#{day_month(@begin_time)} - #{time(@begin_time)} )" %>
+          <%= "(#{day_month(@date)} - #{time(@date)} )" %>
         <% end %>
       <% end %>
     </div>

@@ -4,15 +4,7 @@ class ServicesController < ApplicationController
   before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update show details]
 
-  def show
-    # TODO: isso eh provisorio, remover e aplicar a regra real depois
-    @first_timetable = params[:ftime].to_datetime if params[:ftime]
-    @first_timetable = '07/03/2019 15:00'.to_datetime unless params[:ftime]
-  end
-
-  def details
-    @begin_time = params[:timetable].to_datetime
-  end
+  def show; end
 
   def new
     authorize @establishment, policy_class: ServicePolicy

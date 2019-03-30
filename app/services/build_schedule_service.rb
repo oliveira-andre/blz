@@ -28,10 +28,9 @@ class BuildScheduleService
       loop do
         schedule_date_end = schedule_date_begin + service.duration.minutes
         break unless schedule_date_valid?(schedule_date_end, work_until)
-
+        debugger
         Schedule.create!(
           date: schedule_date_begin,
-          free: true,
           professional_service_id: professional_service.id
         )
         schedule_date_begin += service.duration.minutes
@@ -52,7 +51,3 @@ class BuildScheduleService
     end
   end
 end
-# BuildScheduleService.execute ProfessionalService.first
-# Schedule.all.each {|s| p " --- #{I18n.l(s.date, format: :day_month)} às #{I18n.l(s.date, format: :time)} --- "}
-# Schedule.destroy_all
-

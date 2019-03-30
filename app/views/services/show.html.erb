@@ -1,18 +1,47 @@
 <%= render 'pages/shared/header' %>
 <div class="service-details">
   <div class="container">
-    <div class="columns is-multiline">
+    <div class="columns">
       <div class="column is-6">
         <%= render 'gallery' %>
       </div>
       <div class="column is-6">
        <%= render 'service_details' %>
       </div>
-      <div class="column is-12">
-        <%= render 'schedules' %>
-      </div>
+    </div>
+    <div class="columns">
+      <% if @service.professional_services.count > 1 %>
+        <div class="column is-12">
+          <div class="tabs is-centered columns">
+            <ul>
+              <% @service.professional_services.each_with_index do |professional_service, index| %>
+                <% if professional_service.table_schedule.any? %>
+                  <li class="column tab <%= index == 0 ? 'is-active' : ''%>"
+                      data-target='<%= "professional-service-#{professional_service.id}" %>'>
+                    <%= render 'shared/avatar', resource: professional_service.professional %>
+                    <p class="has-text-centered is-hidden-mobile">
+                      <strong><%= professional_service.professional.name %></strong>
+                    </p>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="columns">
+      <% @service.professional_services.each_with_index do |professional_service, index| %>
+        <% if professional_service.table_schedule.any? %>
+          <div class="column is-12 content-tab"
+            id="professional-service-<%= professional_service.id %>"
+            style="display:<%= index == 0 ? ' block' : ' none'%>;">
+            <%= render 'schedules', professional_service: professional_service %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
 
-<div class="modal" id="details-model-scheduling"></div>
+<div class="modal" id="new-modal-scheduling"></div>

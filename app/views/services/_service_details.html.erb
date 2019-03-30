@@ -3,8 +3,12 @@
 <div class="box">
   <article class="media">
     <div class="media-left">
-      <figure class="image">
-        <img src="https://bulma.io/images/placeholders/64x64.png">
+      <figure class="image is-64x64">
+        <% if @service.establishment.photo.attached? %>
+          <%= image_tag @service.establishment.photo, class:'image' %>
+        <% else %>
+          <img src="https://bulma.io/images/placeholders/128x128.png">
+        <% end %>
       </figure>
     </div>
     <div class="media-content">
@@ -47,10 +51,4 @@
     </div>
   </article>
 </div>
-<%= form_with url: service_details_path(service_id: @service.id) do |f| %>
-  <%= f.hidden_field :timetable, value: @first_timetable %>
-  <%= f.button class: 'button is-info is-rounded' do %>
-    <strong>Agendar no primeiro horário disponível</strong>
-    <%= "(#{day_month(@first_timetable)} - #{time(@first_timetable)} )" %>
-  <% end %>
-<% end %>
+

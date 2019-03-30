@@ -8,7 +8,7 @@
       <div class="column is-12">
         <div class="tabs is-toggle is-toggle-rounded">
           <ul>
-            <li class="tab is-active"  onclick="openTab(event,'scheduling')">
+            <li class="tab is-active"  data-target='scheduling'>
               <a>
                 <span class="icon is-small">
                   <i class="fas fa-calendar-alt"></i>
@@ -16,7 +16,7 @@
                 <span>Minha Agenda</span>
               </a>
             </li>
-            <li class="tab" onclick="openTab(event,'history')">
+            <li class="tab" data-target='history'>
               <a>
                 <span class="icon is-small">
                   <i class="fas fa-history"></i>
@@ -30,12 +30,16 @@
       <div id="scheduling" class="column is-12 content-tab">
         <% if @scheduling.any? %>
           <% @scheduling.each do |schedule| %>
-            <div class="column is-6">
+            <div class="column is-12">
               <div class="box">
                 <article class="media">
                   <div class="media-left">
-                    <figure class="image">
-                      <img src="https://bulma.io/images/placeholders/64x64.png">
+                    <figure class="image is-64x64">
+                      <% if schedule.professional_service.service.establishment.photo.attached? %>
+                        <%= image_tag schedule.professional_service.service.establishment.photo %>
+                      <% else %>
+                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                      <% end %>
                     </figure>
                   </div>
                   <div class="media-content">
@@ -43,7 +47,7 @@
                       <div class="column is-12">
                         <div class="content">
                           <p class="has-text-weight-semibold">
-                            <%= schedule.service.establishment.name %>
+                            <%= schedule.professional_service.service.establishment.name %>
                           </p>
                           <p>
                             <i class="fas fa-star is-size-5"></i>
@@ -52,26 +56,26 @@
                             <i class="far fa-star is-size-5"></i>
                             <i class="far fa-star is-size-5"></i>
                           </p>
-                          <p  class="has-text-weight-semibold"><%= schedule.service.title %></p>
+                          <p  class="has-text-weight-semibold"><%= schedule.professional_service.service.title %></p>
                         </div>
                       </div>
                       <div class="column is-4">
                         <i class="fas fa-money-bill-wave is-size-4"></i>
-                        R$ <%= schedule.service.amount %>
+                        R$ <%= schedule.professional_service.service.amount %>
                       </div>
                       <div class="column is-4">
                         <i class="fas fa-hourglass-half is-size-4"></i>
-                        <%= schedule.service.duration %> minutos
+                        <%= schedule.professional_service.service.duration %> minutos
                       </div>
                       <div class="column is-4">
                         <i class="fas fa-clock is-size-4"></i>
-                        <%= "#{day_month(schedule.begin_time)} - #{time(schedule.begin_time)}" %>
+                        <%= "#{day_month(schedule.date)} - #{time(schedule.date)}" %>
                       </div>
-                      <% unless schedule.service.establishment.address.nil? %>
+                      <% unless schedule.professional_service.service.establishment.address.nil? %>
                         <div class="column is-12">
                           <span>
                             <i class="fas fa-map-marker-alt is-size-4"></i>
-                            <%= schedule.service.establishment.address.full %>
+                            <%= schedule.professional_service.service.establishment.address.full %>
                           </span>
                         </div>
                       <% end %>

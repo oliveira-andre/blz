@@ -50,18 +50,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.index ["establishment_id"], name: "index_addresses_on_establishment_id"
   end
 
-  create_table "bank_dates", force: :cascade do |t|
-    t.string "cpf_cnpj", null: false
-    t.string "holder", null: false
-    t.integer "bank_code", null: false
-    t.string "agency", null: false
-    t.string "account_number", null: false
-    t.bigint "establishment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["establishment_id"], name: "index_bank_dates_on_establishment_id"
-  end
-
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
@@ -79,15 +67,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_establishments_on_user_id"
-  end
-
-  create_table "linked_services", force: :cascade do |t|
-    t.bigint "service_id"
-    t.bigint "linked_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["linked_id"], name: "index_linked_services_on_linked_id"
-    t.index ["service_id"], name: "index_linked_services_on_service_id"
   end
 
   create_table "office_hours", force: :cascade do |t|
@@ -119,7 +98,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.boolean "free", null: false
+    t.boolean "free", default: true
     t.datetime "date", null: false
     t.bigint "professional_service_id"
     t.datetime "created_at", null: false
@@ -129,13 +108,13 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
 
   create_table "schedulings", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "service_id"
+    t.bigint "professional_service_id"
     t.integer "status", default: 0
-    t.datetime "begin_time", null: false
-    t.datetime "end_time", null: false
+    t.integer "service_duration", null: false
+    t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["service_id"], name: "index_schedulings_on_service_id"
+    t.index ["professional_service_id"], name: "index_schedulings_on_professional_service_id"
     t.index ["user_id"], name: "index_schedulings_on_user_id"
   end
 
@@ -171,16 +150,13 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "establishments"
-  add_foreign_key "bank_dates", "establishments"
   add_foreign_key "establishments", "users"
-  add_foreign_key "linked_services", "services"
-  add_foreign_key "linked_services", "services", column: "linked_id"
   add_foreign_key "office_hours", "professionals"
   add_foreign_key "professional_services", "professionals"
   add_foreign_key "professional_services", "services"
   add_foreign_key "professionals", "establishments"
   add_foreign_key "schedules", "professional_services"
-  add_foreign_key "schedulings", "services"
+  add_foreign_key "schedulings", "professional_services"
   add_foreign_key "schedulings", "users"
   add_foreign_key "services", "categories"
   add_foreign_key "services", "establishments"

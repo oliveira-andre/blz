@@ -1,47 +1,59 @@
 class Scheduling < ApplicationRecord
+  default_scope { order(:date) }
   scope :history, -> { where.not(status: %i[in_payment awaiting_service]) }
 
   enum status: %i[in_payment awaiting_service finished canceled]
 
   belongs_to :user, required: false
-  belongs_to :service
+  belongs_to :professional_service
 
   validates :status, presence: true
-  validates :begin_time, presence: true
-  validates :end_time, presence: true
+  validates :date, presence: true
+  validates :service_duration, presence: true
 
   validates_with DatePastValidator
 
-  validate :uniqueness_time_by_user
-  validate :uniqueness_time_by_establishment
+  validate :date_in_schedule?
+  validate :user_date_busy?
+  validate :professional_date_busy?
+
+  after_save :set_schedule_busy
 
   private
 
-  def uniqueness_time_by_establishment
-    return if service_id.nil?
+  def date_in_schedule?
+    schedule = professional_service.schedules.where(date: date).first
+    return unless schedule.nil?
 
-    current_establishment = service.establishment
-    services_ids_by_establishment = current_establishment.services.ids
-    scheduling_ids = Scheduling.where(
-      end_time: (begin_time..end_time),
-      service_id: services_ids_by_establishment
-    ).ids
-
-    return if scheduling_ids.empty?
-
-    @errors.add(:begin_time, 'já esta ocupado para esse salão/profissional')
+    @errors.add(:date, 'inválido ou indisponível, tente novamente')
   end
 
-  def uniqueness_time_by_user
-    return if user_id.nil?
+  def professional_date_busy?
+    professional = professional_service.professional
+    professional_services_ids = professional.professional_services.ids
 
     scheduling_ids = Scheduling.where(
-      end_time: (begin_time..end_time),
-      user_id: user_id
+      professional_service_id: professional_services_ids,
+      date: (date..(date + service_duration.minutes - 1.seconds))
+    )
+
+    return if scheduling_ids.empty?
+
+    @errors.add(:date, 'já esta ocupado para esse salão/profissional')
+  end
+
+  def user_date_busy?
+    scheduling_ids = user.scheduling.where(
+      date: (date..(date + service_duration.minutes - 1.seconds))
     ).ids
 
     return if scheduling_ids.empty?
 
-    @errors.add(:begin_time, 'já esta ocupado na sua agenda')
+    @errors.add(:date, 'já esta ocupado na sua agenda')
+  end
+
+  def set_schedule_busy
+    schedule = professional_service.schedule.where(date: date).first
+    schedule.update! free: false
   end
 end

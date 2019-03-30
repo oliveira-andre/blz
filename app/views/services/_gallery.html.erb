@@ -1,25 +1,33 @@
 <div class="columns is-centered is-multiline">
   <div class="column is-10">
-    <%= image_tag 'https://bulma.io/images/placeholders/1280x960.png' %>
+    <figure class="image">
+      <% if @service.photos.attached? %>
+        <%= image_tag @service.photos.sample %>
+      <% else %>
+        <img src="https://bulma.io/images/placeholders/1280x960.png">
+      <% end %>
+    </figure>
   </div>
   <div class="column is-12">
     <div class="columns is-vcentered is-centered">
       <!-- <span class="is-size-4 is-pulled-right"> <i class="fas fa-arrow-left"></i> </span> -->
-      <div class="column is-2">
-        <%= image_tag 'https://bulma.io/images/placeholders/128x128.png' %>
-      </div>
-      <div class="column is-2">
-        <%= image_tag 'https://bulma.io/images/placeholders/128x128.png' %>
-      </div>
-      <div class="column is-2">
-        <%= image_tag 'https://bulma.io/images/placeholders/128x128.png' %>
-      </div>
-      <div class="column is-2">
-        <%= image_tag 'https://bulma.io/images/placeholders/128x128.png' %>
-      </div>
-      <div class="column is-2">
-        <%= image_tag 'https://bulma.io/images/placeholders/128x128.png' %>
-      </div>
+      <% if @service.photos.attached? %>
+        <div class="column is-2">
+          <%= image_tag @service.photos.sample %>
+        </div>
+        <div class="column is-2">
+          <%= image_tag @service.photos.sample %>
+        </div>
+        <div class="column is-2">
+          <%= image_tag @service.photos.sample %>
+        </div>
+        <div class="column is-2">
+          <%= image_tag @service.photos.sample %>
+        </div>
+        <div class="column is-2">
+          <%= image_tag @service.photos.sample %>
+        </div>
+      <% end %>
       <!-- <span class="is-size-4 is-pulled-left"> <i class="fas fa-arrow-right"></i> </span> -->
     </div>
   </div>

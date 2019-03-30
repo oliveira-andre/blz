@@ -1,4 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
+
   root 'pages#home'
   devise_for :users, controllers: {
     omniauth_callbacks: 'callbacks',
@@ -15,9 +19,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :services, only: :show do
-    post 'details' => 'services#details'
-    resources :scheduling, only: %i[create]
+  resources :services, only: :show
+
+  resources :professional_services, only: :show do
+    resources :scheduling, only: %i[new create]
   end
 
   get '/users/:id/dashboard',

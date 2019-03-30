@@ -36,8 +36,7 @@ pt-BR:
         neighborhood: Bairro
 
       scheduling:
-        begin_time: 'Horário'
-        end_time: 'Horário final'
+        date: 'Horário'
 
       office_hour:
         hour_begin: 'Hora inicial'
