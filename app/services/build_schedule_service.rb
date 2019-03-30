@@ -1,31 +1,58 @@
 class BuildScheduleService
-	class << self
+  class << self
     def execute(professional_service)
-      duration = (professional_service.service.duration.to_f / 60)
+      @professional_service = professional_service
+      @professional = professional_service.professional
+      @service = professional_service.service
+
       professional_service.schedules.destroy_all
-      (0..45).each do |day|
-        datetime = Date.today + day.days
-        week_day = datetime.strftime('%w').to_i
+      generate_schedule
+    end
 
-        professional_service.office_hours.where(week_day: week_day).each do |office_hour|
-          time_to_work = office_hour.hour_end - office_hour.hour_begin
-          time = datetime + office_hour.hour_begin.hours
+    private
 
-          while time_to_work >= duration
-            time += (duration*60).minutes
-            schedule = Schedule.find_or_create_by!(
-              date: time,
-              free: true,
-              professional_service_id: professional_service.id
-            )
-            time_to_work -= duration
-          end
-        end
+    attr_accessor :professional, :service, :professional_service, :work_at
+
+    def generate_schedule
+      (0..30).each do |day|
+        @work_at = Date.today + day.days
+        wday = work_at.strftime('%w').to_i
+        wday_office_hours = professional.office_hours.where(week_day: wday)
+        wday_office_hours.each { |office_hour| create_schedule office_hour }
       end
+    end
+
+    def create_schedule(office_hour)
+      work_until = date_join_time(work_at, office_hour.hour_end)
+      schedule_date_begin = date_join_time(work_at, office_hour.hour_begin)
+      loop do
+        schedule_date_end = schedule_date_begin + service.duration.minutes
+        break unless schedule_date_valid?(schedule_date_end, work_until)
+
+        Schedule.create!(
+          date: schedule_date_begin,
+          free: true,
+          professional_service_id: professional_service.id
+        )
+        schedule_date_begin += service.duration.minutes
+      end
+    end
+
+    def date_join_time(date, hour_int)
+      (date.to_s + ' ' + hour_mask(hour_int)).to_datetime
+    end
+
+    def hour_mask(hour)
+      length = hour.to_s.length
+      hour.to_s.insert(length - 2, ':')
+    end
+
+    def schedule_date_valid?(data_end, work_end)
+      data_end <= work_end
     end
   end
 end
-
 # BuildScheduleService.execute ProfessionalService.first
 # Schedule.all.each {|s| p " --- #{I18n.l(s.date, format: :day_month)} às #{I18n.l(s.date, format: :time)} --- "}
 # Schedule.destroy_all
+
