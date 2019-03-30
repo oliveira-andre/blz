@@ -1,0 +1,7 @@
+<figure class="image is-64x64">
+  <% if resource.photo.attached? %>
+    <%= image_tag resource.photo, class: 'is-rounded' %>
+  <% else %>
+    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" class="is-rounded">
+  <% end %>
+</figure>
