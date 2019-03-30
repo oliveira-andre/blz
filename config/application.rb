@@ -24,5 +24,6 @@ module Blz
     config.generators.system_tests = nil
     config.generators.assets = false
     config.generators.helper = false
+    config.active_job.queue_adapter = :sidekiq
   end
 end
