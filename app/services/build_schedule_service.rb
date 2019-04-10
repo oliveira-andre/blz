@@ -28,7 +28,6 @@ class BuildScheduleService
       loop do
         schedule_date_end = schedule_date_begin + service.duration.minutes
         break unless schedule_date_valid?(schedule_date_end, work_until)
-        debugger
         Schedule.create!(
           date: schedule_date_begin,
           professional_service_id: professional_service.id
