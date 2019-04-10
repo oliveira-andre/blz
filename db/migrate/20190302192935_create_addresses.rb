@@ -5,8 +5,8 @@ class CreateAddresses < ActiveRecord::Migration[5.2]
       t.string :number, null: false
       t.string :neighborhood, null: false
       t.string :city, default: 'Porto Velho'
-      t.string :state, default: 'Rondônia'
-      t.string :country, default: 'Brasil'
+      t.string :state, default: 'RO'
+      t.string :country, default: 'BRA'
       t.string :zipcode
       t.references :establishment, foreign_key: true
 

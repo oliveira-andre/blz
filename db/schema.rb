@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.string "number", null: false
     t.string "neighborhood", null: false
     t.string "city", default: "Porto Velho"
-    t.string "state", default: "Rondônia"
-    t.string "country", default: "Brasil"
+    t.string "state", default: "RO"
+    t.string "country", default: "BRA"
     t.string "zipcode"
     t.bigint "establishment_id"
     t.datetime "created_at", null: false
@@ -58,12 +58,14 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
   end
 
   create_table "establishments", force: :cascade do |t|
-    t.string "cpf_cnpj", null: false
     t.string "name", null: false
-    t.string "email", null: false
-    t.string "phone", null: false
     t.string "timetable", null: false
+    t.integer "status", default: 0
     t.bigint "user_id"
+    t.string "moip_account_id"
+    t.string "moip_access_token"
+    t.string "moip_refresh_token"
+    t.string "moip_set_password_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_establishments_on_user_id"
@@ -137,6 +139,11 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", null: false
+    t.string "cpf"
+    t.string "phone"
+    t.boolean "terms_acceptation", null: false
+    t.date "birth_date"
+    t.integer "status", default: 0
     t.string "provider"
     t.string "uid"
     t.string "reset_password_token"
