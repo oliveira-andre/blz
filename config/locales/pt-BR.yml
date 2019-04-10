@@ -12,6 +12,9 @@ pt-BR:
         email: Email
         password_confirmation: Confirmação de senha
         current_password: Senha atual
+        terms_acceptation: Termos de uso
+        cpf: CPF
+        phone: Telefone
 
       service:
         title: Título
@@ -25,10 +28,9 @@ pt-BR:
       establishment:
         name: Nome
         email: Email
-        phone: Telefone
         timetable: Horário de funcionamento
-        cpf_cnpj: CPF ou CNPJ
-        user: Usuário
+        user: Informações do dono
+        address: Endereço
 
       address:
         street: Rua/Logradouro
