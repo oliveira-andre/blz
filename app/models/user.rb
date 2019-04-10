@@ -3,6 +3,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
 
   validates :name, presence: true
+  validates :birth_date, presence: true
+  validates :terms_acceptation, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :cpf, presence: true, uniqueness: true
+  validates_cpf :cpf
+
   has_many :scheduling
   has_one :establishment
   has_many :scheduling
