@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   get '/establishments/:id/dashboard',
       to: 'establishments_dashboard#index',
       as: :establishments_dashboard
+
+  resources :callbacks, only: :index
 end
