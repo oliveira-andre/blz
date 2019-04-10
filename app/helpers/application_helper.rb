@@ -22,4 +22,8 @@ module ApplicationHelper
   def establishment?
     !current_user.establishment.nil?
   end
+
+  def moip_request_permission_link
+    Moip::RequestPermissionService.execute
+  end
 end
