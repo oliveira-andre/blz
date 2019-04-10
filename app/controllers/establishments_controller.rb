@@ -1,22 +1,21 @@
 class EstablishmentsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[new create]
-  before_action :load_establishment, only: %i[edit update]
+  before_action :load_establishment, only: %i[edit update success authorization]
 
   def new
-    @user = User.new
-    @establishment = Establishment.new user: @user
-    @address = Address.new establishment: @establishment
-    @establishment.address = @address
+    @establishment = Establishment.new
+    @establishment.address = Address.new
+    @establishment.user = User.new
   end
 
   def create
     @establishment = Establishment.new establishment_params
-    @establishment.address = Address.new establishment_params[:address_attributes]
-    @establishment.address.establishment = @establishment
-    SaveEstablishmentService.execute @establishment
-    redirect_to new_user_session_path, notice: 'Cadastro realizado com sucesso'
+    @establishment.save!
+    Moip::CreateAccountService.execute @establishment
+    redirect_to establishments_dashboard_path(@establishment),
+                notice: 'Cadastro realizado com sucesso'
   rescue ActiveRecord::RecordInvalid => error
-    @errors = error.record.errors
+    @messages_errors = error.record.errors.full_messages
     render 'new'
   end
 
@@ -39,13 +38,18 @@ class EstablishmentsController < ApplicationController
 
   def establishment_params
     params.require(:establishment)
-          .permit(:cpf_cnpj, :name, :email, :phone, :timetable, :photo,
-                  address_attributes: %i[street number neighborhood zipcode],
-                  user_attributes: %i[password password_confirmation])
+          .permit(
+            :name, :timetable, :photo, address_attributes: %i[
+              street number neighborhood zipcode
+            ], user_attributes: %i[
+              name cpf email phone password password_confirmation
+              terms_acceptation birth_date
+            ]
+          )
   end
 
   def load_establishment
-    @establishment = Establishment.find(params[:id])
+    @establishment = Establishment.find(params[:id] || params[:establishment_id])
     @user = User.find(@establishment.user_id)
     @address = Address.find_by(establishment: @establishment)
   end
