@@ -30,13 +30,15 @@
               <%= f.submit "Entrar", class: "button is-block is-info is-large is-fullwidth" %>
               </br>
               <%= link_to "Voltar", root_path, class: "button is-block is-large is-fullwidth" %>
+              <!--
               <p>Entrar com</p>
-              <%= link_to user_facebook_omniauth_authorize_path, class: "is-size-4" do %>
+              #link_to user_facebook_omniauth_authorize_path, class: "is-size-4" do
                 <i class="fab fa-facebook"></i>
-              <% end %>
-              <%= link_to user_google_oauth2_omniauth_authorize_path, class: "is-size-4" do %>
+              #end
+              #link_to user_google_oauth2_omniauth_authorize_path, class: "is-size-4"
                 <i class="fab fa-google-plus-square"></i>
-              <% end %>
+              #end
+              -->
             </div>
             <p class="has-text-grey">
               <%= render "devise/shared/links" %>
