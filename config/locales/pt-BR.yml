@@ -15,6 +15,7 @@ pt-BR:
         terms_acceptation: Termos de uso
         cpf: CPF
         phone: Telefone
+        birth_date: 'Data de nascimento'
 
       service:
         title: Título

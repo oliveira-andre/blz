@@ -9,4 +9,17 @@
     min-width: 128px;
     max-width: 128px;
   }
+
+  h2 {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+  }
+
+  .notification.is-danger {
+    padding: 5px;
+    width: max-content;
+    padding-right: 50px;
+    margin-left: 10px;
+  }
 }
