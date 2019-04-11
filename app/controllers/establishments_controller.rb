@@ -11,7 +11,7 @@ class EstablishmentsController < ApplicationController
   def create
     @establishment = Establishment.new establishment_params
     @establishment.save!
-    Moip::CreateAccountService.execute @establishment
+    Moip::Account::CreateService.execute @establishment
     redirect_to establishments_dashboard_path(@establishment),
                 notice: 'Cadastro realizado com sucesso'
   rescue ActiveRecord::RecordInvalid => error

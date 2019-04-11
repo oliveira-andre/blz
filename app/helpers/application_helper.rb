@@ -24,6 +24,6 @@ module ApplicationHelper
   end
 
   def moip_request_permission_link
-    Moip::RequestPermissionService.execute
+    Moip::Account::RequestPermissionLinkService.execute
   end
 end
