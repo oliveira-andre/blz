@@ -1,3 +1,29 @@
+## Categories
+Category.find_or_create_by!(
+  name: 'Corpo',
+  description: 'Cuidados com o corpo, como depilação, massagens, etc.'
+)
+Category.find_or_create_by!(
+  name: 'Unhas',
+  description: 'Tudo para unhas: manicure e pedicute'
+)
+Category.find_or_create_by!(
+  name: 'Barbearia',
+  description: 'Cuidados para os homens'
+)
+Category.find_or_create_by!(
+  name: 'Cabelo',
+  description: 'Cortes, penteados. pintura e alisamentos. Tudo para o cabelo'
+)
+Category.find_or_create_by!(
+  name: 'Maquiagem',
+  description: 'Maquiagem para casamento, festas, entre outros e design de sobracelha'
+)
+Category.find_or_create_by!(
+  name: 'Outros',
+  description: 'Demais categorias'
+)
+
 ## Establishments
 emails = ['spa@blz.life', 'barber@blz.life', 'saloon@blz.life']
 names = ['Spa delas', 'The barber', 'Centro da beleza']
@@ -34,38 +60,6 @@ if user.nil?
   user.password_confirmation = '123456'
   user.save!
 end
-
-## Categories
-
-Category.find_or_create_by!(
-    name: 'Cabelos',
-    description: 'Breve descrição'
-)
-
-Category.find_or_create_by!(
-    name: 'Esmalteria',
-    description: 'Breve descrição'
-)
-
-Category.find_or_create_by!(
-    name: 'Depilação',
-    description: 'Breve descrição'
-)
-
-Category.find_or_create_by!(
-    name: 'Penteados e maquiagens',
-    description: 'Breve descrição'
-)
-
-Category.find_or_create_by!(
-    name: 'Massagem',
-    description: 'Breve descrição'
-)
-
-Category.find_or_create_by!(
-    name: 'Pele',
-    description: 'Breve descrição'
-)
 
 ## Services
 
