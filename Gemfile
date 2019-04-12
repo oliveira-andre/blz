@@ -41,6 +41,7 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-yarn'
+  gem 'capistrano-sidekiq'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
