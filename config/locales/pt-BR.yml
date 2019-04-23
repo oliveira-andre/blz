@@ -45,6 +45,25 @@ pt-BR:
         hour_begin: 'Hora inicial'
         hour_end: 'Hora final'
 
+    enums:
+      scheduling:
+        waiting_paid: Aguardando pagamento
+        paid: Pago
+        not_paid: Pagamento não efetuado
+        finished: Finalizado
+        canceled: Cancelado
+      establishment:
+        authorization: Aguardando autorização
+        analyze: Em analize
+        approved: Aprovado
+        disapproved: Reprovado
+        canceled: Cancelado
+      service:
+        approved: Aprovado
+        recused: Recusado
+        awaiting_avaliation: Aguardando avaliação
+        archived: Arquivado
+
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
