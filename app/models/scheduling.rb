@@ -18,6 +18,7 @@ class Scheduling < ApplicationRecord
   validate :date_in_schedule?, on: :create
   validate :user_date_busy?, on: :create
   validate :professional_date_busy?, on: :create
+  validate :service_approved?, on: :create
 
   after_save :set_schedule_busy
 
@@ -52,6 +53,12 @@ class Scheduling < ApplicationRecord
     return if scheduling_ids.empty?
 
     @errors.add(:date, 'já esta ocupado na sua agenda')
+  end
+
+  def service_approved?
+    return if professional_service.service.approved?
+
+    @errors.add(:professional_service, 'não esta disponível')
   end
 
   def set_schedule_busy

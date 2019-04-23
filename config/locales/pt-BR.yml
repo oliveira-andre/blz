@@ -39,7 +39,8 @@ pt-BR:
         neighborhood: Bairro
 
       scheduling:
-        date: 'Horário'
+        date: Horário
+        professional_service: Serviço
 
       office_hour:
         hour_begin: 'Hora inicial'

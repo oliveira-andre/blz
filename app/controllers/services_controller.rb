@@ -1,10 +1,15 @@
 class ServicesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[show details]
+  skip_before_action :authenticate_user!, only: %i[show]
 
   before_action :load_establishment, only: %i[index new create]
-  before_action :load_service, only: %i[edit update show details]
+  before_action :load_service, only: %i[edit update]
 
-  def show; end
+  def show
+    @service = Service.approved.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Serviço não encontrado!'
+    redirect_to root_path
+  end
 
   def new
     authorize @establishment, policy_class: ServicePolicy
