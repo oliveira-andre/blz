@@ -21,8 +21,10 @@ class Establishment < ApplicationRecord
     professional_services_ids = ProfessionalService.where(
       professional_id: professionals.ids,
       service_id: services.ids
-    ).uniq
+    ).ids.uniq
     ::Scheduling.where(professional_service_id: professional_services_ids)
+                .where.not(status: %i[not_paid finished canceled])
+                .order(:date)
   end
 
   def moip_update(moip_response)
