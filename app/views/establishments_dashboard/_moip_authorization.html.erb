@@ -6,16 +6,14 @@
     <% if @establishment.moip_set_password_link %>
       <div class="column is-12">
         <p class="subtitle">
-          1 - Você precisa criar uma senha para sua conta no
-          sistema de pagamento. (WIRECARD)
+          Você precisa criar uma senha para sua conta no sistema de pagamento. (WIRECARD)
         </p>
         <%= link_to 'Criar senha no WIRECARD', @establishment.moip_set_password_link, class: 'button is-info', target: '_blank' %>
       </div>
     <% end %>
     <div class="column is-12">
       <p class="subtitle">
-        2 - Depois de criar sua senha e acessar sua conta no WIRECARD, precisamos da sua autorização
-        para fazermos as transferências dos seus serviços.
+        Precisamos da sua autorização para fazermos as transferências dos seus serviços.
       </p>
       <%= link_to 'Autorizar o BLZ', moip_request_permission_link,
                   class: 'button is-info' %>
