@@ -24,56 +24,55 @@ Category.find_or_create_by!(
   description: 'Demais categorias'
 )
 
-## Establishments
-emails = ['spa@blz.life', 'barber@blz.life', 'saloon@blz.life']
-names = ['Spa delas', 'The barber', 'Centro da beleza']
-(0..2).each do |i|
-  user = User.find_by email: emails[i]
-  if user.nil?
-    user = User.new
-    user.name = names[i]
-    user.email = emails[i]
-    user.password = '123456'
-    user.password_confirmation = '123456'
-    user.save!
-  end
+## User
+User.create!(
+  email: 'example@blz.life',
+  name: 'Example Silva',
+  cpf: '478.729.950-69',
+  password: '123456',
+  phone: '699810012225',
+  birth_date: DateTime.now - 18.years,
+  terms_acceptation: true
+)
 
-  e = Establishment.find_or_create_by!(
-    cpf_cnpj: rand(999_999_999_99),
-    name: user.name,
-    email: user.email,
-    phone: '69981001225',
-    timetable: "#{rand(6..9)}:00 - #{rand(16..22)}:00",
-    user: user
-  )
+## Establishment
+Establishment.create!(
+  name: 'Example BLZ',
+  timetable: '08:00 ás 18:00',
+  user_id: User.first.id
+)
 
-  p = e.professionals.build name: 'Maria Amanda'
-  p.save!
-end
+## Address
+Address.create!(
+  street: 'Rua Indepêndia',
+  number: '2803',
+  neighborhood: 'Liberdade',
+  zipcode: '76820518',
+  addressable: Establishment.first
+)
 
-user = User.find_by email: 'rv@gmail.com'
-if user.nil?
-  user = User.new
-  user.name = 'Rivelino'
-  user.email = 'rv@gmail.com'
-  user.password = '123456'
-  user.password_confirmation = '123456'
-  user.save!
-end
-
-## Services
-
-categories_ids = Category.ids
+categories_ids = Category.all.ids
 
 Service.find_or_create_by!(
-  title: 'Corte feminino',
+  title: 'Selagem com corte feminino',
   description: 'Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia',
   category_id: categories_ids.sample,
-  amount: 20.0,
-  status: Service.statuses.keys.sample,
+  amount: 280.0,
+  status: :approved,
   local_type: Service.local_types.keys.sample,
-  duration: 30,
+  duration: 150,
   establishment_id: Establishment.all.sample.id
+)
+
+Professional.create!(
+  name: 'Clariane Viera',
+  description: '10 anos de experiência com cortes de cabelos femininos',
+  establishment_id: Establishment.first.id
+)
+
+ProfessionalService.create!(
+  professional_id: Professional.first.id,
+  service_id: Service.first.id
 )
 
 Service.find_or_create_by!(
