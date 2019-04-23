@@ -2,7 +2,7 @@ class SchedulingController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
 
   def new
-    @scheduling = Scheduling.new scheduling_params
+    @scheduling = Scheduling.new scheduling_new_params
   end
 
   def create
@@ -22,5 +22,9 @@ class SchedulingController < ApplicationController
   def scheduling_params
     params.permit(:professional_service_id, :date)
           .merge(user_id: current_user.id)
+  end
+
+  def scheduling_new_params
+    params.permit(:professional_service_id, :date)
   end
 end

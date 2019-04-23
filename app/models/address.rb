@@ -13,7 +13,7 @@ class Address < ApplicationRecord
     if addressable.address
       addressable.address.update!(params)
     else
-      Address.create!(address_params)
+      Address.create!(params)
     end
   end
 end
