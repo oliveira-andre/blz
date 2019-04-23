@@ -37,6 +37,9 @@
                     <i class="fas fa-hourglass-half"></i>
                     <%= service.duration %> min
                   </p>
+                  <p>
+                    <span class="tag is-size-6 is-white"><%= service.t_status %></span>
+                  </p>
                   <%= link_to edit_establishment_service_path(service.establishment_id, service.id), class: "level-item button is-link", aria: {label: "reply"} do %>
                     <i class="fas fa-edit"></i>
                     <span>Editar</span>

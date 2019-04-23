@@ -7,7 +7,7 @@ class Establishment < ApplicationRecord
 
   belongs_to :user
 
-  has_many :services
+  has_many :services, -> { order(:status) }
   has_many :professionals
   has_one :address, as: :addressable
   has_one_attached :photo
