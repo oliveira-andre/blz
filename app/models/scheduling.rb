@@ -1,11 +1,13 @@
 class Scheduling < ApplicationRecord
   default_scope { order(:date) }
-  scope :history, -> { where.not(status: %i[in_payment awaiting_service]) }
+  scope :history, -> { where.not(status: %i[waiting_paid paid]) }
 
-  enum status: %i[in_payment awaiting_service finished canceled]
+  enum status: %i[waiting_paid paid not_paid finished canceled]
 
   belongs_to :user, required: false
   belongs_to :professional_service
+
+  before_validation :set_service_duration
 
   validates :status, presence: true
   validates :date, presence: true
@@ -13,9 +15,9 @@ class Scheduling < ApplicationRecord
 
   validates_with DatePastValidator
 
-  validate :date_in_schedule?
-  validate :user_date_busy?
-  validate :professional_date_busy?
+  validate :date_in_schedule?, on: :create
+  validate :user_date_busy?, on: :create
+  validate :professional_date_busy?, on: :create
 
   after_save :set_schedule_busy
 
@@ -53,7 +55,11 @@ class Scheduling < ApplicationRecord
   end
 
   def set_schedule_busy
-    schedule = professional_service.schedule.where(date: date).first
+    schedule = professional_service.schedules.where(date: date).first
     schedule.update! free: false
+  end
+
+  def set_service_duration
+    self.service_duration = professional_service.service.duration
   end
 end
