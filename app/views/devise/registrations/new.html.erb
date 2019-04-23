@@ -15,19 +15,19 @@
 
               <div class="field">
                 <div class="control">
-                  <%= f.text_field :name, autocomplete: "name", placeholder: "Nome", class: "input is-large" %>
+                  <%= f.text_field :name, autocomplete: "name", placeholder: "Nome", class: "input", required: true  %>
                 </div>
               </div>
 
               <div class="field">
                 <div class="control">
-                  <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "input is-large" %>
+                  <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "input", required: true  %>
                 </div>
               </div>
 
               <div class="field">
                 <div class="control">
-                  <%= f.password_field :password, class: "input is-large", placeholder: "Senha" %>
+                  <%= f.password_field :password, class: "input", placeholder: "Senha", required: true  %>
                 </div>
                 <% if @minimum_password_length %>
                   <em>(<%= @minimum_password_length %> carácteres no mínimo)</em>
@@ -36,12 +36,19 @@
 
               <div class="field">
                 <div class="control">
-                  <%= f.password_field :password_confirmation, class: "input is-large", placeholder: "Confirme sua senha" %>
+                  <%= f.password_field :password_confirmation, class: "input", placeholder: "Confirme sua senha", required: true  %>
                 </div>
               </div>
 
+              <div class="field column is-12">
+                <label class="column checkbox is-12">
+                  <%= f.check_box :terms_acceptation, checked_value: true, required: true %>
+                  Estou de acordo os <a href="#">termos de uso</a> do sistema.
+                </label>
+              </div>
+
               <div class="actions">
-                <%= f.submit "Cadastrar", class: "button is-block is-info is-large is-fullwidth" %>
+                <%= f.submit "Cadastrar", class: "button is-block is-info is-fullwidth" %>
               </div>
 
             </div>
