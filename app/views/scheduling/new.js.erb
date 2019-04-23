@@ -1,5 +1,3 @@
-$("#new-modal-scheduling").replaceWith(
-  "<%= j render('new_modal')%>"
-);
-
-modalEvents();
+$("#new-modal-scheduling").replaceWith("<%= j render('new_modal')%>");
+$("#new-modal-scheduling").addClass('is-active');
+modalListener();

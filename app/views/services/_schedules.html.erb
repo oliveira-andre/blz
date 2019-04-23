@@ -15,7 +15,7 @@
       </p>
       <% schedule.values.flatten.each do |s| %>
         <% if s.free %>
-          <%= link_to time(s.date), new_professional_service_scheduling_path(professional_service_id: professional_service.id, date: s.date),
+          <%= link_to time(s.date), new_scheduling_path(professional_service_id: professional_service.id, date: s.date),
                       class: 'button is-size-6 is-size-7-touch has-text-centered is-text', remote: true,
                       title: 'Horário livre' %>
         <% else %>

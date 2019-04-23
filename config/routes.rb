@@ -21,8 +21,9 @@ Rails.application.routes.draw do
 
   resources :services, only: :show
 
-  resources :professional_services, only: :show do
-    resources :scheduling, only: %i[new create]
+  resources :scheduling, only: %i[new create] do
+    resources :payments, only: %i[new create]
+    resources :holders, only: %i[new update]
   end
 
   get '/users/:id/dashboard',

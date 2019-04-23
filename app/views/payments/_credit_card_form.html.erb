@@ -1,0 +1,86 @@
+ <%= form_with url: scheduling_payments_path(scheduling_id: @scheduling.id), id: 'payment_form', local: true do |f| %>
+  <div class="columns is-multiline">
+    <div class="column is-4">
+      <div class="field">
+        <div class="control">
+          <label class="label" for="email">Nome do titular</label>
+          <%= f.text_field :fullname, id: 'fullname', class:'input', required: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-4">
+      <div class="field">
+        <div class="control">
+          <label for="number" class="label">CPF</label>
+          <%= f.text_field :cpf, id: 'cpf', class:'input cpf', required: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-4">
+      <div class="field">
+        <div class="control">
+          <label class="label">Data de nascimento</label>
+          <%= f.date_field :birth_date, id: 'birthdate', class: 'input', required: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-6">
+      <div class="field">
+        <div class="control">
+          <label for="number" class="label">Número do cartão</label>
+          <%= f.number_field :number, id: 'card_number', class:'input', required: true %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-2">
+      <div class="field">
+        <div class="control">
+          <label for="cvc" class="label">CVC</label>
+          <%= f.number_field :cvc, id: 'card_cvc', class:'input', required: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-2">
+      <div class="control">
+        <label class="label">Data de validade</label>
+        <div class="select">        
+          <%= f.select("expiration_month", (1..12).to_a, {}, id: 'expiration_month') %>        
+        </div>
+        <div class="select">      
+          <%= f.select("expiration_year", credit_card_expiration_year_range, {}, id: 'expiration_year') %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-2">
+      <div class="control">
+        <label class="label">Número de parcelas</label>
+        <div class="select">        
+          <%= f.select :installment_count, (1..3).to_a %>        
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="column is-12">
+      <div class="control">
+        <%= f.submit 'Finalizar agendamento', class: 'button is-info is-pulled-right is-fullwidth'%>
+      </div>
+    </div>
+    <textarea id="public_key" class="is-hidden">
+  -----BEGIN PUBLIC KEY-----
+  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsj7uzpy+cahCaQfe3TmJ
+  yhqG2xfePhpKNkc7W3fpp+5xYrgFOUxz9ZYYl7dHnB67B0eErInK5EhikCq19yax
+  4o+ZW5QUfhBGu/6ec8Nmkfo/4jtCU3Hbd1nvYdbsiGA6MeKfGtFMoxJBP107lMuU
+  wMi44yEjZPvc1Iw8R4/CYx/K5C6on1GjOlwJ4CYBtWJXuMceexkRHNKYVHjq2NrS
+  d/6NtT6yzwqcKqnO2WAp4Qe4Q5oOhWB0mR157V5dTSNdbDMJUi91lYvJoXBskDcN
+  yLLsaIJH4+HlJH1gmeM+AqTtivFNDTucOpV0AHsnTGgMEeubIxS4vNCKg1JBcsVx
+  2QIDAQAB
+  -----END PUBLIC KEY-----</textarea>
+    <%= f.hidden_field :card_hash, value: '', id: 'card_hash' %>
+  </div>
+<% end %>
