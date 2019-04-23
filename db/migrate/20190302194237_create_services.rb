@@ -5,7 +5,7 @@ class CreateServices < ActiveRecord::Migration[5.2]
       t.integer :status, default: 2, null: false
       t.integer :local_type, null: false
       t.text :description, null: false
-      t.numeric :amount, null: false
+      t.numeric :amount, null: false, precision: 6, scale: 2
       t.integer :duration, null: false
       t.references :category, foreign_key: true
       t.references :establishment, foreign_key: true
