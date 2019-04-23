@@ -44,10 +44,11 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.string "state", default: "RO"
     t.string "country", default: "BRA"
     t.string "zipcode"
-    t.bigint "establishment_id"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["establishment_id"], name: "index_addresses_on_establishment_id"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.bigint "professional_service_id"
     t.integer "status", default: 0
     t.integer "service_duration", null: false
+    t.string "moip_order_id"
     t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -125,7 +127,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.integer "status", default: 2, null: false
     t.integer "local_type", null: false
     t.text "description", null: false
-    t.decimal "amount", null: false
+    t.decimal "amount", precision: 6, scale: 2, null: false
     t.integer "duration", null: false
     t.bigint "category_id"
     t.bigint "establishment_id"
@@ -156,7 +158,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "addresses", "establishments"
   add_foreign_key "establishments", "users"
   add_foreign_key "office_hours", "professionals"
   add_foreign_key "professional_services", "professionals"

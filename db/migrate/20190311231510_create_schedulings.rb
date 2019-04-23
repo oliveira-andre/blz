@@ -5,7 +5,8 @@ class CreateSchedulings < ActiveRecord::Migration[5.2]
       t.references :professional_service, foreign_key: true
       t.integer :status, default: 0
       t.integer :service_duration, null: false
-      t.timestamp :date, null: false
+      t.string :moip_order_id
+      t.datetime :date, null: false
       t.timestamps
     end
   end
