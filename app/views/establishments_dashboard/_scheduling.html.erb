@@ -41,10 +41,10 @@
               <div class="column is-6">
                 <div class="content">
                   <p class="has-text-weight-semibold">
-                    <%= s.service.title %>
+                    <%= s.professional_service.service.title %>
                   </p>
                   <p>
-                    <span class="has-text-weight-semibold">André</span> (69) 9 9368-5534
+                    <span class="has-text-weight-semibold"><%= s.user.name %></span> <%= s.user.phone %>
                   </p>
                 </div>
               </div>
@@ -52,11 +52,14 @@
                 <div class="content is-pulled-right">
                   <p>
                     <i class="fas fa-money-bill-wave is-size-4"></i>
-                    <%= s.service.amount %>
+                    <%= s.professional_service.service.amount %>
                   </p>
                   <p>
                     <i class="fas fa-clock is-size-4"></i>
-                    <%= s.begin_time %> - <%= s.end_time %>
+                    <%= "#{day_month(s.date)} - #{time(s.date)}" %>
+                  </p>
+                  <p>
+                    <span class="tag is-size-6 is-white"><%= s.t_status %></span>
                   </p>
                   <div class="level-item button is-info">
                     <i class="fas fa-eye"></i>
