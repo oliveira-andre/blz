@@ -15,8 +15,6 @@ class Establishment < ApplicationRecord
   accepts_nested_attributes_for :address, allow_destroy: true
   accepts_nested_attributes_for :user, allow_destroy: true
 
-  after_create :create_moip_account, unless: :exist_moip_account?
-
   def scheduling
     professional_services_ids = ProfessionalService.where(
       professional_id: professionals.ids,
@@ -35,18 +33,5 @@ class Establishment < ApplicationRecord
       moip_set_password_link: nil,
       status: :analyze
     )
-  end
-
-  private
-
-  def exist_moip_account?
-    Moip::Account::ExistService.execute(
-      tax_document: user.cpf,
-      email: user.email
-    )
-  end
-
-  def create_moip_account
-    Moip::Account::CreateService.execute self
   end
 end
