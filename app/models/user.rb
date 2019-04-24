@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :birth_date, presence: true, if: :establishment_or_update?
+  validates :phone, presence: true, if: :establishment_or_update?
   validates :terms_acceptation, presence: true
   validates :email, presence: true, uniqueness: true
   validates :cpf, presence: true,
