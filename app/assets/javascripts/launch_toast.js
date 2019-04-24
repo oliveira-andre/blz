@@ -5,5 +5,5 @@ $(document).on("turbolinks:load", function () {
 function launch_toast() {
   toast = $('.toast')
   if(!toast) return;
-  setTimeout( function() { toast.removeClass('show') }, 3000);
+  setTimeout( function() { toast.removeClass('show') }, 5000);
  }
