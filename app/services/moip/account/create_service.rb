@@ -3,16 +3,23 @@ module Moip
     module CreateService
       class << self
         def execute(establishment)
-          moip_api = Moip::APIService.execute
-          @establishment = establishment
+          Establishment.transaction do
+            @establishment = establishment
+            @establishment.save!
 
-          @account = moip_api.accounts.create(account_json)
-          @establishment.moip_account_id = @account.id
-          @establishment.moip_access_token = @account.access_token
-          @establishment.moip_set_password_link = @account._links
-                                                          .set_password
-                                                          .href
-          @establishment.save!
+            return if account_exist?
+
+            moip_api = Moip::APIService.execute
+            @account = moip_api.accounts.create(account_json)
+
+            raise_error if @account.try(:errors)
+
+            @establishment.update!(
+              moip_account_id: @account.id,
+              moip_access_token: @account.access_token,
+              moip_set_password_link: @account._links.set_password.href
+            )
+          end
         end
 
         private
@@ -43,6 +50,8 @@ module Moip
         end
 
         def phone
+          return {} if establishment.user.phone.nil?
+
           numbers = establishment.user.phone.gsub(/[^0-9]/, '')
 
           {
@@ -62,6 +71,17 @@ module Moip
             state: establishment.address.state,
             country: establishment.address.country
           }
+        end
+
+        def account_exist
+          Moip::Account::ExistService.execute(
+            tax_document: establishment.user.cpf,
+            email: establishment.user.email
+          )
+        end
+
+        def raise_error
+          raise MoipRequestError, @account.errors.pluck(:description).join(', ')
         end
       end
     end
