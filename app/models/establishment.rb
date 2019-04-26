@@ -24,14 +24,4 @@ class Establishment < ApplicationRecord
                 .where.not(status: %i[not_paid finished canceled])
                 .order(:date)
   end
-
-  def moip_update(moip_response)
-    update(
-      moip_account_id: moip_response.moip_account.id,
-      moip_access_token: moip_response.access_token,
-      moip_refresh_token: moip_response.refresh_token,
-      moip_set_password_link: nil,
-      status: :analyze
-    )
-  end
 end
