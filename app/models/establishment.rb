@@ -1,5 +1,5 @@
 class Establishment < ApplicationRecord
-  enum status: %i[authorization analyze approved disapproved canceled]
+  enum status: %i[analyze approved disapproved canceled]
 
   validates :name, presence: true
   validates :timetable, presence: true

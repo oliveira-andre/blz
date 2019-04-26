@@ -1,6 +1,6 @@
 class EstablishmentsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[new create]
-  before_action :load_establishment, only: %i[edit update success authorization]
+  before_action :load_establishment, only: %i[edit update success]
 
   def new
     @establishment = Establishment.new
