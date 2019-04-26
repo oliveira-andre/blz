@@ -10,7 +10,7 @@ class EstablishmentsController < ApplicationController
 
   def create
     @establishment = Establishment.new establishment_params
-    Moip::Account::CreateService.execute @establishment
+    @establishment.save!
 
     redirect_to establishments_dashboard_path(@establishment),
                 notice: 'Cadastro realizado com sucesso'

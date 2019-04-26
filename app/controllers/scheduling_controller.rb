@@ -10,7 +10,7 @@ class SchedulingController < ApplicationController
     authorize @scheduling
 
     if @scheduling.save
-      redirect_to new_scheduling_holder_path(scheduling_id: @scheduling.id)
+      redirect_to users_dashboard_path(current_user)
     else
       @scheduling.errors.full_messages.each { |msg| flash[:error] = msg }
       redirect_to service_path(id: @scheduling.professional_service.service)

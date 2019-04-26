@@ -63,10 +63,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.string "timetable", null: false
     t.integer "status", default: 0
     t.bigint "user_id"
-    t.string "moip_account_id"
-    t.string "moip_access_token"
-    t.string "moip_refresh_token"
-    t.string "moip_set_password_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_establishments_on_user_id"
@@ -114,7 +110,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_232431) do
     t.bigint "professional_service_id"
     t.integer "status", default: 0
     t.integer "service_duration", null: false
-    t.string "moip_order_id"
     t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
