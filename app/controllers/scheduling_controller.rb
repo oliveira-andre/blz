@@ -10,6 +10,7 @@ class SchedulingController < ApplicationController
     authorize @scheduling
 
     if @scheduling.save
+      flash[:success] = 'Agendamento realizado com sucesso!'
       redirect_to users_dashboard_path(current_user)
     else
       @scheduling.errors.full_messages.each { |msg| flash[:error] = msg }
