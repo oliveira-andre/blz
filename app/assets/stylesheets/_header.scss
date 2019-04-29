@@ -1,4 +1,6 @@
 header {
+  background-color: #31aeb5;
+
   img {
     min-width: 150px;
     max-width: 150px;
@@ -6,11 +8,29 @@ header {
     max-height: 80px;
   }
 
-  border-bottom: 1px solid #ececec;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 
   p {
     margin-right: 30px;
+  }
+
+  .navbar {
+    background-color: #31aeb5;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+        margin-left: 1px;
+      }
+
+      @include mobile {
+        &:last-child {
+          margin-top: 5px;
+        }
+      }
+    }
   }
 }
