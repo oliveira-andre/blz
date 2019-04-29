@@ -1,6 +1,36 @@
 .establishments_dashboard {
+  .container {
+    padding-bottom: 50px;
+
+    @include mobile {
+      margin: 0px 12px;
+    }
+  }
+
+  h1 {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 15px;
+    color: grey;
+    margin-bottom: 15px;
+
+    @include mobile {
+    }
+  }
+
   li {
     width: 50%;
+  }
+
+  .button {
+    &.is-active {
+      background-color: #31aeb5;
+      color: #fff;
+      border-color: #31aeb5;
+    }
+  }
+
+  .media-content {
+    overflow-x: initial;
   }
 
   .no-scheduling {
@@ -8,8 +38,6 @@
   }
 
   .numbers-cards {
-    height: 280px;
-
     .column.is-12 {
       margin-bottom: 30px;
     }
@@ -34,5 +62,21 @@
       height: 280px;
     }
   
+  }
+
+  .botton-navigtion-bar {
+    .tab {
+      a {
+        color: grey;
+        height: 50px;
+      }
+
+      &.is-active, &:hover {
+        a {
+          color: #31aeb5;
+          border-bottom-color: #31aeb5;
+        }
+      }
+    }
   }
 }

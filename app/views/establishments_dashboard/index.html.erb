@@ -1,49 +1,7 @@
 <%= render 'pages/shared/header' %>
 <div class="establishments_dashboard">
   <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
-        <%= render 'graphs' %>
-      </div>
-      
-      <div class="column is-12">
-        <div class="tabs is-toggle is-toggle-rounded">
-          <ul>
-            <li class="tab is-active" data-target="scheduling">
-              <a>
-                <span class="icon is-small">
-                  <i class="fas fa-calendar-alt"></i>
-                </span>
-                <span>Minha Agenda</span>
-              </a>
-            </li>
-            <li class="tab" data-target="services">
-              <a>
-                <span class="icon is-small">
-                  <i class="fab fa-whmcs"></i>
-                </span>
-                <span>Meus serviços</span>
-              </a>
-            </li>
-            <li class="tab" data-target="professionals">
-              <a>
-                <span class="icon is-small">
-                  <i class="fab fa-whmcs"></i>
-                </span>
-                <span>Profissionais</span>
-              </a>
-            </li>
-            <li class="tab" data-target="history")">
-              <a>
-                <span class="icon is-small">
-                  <i class="fas fa-history"></i>
-                </span>
-                <span>Histórico</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div class="columns is-multiline is-gapless">
       <div class="column is-12">
         <div  id="scheduling" class="content-tab">
           <%= render 'scheduling' %>
@@ -59,11 +17,8 @@
           <%= render 'professionals' %>
         </div>
       </div>
-      <div class="column is-12">
-        <div  id="history" class="content-tab" style="display:none">
-          <%= render 'history' %>
-        </div>
-      </div>
     </div>
   </div>
+  <%= render 'bottom_navigation_bar' %>
 </div>
+
