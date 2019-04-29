@@ -21,7 +21,6 @@ class Establishment < ApplicationRecord
       service_id: services.ids
     ).ids.uniq
     ::Scheduling.where(professional_service_id: professional_services_ids)
-                .where.not(status: %i[not_paid finished canceled])
-                .order(:date)
+                .scheduled.order(:date)
   end
 end

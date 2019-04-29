@@ -48,9 +48,7 @@ pt-BR:
 
     enums:
       scheduling:
-        waiting_paid: Aguardando pagamento
-        paid: Pago
-        not_paid: Pagamento não efetuado
+        scheduled: Agendado
         finished: Finalizado
         canceled: Cancelado
       establishment:

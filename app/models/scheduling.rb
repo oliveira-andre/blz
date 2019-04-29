@@ -1,8 +1,8 @@
 class Scheduling < ApplicationRecord
   default_scope { order(:date) }
-  scope :history, -> { where.not(status: %i[waiting_paid paid]) }
+  scope :history, -> { where.not(status: :scheduled) }
 
-  enum status: %i[waiting_paid paid not_paid finished canceled]
+  enum status: %i[scheduled finished canceled]
 
   belongs_to :user, required: false
   belongs_to :professional_service
