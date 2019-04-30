@@ -13,6 +13,10 @@
 @import 'professional_services';
 @import 'office_hours';
 
+*:focus {
+  outline: none;
+}
+
 .is-64x64 {
   img {
     min-height: 64px;

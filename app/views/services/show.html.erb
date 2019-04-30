@@ -1,45 +1,69 @@
-<%= render 'pages/shared/header' %>
+<%= render 'shared/header' %>
 <div class="service-details">
+  <%= render 'gallery' %>
   <div class="container">
-    <div class="columns">
-      <div class="column is-6">
-        <%= render 'gallery' %>
-      </div>
-      <div class="column is-6">
-       <%= render 'service_details' %>
-      </div>
-    </div>
-    <div class="columns">
-      <% if @service.professional_services.count > 1 %>
-        <div class="column is-12">
-          <div class="tabs is-centered columns">
-            <ul>
-              <% @service.professional_services.each_with_index do |professional_service, index| %>
-                <% if professional_service.table_schedule.any? %>
-                  <li class="column tab <%= index == 0 ? 'is-active' : ''%>"
-                      data-target='<%= "professional-service-#{professional_service.id}" %>'>
-                    <%= render 'shared/avatar', resource: professional_service.professional %>
-                    <p class="has-text-centered is-hidden-mobile">
-                      <strong><%= professional_service.professional.name %></strong>
-                    </p>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="columns">
-      <% @service.professional_services.each_with_index do |professional_service, index| %>
-        <% if professional_service.table_schedule.any? %>
-          <div class="column is-12 content-tab"
-            id="professional-service-<%= professional_service.id %>"
-            style="display:<%= index == 0 ? ' block' : ' none'%>;">
-            <%= render 'schedules', professional_service: professional_service %>
-          </div>
+    <%= render 'service_details' %>
+    <div id="schedule">
+      <h2 class="has-text-weight-semibold is-size-4">Agenda</h2>
+      <ul class="columns is-mobile is-centered tabs">
+        <% @service.professional_services.each_with_index do |professional_service, index| %>
+          <% if professional_service.table_schedule.any? %>
+            <div class="column is-5">
+              <li class="tab <%= index == 0 ? 'is-active' : ''%>"
+                  data-target='<%= "professional-service-#{professional_service.id}" %>'>
+                <%= render 'shared/avatar', resource: professional_service.professional %>
+                <p class="has-text-centered">
+                  <%= first_name(professional_service.professional) %>
+                </p>
+              </li>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </ul>
+      <div class="columns">
+        <% @service.professional_services.each_with_index do |professional_service, index| %>
+          <% if professional_service.table_schedule.any? %>
+            <div class="column is-12 content-tab"
+              id="professional-service-<%= professional_service.id %>"
+              style="display:<%= index == 0 ? ' block' : ' none'%>;">
+              <%= render 'schedules', professional_service: professional_service %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="columns is-mobile is-multiline categories">
+      <div class="column is-12">
+        <h2 class=" has-text-weight-semibold is-size-4">Explore mais serviços</h2>
+      </div>
+      <div class="column is-5">
+        <a class="">Cabelo</a>
+      </div>
+      <div class="column is-5">
+        <a class="">Unhas</a>
+      </div>
+      <div class="column is-5">
+        <a class="">Barbearia</a>
+      </div>
+      <div class="column is-5">
+        <a class="">Maquiagem</a>
+      </div>
+      <div class="column is-5">
+        <a class="">Corpo</a>
+      </div>
+      <div class="column is-5">
+        <a class="">Outros</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-navigation-bar">
+    <div class="columns is-mobile">
+      <div class="column has-text-centered">
+        <p class="has-text-weight-semibold is-size-5 has-text-white">R$ <%= @service.amount %></p>
+      </div>
+      <div class="column has-text-centered">
+        <a href="#schedule" class="button is-light btn-schedule">Agendar</a>
+      </div>
     </div>
   </div>
 </div>
