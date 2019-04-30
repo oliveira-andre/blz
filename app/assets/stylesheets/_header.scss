@@ -1,13 +1,5 @@
 header {
   background-color: #31aeb5;
-
-  img {
-    min-width: 150px;
-    max-width: 150px;
-    min-height: 80px;
-    max-height: 80px;
-  }
-
   margin-bottom: 15px;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 
@@ -18,18 +10,42 @@ header {
   .navbar {
     background-color: #31aeb5;
 
+    .navbar-menu > .navbar-end > .navbar-item {
+      a {
+        border-color: #31aeb5;
+      }
+
+      @include mobile {
+        a:nth-child(2) {
+          margin-left: 40px;
+        }
+
+        a:last-child {
+          margin-right: 40px;
+        }
+      }
+    }
+
     a {
       color: #fff;
 
       &:hover {
         color: #fff;
-        margin-left: 1px;
       }
+    }
+  }
+}
 
-      @include mobile {
-        &:last-child {
-          margin-top: 5px;
-        }
+.services-show {
+  header {
+    margin-bottom: 0px;
+    background-color: #fff;
+
+    .navbar {
+      background-color: #fff;
+
+      a {
+        color: #31aeb5;
       }
     }
   }
