@@ -1,30 +1,33 @@
-<h1 class="title has-text-centered has-text-weight-semibold">
-  <span class="is-size-5 is-pulled-right" id="arrow-next"> <i class="fas fa-arrow-right"></i></span>
-    Escolha um horário
-    <span class="is-hidden-tablet"> com <%= professional_service.professional.name %></span>
-  <span class="is-size-5 is-pulled-left" id="arrow-back"> <i class="fas fa-arrow-left"></i> </span>
-</h1>
-<div class="columns is-mobile is-gapless table-schedule">
-  <% professional_service.table_schedule.each do |schedule| %>
-    <div class="column">
-      <p class="has-text-weight-semibold is-size-6 is-size-7-touch has-text-centered">
-        <%= schedule.keys.first %></br>
-        <span class="has-text-weight-normal">
-          <%= week_day(schedule.values.flatten.first.date) %>
-        </span>
-      </p>
-      <% schedule.values.flatten.each do |s| %>
-        <% if s.free %>
-          <%= link_to time(s.date), new_scheduling_path(professional_service_id: professional_service.id, date: s.date),
-                      class: 'button is-size-6 is-size-7-touch has-text-centered is-text', remote: true,
-                      title: 'Horário livre' %>
-        <% else %>
-          <span class="button is-size-6 is-size-7-touch has-text-centered is-text"
-                title="Horário ocupado">
-            <%= time(s.date) %>
+<div class="schedule">
+  <div class="header">
+    <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+      <span class="is-size-5 is-pulled-right" id="arrow-next"> <i class="fas fa-chevron-right "></i></span>
+        Escolha um horário
+      <span class="is-size-5 is-pulled-left" id="arrow-back"> <i class="fas fa-chevron-left"></i> </span>
+    </h1>
+  </div>
+  <div class="columns is-mobile is-gapless table-schedule">
+    <% professional_service.table_schedule.each do |schedule| %>
+      <div class="column">
+        <p class="has-text-weight-semibold is-size-6 is-size-7-touch has-text-centered">
+          <%= schedule.keys.first %></br>
+          <span class="has-text-weight-normal">
+            <%= week_day(schedule.values.flatten.first.date) %>
           </span>
+        </p>
+        <% schedule.values.flatten.each do |s| %>
+          <% if s.free %>
+            <%= link_to time(s.date), new_scheduling_path(professional_service_id: professional_service.id, date: s.date),
+                        class: 'button is-size-6 is-size-7-touch has-text-centered is-text', remote: true,
+                        title: 'Horário livre' %>
+          <% else %>
+            <span class="button is-size-6 is-size-7-touch has-text-centered is-text"
+                  title="Horário ocupado">
+              <%= time(s.date) %>
+            </span>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
