@@ -1,0 +1,119 @@
+.home_page { 
+  .filters {
+    background: #f9f9f9;
+    padding-top: 300px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+
+    @include desktop {
+      padding-top: 400px;
+    }
+
+    .datetimepicker-dummy {
+      max-width: 280px;
+    }
+
+    p {
+      color: $grey-color-dark;
+    }
+
+    form {
+      padding: 15px;
+    }
+
+    .categories {
+      overflow-x: scroll;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+
+      @include mobile {
+        &.is-centered {
+          justify-content: initial;
+        }
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .mobile-background-shadow {
+        content: '';
+        width: 20%;        
+        height: 130px;        
+        background: linear-gradient(to right, rgba(249, 249, 249, .6), #f9f9f9);       
+        position: absolute;        
+        margin-left: calc(100% - 20%);
+
+        span {
+          margin-top: 36px;
+          margin-right: 10px;
+          color: black;
+        }
+      }
+
+      .column {
+        max-width: 130px;
+        min-width: 130px;
+        
+        figure {
+          box-shadow: 1px 2px 2px #cecece;
+          border-radius: 50%;
+          width: 70px;
+          height: 70px;
+          margin: 0 auto;
+
+          img {
+            display: block;
+            height: auto;
+            width: 55%;
+            margin: 0px auto;
+            padding-top: 30px;
+          }
+        }
+
+        p {
+          margin-top: 10px
+        }
+
+        &:nth-child(2) {
+          figure > img {
+            width: 50%;
+            padding-top: 15px;
+          }
+        }
+
+        &:nth-child(3) {
+          figure > img {
+            width: 40%;
+            padding-top: 13px;
+          }
+        }
+
+        &:nth-child(4) {
+          figure > img {
+            width: 40%;
+            padding-top: 15px;
+          }
+        }
+
+        &:nth-child(5) {
+          figure > img {
+            width: 35%;
+            padding-top: 13px;
+          }
+        }
+
+        &:nth-child(6) {
+          @include mobile {
+            padding-right: 40px;
+          }
+
+          figure > img {
+            width: 40%;
+            padding-top: 22px;
+          }
+        }
+      }
+    }
+  }
+}

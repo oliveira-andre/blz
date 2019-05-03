@@ -1,49 +1,91 @@
-<div id="filters">
+<div class="filters">
   <div class="container">
-     <%= form_with url: '/filters', method: :get, class: 'filter_form' do |f| %>
+    <%= form_with url: '/filters', method: :get, class: 'filter_form' do |f| %>
       <%= f.hidden_field :query, value: filter['query'] %>
       <div class="columns">
         <div class="column">
-          <p class="has-text-weight-semibold">Onde prefere ser atendido ? </p>
-          <div class="control">
-            <label class="radio">
-              <%= f.radio_button :local_type, 'home', checked: filter['local_type'] == 'home' %>
-              Em casa
-            </label>
-            <strong> ou </strong>
-            <label class="radio">
-              <%= f.radio_button :local_type, 'establishment', checked: filter['local_type'] == 'establishment' %>
-              No estabelecimento
-            </label>
+          <div class="columns is-mobile">
+            <div class="column is-3">
+              <p class="is-pulled-right">Onde</p>
+            </div>
+            <div class="column">
+                <div class="field">
+                <%= check_box_tag(:local_type, 'home', filter['local_type'] == 'home', class: 'is-checkradio', id: 'local_type_home' ) %>
+                <label for="local_type_home">Em casa</label>
+              </div>
+              <div class="field">
+                <%= check_box_tag(:local_type, 'establishment', filter['local_type'] == 'establishment', class: 'is-checkradio', id: 'local_type_establishment' ) %>
+                <label for="local_type_establishment">No estabelecimento</label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="column">
-          <p class="has-text-weight-semibold">Qual tipo de serviço esta procurando ? </p>
-          <div class="select">
-            <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] }, prompt: 'Todos', selected: filter['category_id'] %>
+          <div class="columns is-mobile">
+            <div class="column is-3">
+              <p class="is-pulled-right">Quando</p>
+            </div>
+            <div class="column">
+              <%= f.date_field :date_f, class: 'input', id: 'home_filter_date' %>
+            </div>
           </div>
-        </div>
-        <div class="column">
-          <%= f.submit 'Filtrar', class: 'button is-info is-rounded', style: 'width: 40%; margin: 0 30%' %>  
         </div>
       </div>
-    <% end %>
-
-    <div class="tags-filtereds">
-      <% filter.each do |key, value| %>
-        <% if value.present? %>
-          <%= form_with url: filter_path(id: key), method: :delete do |f| %>
-            <% filter.each do |k, v| %>
-              <%= f.hidden_field k, value: (key == k ? '' : v) %>
-            <% end %>
-            <span class="tag is-info is-medium">
-            <%= value unless category?(key) %>
-            <%= category_name(value) if category?(key) %>
-            <button class="delete is-small"></button>
+      <div class="columns is-mobile categories is-centered">
+        <div class="column">
+          <a>
+            <figure>
+              <%= image_tag '/images/category1.png' %>
+            </figure>
+            <p class="has-text-centered">Barbearia</p>
+          </a>
+        </div>
+        <div class="column">
+          <a>
+            <figure>
+              <%= image_tag '/images/category2.png' %>
+            </figure>
+            <p class="has-text-centered">Cabelo</p>
+          </a>
+        </div>
+        <div class="column">
+          <a>
+            <figure>
+              <%= image_tag '/images/category3.png' %>
+            </figure>
+            <p class="has-text-centered">Corpo</p>
+          </a>
+        </div>
+        <div class="column">
+          <a>
+            <figure>
+              <%= image_tag '/images/category4.png' %>
+            </figure>
+            <p class="has-text-centered">Maquiagem</p>
+          </a>
+        </div>
+        <div class="column">
+          <a>
+            <figure>
+              <%= image_tag '/images/category5.png' %>
+            </figure>
+            <p class="has-text-centered">Unhas</p>
+          </a>
+        </div>
+        <div class="column">
+          <a>
+            <figure>
+              <%= image_tag '/images/category6.png' %>
+            </figure>
+            <p class="has-text-centered">Outros</p>
+          </a>
+        </div>
+        <a class="mobile-background-shadow is-vcentered is-hidden-tablet">
+          <span class="icon is-size-2 is-pulled-right">
+            <i class="fas fa-chevron-right"></i>
           </span>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>  
+        </a>
+      </div>
+    <% end %>
   </div>
 </div>
