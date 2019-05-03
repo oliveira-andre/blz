@@ -6,15 +6,13 @@
 
 @import 'utils/*';
 @import 'bulma_custom/*';
+@import 'shared/*';
+@import 'home_page/*';
 
-@import 'home';
 @import 'services';
 @import 'devise';
 @import 'establishment';
 @import 'service_details';
-@import 'toast';
-@import 'bottom_navigation_bar';
-@import 'header';
 @import 'users_dashboard';
 @import 'establishments_dashboard';
 @import 'professional_services';

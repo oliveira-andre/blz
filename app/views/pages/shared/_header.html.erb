@@ -1,62 +1,37 @@
 <header>
-  <div class="container">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item is-size-3 is-48x48" href="/">
-          BLZ
-        </a>
+  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item is-size-3" href="/">
+        BLZ
+      </a>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBLZ">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBLZ" class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <% if user_signed_in? %>
-                <% if establishment? %>
-                  <p class="is-size-5">
-                    <span class="is-size-6">Olá, </span>
-                    <%= current_user.establishment.name %>
-                    <span class="is-size-6">:)</span>
-                  </p>
-                  <%= link_to "Meus trabalhos",
-                              establishments_dashboard_path(
-                                current_user.establishment
-                              ),
-                              class: 'button is-info is-rounded' %>
-                  <%= link_to "Editar dados",
-                              edit_establishment_path(
-                                current_user.establishment
-                              ),
-                              class: 'button is-light is-rounded' %>
-                <% else %>
-                  <p class="is-size-5">
-                    <span class="is-size-6">Olá, </span>
-                    <%= current_user.name %>
-                    <span class="is-size-6">:)</span>
-                  </p>
-                  <%= link_to "Minha conta",
-                              users_dashboard_path(current_user),
-                              class: 'button is-info is-rounded' %>
-                <% end %>
-
-                <%= link_to 'Sair', destroy_user_session_path, method: :delete,
-                            class: 'button is-light is-rounded' %>
-              <% else %>                
-                <%= link_to 'Entrar', new_user_session_path,
-                            class: 'button is-light is-rounded' %>
-                <%= link_to 'Cadastre seu serviço', new_establishment_path,
-                            class: 'button is-info is-rounded' %>
-              <% end %>
-            </div>
-          </div>
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <% if user_signed_in? && establishment? %>
+            <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
+              Olá, <span class="is-size-6"><%= current_user.establishment.name %></span> :)
+            </p>
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
+            <%= link_to 'Minha conta', establishments_dashboard_path(current_user.establishment), class: 'button is-pulled-right' %>
+          <% elsif user_signed_in? %>
+            <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
+              Olá, <span class="is-size-6"><%= current_user.name %></span> :)
+            </p>            
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
+            <%= link_to 'Minha conta', users_dashboard_path(current_user), class: 'button is-pulled-right' %>
+          <% else %>
+            <%= link_to 'Entrar', new_user_session_path, class: 'button is-pulled-right' %>
+            <%= link_to 'Cadastre seu serviço', new_establishment_path, class: 'button is-pulled-right' %>
+          <% end %>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </header>
