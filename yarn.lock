@@ -1140,12 +1140,26 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
+bulma-calendar@^6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/bulma-calendar/-/bulma-calendar-6.0.6.tgz#cea7d8796dd642fa5ea21db5402b529f6221cec4"
+  integrity sha512-5hJEz1KeikEYswz5B9SLGmXLq1maH4M8+8Sql3Zm/20875SUsHnNoGECCKP8ypZGo55BB0fc1dRGAE3l4VxqJA==
+  dependencies:
+    bulma latest
+    date-and-time "^0.6.3"
+    date-fns "^1.29.0"
+
+bulma-extensions@^6.2.5:
+  version "6.2.5"
+  resolved "https://registry.yarnpkg.com/bulma-extensions/-/bulma-extensions-6.2.5.tgz#dd11ff94013543ce654c9b9fff8b34ae3cbc0715"
+  integrity sha512-66nm0M4C8edOldw38hCRJ2cCQbocCkaUnl+UqBXXWQxiYbqCBNSDBjkfWllDOU2IXs4b4QwW2DwFjNqPLEk9xw==
+
 bulma-modal-fx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/bulma-modal-fx/-/bulma-modal-fx-1.1.1.tgz#36e1a800cf25e37bbd3963f2ed3136612c8a350a"
   integrity sha512-Ma1e/uczogPd0MzpeOsYJau1ocavO2wlnGg1ZVg+/mrsKyeasrdtyfbOH1kRdzqCH9DMrZAw7WEW0Oa3lKr6Fw==
 
-bulma@^0.7.4:
+bulma@^0.7.4, bulma@latest:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.4.tgz#7e74512e9118d9799021339e67e365ee0ac4f3f9"
   integrity sha512-krG2rP6eAX1WE0sf6O0SC/FUVSOBX4m1PBC2+GKLpb2pX0qanaDqcv9U2nu75egFrsHkI0zdWYuk/oGwoszVWg==
@@ -1807,6 +1821,16 @@ dashdash@^1.12.0:
   integrity sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
   dependencies:
     assert-plus "^1.0.0"
+
+date-and-time@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-0.6.3.tgz#2daee52df67c28bd93bce862756ac86b68cf4237"
+  integrity sha512-lcWy3AXDRJOD7MplwZMmNSRM//kZtJaLz4n6D1P5z9wEmZGBKhJRBIr1Xs9KNQJmdXPblvgffynYji4iylUTcA==
+
+date-fns@^1.29.0:
+  version "1.30.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
+  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -3026,6 +3050,11 @@ ini@~1.3.0:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+
+inter-ui@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/inter-ui/-/inter-ui-3.5.0.tgz#810eb53df06f99b38142ad1dc11fbeb946651258"
+  integrity sha512-fTm1qnWjXLtlHr2W85p6quoSz7v6ToeIevREoIKfpcYR06Rf1XMiLT9W8GESmkeFPiOmZ8E0hWzR4Dzcz9fUoQ==
 
 internal-ip@1.2.0:
   version "1.2.0"
