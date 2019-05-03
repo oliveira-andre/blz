@@ -1,5 +1,14 @@
+
+@import 'utilities/*';
 @import 'bulma/bulma';
+@import 'bulma-extensions/dist/css/bulma-extensions.min';
+@import "bulma-calendar/dist/css/bulma-calendar.min";
 @import 'bulma-modal-fx/dist/css/modal-fx.min';
+@import 'inter-ui/inter.scss';
+
+@import 'utilities/*';
+@import 'bulma_custom/*';
+
 @import 'home';
 @import 'services';
 @import 'devise';
@@ -13,28 +22,25 @@
 @import 'professional_services';
 @import 'office_hours';
 
+html {
+  font-family: 'Inter', sans-serif !important;
+}
+
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
+
+body {
+  font-family: 'Inter UI Medium', sans-serif !important;
+}
+
+h1, h2 {
+  font-family: 'Inter UI Bold', sans-serif !important;
+}
+
+
 *:focus {
-  outline: none;
-}
-
-.is-64x64 {
-  img {
-    min-height: 64px;
-    max-height: 64px;
-    min-width: 64px;
-    max-width: 64px;
-    object-fit: cover;
-  }
-}
-
-.is-128x128 {
-  img {
-    min-height: 128px;
-    max-height: 128px;
-    min-width: 128px;
-    max-width: 128px;
-    object-fit: cover;
-  }
+  outline: none !important;
 }
 
 .button {
