@@ -8,6 +8,9 @@ document.addEventListener('turbolinks:load', () => {
         const $target = document.getElementById(target);
         el.classList.toggle('is-active');
         $target.classList.toggle('is-active');
+
+        const brand = document.querySelectorAll('a.navbar-item')[0];
+        if(brand) brand.classList.toggle('is-unactive');
       });
     });
   }

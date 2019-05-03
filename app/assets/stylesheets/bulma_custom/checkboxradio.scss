@@ -1,0 +1,16 @@
+.is-checkradio[type="checkbox"] + label::after, .is-checkradio[type="checkbox"] + label::after {
+  border-color: $primary-color !important;
+  border-color: $grey-color-light;
+}
+
+.is-checkradio[type="checkbox"] + label::before, .is-checkradio[type="checkbox"] + label::before {
+  border-color: $grey-color-light;
+}
+
+.is-checkradio[type="checkbox"]:checked + label::before, .is-checkradio[type="checkbox"]:checked + label::before {
+  border-color: $grey-color-light;
+}
+
+.is-checkradio[type="checkbox"]:hover:not([disabled]) + label::before, .is-checkradio[type="checkbox"]:hover:not([disabled]) + label::before {
+  border-color: $primary-color !important;
+}
