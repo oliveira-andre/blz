@@ -1,0 +1,75 @@
+.datetimepicker {  
+  .datepicker-nav {
+    background-color: $primary-color;
+    @include mobile {
+      padding: 0px;
+    }
+  }
+
+  .datetimepicker-header .datetimepicker-selection-start .datetimepicker-selection-day {
+    color: $primary-color !important;
+  }
+
+  .datepicker-body{
+    .datepicker-dates .datepicker-days .datepicker-date .date-item {
+      &.is-today {
+        border-color: $primary-color !important;
+        color: $primary-color !important;
+      }
+
+      &:hover {
+        border-color: $primary-color !important;
+      }
+
+      &.is-active {
+        background-color: $primary-color !important;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    .datepicker-weekdays .datepicker-date {
+      @include mobile {
+        padding: 0px;
+      }
+    }
+  }
+
+  .datetimepicker-footer-today {
+    color: $primary-color !important;
+    font-size: 1rem;
+  }
+
+  .datetimepicker-footer-cancel {
+    font-size: 1rem;
+  }
+  
+}
+
+.datetimepicker-dummy {
+  @include mobile {
+    width: 95%;
+  }
+
+  .datetimepicker-dummy-wrapper {
+    border-radius: 3px;
+    border-color: $grey-color-light;
+  }
+
+  &::before {
+    background-color: $primary-color;
+  }
+
+  .datetimepicker-dummy-input{
+    @include mobile {
+      max-width: 95% !important;
+    }
+  }
+
+  .datetimepicker-clear-button {
+    font-size: 1rem;
+    color: $primary-color;
+  }
+}
