@@ -7,7 +7,9 @@
                   establishment_id: office_hour.professional.establishment_id,
                   professional_id: office_hour.professional.id,
                   id: office_hour.id
-                ), method: :delete, class: "button is-danger" do %>
+                ), method: :delete, 
+                data: { confirm: 'Você tem certeza disso?' },
+                class: "button is-danger" do %>
       <i class="fas fa-trash"></i>
     <% end %>
   </td>
