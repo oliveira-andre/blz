@@ -2,8 +2,8 @@
   .container {
     padding-bottom: 100px;
 
-    @include mobile {
-      margin: 0 12px;
+    @include touch {
+      margin: 0 15px;
     }
   }
 
@@ -73,6 +73,8 @@
     }
 
     .tab {
+      max-width: 250px;
+      margin: 0 auto;
       padding: 0px;
       padding-top: 5px;
       cursor: pointer;
@@ -216,6 +218,10 @@
       color: #fff;
       border-color: $primary-color;
       left: calc(100% - 150px);
+
+      @include desktop {
+        left: calc(100% - 300px);
+      }
       top: 190px;
 
       &:hover {
