@@ -1,6 +1,15 @@
 <div class="home_page">
-  <%= render 'pages/shared/header' %>
-  <%= render 'pages/shared/banner' %>
+  <div class="image-background" id="search-filters">
+    <div class="container">
+      <%= render 'pages/shared/header' %>
+      <h1 class="title has-text-white has-text-weight-normal">O jeito mais rápido de encontrar serviços de beleza</h1>
+      <h2 class="subtitle is-hidden-mobile has-text-white">Encontre o melhor profissional para o que precisa, do seu jeito e no seu tempo</h2>
+      <%= render 'pages/shared/form_search', filter: @filter || {} %>
+    </div>
+  </div>
   <%= render 'pages/shared/filters', filter: @filter || { } %>
   <%= render 'pages/shared/results', services: @services || [] %>
+
+  <%= render 'pages/shared/footer_mobile' %>
+  <%= render 'pages/shared/footer_normal' %>  
 </div>

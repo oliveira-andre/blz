@@ -1,0 +1,39 @@
+.home_page { 
+  footer.mobile {
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    background: $primary-color;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+      }
+
+      span {
+        padding-top: 25px;
+      }
+    }
+  }
+
+  footer.normal {
+    @include touch {
+      padding: 0px;
+    }
+
+    background: $primary-color;
+
+    a, p {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+} 

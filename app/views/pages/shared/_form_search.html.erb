@@ -3,11 +3,10 @@
   <%= f.hidden_field :category_id, value: filter['category_id'] %> 
   <div class="field">
     <p class="control has-icons-right">
-      <%= f.text_field :query, class: 'input is-rounded', placeholder: 'Esta procurando pelo o que ?' %>
+      <%= f.text_field :query, class: 'input is-rounded', placeholder: 'Busque por um serviço...' %>
       <span class="icon is-small is-right">
-        <i class="fas fa-search"></i>
+        <%= image_tag '/images/search.png' %>
       </span>
     </p>
   </div>
-  <%= f.submit 'Encontrar', class: 'button is-info is-rounded' %>
 <% end %>
