@@ -2,8 +2,8 @@
   .container {
     padding-bottom: 100px;
 
-    @include mobile {
-      margin: 0 12px;
+    @include touch {
+      margin: 0 15px;
     }
   }
 
@@ -22,7 +22,7 @@
     }
 
     i {
-      color: #31aeb5;
+      color: $primary-color;
     }
   }
 
@@ -56,7 +56,7 @@
       justify-content: center;
 
       &:hover {
-        color: #31aeb5;
+        color: $primary-color;
       }
 
       i {
@@ -73,6 +73,8 @@
     }
 
     .tab {
+      max-width: 250px;
+      margin: 0 auto;
       padding: 0px;
       padding-top: 5px;
       cursor: pointer;
@@ -94,7 +96,7 @@
       }
 
       &.is-active {
-        border: 1px solid #31aeb5;
+        border: 1px solid $primary-color;
 
         &:hover {
           img {
@@ -106,7 +108,7 @@
   }
 
   .schedule {
-    border: 1px solid #CDE4E5;
+    border: 1px solid $light-color;
 
     .header {
       margin: 10px;
@@ -126,7 +128,7 @@
       }
 
       .column {
-        border: 1px solid #CDE4E5;
+        border: 1px solid $light-color;
         min-width: 90px;
 
         &:nth-child(1) {
@@ -156,7 +158,7 @@
         margin: 0px;
         height: 40px;
         background-color: #fff;
-        border-bottom: 1px solid #CDE4E5;
+        border-bottom: 1px solid $light-color;
         border-radius: 0px;
         color: #586869;
 
@@ -169,12 +171,18 @@
       span.button {
         background-color: #F7F7F7;
         color: #CACACA;
+
+        &:hover {
+          background-color: #F7F7F7;
+          color: #CACACA;
+          cursor: default;
+        }
       }
 
       p {
         padding-bottom: 15px;
         padding-top: 15px;
-        border-bottom: 1px solid #CDE4E5;
+        border-bottom: 1px solid $light-color;
         background-color: #D7EDEE;
       }
     }
@@ -206,21 +214,25 @@
     }
 
     .button {
-      background-color: #31aeb5;
+      background-color: $primary-color;
       color: #fff;
-      border-color: #31aeb5;
+      border-color: $primary-color;
       left: calc(100% - 150px);
+
+      @include desktop {
+        left: calc(100% - 300px);
+      }
       top: 190px;
 
       &:hover {
         background-color: #fff;
-        color: #31aeb5;
+        color: $primary-color;
       }
     }
   }
 
   .bottom-navigation-bar {
-    background-color: #31aeb5;
+    background-color: $primary-color;
     height: 70px;
 
     p, a {
@@ -229,12 +241,12 @@
 
     a {
       margin-top: 15px;
-      color: #31aeb5;
+      color: $primary-color;
       background-color: #fff;
 
       &:hover {
         color: #fff;
-        background-color: #31aeb5;
+        background-color: $primary-color;
         border: 1px solid #fff;
       }
     }
