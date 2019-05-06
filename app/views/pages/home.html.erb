@@ -9,20 +9,7 @@
   </div>
   <%= render 'pages/shared/filters', filter: @filter || { } %>
   <%= render 'pages/shared/results', services: @services || [] %>
-  <footer class="is-hidden is-hidden-tablet">
-    <div class="columns is-mobile">
-      <div class="column has-text-centered">
-        <a class="is-size-3" href="/">
-          BLZ
-        </a>
-      </div>
-      <div class="column has-text-centered">
-        <a class="is-size-4" href="#search-filters">
-          <span class="icon">
-            <i class="fas fa-search"></i>
-          </span>
-        </a>
-      </div>
-    </div>
-  </footer>
+
+  <%= render 'pages/shared/footer_mobile' %>
+  <%= render 'pages/shared/footer_normal' %>  
 </div>

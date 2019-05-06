@@ -18,9 +18,9 @@ $(document).on("turbolinks:load", function () {
     var scroll = $(window).scrollTop();
 
     if (scroll >= 550) {
-      $('footer').removeClass('is-hidden');
+      $('footer.mobile').removeClass('is-hidden');
     } else {
-      $('footer').addClass('is-hidden')
+      $('footer.mobile').addClass('is-hidden')
     }
   });
 });
