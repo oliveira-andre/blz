@@ -1,37 +1,39 @@
-<header>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item is-size-3" href="/">
-        BLZ
-      </a>
+<div class="container">
+  <header>
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-3" href="/">
+          BLZ
+        </a>
 
-      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div class="navbar-menu" id="navMenu">
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <% if user_signed_in? && establishment? %>
-            <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
-              Olá, <span class="is-size-6"><%= current_user.establishment.name %></span> :)
-            </p>
-            <%= link_to 'Minha conta', establishments_dashboard_path(current_user.establishment), class: 'button' %>
-            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
-          <% elsif user_signed_in? %>
-            <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
-              Olá, <span class="is-size-6"><%= current_user.name %></span> :)
-            </p>
-            <%= link_to 'Minha conta', users_dashboard_path(current_user), class: 'button' %>
-            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
-          <% else %>
-            <%= link_to 'Cadastre seu serviço', new_establishment_path, class: 'button' %>
-            <%= link_to 'Entrar', new_user_session_path, class: 'button is-pulled-right' %>
-          <% end %>
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <% if user_signed_in? && establishment? %>
+              <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
+                Olá, <span class="is-size-6"><%= current_user.establishment.name %></span> :)
+              </p>
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
+              <%= link_to 'Minha conta', establishments_dashboard_path(current_user.establishment), class: 'button is-pulled-right' %>
+            <% elsif user_signed_in? %>
+              <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
+                Olá, <span class="is-size-6"><%= current_user.name %></span> :)
+              </p>
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
+              <%= link_to 'Minha conta', users_dashboard_path(current_user), class: 'button is-pulled-right' %>
+            <% else %>
+              <%= link_to 'Entrar', new_user_session_path, class: 'button is-pulled-right' %>
+              <%= link_to 'Cadastre seu serviço', new_establishment_path, class: 'button is-pulled-right' %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
+</div>
