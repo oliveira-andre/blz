@@ -1,11 +1,12 @@
 .toast {
   visibility: hidden;
   margin: auto;
+  width: 200px;
 
   position: fixed;
   z-index: 9999;
-  left: 80%;
-  top: 60px;
+  left: calc(100% - 220px);
+  top: 30px;
 }
 
 .toast.show {
@@ -15,11 +16,11 @@
 }
 
 @-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;} 
-  to {top: 60px; opacity: 1;}
+  from { top: 0; opacity: 0; }
+  to { top: 30px; opacity: 1; }
 }
 
 @keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 60px; opacity: 1;}
+  from { top: 0; opacity: 0; }
+  to { top: 30px; opacity: 1; }
 }
