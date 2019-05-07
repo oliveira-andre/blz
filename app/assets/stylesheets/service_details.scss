@@ -253,21 +253,64 @@
   }
 }
 
-#details-model-scheduling {
-  article {
-    margin-bottom: 10px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e6e6e6;
-  }
+#new-modal-scheduling {
+  .modal-content {
+    .columns.content {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 25px 5px 20px 5px;
+      background-color: #fff;
 
-  form > button {
-    width: 80%;
-    margin-top: 10px;
-    margin-left: 10%;
-    margin-right: 10%;
+      @media (max-width: 450px) {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
 
-    strong {
-      margin-right: 5px;
+      article {
+        .image {
+          margin-left: 0px;
+          margin-right: 0px;
+        }
+      }
+
+      .is-date-scheduling, .is-duration-service {
+        p {
+          margin-bottom: 5px;
+          color: black;
+        }
+
+        span {
+          color: $secondary-color;
+          margin-left: 5px;
+        }
+      }
+
+      .is-date-scheduling {
+        span.icon {
+          img {
+            max-width: 22px;
+            min-width: 22px;
+          }
+        }
+      }
+
+      .is-duration-service {
+        span.icon {
+          img {
+            max-width: 17px;
+            min-width: 17px;
+          }
+        }
+      }
+
+      .columns.is-mobile {
+        margin-top: 15px;
+      }
+
+      .button {
+        background-color: $primary-color;
+        color: #fff;
+      }
     }
   }
 }
