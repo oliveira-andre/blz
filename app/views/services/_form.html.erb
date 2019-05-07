@@ -23,21 +23,10 @@
     </div>
     <% if @service.photos.present? %>
     <% else %>
-      <div class="column is-7 is-offset-5" id="gallery">
-        <div class="field">
-          <div class="file is-warning is-boxed">
-            <label class="file-label">
-              <%= f.file_field :photos, class: "file-input", multiple: true, id: "gallery-photo-add" %>
-              <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-cloud-upload-alt"></i>
-              </span>
-              <span class="file-label">
-                  Enviar fotos
-              </span>
-            </span>
-            </label>
-          </div>
+      <div class="column is-7 is-offset-5">
+        <div id="drop-area">
+          <h3>Drag and Drop Files Here<h3/>
+            <%= f.file_field :photos, multiple: true %>
         </div>
       </div>
     <% end %>
