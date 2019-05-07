@@ -1,36 +1,63 @@
-<h1 class="title"><%= @service.title %></h1>
-<p class="subtitle"><%= @service.establishment.name %></p>
+<div class="columns is-multiline">
+  <div class="column is-12 is-8-desktop">
+    <h1 class="title"><%= @service.title %></h1>
+    <p class="subtitle"><%= @service.establishment.name %></p>
+    <p class="description"><%= @service.description %></p>
+  </div>
 
-<div class="columns is-mobile is-hidden">
-  <div class="column is-6 review">
-    <p>207 avaliações</p>
-    <p>
-      <i class="fas fa-star is-size-6"></i>
-      <i class="fas fa-star is-size-6"></i>
-      <i class="fas fa-star is-size-6"></i>
-      <i class="far fa-star is-size-6"></i>
-      <i class="far fa-star is-size-6"></i>
-    </p>
-  </div>
-  <div class="column is-6 favorite">
-    <a><i class="far fa-heart is-size-5"></i> Favoritar</a>
-  </div>
-</div>
+  <!-- INFOs to mobile and tablet -->
+  <div class="column is-12 is-hidden-desktop">
+    <div class="columns is-mobile is-hidden">
+      <div class="column is-6 review">
+        <p>207 avaliações</p>
+        <p>
+          <i class="fas fa-star is-size-6"></i>
+          <i class="fas fa-star is-size-6"></i>
+          <i class="fas fa-star is-size-6"></i>
+          <i class="far fa-star is-size-6"></i>
+          <i class="far fa-star is-size-6"></i>
+        </p>
+      </div>
+      <div class="column is-6 favorite">
+        <a><i class="far fa-heart is-size-5"></i> Favoritar</a>
+      </div>
+    </div>
 
-<div class="columns is-mobile">
-  <div class="column info">
-    <p><%= @service.description %></p>
+    <div class="columns is-mobile info">
+      <div class="column is-6">
+        <p>Atendimento</p>
+        <%= image_tag '/images/hours.png' %>
+        <p><%= @service.establishment.timetable %></p>
+      </div>
+      <div class="column is-6 info">
+        <p>Duração estimada</p>
+        <%= image_tag '/images/time.png' %>
+        <p><%= @service.duration %> minutos</p>
+      </div>
+    </div>
   </div>
-</div>
-<div class="columns is-mobile info">
-  <div class="column is-6">
-    <p>Atendimento</p>
-    <%= image_tag '/images/hours.png' %>
-    <p><%= @service.establishment.timetable %></p>
-  </div>
-  <div class="column is-6 info">
-    <p>Duração estimada</p>
-    <%= image_tag '/images/time.png' %>
-    <p><%= @service.duration %> minutos</p>
+
+  <!-- INFOs to desktop -->
+  <div class="column is-4 is-hidden-touch">
+    <div class="box">
+      <div class="columns is-multiline info">
+        <div class="column is-12">
+          <p class="title">R$ <%= @service.amount %><p>
+        </div>
+        <div class="column is-12">
+          <p>Atendimento</p>
+          <%= image_tag '/images/hours.png' %>
+          <p><%= @service.establishment.timetable %></p>
+        </div>
+        <div class="column is-12 info">
+          <p>Duração estimada</p>
+          <%= image_tag '/images/time.png' %>
+          <p><%= @service.duration %> minutos</p>
+        </div>
+         <div class="column is-12">
+          <a href="#schedule" class="button is-light btn-schedule">AGENDAR</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
