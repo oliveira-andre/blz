@@ -19,11 +19,11 @@ class ServicesController < ApplicationController
     @service = @establishment.services.build(service_params)
     authorize @service
     if @service.save
-      redirect_to establishments_dashboard_path(@service),
+      redirect_to establishments_dashboard_path(@establishment),
                   notice: 'Serviço criado com sucesso'
     else
       flash[:error] = @service.errors.full_messages.to_sentence
-      redirect_back(fallback_location: establishment_service_path(@service))
+      redirect_to establishments_dashboard_path(@establishment)
     end
   end
 

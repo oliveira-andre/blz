@@ -1,29 +1,35 @@
 $(document).on("turbolinks:load", function () {
-    $('#drag-and-drop-zone').dmUploader({
-        url: '/demo/java-script/upload',
-        maxFileSize: 3000000, // 3 Megs max
-        allowedTypes: 'image/*',
-        extFilter: ['jpg', 'jpeg', 'png', 'gif'],
-        // ...
-        onNewFile: function (id, file) {
-            //...
-            if (typeof FileReader !== 'undefined') {
-                var reader = new FileReader();
-                var img = $('<img />');
+    $(document).ready(function() {
+        if (window.File && window.FileList && window.FileReader) {
+            $("#files").on("change", function(e) {
+                var files = e.target.files,
+                    filesLength = files.length;
+                for (var i = 0; i < filesLength; i++) {
+                    var f = files[i]
+                    var fileReader = new FileReader();
+                    fileReader.onload = (function(e) {
+                        var file = e.target;
+                        $("<span class=\"pip\">" +
+                            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                            "<br/><span class=\"remove\">Remove image</span>" +
+                            "</span>").insertAfter("#files");
+                        $(".remove").click(function(){
+                            $(this).parent(".pip").remove();
+                        });
 
-                reader.onload = function (e) {
-                    img.attr('src', e.target.result);
+                        // Old code here
+                        /*$("<img></img>", {
+                          class: "imageThumb",
+                          src: e.target.result,
+                          title: file.name + " | Click to remove"
+                        }).insertAfter("#files").click(function(){$(this).remove();});*/
+
+                    });
+                    fileReader.readAsDataURL(f);
                 }
-                /* ToDo: do something with the img! */
-                reader.readAsDataURL(file);
-            }
-        },
-        onFileTypeError: function (file) {
-            // ...
-        },
-        onFileTypeError: function (file) {
-            // ...
+            });
+        } else {
+            alert("Your browser doesn't support to File API")
         }
-        // ...
     });
 });

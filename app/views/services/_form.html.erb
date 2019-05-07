@@ -24,13 +24,10 @@
     <% if @service.photos.present? %>
     <% else %>
       <div class="column is-7 is-offset-5">
-        <div id="drop-area">
-          <h3>Drag and Drop Files Here<h3/>
-            <%= f.file_field :photos, multiple: true %>
-        </div>
+        <h3>Selecione suas fotos<h3/>
+          <%= f.file_field :photos, multiple: true,id:"files" %>
       </div>
     <% end %>
-
     <% unless @service.new_record? %>
       <% if @service.photos.present? %>
         <div class="column is-12">
