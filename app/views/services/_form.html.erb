@@ -21,13 +21,14 @@
         <h1 class="has-text-centered has-text-weight-bold	is-size-4">Editar Serviço</h1>
       <% end %>
     </div>
-
-    <div class="column is-7 is-offset-5" id="gallery">
-      <div class="field">
-        <div class="file is-warning is-boxed">
-          <label class="file-label">
-            <%= f.file_field :photos, class: "file-input", multiple: true, id: "gallery-photo-add" %>
-            <span class="file-cta">
+    <% if @service.photos.present? %>
+    <% else %>
+      <div class="column is-7 is-offset-5" id="gallery">
+        <div class="field">
+          <div class="file is-warning is-boxed">
+            <label class="file-label">
+              <%= f.file_field :photos, class: "file-input", multiple: true, id: "gallery-photo-add" %>
+              <span class="file-cta">
               <span class="file-icon">
                 <i class="fas fa-cloud-upload-alt"></i>
               </span>
@@ -35,17 +36,31 @@
                   Enviar fotos
               </span>
             </span>
-          </label>
+            </label>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <% unless @service.new_record? %>
-      <% @service.photos.each do |photos| %>
-        <div>
-          <figure>
-            <%= image_tag photos %>
-          </figure>
+      <% if @service.photos.present? %>
+        <div class="column is-12">
+          <div class="card">
+            <div class="card-content is-inline">
+              <div class="content">
+                <% (0...@service.photos.count).each do |image| %>
+                  <%= image_tag(@service.thumbmail_smal(image)) %>
+                <% end %>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <% @service.photos.each do |image| %>
+                <%= link_to 'Remove', delete_photo_attachment_service_path(image),
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'}, class: "card-footer-item" %>
+              <% end %>
+            </footer>
+          </div>
         </div>
       <% end %>
     <% end %>
@@ -79,9 +94,9 @@
 
     <div class="column is-2">
       <div class="field">
-        <%= f.label "Duração (O tempo deve ser em minutos)", class: "label" %>
+        <%= f.label "Duração", class: "label" %>
         <div class="control">
-          <%= f.text_field :duration, class: "input", placeholder: "Duração em minutos" %>
+          <%= f.text_field :duration, class: "input" %>
         </div>
       </div>
     </div>
@@ -122,3 +137,4 @@
   </div>
 
 <% end %>
+

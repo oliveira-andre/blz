@@ -1,6 +1,5 @@
 class ServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
-
   before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update]
 
@@ -20,10 +19,11 @@ class ServicesController < ApplicationController
     @service = @establishment.services.build(service_params)
     authorize @service
     if @service.save
-      redirect_to establishments_dashboard_path(@establishment),
+      redirect_to establishments_dashboard_path(@service),
                   notice: 'Serviço criado com sucesso'
     else
-      render 'new'
+      flash[:error] = @service.errors.full_messages.to_sentence
+      redirect_back(fallback_location: establishment_service_path(@service))
     end
   end
 
@@ -38,9 +38,12 @@ class ServicesController < ApplicationController
       redirect_to establishments_dashboard_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
     else
-      render 'edit'
+      flash[:error] = @service.errors.full_messages.to_sentence
+      redirect_back(fallback_location: establishment_service_path(@service))
     end
   end
+
+
 
   private
 
