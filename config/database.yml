@@ -2,10 +2,9 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: root
-  host: 127.0.0.1
-  port: 5432
+  username: <%= ENV.fetch("DB_USERNAME") %>
+  password: <%= ENV.fetch("DB_PASSWORD") %>
+  host: <%= ENV.fetch("DB_HOST") %>
 
 development:
   <<: *default
@@ -20,3 +19,4 @@ production:
   <<: *default
   database: blz_production
   username: blz
+  password: <%= ENV['BLZ_DATABASE_PASSWORD'] %>
