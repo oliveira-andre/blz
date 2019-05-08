@@ -1,0 +1,15 @@
+footer.normal {
+	@include touch {
+		padding: 0px;
+	}
+
+	background: $primary-color;
+
+	a, p {
+		color: #fff;
+
+		&:hover {
+			color: #fff;
+		}
+	}
+}

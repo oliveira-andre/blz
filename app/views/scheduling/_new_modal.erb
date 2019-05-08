@@ -1,65 +1,49 @@
 <div id="new-modal-scheduling" class="modal modal-fx-fadeInScale">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <div class="box">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image is-64x64">
-            <% if @scheduling.professional_service.service.establishment.photo.attached? %>
-              <%= image_tag @scheduling.professional_service.service.establishment.photo, class:'image' %>
-            <% else %>
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            <% end %>
-          </figure>
+      <div class="columns content is-multiline">
+        <div class="column is-12">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <% if @scheduling.professional_service.professional.photo.attached? %>
+                  <%= image_tag @scheduling.professional_service.professional.photo, class:'image is-rounded' %>
+                <% else %>
+                  <img src="https://bulma.io/images/placeholders/128x128.png" class="is-rounded">
+                <% end %>
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-size-4"><%= @scheduling.professional_service.service.title %></p>
+              <p class="subtitle is-size-6"><%= @scheduling.professional_service.professional.name %></p>
+            </div>
+          </article>
         </div>
-        <div class="media-content">
-          <div class="columns is-multiline">
-            <div class="column is-12">
-              <div class="content">
-                <p class="has-text-weight-semibold">
-                  <%= @scheduling.professional_service.service.establishment.name %>
-                </p>
-                <p>
-                  <i class="fas fa-star is-size-5"></i>
-                  <i class="fas fa-star is-size-5"></i>
-                  <i class="fas fa-star is-size-5"></i>
-                  <i class="far fa-star is-size-5"></i>
-                  <i class="far fa-star is-size-5"></i>  
-                </p>
-              </div>
+        <div class="column is-12 is-date-scheduling">
+          <p>Horário escolhido</p>
+          <span class="icon"><%= image_tag '/images/hours.png' %></span>
+          <span class="is-size-4 has-text-weight-semibold"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
+        </div>
+        <div class="column is-12 is-duration-service">
+          <p>Duração estimada</p>
+          <span class="icon is-duration"><%= image_tag '/images/time.png' %></span>
+          <span class="is-size-4 has-text-weight-semibold"><%= @scheduling.professional_service.service.duration %> min</span>
+        </div>
+        <div class="column is-12">
+          <div class="columns is-mobile">
+            <div class="column is-8">
+              <p class="title">R$ <%= @scheduling.professional_service.service.amount %></p>
             </div>
             <div class="column is-4">
-                <i class="fas fa-money-bill-wave is-size-4"></i>
-                R$ <%= @scheduling.professional_service.service.amount.to_i %>
+              <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
+                <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
+                <%= f.hidden_field :date, value:  @scheduling.date %>
+                <%= f.submit 'AGENDAR', class: 'button is-light'%>
+              <% end %>
             </div>
-            <div class="column is-4">
-                <i class="fas fa-hourglass-half is-size-4"></i>
-                <%= @scheduling.professional_service.service.duration %> minutos
-            </div>
-            <div class="column is-4">
-                <i class="fas fa-clock is-size-4"></i>
-                <%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %>
-            </div>
-            <% unless @scheduling.professional_service.service.establishment.address.nil? %>
-              <div class="column is-12">
-                <span>
-                  <i class="fas fa-map-marker-alt is-size-4"></i>
-                  <%= @scheduling.professional_service.service.establishment.address.full %>
-                </span>
-              </div>
-            <% end %>
           </div>
         </div>
-      </article>
-      <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
-        <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
-        <%= f.hidden_field :date, value:  @scheduling.date %>
-        <%= f.button class: 'button is-info is-rounded' do %>
-          <strong>Confirmar agendamento para </strong>
-          <%= "(#{day_month(@scheduling.date)} - #{time(@scheduling.date)} )" %>
-        <% end %>
-      <% end %>
-    </div>
+      </div>
   </div>
   <button class="modal-close is-large" aria-label="close"></button>
 </div>
