@@ -34,10 +34,11 @@ class ServicesController < ApplicationController
 
   def update
     authorize @service
-    if @service.update(service_params)
+    if @service.update_and_rebuild_schedule(service_params)
       redirect_to establishments_dashboard_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
     else
+      @professionals = @service.professionals_to_link
       render 'edit'
     end
   end
