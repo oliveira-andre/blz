@@ -15,17 +15,11 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <% if user_signed_in? && establishment? %>
-            <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
-              Olá, <span class="is-size-6"><%= current_user.establishment.name %></span> :)
-            </p>
-            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
             <%= link_to 'Minha conta', establishments_dashboard_path(current_user.establishment), class: 'button is-pulled-right' %>
-          <% elsif user_signed_in? %>
-            <p class="is-size-6 is-hidden-tablet is-hidden-mobile">
-              Olá, <span class="is-size-6"><%= current_user.name %></span> :)
-            </p>
             <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
+          <% elsif user_signed_in? %>
             <%= link_to 'Minha conta', users_dashboard_path(current_user), class: 'button is-pulled-right' %>
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path, class: 'button is-pulled-right' %>
             <%= link_to 'Cadastre seu serviço', new_establishment_path, class: 'button is-pulled-right' %>
