@@ -19,8 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :photos, only: :destroy, defaults: {format: 'js'}
+
   resources :services, only: :show
-  delete '/services/:id/delete_photo_attachment', to: "photos#delete", as: "delete_photo_attachment_service"
 
   resources :scheduling, only: %i[new create] do
     resources :payments, only: %i[new create]
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
       as: :establishments_dashboard
 
   resources :callbacks, only: :index
-
-
 end
+
+
+
+

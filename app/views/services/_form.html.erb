@@ -1,4 +1,6 @@
-<%= form_with model: @service, url: url, local: true do |f| %>
+<%= form_with model: @service, url: url, local: true, :remote => true do |f| %>
+  <%= f.hidden_field :query, value: photos['query'] %>
+
   <div class="columns is-multiline">
     <div class="column is-12">
       <% if @service.errors.any? %>
@@ -14,6 +16,7 @@
         </div>
       <% end %>
     </div>
+
     <div class="column is-12">
       <% if @service.new_record? %>
         <h1 class="has-text-centered has-text-weight-bold	is-size-4">Adicionar Serviço</h1>
@@ -21,34 +24,41 @@
         <h1 class="has-text-centered has-text-weight-bold	is-size-4">Editar Serviço</h1>
       <% end %>
     </div>
+
     <% if @service.photos.present? %>
     <% else %>
       <div class="column is-7 is-offset-5">
-        <h3>Selecione suas fotos<h3/>
-          <%= f.file_field :photos, multiple: true,id:"files" %>
+        <h3> Selecione suas fotos <h3/>
+          <%= f.file_field :photos, multiple: true, id: "files" %>
       </div>
     <% end %>
+
     <% unless @service.new_record? %>
+
       <% if @service.photos.present? %>
         <div class="column is-12">
           <div class="card">
             <div class="card-content is-inline">
               <div class="content">
                 <% (0...@service.photos.count).each do |image| %>
+                  <div id="images">
                   <%= image_tag(@service.thumbmail_smal(image)) %>
+                  </div>
                 <% end %>
               </div>
             </div>
+
             <footer class="card-footer">
               <% @service.photos.each do |image| %>
-                <%= link_to 'Remove', delete_photo_attachment_service_path(image),
+                <%= link_to 'Remove', photo_path(image),
                             method: :delete,
-                            data: {confirm: 'Are you sure?'}, class: "card-footer-item" %>
+                            data: {confirm: 'Você tem certeza?'}, class: "card-footer-item" %>
               <% end %>
             </footer>
           </div>
         </div>
       <% end %>
+
     <% end %>
 
     <div class="column is-12">

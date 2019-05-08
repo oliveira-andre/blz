@@ -23,7 +23,7 @@ class ServicesController < ApplicationController
                   notice: 'Serviço criado com sucesso'
     else
       flash[:error] = @service.errors.full_messages.to_sentence
-      redirect_to establishments_dashboard_path(@establishment)
+      render 'new'
     end
   end
 
@@ -39,7 +39,7 @@ class ServicesController < ApplicationController
                   notice: 'Serviço atualizado com sucesso'
     else
       flash[:error] = @service.errors.full_messages.to_sentence
-      redirect_back(fallback_location: establishment_service_path(@service))
+      render 'edit'
     end
   end
 

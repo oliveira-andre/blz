@@ -9,9 +9,10 @@ $(document).on("turbolinks:load", function () {
                     var fileReader = new FileReader();
                     fileReader.onload = (function(e) {
                         var file = e.target;
+                        console.log(e)
                         $("<span class=\"pip\">" +
-                            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                            "<br/><span class=\"remove\">Remove image</span>" +
+                            "<img  class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                            "<br/><span class=\"remove\">Remover foto</span>" +
                             "</span>").insertAfter("#files");
                         $(".remove").click(function(){
                             $(this).parent(".pip").remove();
@@ -20,8 +21,7 @@ $(document).on("turbolinks:load", function () {
                     fileReader.readAsDataURL(f);
                 }
             });
-        } else {
-            alert("Your browser doesn't support to File API")
         }
     });
+
 });
