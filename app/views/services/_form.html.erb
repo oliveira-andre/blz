@@ -33,28 +33,28 @@
     <% end %>
 
     <% unless @service.new_record? %>
-
       <% if @service.photos.present? %>
-        <div class="column is-12">
-          <div class="card">
-            <div class="card-content is-inline">
-              <div class="content">
-                <% (0...@service.photos.count).each_with_index  do |index| %>
-                  <div class="<%= index %>">
-                    <%= image_tag(@service.thumbmail_smal(index)) %>
-                  </div>
-                <% end %>
+        <% @service.photos.each do |photo| %>
+          <div class="column is-3" id="photo-<%= photo.id %>">
+            <div class="card">
+              <div class="card-content is-inline">
+                <div class="content">
+                  <%= image_tag(@service.thumbnail(photo, :small)) %>
+                </div>
               </div>
-            </div>
-            <footer class="card-footer">
-              <% @service.photos.each do |index| %>
-                <%= link_to 'Remove', photo_path(index) ,remote: true, id: "remuve_photo_#{index.id}",
-                            method: :delete,
-                            data: {confirm: 'Você tem certeza?'}, class: "card-footer-item" %>
+              <% unless photo.new_record? %>
+                <footer class="card-footer">
+                  <%= link_to 'Remove',
+                              photo_path(photo),
+                              remote: true,
+                              method: :delete,
+                              data: { confirm: 'Você tem certeza?' },
+                              class: "card-footer-item" %>
+                </footer>
               <% end %>
-            </footer>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
 
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="column is-2">
+    <div class="column is-4">
       <div class="field">
         <%= f.label "Valor", class: "label" %>
         <div class="control">
@@ -85,9 +85,9 @@
       </div>
     </div>
 
-    <div class="column is-2">
+    <div class="column is-4">
       <div class="field">
-        <%= f.label "Duração (O tempo deve ser em minutos)", class: "label" %>
+        <label class="label">Duração <small>(tempo em minutos)</small></label>
         <div class="control">
           <%= f.text_field :duration, class: "input", placeholder: "Duração em minutos" %>
         </div>
@@ -105,7 +105,7 @@
       </div>
     </div>
 
-    <div class="column is-4">
+    <div class="column is-12">
       <%= f.label "Onde o serviço é feito ?", class: "label" %>
       <div class="control">
         <label class="radio">
