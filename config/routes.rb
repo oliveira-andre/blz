@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   devise_for :users, controllers: {
-      omniauth_callbacks: 'callbacks',
-      registrations: 'users/registrations'
+    omniauth_callbacks: 'callbacks',
+    registrations: 'users/registrations'
   }
 
   resources :filters, only: %i[index destroy]
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: :destroy
-  
   resources :services, only: :show
 
   resources :scheduling, only: %i[new create] do
