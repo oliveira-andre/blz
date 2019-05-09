@@ -16,7 +16,8 @@ class Service < ApplicationRecord
   validates :amount, presence: true
   validates :duration, presence: true
   validates :local_type, presence: true
-  validates :status, :photos, presence: true
+  validates :status, presence: true
+  validates :photos, presence: true
 
   validate :photo_type
   validate :limit_number_photos
