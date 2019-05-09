@@ -33,6 +33,17 @@
     <% end %>
 
     <% unless @service.new_record? %>
+      <div class="column is-3" id="photo-new">
+        <div class="card">
+          <div class="card-content is-inline">
+            <div class="content has-text-centered">
+              <span class="icon is-size-1">
+                <i class="fas fa-plus-circle"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
       <% if @service.photos.present? %>
         <% @service.photos.each do |photo| %>
           <div class="column is-3" id="photo-<%= photo.id %>">
