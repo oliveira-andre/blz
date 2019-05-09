@@ -24,7 +24,6 @@ class ServicesController < ApplicationController
       redirect_to establishments_dashboard_path(@establishment),
                   notice: 'Serviço criado com sucesso'
     else
-      flash[:error] = @service.errors.full_messages.to_sentence
       render 'new'
     end
   end
@@ -36,7 +35,7 @@ class ServicesController < ApplicationController
 
   def update
     authorize @service
-    if @service.update_and_rebuild_schedule(service_params)
+    if @service.update(service_params)
       redirect_to establishments_dashboard_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
     else

@@ -40,15 +40,15 @@ input[type="file"] {
 }
 
 .remove {
+  & :hover {
+    background: white;
+    color: black;
+  }
   display: block;
   background: #444;
   border: 1px solid black;
   color: white;
   text-align: center;
   cursor: pointer;
-}
 
-.remove:hover {
-  background: white;
-  color: black;
 }

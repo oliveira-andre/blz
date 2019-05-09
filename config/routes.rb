@@ -19,8 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :photos, only: :destroy, defaults: {format: 'js'}
-
+  resources :photos, only: :destroy
+  
   resources :services, only: :show
 
   resources :scheduling, only: %i[new create] do
@@ -38,7 +38,3 @@ Rails.application.routes.draw do
 
   resources :callbacks, only: :index
 end
-
-
-
-
