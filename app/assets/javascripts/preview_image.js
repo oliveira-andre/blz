@@ -1,5 +1,10 @@
 $(document).on("turbolinks:load", function () {
     $(document).ready(function() {
+        $(function(){
+            $('.delete-link').on('ajax:success', function() {
+                $(this).parents('div:first').remove();
+            });
+        });
         if (window.File && window.FileList && window.FileReader) {
             $("#files").on("change", function(e) {
                 var files = e.target.files,

@@ -1,5 +1,4 @@
 <%= form_with model: @service, url: url, local: true, :remote => true do |f| %>
-  <%= f.hidden_field :query, value: photos['query'] %>
 
   <div class="columns is-multiline">
     <div class="column is-12">
@@ -41,16 +40,15 @@
             <div class="card-content is-inline">
               <div class="content">
                 <% (0...@service.photos.count).each do |image| %>
-                  <div id="images">
-                  <%= image_tag(@service.thumbmail_smal(image)) %>
+                  <div class="<%= image %>">
+                    <%= image_tag(@service.thumbmail_smal(image)) %>
                   </div>
                 <% end %>
               </div>
             </div>
-
             <footer class="card-footer">
               <% @service.photos.each do |image| %>
-                <%= link_to 'Remove', photo_path(image),
+                <%= link_to 'Remove', photo_path(image) ,remote: true, id: "remuve_photo_#{image.id}",
                             method: :delete,
                             data: {confirm: 'Você tem certeza?'}, class: "card-footer-item" %>
               <% end %>
@@ -58,7 +56,6 @@
           </div>
         </div>
       <% end %>
-
     <% end %>
 
     <div class="column is-12">
