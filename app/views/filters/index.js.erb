@@ -10,5 +10,5 @@ $("#form_search").replaceWith(
   "<%= j render('pages/shared/form_search', filter: @filter) %>"
 );
 
-runHomePage();
+runHomePage("<%= @filter['date'] %>");
 $('html, body').animate({ scrollTop: $('.results').offset().top }, 'slow');

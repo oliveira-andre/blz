@@ -1,6 +1,6 @@
 <div class="filters">
   <div class="container">
-    <%= form_with url: '/filters', method: :get, class: 'filter_form' do |f| %>
+    <%= form_with url: '/filters', method: :get, class: 'filter_form', id: 'filter_form' do |f| %>
       <%= f.hidden_field :query, value: filter['query'] %>
       <div class="columns">
         <div class="column">
@@ -9,12 +9,12 @@
               <p class="is-pulled-right">Onde</p>
             </div>
             <div class="column">
-                <div class="field">
-                <%= check_box_tag(:local_type, 'home', filter['local_type'] == 'home', class: 'is-checkradio', id: 'local_type_home' ) %>
+              <div class="field">
+                <%= check_box_tag('local_type[]', 'home', filter['local_type'] && filter['local_type'].include?('home'), class: 'is-checkradio', id: 'local_type_home' ) %>
                 <label for="local_type_home">Em casa</label>
               </div>
               <div class="field">
-                <%= check_box_tag(:local_type, 'establishment', filter['local_type'] == 'establishment', class: 'is-checkradio', id: 'local_type_establishment' ) %>
+                <%= check_box_tag('local_type[]', 'establishment', filter['local_type'] && filter['local_type'].include?('establishment'), class: 'is-checkradio', id: 'local_type_establishment' ) %>
                 <label for="local_type_establishment">No estabelecimento</label>
               </div>
             </div>
@@ -26,66 +26,34 @@
               <p class="is-pulled-right">Quando</p>
             </div>
             <div class="column">
-              <%= f.date_field :date_f, class: 'input', id: 'home_filter_date' %>
+              <%= f.date_field :date, class: 'input', id: 'home_filter_date'  %>
             </div>
           </div>
         </div>
       </div>
       <div class="columns is-mobile categories is-centered">
-        <div class="column">
-          <a>
-            <figure>
-              <%= image_tag '/images/category1.png' %>
-            </figure>
-            <p class="has-text-centered">Barbearia</p>
-          </a>
-        </div>
-        <div class="column">
-          <a>
-            <figure>
-              <%= image_tag '/images/category2.png' %>
-            </figure>
-            <p class="has-text-centered">Cabelo</p>
-          </a>
-        </div>
-        <div class="column">
-          <a>
-            <figure>
-              <%= image_tag '/images/category3.png' %>
-            </figure>
-            <p class="has-text-centered">Corpo</p>
-          </a>
-        </div>
-        <div class="column">
-          <a>
-            <figure>
-              <%= image_tag '/images/category4.png' %>
-            </figure>
-            <p class="has-text-centered">Maquiagem</p>
-          </a>
-        </div>
-        <div class="column">
-          <a>
-            <figure>
-              <%= image_tag '/images/category5.png' %>
-            </figure>
-            <p class="has-text-centered">Unhas</p>
-          </a>
-        </div>
-        <div class="column">
-          <a>
-            <figure>
-              <%= image_tag '/images/category6.png' %>
-            </figure>
-            <p class="has-text-centered">Outros</p>
-          </a>
-        </div>
+        <% Category.all.order(:order).each do |category| %>
+          <div class="column field">
+            <label class="checkbox <%= (filter['categories_ids'] && filter['categories_ids'].include?(category.id.to_s)) ? 'is-active' : '' %>">
+              <%= check_box_tag(
+                    'categories_ids[]',
+                    category.id,
+                    filter['categories_ids'] && filter['categories_ids'].include?(category.id.to_s),
+                    class: 'is-hidden', id: "category_#{category.id}" ) %>
+              <figure>
+                <%= image_tag "/images/category#{category.order}.png" %>
+              </figure>
+              <p class="has-text-centered"><%= category.name %></p>
+            </label>
+          </div>
+        <% end %>
         <a class="mobile-background-shadow is-vcentered is-hidden-tablet">
           <span class="icon is-size-2 is-pulled-right is-hidden">
             <i class="fas fa-chevron-right"></i>
           </span>
         </a>
       </div>
+      <%= f.submit '', class: 'is-hidden', id: 'filters-submit' %>
     <% end %>
   </div>
 </div>
