@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
   before_action :load_establishment, only: %i[index new create]
@@ -34,16 +36,14 @@ class ServicesController < ApplicationController
 
   def update
     authorize @service
-    if @service.update(service_params)
+    if @service.update_and_rebuild_schedule(service_params)
       redirect_to establishments_dashboard_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
     else
-      flash[:error] = @service.errors.full_messages.to_sentence
+      @professionals = @service.professionals_to_link
       render 'edit'
     end
   end
-
-
 
   private
 

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class PhotosController < ApplicationController
-  respond_to :html, :js
-
   def destroy
     @photos = ActiveStorage::Attachment.find(params[:id])
     @photos.purge

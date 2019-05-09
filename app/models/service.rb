@@ -46,4 +46,18 @@ class Service < ApplicationRecord
       end
     end
   end
+
+  def update_and_rebuild_schedule(params)
+    params = params.to_h
+    duration_changed = duration != params[:duration].to_i
+    updated = update(params)
+    rebuild_schedule if duration_changed && updated
+    updated
+  end
+
+  private
+
+  def rebuild_schedule
+    professional_services.each { |p_s| Schedule.rebuild(p_s) }
+  end
 end
