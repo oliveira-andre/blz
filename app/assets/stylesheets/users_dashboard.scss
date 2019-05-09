@@ -1,9 +1,78 @@
+
+
 .users_dashboard {
-  li {
-    width: 50%;
+  height: 100hv;
+  padding-top: 15px;
+  background-color: #f2f2f2;
+
+  .container {
+    @include mobile {
+      margin: 15px;
+    }
   }
 
-  .edit_user {
-    margin-bottom: 25px;
+  .box, .image-mobile {
+
+    .media {
+      .media-left {
+        max-width: 64px;
+
+        .image {
+          margin: 0 auto;
+
+          img {
+            border: 2px solid #fff;
+          }
+        }
+      }
+    }
+
+    .infos {
+      p {
+        margin-bottom: 2px;
+      }
+    }
+
+    .actions {
+      .button.is-light {
+        background-color: transparent;
+        border: 1px solid #fff;
+        color: #fff;
+
+        &:hover {         
+          background-color: #fff;
+          color: black;
+        }
+      }
+    }
+  }
+
+
+}
+
+// HEADER CUSTOM
+.users_dashboard-index {
+  header {
+    background-color: $primary-color;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+
+    .navbar {
+      .navbar-menu {
+        .navbar-item {
+          a {
+            border-color: #fff;
+          }
+        } 
+      }
+
+      a {
+        color:  #fff;
+        border-color: #fff;
+
+        &:hover {
+          color:  #fff;
+        }
+      }
+    }
   }
 }
