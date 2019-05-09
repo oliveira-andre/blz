@@ -14,6 +14,6 @@ class FiltersController < ApplicationController
   private
 
   def filter_params
-    params.permit(:query, :local_type, :category_id)
+    params.permit(:query, :date, categories_ids: [], local_type: [])
   end
 end
