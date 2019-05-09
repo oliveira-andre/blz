@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
 
@@ -36,8 +34,7 @@ class ServicesController < ApplicationController
 
   def update
     authorize @service
-
-    if @service.update(service_params)
+    if @service.update_and_rebuild_schedule(service_params)
       redirect_to establishments_dashboard_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
     else
