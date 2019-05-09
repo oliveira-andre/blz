@@ -2,6 +2,7 @@
 
 class ServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
+
   before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update]
 
@@ -35,6 +36,7 @@ class ServicesController < ApplicationController
 
   def update
     authorize @service
+
     if @service.update(service_params)
       redirect_to establishments_dashboard_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'

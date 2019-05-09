@@ -2,12 +2,7 @@
 
 class PhotosController < ApplicationController
   def destroy
-    @photos = ActiveStorage::Attachment.find(params[:id])
-    @photos.purge
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
-      format.js
-    end
+    @photo = ActiveStorage::Attachment.find(params[:id])
+    @photo.destroy
   end
 end
