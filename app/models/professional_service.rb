@@ -5,6 +5,8 @@ class ProfessionalService < ApplicationRecord
   has_many :schedules, dependent: :destroy
   has_many :scheduling
 
+  after_create :rebuild_schedule
+
   def table_schedule
     return [] if schedules.empty?
 
@@ -16,5 +18,11 @@ class ProfessionalService < ApplicationRecord
         I18n.l(date, format: :day_month) => schedule
       }
     end
+  end
+
+  private
+
+  def rebuild_schedule
+    Schedule.rebuild(self)
   end
 end
