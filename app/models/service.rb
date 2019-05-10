@@ -11,17 +11,21 @@ class Service < ApplicationRecord
   has_many :professionals, through: :professional_services
 
   validates :title, presence: true
+  validates :title, uniqueness: { scope: :establishment_id }
   validates :description, presence: true
   validates :amount, presence: true
   validates :duration, presence: true
   validates :local_type, presence: true
   validates :status, presence: true
+  validates :photos, presence: true
 
-  validates :title, uniqueness: { scope: :establishment_id }
+  validate :photo_type
+  validate :limit_number_photos
 
   def professionals_to_link
     professionals_ids = ProfessionalService.where(service_id: id)
                                            .pluck(:professional_id)
+
     Professional.where(establishment_id: establishment_id)
                 .where.not(id: professionals_ids)
   end
@@ -35,6 +39,19 @@ class Service < ApplicationRecord
   end
 
   private
+
+  def limit_number_photos
+    errors.add(:photos, '5 no máximo.') if photos.count > 5
+  end
+
+  def photo_type
+    photos.each do |photo|
+      next if photo.content_type.in?(%(image/jpeg image/png))
+
+      errors.add(:photos, 'com tipo não permitido.')
+      break
+    end
+  end
 
   def rebuild_schedule
     professional_services.each { |p_s| Schedule.rebuild(p_s) }

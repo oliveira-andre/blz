@@ -1,18 +1,24 @@
 $(document).on("turbolinks:load", function () {
-  $('#gallery-photo-add').on('change', function () {
+  $('#files').on('change', function () {
+
+    var cont = 0
     var files = this.files;
+
     if (!files) return;
-
-    var gallery = $('#gallery');
-
     for (var i = 0; i < files.length; i++) {
       var reader = new FileReader();
       reader.onload = function (event) {
-        $(`<div>
-            <figure>
-                <img src="${event.target.result}">
-            </figure>
-          </div>`).insertAfter(gallery);
+        cont = i++
+        $(`<div class="column is-3" id="photo-${cont}">
+        <div class="card">
+          <div class="card-content is-inline">
+            <img class="image is-320x240" src="${event.target.result}">
+          </div>
+            <footer class="card-footer">
+            <a class="card-footer-item" onclick="remove(${cont})">Remove</a>
+            </footer>
+        </div>
+      </div>`).insertAfter($("#preview"));
       }
       reader.readAsDataURL(files.item(i));
     }
@@ -28,4 +34,8 @@ $(document).on("turbolinks:load", function () {
     }
     reader.readAsDataURL(files.item(0));
   });
+  
 });
+function remove(img){
+  $("#photo-"+img).remove();
+}

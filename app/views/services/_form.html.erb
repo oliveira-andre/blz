@@ -1,4 +1,5 @@
 <%= form_with model: @service, url: url, local: true do |f| %>
+
   <div class="columns is-multiline">
     <div class="column is-12">
       <% if @service.errors.any? %>
@@ -14,6 +15,7 @@
         </div>
       <% end %>
     </div>
+
     <div class="column is-12">
       <% if @service.new_record? %>
         <h1 class="has-text-centered has-text-weight-bold	is-size-4">Adicionar Serviço</h1>
@@ -22,31 +24,45 @@
       <% end %>
     </div>
 
-    <div class="column is-7 is-offset-5" id="gallery">
-      <div class="field">
-        <div class="file is-warning is-boxed">
-          <label class="file-label">
-            <%= f.file_field :photos, class: "file-input", multiple: true, id: "gallery-photo-add" %>
-            <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-cloud-upload-alt"></i>
-              </span>
-              <span class="file-label">
-                  Enviar fotos
-              </span>
-            </span>
-          </label>
+    <% unless @service.new_record? %>
+      <div class="column is-3" id="preview">
+        <div class="content has-text-centered is-inline">
+          <div class="field">
+            <div class="file is-small is-boxed" id="gallery">
+              <label class="file-label">
+                <%= f.file_field :photos, multiple: true, id: "files" ,class:"file-input" %>
+                <span class="file-cta">
+                  <span class="file-label is-size-1">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <% unless @service.new_record? %>
-      <% @service.photos.each do |photos| %>
-        <div>
-          <figure>
-            <%= image_tag photos %>
-          </figure>
-        </div>
+      <% if @service.photos.present? %>
+        <% @service.photos.each do |photo| %>
+          <div class="column is-3" id="photo-<%= photo.id %>">
+            <div class="card">
+              <div class="card-content is-inline">
+                <div class="content">
+                  <%= image_tag(@service.thumbnail(photo, :small)) %>
+                </div>
+              </div>
+              <% unless photo.new_record? %>
+                <footer class="card-footer">
+                  <%= link_to 'Remove',
+                              photo_path(photo),
+                              remote: true,
+                              method: :delete,
+                              data: { confirm: 'Você tem certeza?' },
+                              class: "card-footer-item" %>
+                </footer>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
 
@@ -68,7 +84,7 @@
       </div>
     </div>
 
-    <div class="column is-2">
+    <div class="column is-4">
       <div class="field">
         <%= f.label "Valor", class: "label" %>
         <div class="control">
@@ -77,9 +93,9 @@
       </div>
     </div>
 
-    <div class="column is-2">
+    <div class="column is-4">
       <div class="field">
-        <%= f.label "Duração (O tempo deve ser em minutos)", class: "label" %>
+        <label class="label">Duração <small>(tempo em minutos)</small></label>
         <div class="control">
           <%= f.text_field :duration, class: "input", placeholder: "Duração em minutos" %>
         </div>
@@ -97,7 +113,7 @@
       </div>
     </div>
 
-    <div class="column is-4">
+    <div class="column is-12">
       <%= f.label "Onde o serviço é feito ?", class: "label" %>
       <div class="control">
         <label class="radio">

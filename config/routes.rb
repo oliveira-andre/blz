@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :photos, only: :destroy
   resources :services, only: :show
 
   resources :scheduling, only: %i[new create] do
