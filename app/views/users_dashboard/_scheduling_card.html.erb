@@ -1,0 +1,66 @@
+<div class="column is-6">
+  <div class="image-mobile box" style="<%= 
+    (service.photos.attached?) ?
+        liner_gradiente_card_img_dashboard_user(
+          url_for(schedule.thumbnail(service.photos.sample, :medium))
+        ) : liner_gradiente_card_img_dashboard_user('images/1280x960.png') %>">
+    <div class="columns content is-multiline">
+      <div class="column is-12">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <% if professional.photo.attached? %>
+                <%= image_tag schedule.thumbnail(professional.photo, :avatar), 
+                              class:'image is-rounded' %>
+              <% else %>
+                <img src="images/128x128.png" class="image is-rounded">
+              <% end %>
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-size-5 is-size-4-desktop has-text-white"><%= service.title %></p>
+            <p class="subtitle is-size-7 is-size-6-desktop has-text-white"><%= professional.name %></p>
+          </div>
+        </article>
+      </div>
+      <div class="column is-12">
+        <div class="columns is-multiline infos">
+          <div class="column is-6">
+            <p class="is-size-7 is-size-6-desktop has-text-white">Horário escolhido</p>
+            <span class="icon is-size-5 has-text-white has-text-white"><i class="far fa-clock"></i></span>
+            <span class="is-size-6 is-size-5-desktop has-text-white"><%= "#{day_month(schedule.date)} às #{time(schedule.date)}" %></span>
+          </div>
+          <div class="column is-6">
+            <p class="is-size-7 is-size-6-desktop has-text-white">Duração estimada</p>
+            <span class="icon is-size-5 has-text-white"><i class="fas fa-hourglass-start"></i></span>
+            <span class="is-size-6 is-size-5-desktop has-text-white"><%= service.duration %> min</span>
+          </div>
+          <div class="column is-6">
+            <p class="is-size-7 is-size-6-desktop has-text-white">Situação</p>
+            <span class="icon is-size-5 has-text-white"><i class="fas fa-info-circle"></i></span>
+            <span class="is-size-6 is-size-5-desktop has-text-white"><%= service.t_status %></span>
+          </div>
+          <div class="column is-12">
+            <p class="is-size-7 is-size-6-desktop has-text-white">Endereço</p>
+            <span class="icon is-size-5 has-text-white"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="is-size-6 is-size-5-desktop has-text-white"><%= service.establishment.address.full %></span>
+          </div>
+        </div>
+      </div>
+      <div class="column is-12">
+        <div class="columns is-mobile actions">
+          <div class="column is-8">
+            <p class="is-size-3 has-text-white">R$ <%= service.amount %></p>
+          </div>
+          <div class="column is-4 has-text-centered">
+            <% if schedule.finished? %>
+              <a class="button is-light">Avaliar</a>
+            <% else %>
+              <a class="button is-text has-text-white">Cancelar</a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
