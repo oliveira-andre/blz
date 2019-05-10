@@ -9,7 +9,7 @@ class ApplicationRecord < ActiveRecord::Base
     return if photo.nil?
 
     resizes = {
-      avatar: '64x64!',
+      avatar: '128x128!',
       small: '320x240!',
       medium: '640x480!',
       large: '1280x960!'
