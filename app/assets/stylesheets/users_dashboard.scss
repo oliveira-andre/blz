@@ -32,14 +32,13 @@
     }
 
     .actions {
-      .button.is-light {
-        background-color: transparent;
-        border: 1px solid #fff;
+      .button.is-text {
         color: #fff;
 
         &:hover {         
           background-color: #fff;
-          color: black;
+          color: black !important;
+          text-decoration: none;
         }
       }
     }
