@@ -1,12 +1,10 @@
-
-
 .users_dashboard {
-  height: 100hv;
+  height: 100vh;
   padding-top: 15px;
   background-color: #f2f2f2;
 
   .container {
-    @include mobile {
+    @include touch {
       margin: 15px;
     }
   }
