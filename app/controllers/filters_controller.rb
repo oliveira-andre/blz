@@ -6,14 +6,9 @@ class FiltersController < ApplicationController
     @services = FiltersService.execute(@filter) || Service.approved
   end
 
-  def destroy
-    @filter = filter_params
-    @services = FiltersService.execute(@filter) || Service.approved
-  end
-
   private
 
   def filter_params
-    params.permit(:query, :local_type, :category_id)
+    params.permit(:query, :date, categories_ids: [], local_type: [])
   end
 end

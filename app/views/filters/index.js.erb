@@ -1,8 +1,8 @@
-$("#filters").replaceWith(
+$(".filters").replaceWith(
   "<%= j render('pages/shared/filters', services: @services, filter: @filter) %>"
 );
 
-$("#results").replaceWith(
+$(".results").replaceWith(
   "<%= j render('pages/shared/results', services: @services, filter: @filter) %>"
 );
 
@@ -10,4 +10,5 @@ $("#form_search").replaceWith(
   "<%= j render('pages/shared/form_search', filter: @filter) %>"
 );
 
-$("#query").val('');
+runHomePage("<%= @filter['date'] %>");
+$('html, body').animate({ scrollTop: $('.results').offset().top }, 'slow');

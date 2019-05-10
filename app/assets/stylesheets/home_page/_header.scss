@@ -57,20 +57,25 @@
           font-size: 1.8rem;
         }
       }
-
-      input {    
-        height: 45px;
-      }
-
-      span > img {
-        margin-right: 12px;
-        margin-top: 10px;
-      }
     }
 
     form {
       .field {
         max-width: 550px;
+
+        input {
+          height: 45px;
+        }
+
+        span > img {
+          margin-right: 12px;
+          margin-top: 10px;
+        }
+
+        button {
+          background: transparent;
+          border: 0px;
+        }
       }
     }
   }

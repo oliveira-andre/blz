@@ -1,12 +1,22 @@
 <%= form_with url: filters_path, method: :get, id: 'form_search' do |f| %>
   <%= f.hidden_field :local_type, value: filter['local_type'] %>
-  <%= f.hidden_field :category_id, value: filter['category_id'] %> 
+  <% (filter['categories_ids'] || []).each do |category_id| %>
+    <%= f.hidden_field 'categories_ids[]', value: category_id %>
+  <% end %>
+  <%= f.hidden_field :date, value: filter['date'] %>
   <div class="field">
-    <p class="control has-icons-right">
-      <%= f.text_field :query, class: 'input is-rounded', placeholder: 'Busque por um serviço...' %>
-      <span class="icon is-small is-right">
-        <%= image_tag '/images/search.png' %>
-      </span>
-    </p>
+    <div class="control is-large has-icons-right">
+      <%= f.text_field :query, class: 'input is-rounded',
+                       placeholder: 'Busque por um serviço...',
+                       value: filter['query'],
+                       autocomplete: 'off' %>
+
+      <%= button_tag type: 'submit', id: 'search-submit' do %>
+        <span class="icon is-small is-right">
+          <%= image_tag '/images/search.png' %>
+        </span>
+      <% end %>
+    </div>
   </div>
+  <%= f.submit '', class: 'is-hidden', id: 'search-submit' %>
 <% end %>

@@ -55,19 +55,36 @@
         max-width: 130px;
         min-width: 130px;
         
-        figure {
-          box-shadow: 1px 2px 2px #cecece;
-          border-radius: 50%;
-          width: 70px;
-          height: 70px;
-          margin: 0 auto;
+        .checkbox {
+          figure {
+            box-shadow: 1px 2px 2px #cecece;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
 
-          img {
-            display: block;
-            height: auto;
-            width: 55%;
-            margin: 0px auto;
-            padding-top: 30px;
+            &.button {
+              padding: 0px !important;
+              display: block;
+            }
+
+            img {
+              display: block;
+              height: auto;
+              width: 55%;
+              margin: 0px auto;
+              padding-top: 30px;
+            }
+          }
+
+          &.is-active, &:hover {
+            p {
+              color: #0E6C70;
+            }
+
+            figure {
+              border: 1px solid #0E6C70;
+            }
           }
         }
 

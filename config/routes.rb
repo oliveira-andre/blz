@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :filters, only: %i[index destroy]
+  resources :filters, only: :index
   resources :establishments do
     resources :services, except: :index do
       resources :professional_services, only: %i[create destroy]
