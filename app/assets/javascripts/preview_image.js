@@ -1,4 +1,11 @@
 $(document).on("turbolinks:load", function () {
+
+  bulmaCarousel.attach('.hero-carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 3,
+    loop: true
+  });
+  
   $('#files').on('change', function () {
 
     var cont = 0
@@ -34,8 +41,8 @@ $(document).on("turbolinks:load", function () {
     }
     reader.readAsDataURL(files.item(0));
   });
-  
+
 });
-function remove(img){
-  $("#photo-"+img).remove();
+function remove(img) {
+  $("#photo-" + img).remove();
 }

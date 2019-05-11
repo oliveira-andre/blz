@@ -5,6 +5,7 @@
     "@rails/webpacker": "3.5",
     "bulma": "^0.7.4",
     "bulma-calendar": "^6.0.6",
+    "bulma-carousel": "^4.0.4",
     "bulma-extensions": "^6.2.5",
     "bulma-modal-fx": "^1.1.1",
     "inter-ui": "^3.5.0",

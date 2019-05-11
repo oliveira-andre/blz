@@ -1149,6 +1149,11 @@ bulma-calendar@^6.0.6:
     date-and-time "^0.6.3"
     date-fns "^1.29.0"
 
+bulma-carousel@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/bulma-carousel/-/bulma-carousel-4.0.4.tgz#96a2e93e6042d196cb064b9a1ea48ca4db4bb030"
+  integrity sha512-fxARvrPZ0meiVMkxI1ayK2RBd9YUNPc7FFnDpD+SgPnQdZgW+VAvHM8YdR3BJfnmR9lNWNqfKR/hk7Ko0GP2tA==
+
 bulma-extensions@^6.2.5:
   version "6.2.5"
   resolved "https://registry.yarnpkg.com/bulma-extensions/-/bulma-extensions-6.2.5.tgz#dd11ff94013543ce654c9b9fff8b34ae3cbc0715"
