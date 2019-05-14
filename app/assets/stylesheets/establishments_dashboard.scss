@@ -1,80 +1,128 @@
 .establishments_dashboard {
+  height: calc(100% + 90px);
+  padding-top: 15px;
+  background-color: #f2f2f2;
+
   .container {
-    padding-bottom: 50px;
-
-    @include mobile {
-      margin: 0px 12px;
+    @include touch {
+      margin: 15px;
     }
   }
 
-  h1 {
-    border-bottom: 1px solid #efefef;
-    padding-bottom: 15px;
-    color: grey;
-    margin-bottom: 15px;
+  .box {
+    border: 1px solid $light-color;
+    box-shadow: none;
+    border-radius: 0px;
 
-    @include mobile {
-    }
-  }
+    .media {
+      .media-left {
+        max-width: 64px;
 
-  li {
-    width: 50%;
-  }
+        .image {
+          margin: 0 auto;
 
-  .button {
-    &.is-active {
-      background-color: #31aeb5;
-      color: #fff;
-      border-color: #31aeb5;
-    }
-  }
-
-  .media-content {
-    overflow-x: initial;
-  }
-
-  .no-scheduling {
-    margin-top: 10vh;
-  }
-
-  .numbers-cards {
-    .column.is-12 {
-      margin-bottom: 30px;
+          img {
+            border: 2px solid #fff;
+          }
+        }
+      }
     }
 
-    .level-left {
-      width: 30%;
-    }
+    .infos {
+      .column {
+        @include mobile {
+          width: 50%;
+        }
 
-    .level-right {
-      width: 70%;
+        @include desktop {
+          width: 33.33%;
+        }
 
+        &:last-child {
+          @include mobile {
+            width: 100%;
+          }
+        }
+      }
       p {
-        width: 100%;
+        margin-bottom: 2px;
+      }
+    }
+
+    .actions {
+      .button.is-light {
+        background-color: transparent;
+        border: 1px solid $primary-color;
+        color: $primary-color;
+        border-radius: 0px;
+
+        &:hover {
+          background-color: $primary-color;
+          color: #fff;
+        }
       }
     }
   }
 
-  .graph {
-    margin-left: 30px;
+  .bottom-navigation-bar {
+    background-color: $primary-color;
     
-    #curve_chart {
-      height: 280px;
-    }
-  
-  }
+    .tabs {
+      overflow-x: scroll;
+      scrollbar-width: none;
 
-  .botton-navigtion-bar {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .icon:first-child {
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        margin-top: 0.5em;
+      }
+    }
+
+    ul {
+      border: 0px;
+    }
+
     .tab {
       a {
-        color: grey;
-        height: 50px;
+        color: #fff;
+        height: 60px;
       }
 
       &.is-active, &:hover {
         a {
           color: #31aeb5;
-          border-bottom-color: #31aeb5;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+// HEADER CUSTOM
+.establishments_dashboard-index {
+  header {
+    background-color: $primary-color;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+
+    .navbar {
+      .navbar-menu {
+        .navbar-item {
+          a {
+            border-color: #fff;
+          }
+        }
+      }
+
+      a {
+        color:  #fff;
+        border-color: #fff;
+
+        &:hover {
+          color:  #fff;
         }
       }
     }
