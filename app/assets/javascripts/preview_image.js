@@ -1,8 +1,8 @@
 $(document).on("turbolinks:load", function () {
 
-  bulmaCarousel.attach('.hero-carousel', {
+  bulmaCarousel.attach('#hero-carousel', {
     slidesToScroll: 1,
-    slidesToShow: 3,
+    slidesToShow: 1,
     loop: true
   });
   

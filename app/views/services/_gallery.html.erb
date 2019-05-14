@@ -6,12 +6,14 @@
 
 <div class="modal" id="modal-photos">
   <div class="modal-background"></div>
-  <div class="modal-content">
-    <div class="hero-carousel">
+  <div class="modal-card">
+    <div id="hero-carousel" class="products-list">
       <% @service.photos.each do |photo|%>
-        <p class="is-background image is-1280x960">
-          <%= image_tag(@service.thumbnail(photo, :large))%>
-        </p>
+        <div class="slider">
+          <div class="slider-item image is-1280x960">
+            <%= image_tag(@service.thumbnail(photo, :large))%>
+          </div>
+        </div>
       <% end%>
     </div>
   </div>
