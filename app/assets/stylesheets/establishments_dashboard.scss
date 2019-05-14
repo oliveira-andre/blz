@@ -1,8 +1,17 @@
+html, body {
+  height: 100%;
+}
+
 .establishments_dashboard {
-  height: calc(100% + 90px);
+  height: auto !important;
+  min-height: 100%;
   padding-top: 15px;
   background-color: #f2f2f2;
   padding-bottom: 60px;
+
+  @include desktop {
+    padding-bottom: 80px;
+  }
 
   .container {
     @include touch {
@@ -65,8 +74,7 @@
     }
   }
 
-  //SERVICES LIST
-  #services {
+  #services, #professionals {
     .button.is-light {
       background-color: transparent;
       border: 1px solid $primary-color;
@@ -87,6 +95,17 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+      }
+    }
+  }
+
+  #professionals  {
+    a.is-text {
+      margin-top: -45px;
+      color: $primary-color;
+
+      &:hover {
+        background-color: transparent;
       }
     }
   }
