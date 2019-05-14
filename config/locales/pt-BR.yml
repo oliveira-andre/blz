@@ -60,7 +60,7 @@ pt-BR:
       service:
         approved: Aprovado
         recused: Recusado
-        awaiting_avaliation: Aguardando avaliação
+        awaiting_avaliation: Analise
         archived: Arquivado
 
     errors:
