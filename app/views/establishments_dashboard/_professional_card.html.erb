@@ -1,0 +1,22 @@
+<div class=" column is-6">
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <% if professional.photo.attached? %>
+            <%= image_tag professional.thumbnail(professional.photo, :avatar), 
+                          class:'is-rounded' %>
+          <% else %>
+            <img src="/images/128x128.png" class="is-rounded">
+          <% end %>
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title has-text-black is-size-5"><%= professional.name %></p>
+        <p class="subtitle is-size-6"><%= professional.professional_services.count  %> serviço(s)</p>
+      </div>
+    </article>
+    <%= link_to 'Detalhes', edit_establishment_professional_path(establishment_id: current_user.establishment.id, id: professional.id),
+                class: "button is-text is-pulled-right" %>
+  </div>
+</div>
