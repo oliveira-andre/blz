@@ -1,0 +1,46 @@
+<div class="column is-12">
+  <div class="box">
+    <div class="columns content is-multiline">
+      <div class="column is-12">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <% if professional.photo.attached? %>
+                <%= image_tag schedule.thumbnail(professional.photo, :avatar), 
+                              class:'image is-rounded' %>
+              <% else %>
+                <img src="/images/128x128.png" class="image is-rounded">
+              <% end %>
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title has-text-black is-size-5 is-size-4-desktop"><%= service.title %></p>
+            <p class="subtitle is-size-6 is-size-5-desktop"><%= professional.name %></p>
+          </div>
+        </article>
+      </div>
+      <div class="column is-12">
+        <div class="columns is-multiline infos is-mobile">
+          <div class="column is-3">
+            <p class="is-size-6 is-size-5-desktop is-size-7">Horário escolhido</p>
+            <span class="icon has-text-black is-size-5"><i class="far fa-clock"></i></span>
+            <span class="is-size-5-desktop is-size-6 is-size-7-mobile has-text-black has-text-weight-semibold"><%= "#{day_month(schedule.date)} às #{time(schedule.date)}" %></span>
+          </div>
+          <div class="column is-3">
+            <p class="is-size-6 is-size-5-desktop is-size-7">Situação</p>
+            <span class="icon has-text-black is-size-5"><i class="fas fa-info-circle"></i></span>
+            <span class="is-size-5-desktop is-size-6 is-size-7-mobile has-text-black has-text-weight-semibold"><%= schedule.t_status %></span>
+          </div>
+          <div class="column is-6">
+            <p class="is-size-6 is-size-5-desktop is-size-7">Cliente</p>
+            <span class="icon has-text-black is-size-5"><i class="far fa-user"></i></span>
+            <span class="is-size-5-desktop is-size-6 is-size-7-mobile has-text-black has-text-weight-semibold"><%= schedule.user.name %></span>
+          </div>
+        </div>
+      </div>
+      <div class="column is-12 actions">
+        <a class="button is-light">Ver detalhes</a>
+      </div>
+    </div>
+  </div>
+</div>
