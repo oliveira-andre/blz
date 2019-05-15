@@ -1,6 +1,8 @@
 <div class="galery">
   <div class="image-mobile" style='background: url("<%= url_for(@service.photos.sample)%>"); background-size: cover;'>
-    <button class="button is-ligth modal-button" data-target="modal-photos">MAIS FOTOS</button>
+    <% if @service.photos.present?%>
+      <button class="button is-ligth modal-button" data-target="modal-photos">MAIS FOTOS</button>
+    <% end%>
   </div>
 </div>
 

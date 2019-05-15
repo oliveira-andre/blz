@@ -3,9 +3,9 @@ $(document).on("turbolinks:load", function () {
   bulmaCarousel.attach('#hero-carousel', {
     slidesToScroll: 1,
     slidesToShow: 1,
-    loop: true
   });
-  
+
+
   $('#files').on('change', function () {
 
     var cont = 0
