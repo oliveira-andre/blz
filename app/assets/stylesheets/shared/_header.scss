@@ -7,6 +7,18 @@ header {
       background-color: transparent;
     }
 
+    .navbar-brand {
+      a.is-center {
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      a.to-back {
+        margin-left: 5px;
+      }
+    }
+
     .navbar-brand > a.navbar-item, .navbar-menu {
       opacity: 1;
       -webkit-transition: opacity .2s ease-in-out;
