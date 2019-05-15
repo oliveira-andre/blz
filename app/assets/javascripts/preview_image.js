@@ -1,24 +1,18 @@
 $(document).on("turbolinks:load", function () {
   $('#files').on('change', function () {
-
     var cont = 0
     var files = this.files;
 
     if (!files) return;
+    var imgsElements = $('.content-images').children().children();
+    var lastImgElementIndex = imgsElements.length - 1;
+
     for (var i = 0; i < files.length; i++) {
       var reader = new FileReader();
       reader.onload = function (event) {
         cont = i++
-        $(`<div class="column is-3" id="photo-${cont}">
-        <div class="card">
-          <div class="card-content is-inline">
-            <img class="image is-320x240" src="${event.target.result}">
-          </div>
-            <footer class="card-footer">
-            <a class="card-footer-item" onclick="remove(${cont})">Remove</a>
-            </footer>
-        </div>
-      </div>`).insertAfter($("#preview"));
+        $(buildPreviewHtml(cont, event.target.result))
+          .insertAfter($(imgsElements[lastImgElementIndex]));
       }
       reader.readAsDataURL(files.item(i));
     }
@@ -36,6 +30,26 @@ $(document).on("turbolinks:load", function () {
   });
   
 });
-function remove(img){
-  $("#photo-"+img).remove();
+
+function removeImgService(imgIndex){
+  $("#photo-" + imgIndex).remove();
+}
+
+function buildPreviewHtml(cont, result) {
+  return `
+  <div class="column" id="photo-${cont}">
+    <div class="image-item">
+      <figure class="image is-96x96">
+        <img src="${result}">
+      </figure>
+      <div class="options">
+        <a class="button is-light" onclick="removeImgService(${cont})">
+          <span class="icon">
+            <i class="fas fa-times has-text-danger is-size-4"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+  `
 }
