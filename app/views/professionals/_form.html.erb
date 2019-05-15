@@ -1,74 +1,65 @@
-<div class="professionals_form">
-  <div class="container">
-    <%= form_with model: @professional, url: url, local: true do |f| %>
-      <div class="columns is-multiline">
-        <div class="column is-12">
-          <% if @professional.errors.any? %>
-            <div id="error_explanation">
-              <ul>
-                <% @professional.errors.full_messages.each do |msg| %>
-                  <div class="notification is-danger">
-                    <button class="delete" type="button"></button>
-                    <%= msg %>
-                  </div>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+<%= form_with model: @professional, url: url, class: 'custom', local: true do |f| %>
+  <div class="columns is-multiline">
+    <div class="column is-12">
+      <% if @professional.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @professional.errors.full_messages.each do |msg| %>
+              <div class="notification is-danger">
+                <button class="delete" type="button"></button>
+                <%= msg %>
+              </div>
+            <% end %>
+          </ul>
         </div>
-        <div class="column is-12">
-          <% if @professional.new_record? %>
-            <h1 class="has-text-centered has-text-weight-bold	is-size-4">Adicionar Profissional</h1>
-          <% else %>
-            <h1 class="has-text-centered has-text-weight-bold	is-size-4">Editar Profissional</h1>
-          <% end %>
-        </div>
+      <% end %>
+    </div>
+    <div class="column is-12">
+      <% if @professional.new_record? %>
+        <h1 class="is-size-4 has-text-grey">Novo Profissional</h1>
+      <% else %>
+        <h1 class="is-size-4 has-text-grey">Editar Profissional</h1>
+      <% end %>
+    </div>
 
-        <div class="column is-7 is-offset-5">
-          <div class="field">
-            <div class="file is-warning is-boxed">
-              <label class="file-label">
-                <%= f.file_field :photo, class: "file-input", id: "user-photo-add" %>
-                <figure class="image is-128x128" id="temporary_image">
-                  <% if @professional.photo.attached? %>
-                    <%= image_tag @professional.photo, class: "is-rounded" %>
-                  <% else %>
-                    <img class="is-rounded" src="https://placehold.it/128x128">
-                  <% end %>
-                </figure>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="column is-12">
-          <div class="field">
-            <%= f.label "Nome", class: "label" %>
-            <div class="control">
-              <%= f.text_field :name, class: "input" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="column is-12">
-          <div class="field">
-            <%= f.label "Descrição", class: "label" %>
-            <div class="control">
-              <%= f.text_area :description, class: "textarea" %>
-            </div>
-          </div>
+    <div class="column is-12">
+      <div class="field">
+        <div class="file is-warning is-boxed">
+          <label class="file-label">
+            <%= f.file_field :photo, class: "file-input", id: "user-photo-add" %>
+            <figure class="image is-128x128" id="temporary_image">
+              <% if @professional.photo.attached? %>
+                <%= image_tag @professional.photo, class: "is-rounded" %>
+              <% else %>
+                <img class="is-rounded" src="/images/128x128.png">
+              <% end %>
+            </figure>
+          </label>
         </div>
       </div>
+    </div>
 
-      <div class="columns is-multiline">
-        <div class="column is-12">
-          <div class="is-pulled-right">
-            <%= link_to "Cancelar", establishments_dashboard_path(@establishment), class: "button is-light" %>
-            <%= f.submit "Salvar", class: "button is-primary" %>            
-          </div>
+    <div class="column is-12">
+      <div class="field">
+        <label class="label has-text-grey has-text-weight-normal">Nome <small class="is-danger">*</small></label>
+        <div class="control">
+          <%= f.text_field :name, class: "input", placeholder: 'Qual o nome do profissional ? (obrigatório)', required: true %>
         </div>
       </div>
-      
-    <% end %>
+    </div>
+
+    <div class="column is-12">
+      <div class="field">
+         <label class="label has-text-grey has-text-weight-normal">Descrição</label>
+        <div class="control">
+          <%= f.text_area :description, class: "textarea", placeholder: 'Dẽ uma descrição para esse profissional (opcional)' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-12">
+      <%= f.submit 'Salvar', class: 'button is-light is-pulled-right' %>
+      <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey  is-pulled-right' %>
+    </div>
   </div>
-</div>
+<% end %>

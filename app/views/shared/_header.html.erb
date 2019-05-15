@@ -2,7 +2,14 @@
   <div class="container">
     <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item is-size-3" href="/">
+        <% if to_back %>
+          <%= link_to :back, class: 'navbar-item to-back' do %>
+            <span class="icon is-size-4">
+              <i class="fas fa-arrow-left"></i>
+            </span>
+          <% end %>
+        <% end %>
+        <a class="navbar-item is-size-3 <%= to_back ? 'is-center' : '' %>" href="/">
           BLZ
         </a>
 

@@ -9,8 +9,12 @@ document.addEventListener('turbolinks:load', () => {
         el.classList.toggle('is-active');
         $target.classList.toggle('is-active');
 
-        const brand = document.querySelectorAll('a.navbar-item')[0];
-        if(brand) brand.classList.toggle('is-unactive');
+        const brandItems = document.querySelectorAll('a.navbar-item');
+        if(!brandItems) return;
+
+        brandItems.forEach(function(item) {
+          item.classList.toggle('is-unactive');
+        });
       });
     });
   }

@@ -1,23 +1,137 @@
-.index-services {
-  .text-button {
-    margin: 7px 0px 7px 0px;
-  }
+html, body {
+  height: 100%;
 }
 
 .services_form {
+  height: auto !important;
+  min-height: 100%;
+  padding-top: 15px;
+  padding-bottom: 60px;
 
   form:nth-child(1) {
-    figure {
-      img {
-        min-height: 128px;
-        max-height: 128px;
-        min-width: 128px;
-        max-width: 128px;
+    padding-bottom: 30px;
+  }
 
-        margin-left: 5px;
-        margin-bottom: 5px;
+  .container {
+    @include touch {
+      margin: 15px;
+    }
 
-        border: 1px solid #ccc;
+    @include desktop {
+      padding-left: 125px;
+      padding-right: 125px
+    }
+  }
+
+  .service-images {
+    .image-item {
+      margin: 2px;
+      padding: 0px;
+      min-width: 96px;
+      min-height: 96px;
+      max-width: 96px;
+      max-height: 96px;
+      overflow: hidden;
+      border: 1px solid $grey-color-light;
+
+      .file-label {
+        width: 100%;
+        height: 100%;
+
+        .file-cta {
+          background-color: transparent;
+          color: $grey-color-light;
+          border: 0px;
+          padding: 0px;
+          width: 100%;
+          height: auto;
+          margin: 20px auto;
+
+          i {
+            margin: 0 auto;
+          }
+        }
+
+        .file-label:hover .file-cta {
+          background-color: #fff;
+          color: $grey-color-light;
+        }
+      }
+
+      .image.is-96x96 {
+        img {
+          min-width: 96px;
+          min-height: 96px;
+          max-width: 96px;
+          max-height: 96px;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .content-images {
+      margin-left: 5px;
+      margin-right: 10px;
+
+      .options {
+        position: relative;
+        top: -96px;
+        background-color: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        min-width: 96px;
+        min-height: 96px;
+        max-width: 96px;
+        max-height: 96px;
+        transition: all .5ms;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        a.button.is-light {
+          margin-left: 30px;
+          margin-top: 5px;
+          background: transparent;
+          opacity: 1;
+
+          &:nth-child(2) {
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  .professional_services {
+    background-color: #f2f2f2;
+    margin: 5px;
+    padding-bottom: 20px;
+    margin-top: 25px;
+
+    h1.title {
+      margin-top: 10px;
+    }
+
+    .box {
+      border-radius: 0px;
+      box-shadow: none;
+      background: transparent;
+      border-bottom: 1px solid #fff;
+      padding-left: 0px;
+      padding-right: 0px;
+
+      &:nth-child(1) {
+        border-top: 1px solid #fff;
+      }
+
+      &:not(:nth-child(1)) {
+        padding-top: 0px;
+      }
+
+      a.button {
+        color: #f06868;
+        margin-top: -50px;
+        background: transparent;
       }
     }
   }
