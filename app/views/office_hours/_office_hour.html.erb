@@ -3,14 +3,18 @@
   <td><%= mask_hour(office_hour.hour_begin) %></td>
   <td><%= mask_hour(office_hour.hour_end) %></td>
   <td class="has-text-centered">
+
+
     <%= link_to establishment_professional_office_hour_path(
                   establishment_id: office_hour.professional.establishment_id,
                   professional_id: office_hour.professional.id,
                   id: office_hour.id
-                ), method: :delete, 
-                data: { confirm: 'Você tem certeza disso?' },
-                class: "button is-danger" do %>
-      <i class="fas fa-trash"></i>
+                ), remote: true, method: :delete,
+                data: { confirm: 'Você tem certeza ?' },
+                class: "button is-light is-pulled-right" do %>
+      <span class="icon">
+        <i class="fas fa-times has-text-danger is-size-4"></i>
+      </span>
     <% end %>
   </td>
 </tr>

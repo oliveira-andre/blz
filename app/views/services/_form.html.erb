@@ -1,5 +1,5 @@
 
-<%= form_with model: @service, url: url, local: true do |form| %>
+<%= form_with model: @service, url: url, class: 'custom', local: true do |form| %>
   <div class="columns is-multiline">
     <% if @service.errors.any? %>
       <div class="column is-12">

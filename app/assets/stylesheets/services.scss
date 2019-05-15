@@ -23,35 +23,6 @@ html, body {
     }
   }
 
-  .input, .textarea, .select > select {
-    border-color: $grey-color-light;
-    box-shadow: none;
-    border-radius: 3px;
-    color: #7a7a7a;
-
-    &:focus {
-      box-shadow: none;
-    }
-  }
-
-  small.is-danger {
-    color: #f06868;
-  }
-
-  .select, .select > select {
-    min-width: 100%;
-  }
-
-  .select:not(.is-multiple):not(.is-loading)::after {
-    border-color: $grey-color-light;
-  }
-
-  .button[type="submit"] {
-    background: $primary-color;
-    color: #fff;
-    border-radius: 0px;
-  }
-
   .service-images {
     .image-item {
       margin: 2px;

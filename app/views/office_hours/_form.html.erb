@@ -1,37 +1,36 @@
-<%= form_with url: establishment_professional_office_hours_path(establishment_id: @establishment.id, professional_id: @professional.id) do |f| %>
+<%= form_with url: establishment_professional_office_hours_path(establishment_id: @establishment.id, professional_id: @professional.id), class: 'custom' do |f| %>
   <div class="columns is-multiline">
-    <div class="column is-12">
-      <h1 class="title">Horários</h1>
-    </div>
-    <div class="column is-2">
+    <div class="column is-4">
       <div class="field">
-        <%= f.label "Dia", class: "label" %>
+        <label class="label has-text-grey has-text-weight-normal">Dia <small class="is-danger">*</small></label>
         <div class="control">
           <div class="select">
-            <%= f.select :week_day, OfficeHour.week_days.keys.map { |w| [w, w] } %>
+            <%= f.select :week_day, OfficeHour.week_days.keys.map { |w| [w.capitalize, w] },
+                         { prompt: 'selecione o dia da semana' },
+                         { required: true } %>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="column is-4">
+    <div class="column is-3">
       <div class="field">
-        <%= f.label "Inicio", class: "label" %>
+        <label class="label has-text-grey has-text-weight-normal">Hora de Início <small class="is-danger">*</small></label>
         <div class="control">
           <%= f.text_field :hour_begin, class: "input clock", required: true %>
         </div>
       </div>
     </div>
-    <div class="column is-4">
+    <div class="column is-3">
       <div class="field">
-        <%= f.label "Fim", class: "label" %>
+        <label class="label has-text-grey has-text-weight-normal">Hora de saída <small class="is-danger">*</small></label>
         <div class="control">
           <%= f.text_field :hour_end, class: "input clock", required: true %>
         </div>
       </div>
     </div>
-    <div class="column is-2" style="margin-top: 30px;">
-      <%= f.submit "Adicionar", class: "button is-outlined is-primary is-pulled-right" %>
+    <div class="column is-2">
+      <%= f.submit 'Adicionar', class: 'button is-light is-pulled-right' %>
     </div>
   </div>
 <% end %>
