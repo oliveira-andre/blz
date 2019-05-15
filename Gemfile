@@ -23,6 +23,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'redis'
 gem 'sidekiq'
 gem 'validates_cpf_cnpj'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
