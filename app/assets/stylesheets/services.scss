@@ -130,6 +130,39 @@ html, body {
       }
     }
   }
+
+  .professional_services {
+    background-color: #f2f2f2;
+    margin: 5px;
+    padding-bottom: 20px;
+
+    h1.title {
+      margin-top: 10px;
+    }
+
+    .box {
+      border-radius: 0px;
+      box-shadow: none;
+      background: transparent;
+      border-bottom: 1px solid #fff;
+      padding-left: 0px;
+      padding-right: 0px;
+
+      &:nth-child(1) {
+        border-top: 1px solid #fff;
+      }
+
+      &:not(:nth-child(1)) {
+        padding-top: 0px;
+      }
+
+      a.button {
+        color: #f06868;
+        margin-top: -50px;
+        background: transparent;
+      }
+    }
+  }
 }
 
 input[type="file"] {

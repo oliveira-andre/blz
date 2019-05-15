@@ -1,5 +1,6 @@
-<div class="columns is-multiline">
-  <%= form_with model: @service, url: url, local: true do |form| %>
+
+<%= form_with model: @service, url: url, local: true do |form| %>
+  <div class="columns is-multiline">
     <% if @service.errors.any? %>
       <div class="column is-12">
         <div id="error_explanation">
@@ -97,5 +98,5 @@
       <%= form.submit 'Salvar', class: 'button is-light is-pulled-right' %>
       <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey  is-pulled-right' %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
