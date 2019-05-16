@@ -69,9 +69,9 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL_OPTIONS') }
   config.action_mailer.smtp_settings = {
     port: ENV.fetch('SMTP_PORT', 587),
-    address: ENV.fetch('SMTP_ADDRESS') || Rails.application.credentials[Rails.env.to_sym][:smtp][:address],
-    user_name: ENV.fetch('SMTP_USERNAME') || Rails.application.credentials[Rails.env.to_sym][:smtp][:username],
-    password: ENV.fetch('SMTP_PASSWORD') || Rails.application.credentials[Rails.env.to_sym][:smtp][:password]
+    address: Rails.application.credentials[Rails.env.to_sym][:smtp][:address],
+    user_name: Rails.application.credentials[Rails.env.to_sym][:smtp][:username],
+    password: Rails.application.credentials[Rails.env.to_sym][:smtp][:password]
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
