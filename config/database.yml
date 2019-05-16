@@ -2,14 +2,13 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USERNAME") %>
-  password: <%= ENV.fetch("DB_PASSWORD") %>
-  host: <%= ENV.fetch("DB_HOST") %>
+  username: <%= ENV.fetch("DB_USERNAME") || Rails.application.credentials[Rails.env.to_sym][:database][:username] %>
+  password: <%= ENV.fetch("DB_PASSWORD") || Rails.application.credentials[Rails.env.to_sym][:database][:password] %>
+  host: <%= ENV.fetch("DB_HOST") || Rails.application.credentials[Rails.env.to_sym][:database][:host] %>
 
 development:
   <<: *default
   database: blz_development
- 
 
 test:
   <<: *default
@@ -18,5 +17,3 @@ test:
 production:
   <<: *default
   database: blz_production
-  username: blz
-  password: <%= ENV['BLZ_DATABASE_PASSWORD'] %>

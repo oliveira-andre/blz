@@ -7,6 +7,7 @@ require 'capistrano/puma'
 require 'capistrano/yarn'
 require 'capistrano/sidekiq'
 require 'whenever/capistrano'
+require 'capistrano/dotenv/tasks'
 
 install_plugin Capistrano::SCM::Git
 install_plugin Capistrano::Puma
