@@ -39,7 +39,7 @@ set :repo_url, "git@gitlab.com:blz/blz.git"
 # set :ssh_options, verify_host_key: :secure
 
 set :deploy_to, "/var/www/blz"
-append :linked_files, "config/database.yml", "config/storage.yml", "config/master.key"
+append :linked_files, ".env.#{stage}.local"
 append :linked_dirs, "log", "tmp"
 set :keep_releases, 5
 set :migration_role, :app
