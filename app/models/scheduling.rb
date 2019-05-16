@@ -21,6 +21,7 @@ class Scheduling < ApplicationRecord
   validate :service_approved?, on: :create
 
   after_save :set_schedule_busy
+  after_create :notifications
 
   private
 
@@ -68,5 +69,10 @@ class Scheduling < ApplicationRecord
 
   def set_service_duration
     self.service_duration = professional_service.service.duration
+  end
+
+  def notifications
+    SchedulingMailer.to_user(self).deliver_later
+    SchedulingMailer.to_establishment(self).deliver_later
   end
 end
