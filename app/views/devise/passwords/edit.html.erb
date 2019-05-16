@@ -1,25 +1,43 @@
-<h2>Change your password</h2>
+<%= render 'shared/header', to_back: true %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="devise">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <section class="login_form">
+    <div class="container has-text-centered">
+      <div class="column is-4 is-offset-4 is-mobile">
+        <h3 class="title">Faça seu cadastro</h3>
+        <div class="box">
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+          <div class="field">
+            <div class="control">
+              <%= f.label :password, "Nova senha", class: "label" %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> quantidade minima de caracteres)</em><br />
+              <% end %>
+              <%= f.password_field :password, autofocus: true, class: "input is-medium", required: true, placeholder: "Informe uma senha" %>
+            </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+            <div class="field">
+              <div class="control">
+                <%= f.label :password_confirmation, "Confirme a senha", class: "label" %>
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "input is-medium", placeholder: "Confirme sua senha" %>
+              </div>
+            </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+            <div class="columns is-mobile field">
+              <div class="column">
+                <%= link_to "Voltar", root_path, class: "button is-block is-large is-fullwidth" %>
+              </div>
 
-<%= render "devise/shared/links" %>
+              <div class="column">
+                <%= f.submit "Continuar", class: "button is-block is-info is-large is-fullwidth" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <% end %>
+</div>

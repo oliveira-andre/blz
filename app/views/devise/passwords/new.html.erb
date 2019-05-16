@@ -1,31 +1,32 @@
+<%= render 'shared/header', to_back: true %>
 <div class="devise">
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f| %>
-    <section class="hero is-success is-fullheight">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <div class="column is-4 is-offset-4">
-            <h3 class="title has-text-grey">Esqueceu sua senha?</h3>
-            <p class="subtitle has-text-grey">Por favor coloque seu email para receber as instruções</p>
-            <div class="box">
-              <figure class="avatar">
-                <img src="https://placehold.it/128x128">
-              </figure>
-              <%= render "devise/shared/error_messages", resource: resource %>
+  <section class="login_form">
+    <div class="container has-text-centered">
+      <div class="column is-4 is-offset-4 is-mobile">
+        <h3 class="title">Informe seu email</h3>
+        <div class="box">
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-              <div class="field">
-                <div class="control">
-                  <%= f.email_field :email, placeholder: "Email", class: "input is-large" %>
-                </div>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "Enviar", class: "button is-block is-info is-large is-fullwidth" %>
-              </div>
+          <div class="field">
+            <div class="control">
+              <%= f.label :email, "Email" %>
+              <%= f.email_field :email, placeholder: "ex: example@blz.life", class: "input is-medium" %>
             </div>
-            <%= render "devise/shared/links" %>
+          </div>
+
+          <div class="columns is-mobile field">
+            <div class="column">
+              <%= link_to "Voltar", root_path, class: "button is-block is-large is-fullwidth" %>
+            </div>
+
+            <div class="column">
+              <%= f.submit "Recuperar", class: "button is-block is-info is-large is-fullwidth" %>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   <% end %>
 </div>
