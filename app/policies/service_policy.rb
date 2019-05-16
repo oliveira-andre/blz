@@ -20,4 +20,7 @@ class ServicePolicy < ApplicationPolicy
     record.establishment.user == user
   end
 
+  def destroy?
+    record.establishment.user == user
+  end
 end
