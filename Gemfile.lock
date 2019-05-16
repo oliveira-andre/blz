@@ -59,6 +59,8 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (1.5.0)
       capistrano (~> 3.1)
+    capistrano-dotenv-tasks (0.1.5)
+      capistrano (~> 3.0)
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -279,6 +281,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   capistrano (~> 3.10)
+  capistrano-dotenv-tasks
   capistrano-rails (~> 1.3)
   capistrano-rvm
   capistrano-sidekiq
@@ -311,9 +314,6 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webpacker
   whenever
-
-RUBY VERSION
-   ruby 2.5.3p105
 
 BUNDLED WITH
    2.0.1

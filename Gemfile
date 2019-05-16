@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
-
 gem 'devise'
+gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.5'
 gem "mini_magick"
 gem 'rails', '~> 5.2.2'
@@ -28,7 +27,7 @@ gem 'whenever', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop'
-  gem 'dotenv-rails'
+  gem 'capistrano-dotenv-tasks', require: false
 end
 
 group :development do
