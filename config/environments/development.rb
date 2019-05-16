@@ -8,6 +8,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  config.require_master_key = false
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -38,11 +40,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL_OPTIONS') }
 
-  if ENV.featch('MAILCATCHER', false)
+  if ENV.fetch('MAILCATCHER', false)
     config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
   end
 
-  if ENV.featch('MAILGUN', false)
+  if ENV.fetch('MAILGUN', false)
     config.action_mailer.smtp_settings = {
       port: 587,
       address: 'smtp.mailgun.org',
