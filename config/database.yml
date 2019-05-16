@@ -9,7 +9,6 @@ default: &default
 development:
   <<: *default
   database: blz_development
- 
 
 test:
   <<: *default
@@ -18,5 +17,3 @@ test:
 production:
   <<: *default
   database: blz_production
-  username: blz
-  password: <%= ENV['BLZ_DATABASE_PASSWORD'] %>
