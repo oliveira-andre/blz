@@ -1,43 +1,32 @@
 <%= render 'shared/header', to_back: true %>
-
-<div class="devise">
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <section class="login_form">
-    <div class="container has-text-centered">
-      <div class="column is-4 is-offset-4 is-mobile">
-        <h3 class="title">Faça seu cadastro</h3>
-        <div class="box">
-          <%= render "devise/shared/error_messages", resource: resource %>
-
+<div class="form-login">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'custom' }) do |f| %>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h1 class="is-size-4 has-text-grey has-text-centered"> Crie uma nova senha </h1>
+        </div>
+        <div class="column is-12">
           <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Nova senha <small class="is-danger">*</small></label>
             <div class="control">
-              <%= f.label :password, "Nova senha", class: "label" %>
-              <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> quantidade minima de caracteres)</em><br />
-              <% end %>
-              <%= f.password_field :password, autofocus: true, class: "input is-medium", required: true, placeholder: "Informe uma senha" %>
-            </div>
-
-            <div class="field">
-              <div class="control">
-                <%= f.label :password_confirmation, "Confirme a senha", class: "label" %>
-                <%= f.password_field :password_confirmation, autocomplete: "off", class: "input is-medium", placeholder: "Confirme sua senha" %>
-              </div>
-            </div>
-
-            <div class="columns is-mobile field">
-              <div class="column">
-                <%= link_to "Voltar", root_path, class: "button is-block is-large is-fullwidth" %>
-              </div>
-
-              <div class="column">
-                <%= f.submit "Continuar", class: "button is-block is-info is-large is-fullwidth" %>
-              </div>
+              <%= f.password_field :password, class: "input", placeholder: "Informe sua senha", required: true %>
             </div>
           </div>
         </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Confirme a senha <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.password_field :password_confirmation, class: "input", placeholder: "Informe uma senha", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
+          <%= f.submit 'Enviar', class: 'button is-light' %>
+        </div>
       </div>
-    </div>
-  </section>
-  <% end %>
+    <% end %>
+  </div>
 </div>

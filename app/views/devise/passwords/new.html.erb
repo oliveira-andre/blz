@@ -1,32 +1,24 @@
 <%= render 'shared/header', to_back: true %>
-<div class="devise">
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f| %>
-  <section class="login_form">
-    <div class="container has-text-centered">
-      <div class="column is-4 is-offset-4 is-mobile">
-        <h3 class="title">Informe seu email</h3>
-        <div class="box">
-          <%= render "devise/shared/error_messages", resource: resource %>
-
+<div class="form-login">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'custom' }) do |f| %>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h1 class="is-size-4 has-text-grey has-text-centered"> Informe seu email </h1>
+        </div>
+        <div class="column is-12">
           <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
             <div class="control">
-              <%= f.label :email, "Email" %>
-              <%= f.email_field :email, placeholder: "ex: example@blz.life", class: "input is-medium" %>
-            </div>
-          </div>
-
-          <div class="columns is-mobile field">
-            <div class="column">
-              <%= link_to "Voltar", root_path, class: "button is-block is-large is-fullwidth" %>
-            </div>
-
-            <div class="column">
-              <%= f.submit "Recuperar", class: "button is-block is-info is-large is-fullwidth" %>
+              <%= f.email_field :email, class: "input", placeholder: "ex: exemplo@blz.life", required: true %>
             </div>
           </div>
         </div>
+        <div class="column is-12 has-text-centered">
+          <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
+          <%= f.submit 'Enviar', class: 'button is-light' %>
+        </div>
       </div>
-    </div>
-  </section>
-  <% end %>
+    <% end %>
+  </div>
 </div>
