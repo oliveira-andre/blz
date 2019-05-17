@@ -1,7 +1,5 @@
-<%= form_with model: @establishment, local: true, class: 'establishment_form' do |f| %>
 <div class="columns is-multiline">
   <div class="column">
-
     <% unless @messages_errors.nil? %>
       <% @messages_errors.each do |msg| %>
       <div class="notification is-danger">
@@ -10,10 +8,9 @@
       </div>
       <% end %>
     <% end %>
-
-    <div class="steps" id="form-steops">
-      <div class="step-item is-active is-#2AC5CC">
-        <div class="step-marker"><i class="fas fa-home "></i></div>
+    <div class="steps is-large" id="form-steops">
+      <div class="step-item  is-active is-#2AC5CC ">
+        <div class="step-marker "><i class="fas fa-home "></i></div>
         <div class="step-details">
           <p class="step-title">1</p>
         </div>
@@ -31,6 +28,7 @@
         </div>
       </div>
       <div class="steps-content">
+      <%= form_with model: @establishment, local: true, class: 'establishment_form custon' do |f| %>
         <div class="step-content  has-text-centered is-active">
           <div class="field">
             <div class="field-label is-normal">
@@ -38,7 +36,7 @@
             </div>
             <div class="field-body">
               <div class="field">
-                <div class="control ">
+                <div class="control">
                   <%= f.text_field :name, class: 'input', required: true, placeholder:"Diga o nome fantasia do estabelecimento.." %>
                 </div>
               </div>
@@ -196,8 +194,14 @@
             </div>
           </div>
           <div class="field">
-              <%= form_user.check_box :terms_acceptation,class:"is-checkradio", checked_value: true,required: true%>
-              <label> Estou de acordo os <a href="#">termos de uso</a> do sistema.</label>
+            <div class="field-body">
+              <div class="field">
+                <div class="field-label">
+                  <%= form_user.check_box :terms_acceptation, checked_value: true, class:"is-checkradio", required: true%>
+                  Estou de acordo os <a href="#">termos de uso</a> do sistema.
+                </div>
+              </div>
+            </div>
           </div>
         <%end%>
       </div>
@@ -209,7 +213,7 @@
           <a href="#" data-nav="next" class="button is-light">Next</a>
         </div>
       </div>
+<% end %>
     </div>
   </div>
 </div>
-<% end %>
