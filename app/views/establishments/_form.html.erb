@@ -1,219 +1,184 @@
-<div class="columns is-multiline">
-  <div class="column">
-    <% unless @messages_errors.nil? %>
-      <% @messages_errors.each do |msg| %>
-      <div class="notification is-danger">
-        <button class="delete" type="button"></button>
-        <%= msg %>
-      </div>
+<%= form_with model: @establishment, local: true, class: ' custon' do |f| %>
+  <div class="columns is-multiline">
+    <div class="column is-12">
+
+      <% unless @messages_errors.nil? %>
+        <% @messages_errors.each do |msg| %>
+        <div class="notification is-danger">
+          <button class="delete" type="button"></button>
+          <%= msg %>
+        </div>
+        <% end %>
       <% end %>
-    <% end %>
-    <div class="steps is-large" id="form-steops">
-      <div class="step-item  is-active is-#2AC5CC ">
-        <div class="step-marker "><i class="fas fa-home "></i></div>
-        <div class="step-details">
-          <p class="step-title">1</p>
+
+      <div class="steps is-large" id="form-steops">
+        <div class="step-item  is-active is-#2AC5CC ">
+          <div class="step-marker "><i class="fas fa-home "></i></div>
+          <div class="step-details">
+            <p class="step-title">1</p>
+          </div>
         </div>
-      </div>
-      <div class="step-item">
-        <div class="step-marker"><i class="fas fa-user-cog is-ligth"></i></div>
-        <div class="step-details">
-          <p class="step-title">2</p>
+
+        <div class="step-item">
+          <div class="step-marker"><i class="fas fa-user-cog is-ligth"></i></div>
+          <div class="step-details">
+            <p class="step-title">2</p>
+          </div>
         </div>
-      </div>
-      <div class="step-item">
-        <div class="step-marker"><i class="fas fa-user-shield is-ligth"></i></div>
-        <div class="step-details">
-          <p class="step-title">3</p>
+
+        <div class="step-item">
+          <div class="step-marker"><i class="fas fa-user-shield is-ligth"></i></div>
+          <div class="step-details">
+            <p class="step-title">3</p>
+          </div>
         </div>
-      </div>
-      <div class="steps-content">
-      <%= form_with model: @establishment, local: true, class: 'establishment_form custon' do |f| %>
-        <div class="step-content  has-text-centered is-active">
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Nome do estabelecimento</label>
-            </div>
-            <div class="field-body">
+
+        <div class="steps-content">
+          <div class="step-content is-active">
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Nome do estabelecimento <small class="is-danger">*</small></label>
                 <div class="control">
                   <%= f.text_field :name, class: 'input', required: true, placeholder:"Diga o nome fantasia do estabelecimento.." %>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field ">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Horario de funcionamento</label>
-            </div>
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
-                <div class="control has-icon has-icon-right">
+                <label class="label has-text-grey has-text-weight-normal">Horario de funcionamento <small class="is-danger">*</small></label>
+                <div class="control">
                   <%= f.text_field :timetable, class: 'input', required: true, placeholder:"Em qual horário você trabalha ?"%>
                 </div>
               </div>
             </div>
-          </div>
-          <%= f.fields_for :address do |form_address| %>
-          <div class="field ">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">CEP</label>
-            </div>
-            <div class="field-body">
+
+            <%= f.fields_for :address do |form_address| %>
+            <div class="column is-12">
               <div class="field">
-                <div class="control has-icon has-icon-right">
+                <label class="label has-text-grey has-text-weight-normal">CEP <small class="is-danger">*</small></label>
+                <div class="control">
                   <%= form_address.text_field :zipcode, class: 'input zipcode', required: true, placeholder:"Qual o CEP do endereço do estabelecimento ?" %>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="field-label is-normal">
-                <label class="label has-text-left">Rua</label>
-              </div>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <%= form_address.text_field :street, class: 'input', required: true, placeholder:"Rua do seu estabelecimento ?" %>
-                  </div>
-                </div>
-              </div>
-            <div class="field">
-              <div class="field-label is-normal">
-                <label class="label has-text-left">Numero</label>
-              </div>
-              <div class="field-body">
-                <div class="field ">
-                  <div class="control has-icon has-icon-right">
-                    <%= form_address.text_field :number, class: 'input', required: true, placeholder:"Numero do seu estabelecimento ?" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="field">
-              <div class="field-label is-normal">
-                <label class="label has-text-left">Bairro</label>
-              </div>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <%= form_address.text_field :neighborhood, class: 'input', required: true, placeholder:"Bairro do seu estabelecimento" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <%end%>
-        <%= f.fields_for :user do |form_user| %>
-        <div class="step-content has-text-centered">
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Nome do dono</label>
-            </div>
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Rua <small class="is-danger">*</small></label>
+                <div class="control">
+                  <%= form_address.text_field :street, class: 'input', required: true, placeholder:"Rua do seu estabelecimento ?" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-12">
+              <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Numero <small class="is-danger">*</small></label>
+                <div class="control">
+                  <%= form_address.text_field :number, class: 'input', required: true, placeholder:"Numero do seu estabelecimento ?" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-12">
+              <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Bairro <small class="is-danger">*</small></label>
+                <div class="control">
+                   <%= form_address.text_field :neighborhood, class: 'input', required: true, placeholder:"Bairro do seu estabelecimento" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%end%>
+
+          <%= f.fields_for :user do |form_user| %>
+          <div class="step-content">
+            <div class="column is-12">
+              <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Nome do dono <small class="is-danger">*</small></label>
                 <div class="control">
                   <%= form_user.text_field :name, class: 'input', required: true, placeholder:"Qual seu nome ?"%>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">CPF</label>
-            </div>
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">CPF<small class="is-danger">*</small></label>
                 <div class="control">
                   <%= form_user.text_field :cpf, class: 'input cpf', required: true, placeholder:"Informe seu CPF..."%>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Email</label>
-            </div>
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Email<small class="is-danger">*</small></label>
                 <div class="control">
                   <%= form_user.email_field :email, class: 'input', required: true, placeholder:"Informe seu email..."%>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Data de nascimento</label>
-            </div>
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Data de nascimento<small class="is-danger">*</small></label>
                 <div class="control">
                   <%= form_user.date_field :birth_date, class: 'input', required: true, placeholder:"Quando você nasceu ?"%>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Telefone</label>
-            </div>
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Telefone<small class="is-danger">*</small></label>
                 <div class="control">
                   <%= form_user.text_field :phone, class: 'input phone', required: true, placeholder:"Informe um telefone..."%>
                 </div>
               </div>
             </div>
+
           </div>
-        </div>
-        <div class="step-content has-text-centered">
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Senha</label>
-            </div>
-            <div class="field-body">
+
+          <div class="step-content">
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Senha<small class="is-danger">*</small></label>
                 <div class="control">
                   <%= form_user.password_field :password_field, class: 'input', required: true, placeholder:"Informa uma senha"%>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left">Senha</label>
-            </div>
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
+                <label class="label has-text-grey has-text-weight-normal">Confirme sua senha<small class="is-danger">*</small></label>
                 <div class="control">
                   <%= form_user.password_field :password_confirmation, class: 'input', required: true, placeholder:"Digite a mesma senha"%>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="field-body">
+
+            <div class="column is-12">
               <div class="field">
-                <div class="field-label">
-                  <%= form_user.check_box :terms_acceptation, checked_value: true, class:"is-checkradio", required: true%>
-                  Estou de acordo os <a href="#">termos de uso</a> do sistema.
-                </div>
+                <%= f.check_box :terms_acceptation, class: 'is-checkradio', id: 'local_type_home' %>
+                <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <a href="#">termos de uso</a> do sistema.</label>
               </div>
             </div>
           </div>
-        <%end%>
-      </div>
-      <div class="steps-actions">
-        <div class="steps-action">
-          <a href="#" data-nav="previous" class="button is-light">Previous</a>
+          <%end%>
+
+          <div class="steps-actions">
+            <div class="steps-action">
+              <a href="#" data-nav="previous" class="button is-light">Previous</a>
+            </div>
+            <div class="steps-action">
+              <a href="#" data-nav="next" class="button is-light">Next</a>
+            </div>
+          </div>
         </div>
-        <div class="steps-action">
-          <a href="#" data-nav="next" class="button is-light">Next</a>
-        </div>
       </div>
-<% end %>
     </div>
   </div>
-</div>
+<% end %>
