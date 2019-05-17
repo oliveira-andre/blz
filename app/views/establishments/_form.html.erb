@@ -1,15 +1,17 @@
 <%= form_with model: @establishment, local: true, class: 'establishment_form' do |f| %>
 <div class="columns is-multiline">
   <div class="column">
+
     <% unless @messages_errors.nil? %>
-    <% @messages_errors.each do |msg| %>
-    <div class="notification is-danger">
-      <button class="delete" type="button"></button>
-      <%= msg %>
-    </div>
+      <% @messages_errors.each do |msg| %>
+      <div class="notification is-danger">
+        <button class="delete" type="button"></button>
+        <%= msg %>
+      </div>
+      <% end %>
     <% end %>
-    <% end %>
-    <div class="steps" id="stepsDemo">
+
+    <div class="steps" id="form-steops">
       <div class="step-item is-active is-#2AC5CC">
         <div class="step-marker"><i class="fas fa-home "></i></div>
         <div class="step-details">
@@ -69,40 +71,40 @@
           </div>
           <div class="field">
             <div class="field-label is-normal">
-              <label class="label has-text-left">Rua</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <%= form_address.text_field :street, class: 'input', required: true, placeholder:"Rua do seu estabelecimento ?" %>
+                <label class="label has-text-left">Rua</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <%= form_address.text_field :street, class: 'input', required: true, placeholder:"Rua do seu estabelecimento ?" %>
+                  </div>
+                </div>
+              </div>
+            <div class="field">
+              <div class="field-label is-normal">
+                <label class="label has-text-left">Numero</label>
+              </div>
+              <div class="field-body">
+                <div class="field ">
+                  <div class="control has-icon has-icon-right">
+                    <%= form_address.text_field :number, class: 'input', required: true, placeholder:"Numero do seu estabelecimento ?" %>
+                  </div>
                 </div>
               </div>
             </div>
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left"">Numero</label>
-            </div>
-            <div class="field-body">
-              <div class="field ">
-                <div class="control has-icon has-icon-right">
-                  <%= form_address.text_field :number, class: 'input', required: true, placeholder:"Numero do seu estabelecimento ?" %>
+            <div class="field">
+              <div class="field-label is-normal">
+                <label class="label has-text-left">Bairro</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <%= form_address.text_field :neighborhood, class: 'input', required: true, placeholder:"Bairro do seu estabelecimento" %>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="field">
-            <div class="field-label is-normal">
-              <label class="label has-text-left"">Bairro</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <%= form_address.text_field :neighborhood, class: 'input', required: true, placeholder:"Bairro do seu estabelecimento" %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         </div>
         <%end%>
         <%= f.fields_for :user do |form_user| %>
@@ -194,14 +196,8 @@
             </div>
           </div>
           <div class="field">
-            <div class="field-body">
-              <div class="field">
-              <div class="field-label">
-               <%= form_user.check_box :terms_acceptation, checked_value: true, required: true, class:"is-checkradio is-rtl"%>
-                  Estou de acordo os <a href="#">termos de uso</a> do sistema.
-            </div>
-              </div>
-            </div>
+              <%= form_user.check_box :terms_acceptation,class:"is-checkradio", checked_value: true,required: true%>
+              <label> Estou de acordo os <a href="#">termos de uso</a> do sistema.</label>
           </div>
         <%end%>
       </div>
