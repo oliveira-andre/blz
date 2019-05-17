@@ -2,7 +2,7 @@ class ServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
 
   before_action :load_establishment, only: %i[index new create]
-  before_action :load_service, only: %i[edit update]
+  before_action :load_service, only: %i[edit update destroy]
 
   def show
     @service = Service.approved.find(params[:id])
@@ -34,6 +34,15 @@ class ServicesController < ApplicationController
 
   def update
     authorize @service
+
+    if @service.archived?
+      @service.awaiting_avaliation!
+
+      redirect_to establishments_dashboard_path(@service.establishment),
+                  notice: 'Serviço foi desarquivado e para analise!'
+      return
+    end
+
     if @service.update_and_rebuild_schedule(service_params)
       redirect_to establishments_dashboard_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
@@ -41,6 +50,15 @@ class ServicesController < ApplicationController
       @professionals = @service.professionals_to_link
       render 'edit'
     end
+  end
+
+  def destroy
+    authorize @service
+
+    @service.archived!
+
+    redirect_to establishments_dashboard_path(@service.establishment),
+                notice: 'Serviço arquivado!'
   end
 
   private
