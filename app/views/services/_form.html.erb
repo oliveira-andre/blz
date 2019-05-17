@@ -94,7 +94,22 @@
         </div>
       </div>
     </div>
-    <div class="column is-12">    
+    <div class="column is-12">
+      <% unless @service.archived? %>
+        <%= link_to 'Arquivar', establishment_service_path(@service.establishment, @service), method: :delete,
+                    class: 'button is-text has-text-danger',
+                    data: {
+                      confirm: 'Tem certeza disso ?',
+                      tooltip: 'Com esse ação o serviço não aparerá nas buscas.'
+                    } %>
+      <% else %>
+        <%= link_to 'Desarquivar', establishment_service_path(@service.establishment, @service), method: :put,
+                    class: 'button is-text has-text-grey',
+                    data: {
+                      confirm: 'Tem certeza disso ?',
+                      tooltip: 'Com esse ação o serviço aparerá nas buscas.'
+                    } %>
+      <% end %>
       <%= form.submit 'Salvar', class: 'button is-light is-pulled-right' %>
       <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey  is-pulled-right' %>
     </div>
