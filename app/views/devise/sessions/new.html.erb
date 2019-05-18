@@ -1,52 +1,46 @@
-<div class="devise">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <section class="hero is-success is-fullheight">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <div class="column is-4 is-offset-4">
-            <h3 class="title has-text-grey">Entrar</h3>
-            <p class="subtitle has-text-grey">Por favor realize o acesso para prosseguir</p>
-            <div class="box">
-              <figure class="avatar">
-                <img src="https://placehold.it/128x128">
-              </figure>
-              <div class="field">
-                <div class="control">
-                  <%= f.email_field :email, class: "input is-large", placeholder: "Seu Email" %>
-                </div>
-              </div>
-
-              <div class="field">
-                <div class="control">
-                  <%= f.password_field :password, class: "input is-large", placeholder: "Sua Senha" %>
-                </div>
-              </div>
-              <div class="field">
-                <label class="checkbox">
-                  <%= f.check_box :remember_me %>
-                  Lembrar-me
-                </label>
-              </div>
-              <%= f.submit "Entrar", class: "button is-block is-info is-large is-fullwidth" %>
-              </br>
-              <%= link_to "Voltar", root_path, class: "button is-block is-large is-fullwidth" %>
-              <!--
-              <p>Entrar com</p>
-              #link_to user_facebook_omniauth_authorize_path, class: "is-size-4" do
-                <i class="fab fa-facebook"></i>
-              #end
-              #link_to user_google_oauth2_omniauth_authorize_path, class: "is-size-4"
-                <i class="fab fa-google-plus-square"></i>
-              #end
-              -->
+<%= render 'shared/header', to_back: true %>
+<div class="form-login">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {  class: 'custom' }) do |f| %>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h1 class="is-size-4 has-text-grey has-text-centered"> Faça seu acesso </h1>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.email_field :email, class: "input", placeholder: "ex: exemplo@blz.life", required: true %>
             </div>
-            <p class="has-text-grey">
-              <%= render "devise/shared/links" %>
-            </p>
           </div>
         </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Senha <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.password_field :password, class: "input", placeholder: "Informe sua senha", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <%= f.check_box :remember_me, class: 'is-checkradio', id: 'local_type_home' %>
+            <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Lembrar-me</label>
+          </div>
+        </div>
+        <div class="column is-12">
+          <%= link_to "Esqueceu sua senha?", new_password_path(resource_name) %>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
+          <%= f.submit 'Entrar', class: 'button is-light' %>
+        </div>
+        <div class="column is-12">
+          <p class="has-text-grey has-text-centered">
+            Ainda não tem uma conta? <%= link_to "Cadastre-se", new_registration_path(resource_name) %>
+          </p>
+        </div>
       </div>
-    </section>
-  <% end %>
-
+    <% end %>
+  </div>
 </div>

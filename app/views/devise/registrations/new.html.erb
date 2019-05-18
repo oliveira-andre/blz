@@ -1,65 +1,62 @@
-<div class="devise">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <section class="hero is-success is-fullheight">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <div class="column is-4 is-offset-4">
-            <h3 class="title has-text-grey">Cadastre-se</h3>
-            <p class="subtitle has-text-grey">Por favor realize o seu cadastro para prosseguir</p>
-            <div class="box">
-              <figure class="avatar">
-                <img src="https://placehold.it/128x128">
-              </figure>
+<%= render 'shared/header', to_back: true %>
+<div class="form-login">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {  class: 'custom' }) do |f| %>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h1 class="is-size-4 has-text-grey has-text-centered"> Faça seu cadastro </h1>
+        </div>
 
-              <%= render "devise/shared/error_messages", resource: resource %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-              <div class="field">
-                <div class="control">
-                  <%= f.text_field :name, autocomplete: "name", placeholder: "Nome", class: "input", required: true  %>
-                </div>
-              </div>
-
-              <div class="field">
-                <div class="control">
-                  <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "input", required: true  %>
-                </div>
-              </div>
-
-              <div class="field">
-                <div class="control">
-                  <%= f.password_field :password, class: "input", placeholder: "Senha", required: true  %>
-                </div>
-                <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> carácteres no mínimo)</em>
-                <% end %><br/>
-              </div>
-
-              <div class="field">
-                <div class="control">
-                  <%= f.password_field :password_confirmation, class: "input", placeholder: "Confirme sua senha", required: true  %>
-                </div>
-              </div>
-
-              <div class="field column is-12">
-                <label class="column checkbox is-12">
-                  <%= f.check_box :terms_acceptation, checked_value: true, required: true %>
-                  Estou de acordo os <a href="#">termos de uso</a> do sistema.
-                </label>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "Cadastrar", class: "button is-block is-info is-fullwidth" %>
-              </div>
-
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Nome <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.text_field :name, class: "input", placeholder: "Informe seu nome", required: true %>
             </div>
-            <p class="has-text-grey">
-              <%= render "devise/shared/links" %>
-            </p>
           </div>
         </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.email_field :email, class: "input", placeholder: "ex: exemplo@blz.life", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Senha <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.password_field :password, class: "input", placeholder: "Informe sua senha", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Confime sua senha <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.password_field :password_confirmation, class: "input", placeholder: "Confirme sua senha", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <%= f.check_box :terms_acceptation, class: 'is-checkradio', id: 'local_type_home' %>
+            <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <a href="#">termos de uso</a> do sistema.</label>
+          </div>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
+          <%= f.submit 'Salvar', class: 'button is-light' %>
+        </div>
+        <div class="column is-12">
+          <p class="has-text-grey has-text-centered">
+            Já possui uma conta? <%= link_to "Faça o acesso", new_user_session_path %>
+          </p>
+        </div>
       </div>
-    </section>
-
-  <% end %>
-
+    <% end %>
+  </div>
 </div>
