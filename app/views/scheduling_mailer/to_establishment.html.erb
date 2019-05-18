@@ -1,0 +1,18 @@
+<h1>BLZ</h1>
+<h2>Novo agendamento</h2>
+
+<p> Olá <%= @scheduling.professional_service.service.establishment.name %>, tem um novo agendamento para você.</p>
+
+<p> Serviço: <%= @scheduling.professional_service.service.title %> </p>
+<p> Profissional: <%= @scheduling.professional_service.professional.name %> </p>
+<p> Cliente: <%= @scheduling.user.name %></p>
+<p> Horário: <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %></p>
+
+<a>Mais detalhes</a>
+
+<p>
+  Abraços, bom trabalho.
+</p>
+<p>
+  Equipe BLZ
+</p>
