@@ -1,5 +1,6 @@
 .users_dashboard {
-  height: 100vh;
+  height: auto !important;
+  min-height: 100%;
   padding-top: 15px;
   background-color: #f2f2f2;
 
