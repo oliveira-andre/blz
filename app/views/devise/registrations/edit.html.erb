@@ -1,5 +1,5 @@
 <%= render 'shared/header', to_back: true %>
-<div class="form-login">
+<div class="form-login edit">
   <div class="container">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'custom' }) do |f| %>
       <div class="columns is-multiline">
@@ -86,3 +86,4 @@
     <% end %>
   </div>
 </div>
+<%= render 'shared/user_bottom_navigation_bar', tab: 'profile' %>
