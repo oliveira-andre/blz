@@ -40,11 +40,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL_OPTIONS') }
 
-  if ENV.fetch('MAILCATCHER', false)
+  if (ENV.fetch('MAILCATCHER', false) == "true")
     config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
   end
 
-  if ENV.fetch('MAILGUN', false)
+  if (ENV.fetch('MAILGUN', false) == "true")
     config.action_mailer.smtp_settings = {
       port: 587,
       address: 'smtp.mailgun.org',
