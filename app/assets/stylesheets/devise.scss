@@ -1,6 +1,10 @@
 .form-login {
   padding-top: 40px;
 
+  &.edit {
+    padding-bottom: 80px;
+  }
+
   @include desktop {
     .container {
       width: 50%;

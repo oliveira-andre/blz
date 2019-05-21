@@ -1,0 +1,48 @@
+<div class="user bottom-navigation-bar">
+  <div class="tabs is-centered">
+    <ul>
+      <li class="tab <%= tab == 'scheduling' ? 'is-active' : ''%>">
+        <%= link_to users_dashboard_path(current_user) do %>
+          <div class="columns is-multiline is-gapless has-text-centered">
+            <div class="column is-12">
+              <span class="icon is-small is-size-4">
+                <i class="far fa-calendar"></i>
+              </span>
+            </div>
+            <div class="column is-12">
+              <span>Agendamentos</span>
+            </div>
+          </div>
+        <% end %>
+      </li>
+      <li class="tab <%= tab == 'payment' ? 'is-active' : ''%> is-hidden">
+        <a>
+          <div class="columns is-multiline is-gapless has-text-centered">
+            <div class="column is-12">
+              <span class="icon is-small is-size-4">
+                <i class="fas fa-money-check-alt"></i>
+              </span>
+            </div>
+            <div class="column is-12">
+              <span>Pagamento</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="tab <%= tab == 'profile' ? 'is-active' : ''%>">
+        <%= link_to edit_user_registration_path do %>
+          <div class="columns is-multiline is-gapless has-text-centered">
+            <div class="column is-12">
+              <span class="icon is-small is-size-4">
+                <i class="fas fa-user-cog"></i>
+              </span>
+            </div>
+            <div class="column is-12">
+              <span>Perfil</span>
+            </div>
+          </div>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
