@@ -1,4 +1,4 @@
-<%= form_with model: @establishment, local: true, class: ' custon' do |f| %>
+<%= form_with model: @establishment, local: true, class: 'custom establishment' do |f| %>
   <div class="columns is-multiline">
     <div class="column is-12">
       <% unless @messages_errors.nil? %>
@@ -9,6 +9,12 @@
         </div>
         <% end %>
       <% end %>
+    </div>
+    <div class="column is-12">
+      <h1 class="title is-size-4 has-text-weight-normal">
+        <span class="icon"><i class="fas fa-store-alt"></i></span>
+         Sobre o estabelecimento
+      </h1>
     </div>
 
     <div class="column is-12">
@@ -67,6 +73,13 @@
       </div>
     <% end %>
 
+
+    <div class="column is-12">
+      <h1 class="title is-size-4 has-text-weight-normal">
+        <span class="icon"><i class="fas fa-user-cog"></i></span>
+        Sobre o dono
+      </h1>
+    </div>
     <%= f.fields_for :user do |form_user| %>
       <div class="column is-12">
         <div class="field">

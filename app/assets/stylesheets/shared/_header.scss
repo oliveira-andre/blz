@@ -84,7 +84,9 @@ header {
 }
 
 // HEADER CUSTOM
-.establishments_dashboard-index, .services-new, .services-edit, .professionals-new, .professionals-edit {
+.establishments_dashboard-index, .services-new, .services-edit,
+.professionals-new, .professionals-edit, .establishments-new,
+.establishments-edit {
   header {
     background-color: $primary-color;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
