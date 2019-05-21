@@ -1,18 +1,54 @@
-<h1>BLZ</h1>
-<h2>Novo agendamento</h2>
+<div class="container">
+  <h1 class="title has-text-centered has-text-primary is-size-1">BLZ</h1>
+  <h2 class="subtitle has-text-centered has-text-white  is-size-2">Novo agendamento</h2>
 
-<p> Olá <%= @scheduling.professional_service.service.establishment.name %>, tem um novo agendamento para você.</p>
+  <div class="item">
+    <p class=" has-text-centered has-text-primary is-size-3">
+      Olá <%= @scheduling.professional_service.service.establishment.name %>!
+    </p>
+  </div>
 
-<p> Serviço: <%= @scheduling.professional_service.service.title %> </p>
-<p> Profissional: <%= @scheduling.professional_service.professional.name %> </p>
-<p> Cliente: <%= @scheduling.user.name %></p>
-<p> Horário: <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %></p>
+  <div class="item">
+    <p class="has-text-centered is-size-3">
+      O cliente <strong><%= @scheduling.user.name %></strong> fez um novo agendamento.
+    </p>
+  </div>
 
-<a>Mais detalhes</a>
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Serviço
+    </p>
+    <p class="has-text-centered is-size-3">
+      <%= @scheduling.professional_service.service.title %>
+    </p>
+  </div>
 
-<p>
-  Abraços, bom trabalho.
-</p>
-<p>
-  Equipe BLZ
-</p>
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Profissional
+    </p>
+    <p class="has-text-centered is-size-3">
+      <%= @scheduling.professional_service.professional.name %>
+    </p>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Quando
+    </p>
+    <p class="has-text-centered is-size-3">
+      <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %>
+    </p>
+  </div>
+
+  <div class="item has-text-centered">
+    <%= link_to 'Mais detalhes', establishments_dashboard_url(@scheduling.professional_service.service.establishment), class: 'button is-primary is-size-4' %>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Abraços, </br>
+      Equipe BLZ
+    </p>
+  </div>
+</div>
