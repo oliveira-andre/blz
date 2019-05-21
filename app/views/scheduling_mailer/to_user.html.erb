@@ -1,17 +1,56 @@
-<h1>BLZ</h1>
-<h2>Sobre seu agendamento</h2>
+<div class="container">
+  <h1 class="title has-text-centered has-text-primary is-size-1">BLZ</h1>
+  <h2 class="subtitle has-text-centered has-text-white  is-size-2">Agendamento realizado</h2>
 
-<p> Olá <%= @scheduling.user.name %>, detalhes do seu agendamento</p>
+  <div class="item">
+    <p class=" has-text-centered has-text-primary is-size-3">
+      Olá, <%= @scheduling.user.name %>!
+    </p>
+  </div>
 
-<p> Serviço: <%= @scheduling.professional_service.service.title %> </p>
-<p> Profissional: <%= @scheduling.professional_service.professional.name %> </p>
-<p> Horário: <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %> </p>
+  <div class="item">
+    <p class="has-text-centered is-size-3">
+      O agendamento do serviço <strong><%= @scheduling.professional_service.service.title %></strong>
+      com <strong><%= @scheduling.professional_service.service.establishment.name %></strong> foi
+      realizado com sucesso.
+    </p>
+  </div>
 
-<a>Mais detalhes</a>
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Valor
+    </p>
+    <p class="has-text-centered is-size-3">
+      R$ <%= @scheduling.professional_service.service.amount %>
+    </p>
+  </div>
 
-<p>
-  Abraços,
-</p>
-<p>
-  Equipe BLZ
-</p>
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Quando
+    </p>
+    <p class="has-text-centered is-size-3">
+      <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %>
+    </p>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Onde
+    </p>
+    <p class="has-text-centered is-size-3">
+      <%= @scheduling.professional_service.service.establishment.address.full %>
+    </p>
+  </div>
+
+  <div class="item has-text-centered">
+    <%= link_to 'Mais detalhes', users_dashboard_url(@scheduling.user), class: 'button is-primary is-size-4' %>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-4">
+      Abraços, </br>
+      Equipe BLZ
+    </p>
+  </div>
+</div>
