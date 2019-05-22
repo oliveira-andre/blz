@@ -2,7 +2,7 @@
   <div class="image-mobile box" style="<%= 
     (service.photos.attached?) ?
         liner_gradiente_card_img_dashboard_user(
-          url_for(schedule.thumbnail(service.photos.sample, :medium))
+          url_for(schedule.thumbnail(service.photos.sample, custom: '960x640!'))
         ) : liner_gradiente_card_img_dashboard_user('/images/1280x960.png') %>">
     <div class="columns content is-multiline">
       <div class="column is-12">
@@ -48,18 +48,13 @@
         </div>
       </div>
       <div class="column is-12">
-        <div class="columns is-mobile actions">
-          <div class="column is-8">
-            <p class="is-size-3 has-text-white">R$ <%= service.amount %></p>
-          </div>
-          <div class="column is-4 has-text-centered">
-            <% if schedule.finished? %>
-              <a class="button is-light">Avaliar</a>
-            <% else %>
-              <a class="button is-text has-text-white">Cancelar</a>
-            <% end %>
-          </div>
-        </div>
+        <p class="is-size-3 has-text-white">R$ <%= service.amount %></p>
+      </div>
+      <div class="column is-12 actions">
+        <%= link_to 'Ver detalhes', scheduling_path(schedule), class: 'button is-light' %>
+        <% if schedule.finished? %>
+          <a class="button is-light is-pulled-right">Avaliar</a>
+        <% end %>
       </div>
     </div>
   </div>
