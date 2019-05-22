@@ -2,9 +2,8 @@ $(document).on("turbolinks:load", function () {
 
   bulmaCarousel.attach('#service-images-carousel', {
     slidesToScroll: 1,
-    slidesToShow: 1,
+    slidesToShow: 1
   });
-
 
   $('#files').on('change', function () {
     var cont = 0
