@@ -1,8 +1,13 @@
 class SchedulingController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
+  before_action :load_scheduling, only: :show
 
   def new
     @scheduling = Scheduling.new scheduling_new_params
+  end
+
+  def show
+    authorize @scheduling
   end
 
   def create
@@ -23,6 +28,10 @@ class SchedulingController < ApplicationController
   def scheduling_params
     params.permit(:professional_service_id, :date)
           .merge(user_id: current_user.id)
+  end
+
+  def load_scheduling
+    @scheduling = Scheduling.find(params[:id])
   end
 
   def scheduling_new_params
