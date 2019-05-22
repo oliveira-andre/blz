@@ -1,0 +1,83 @@
+<%= render 'shared/header', to_back: true %>
+<div class="scheduling-details">
+  <div class="container">
+    <div class="columns is-multiline">
+        <div class="column is-12">
+          <h1 class="is-size-4 has-text-grey"> Agendamento </h1>
+        </div>
+        <div class="column is-12">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <% if @scheduling.professional_service.professional.photo.attached? %>
+                  <%= image_tag @scheduling.thumbnail(@scheduling.professional_service.professional.photo, :avatar), 
+                                class:'image is-rounded' %>
+                <% else %>
+                  <img src="/images/128x128.png" class="image is-rounded">
+                <% end %>
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-size-5 is-size-4-desktop"><%= @scheduling.professional_service.service.title %></p>
+              <p class="subtitle is-size-7 is-size-6-desktop"><%= @scheduling.professional_service.professional.name %></p>
+            </div>
+          </article>
+        </div>
+        <% unless establishment? %>
+          <div class="column is-12">
+            <p class="is-size-6 is-size-5-desktop"><%= @scheduling.professional_service.service.description %></p>
+          </div>
+        <% end %>
+        <div class="column is-12">
+          <div class="columns is-multiline infos">
+            <div class="column is-6">
+              <p class="is-size-7 is-size-6-desktop">Horário escolhido</p>
+              <span class="icon is-size-5"><i class="far fa-clock"></i></span>
+              <span class="is-size-6 is-size-5-desktop"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
+            </div>
+            <div class="column is-6">
+              <p class="is-size-7 is-size-6-desktop">Duração estimada</p>
+              <span class="icon is-size-5"><i class="fas fa-hourglass-start"></i></span>
+              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.professional_service.service.duration %> min</span>
+            </div>
+            <div class="column is-6">
+              <p class="is-size-7 is-size-6-desktop">Situação</p>
+              <span class="icon is-size-5"><i class="fas fa-info-circle"></i></span>
+              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.t_status %></span>
+            </div>
+            <div class="column is-6">
+              <p class="is-size-7 is-size-6-desktop">Valor</p>
+              <span class="icon is-size-5"><i class="fas fa-money-check-alt"></i></span>
+              <span class="is-size-6 is-size-5-desktop">R$ <%= @scheduling.professional_service.service.amount %></span>
+            </div>
+            <% unless establishment? %>
+              <div class="column is-12">
+                <p class="is-size-7 is-size-6-desktop">Endereço</p>
+                <span class="icon is-size-5"><i class="fas fa-map-marker-alt"></i></span>
+                <span class="is-size-6 is-size-5-desktop"><%= @scheduling.professional_service.service.establishment.address.full %></span>
+              </div>
+            <% else %>
+              <div class="column is-12">
+                <p class="is-size-7 is-size-6-desktop">Cliente</p>
+                <span class="icon is-size-5"><i class="far fa-user"></i></span>
+                <span class="is-size-6 is-size-5-desktop"><%= @scheduling.user.name %></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="column is-12 actions">
+          <% unless @scheduling.finished? %>
+            <a class="button is-light modal-button tooltip is-pulled-right" data-target="cancel-scheduling-modal"
+              data-tooltip="Ver políticas de cancelamento">
+              <span class="icon has-text-grey is-size-4">
+                <i class="far fa-question-circle"></i>
+              </span>
+              <span class="has-text-danger">Cancelar</span>
+            </a>
+          <% end %>
+          <%= link_to 'Voltar', :back, class: 'button is-text' %>
+        </div>
+    </div>
+  </div>
+</div>
+<%= render 'cancel_modal' %>

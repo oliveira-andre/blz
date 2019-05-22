@@ -1,3 +1,34 @@
 .new-scheduling {
   margin-top: 50px;
 }
+
+.scheduling-details {
+  padding-top: 15px;
+
+  .actions {
+    .button {
+      border: 0px;
+      background: transparent;
+
+      &.is-pulled-right {
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
+#cancel-scheduling-modal {
+  .modal-content {
+    .columns.content {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 25px 5px 20px 5px;
+      background-color: #fff;
+
+      @media (max-width: 450px) {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
