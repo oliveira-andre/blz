@@ -1,47 +1,89 @@
-<div class="devise">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
-    <section class="hero is-success is-fullheight">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <div class="column is-4 is-offset-4">
-            <h3 class="title has-text-grey">Editar</h3>
-            <p class="subtitle has-text-grey">Por favor preencha os campos abaixo para prosseguir</p>
-            <div class="box">
-              <figure class="avatar">
-                <img src="https://placehold.it/128x128">
-                <%= render "devise/shared/error_messages", resource: resource %>
+<%= render 'shared/header', to_back: true %>
+<div class="form-login edit">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'custom' }) do |f| %>
+      <div class="columns is-multiline">
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-                <div class="field">
-                  <div class="control">
-                    <%= f.email_field :email, autocomplete: "email is-large", class: "input is-large", placeholder: "Email" %>
-                  </div>
-                </div>
+        <div class="column is-12">
+          <figure class="image is-128x128">
+            <img class="is-rounded" src="https://placehold.it/128x128">
+          </figure>
+        </div>
 
-                <div class="field">
-                  <div class="control">
-                    <%= f.password_field :password, class: "input is-large", placeholder: "Senha (Deixe em branco se não quiser mudar)" %>
-                  </div>
-                </div>
-
-                <div class="field">
-                  <div class="control">
-                    <%= f.password_field :password_confirmation, class: "input is-large", placeholder: "Confirme sua senha" %>
-                  </div>
-                </div>
-
-                <div class="field">
-                  <%= f.password_field :current_password, class: "input is-large", placeholder: "Sua senha atual" %>
-                </div>
-
-                <div class="actions">
-                  <%= f.submit "Atualizar", class: "button is-block is-info is-large is-fullwidth" %>
-                </div>
-              </figure>
+        <div class="column is-12">
+          <h1 class="is-size-4 has-text-grey has-text-centered"> <%= current_user.name %> </h1>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Nome <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.text_field :name, class: "input", placeholder: "Informe seu nome", required: true %>
             </div>
-            <%= link_to "Voltar", :back %>
           </div>
         </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.email_field :email, class: "input", placeholder: "ex: exemplo@blz.life", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">CPF <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.text_field :cpf, class: "input", placeholder: "Informe seu CPF", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Data de nascimento <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.date_field :birth_date, class: "input", placeholder: "Informe sua data de nascimento", required: true %>
+            </div>
+          </div>
+        </div>
+         <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Telefone <small class="is-danger">*</small></label>
+            <div class="control"> 
+              <%= f.text_field :phone, class: "input phone", placeholder: "Informe seu telefone", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Sua senha atual <small class="is-danger">*</small></label>
+            <div class="control"> 
+              <%= f.password_field :current_password, class: "input", placeholder: "Sua senha atual", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Nova senha (para alterar a senha)</label>
+            <div class="control"> 
+              <%= f.password_field :password, class: "input", placeholder: "Informe uma senha" %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Cofirme sua nova senhaara alterar a senha)</label>
+            <div class="control"> 
+              <%= f.password_field :password_confirmation, class: "input", placeholder: "Confirme sua senha" %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
+          <%= f.submit 'Salvar', class: 'button is-light' %>
+        </div>
       </div>
-    </section>
-  <% end %>
+    <% end %>
+  </div>
 </div>
+<%= render 'shared/user_bottom_navigation_bar', tab: 'profile' %>

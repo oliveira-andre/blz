@@ -1,6 +1,7 @@
-<%= render 'pages/shared/header' %>
+<%= render 'shared/header', to_back: true %>
 <div class="services_form">
   <div class="container">
     <%= render "form", url: establishment_services_path  %>
   </div>
 </div>
+<% render 'shared/establishment_bottom_navigation_bar', tab: 'services' %>

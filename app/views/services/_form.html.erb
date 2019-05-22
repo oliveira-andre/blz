@@ -1,8 +1,8 @@
-<%= form_with model: @service, url: url, local: true do |f| %>
 
+<%= form_with model: @service, url: url, class: 'custom', local: true do |form| %>
   <div class="columns is-multiline">
-    <div class="column is-12">
-      <% if @service.errors.any? %>
+    <% if @service.errors.any? %>
+      <div class="column is-12">
         <div id="error_explanation">
           <ul>
             <% @service.errors.full_messages.each do |msg| %>
@@ -13,128 +13,105 @@
             <% end %>
           </ul>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
 
     <div class="column is-12">
       <% if @service.new_record? %>
-        <h1 class="has-text-centered has-text-weight-bold	is-size-4">Adicionar Serviço</h1>
+        <h1 class="is-size-4 has-text-grey">Novo Serviço</h1>
       <% else %>
-        <h1 class="has-text-centered has-text-weight-bold	is-size-4">Editar Serviço</h1>
+        <h1 class="is-size-4 has-text-grey">Editar Serviço</h1>
       <% end %>
     </div>
 
     <% unless @service.new_record? %>
-      <div class="column is-3" id="preview">
-        <div class="content has-text-centered is-inline">
-          <div class="field">
-            <div class="file is-small is-boxed" id="gallery">
-              <label class="file-label">
-                <%= f.file_field :photos, multiple: true, id: "files" ,class:"file-input" %>
-                <span class="file-cta">
-                  <span class="file-label is-size-1">
-                    <i class="fas fa-plus-circle"></i>
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
+      <div class="column is-12">
+        <%= render 'form_images', form: form %>
       </div>
-      <% if @service.photos.present? %>
-        <% @service.photos.each do |photo| %>
-          <div class="column is-3" id="photo-<%= photo.id %>">
-            <div class="card">
-              <div class="card-content is-inline">
-                <div class="content">
-                  <%= image_tag(@service.thumbnail(photo, :small)) %>
-                </div>
-              </div>
-              <% unless photo.new_record? %>
-                <footer class="card-footer">
-                  <%= link_to 'Remove',
-                              photo_path(photo),
-                              remote: true,
-                              method: :delete,
-                              data: { confirm: 'Você tem certeza?' },
-                              class: "card-footer-item" %>
-                </footer>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
     <% end %>
 
     <div class="column is-12">
       <div class="field">
-        <%= f.label "Título", class: "label" %>
+        <label class="label has-text-grey has-text-weight-normal">Título <small class="is-danger">*</small></label>
         <div class="control">
-          <%= f.text_field :title, class: "input" %>
+          <%= form.text_field :title, class: "input", placeholder: "Qual o título do serviço ? (obrigatório)", required: true %>
         </div>
       </div>
     </div>
 
     <div class="column is-12">
       <div class="field">
-        <%= f.label "Descrição", class: "label" %>
+        <label class="label has-text-grey has-text-weight-normal">Descrição <small class="is-danger">*</small></label>
         <div class="control">
-          <%= f.text_area :description, class: "textarea" %>
+          <%= form.text_area :description, class: "textarea", placeholder: "Dê uma descrição para esse serviço (obrigatório)", required: true %>
         </div>
       </div>
     </div>
 
-    <div class="column is-4">
+    <div class="column is-6">
       <div class="field">
-        <%= f.label "Valor", class: "label" %>
+        <label class="label has-text-grey has-text-weight-normal">Valor <small class="is-danger">*</small></label>
         <div class="control">
-          <%= f.text_field :amount, class: "input" %>
+          <%= form.number_field :amount, class: "input", placeholder: "ex: R$ 109.0 (obrigatório)", required: true %>
         </div>
       </div>
     </div>
 
-    <div class="column is-4">
+    <div class="column is-6">
       <div class="field">
-        <label class="label">Duração <small>(tempo em minutos)</small></label>
+        <label class="label has-text-grey has-text-weight-normal">Duração <small>(tempo em minutos)</small></label>
         <div class="control">
-          <%= f.text_field :duration, class: "input", placeholder: "Duração em minutos" %>
+          <%= form.number_field :duration, class: "input", placeholder: "duração deve ser em minutos (obrigatório)", required: true %>
         </div>
       </div>
     </div>
 
-    <div class="column is-4">
+    <div class="column is-12">
       <div class="field">
-        <%= f.label "Categoria", class: "label" %>
+        <label class="label has-text-grey has-text-weight-normal">Categoria <small class="is-danger">*</small></label>
         <div class="control">
           <div class="select">
-            <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id]}, prompt: "Selecione" %>
+            <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, { prompt: "Selecione (obrigatório)" }, { required: true } %>
           </div>
         </div>
       </div>
     </div>
 
     <div class="column is-12">
-      <%= f.label "Onde o serviço é feito ?", class: "label" %>
-      <div class="control">
-        <label class="radio">
-          <%= f.radio_button :local_type, 'home' %>
-          Em casa
-        </label>
-        <strong> ou </strong>
-        <label class="radio">
-          <%= f.radio_button :local_type, 'establishment' %>
-          No estabelecimento
-        </label>
+      <div class="columns is-mobile">
+        <div class="column">
+          <p class="has-text-grey">Onde <small class="is-danger">*</small></p>
+        </div>
+        <div class="column is-9">
+          <div class="field">
+            <%= form.radio_button(:local_type, 'home', class: 'is-checkradio', id: 'local_type_home', required: true) %>
+            <label class="has-text-grey" for="local_type_home">Em casa</label>
+          </div>
+          <div class="field">
+            <%= form.radio_button(:local_type, 'establishment', class: 'is-checkradio', id: 'local_type_establishment', required: true) %>
+            <label class="has-text-grey" for="local_type_establishment">No estabelecimento</label>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="columns is-multiline">
     <div class="column is-12">
-      <div class="is-pulled-right">
-        <%= f.submit "Salvar", class: "button is-primary" %>
-      </div>
+      <% unless @service.archived? %>
+        <%= link_to 'Arquivar', establishment_service_path(@service.establishment, @service), method: :delete,
+                    class: 'button is-text has-text-danger',
+                    data: {
+                      confirm: 'Tem certeza disso ?',
+                      tooltip: 'Com esse ação o serviço não aparerá nas buscas.'
+                    } %>
+      <% else %>
+        <%= link_to 'Desarquivar', establishment_service_path(@service.establishment, @service), method: :put,
+                    class: 'button is-text has-text-grey',
+                    data: {
+                      confirm: 'Tem certeza disso ?',
+                      tooltip: 'Com esse ação o serviço aparerá nas buscas.'
+                    } %>
+      <% end %>
+      <%= form.submit 'Salvar', class: 'button is-light is-pulled-right' %>
+      <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey  is-pulled-right' %>
     </div>
   </div>
-
 <% end %>

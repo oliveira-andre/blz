@@ -1,13 +1,18 @@
-<%= render 'pages/shared/header' %>
+<%= render 'shared/header', to_back: true %>
 <div class="services_form">
   <div class="container">
     <%= render "form", url: establishment_service_path %>
-    <div class="column is-12">
-      <p class="has-text-weight-semibold is-size-4">Profissionais que fazem esse serviço</p>
-    </div>
-   <%= render 'professional_services/form' %>
-    <div class="columns is-multiline">
-      <%= render @service.professional_services %>
+    <div class="columns is-multiline professional_services">
+      <div class="column is-12">
+        <h1 class="title is-size-4 has-text-grey has-text-weight-normal">Profissionais do serviço</h1>
+      </div>
+      <div class="column is-12">
+        <%= render 'professional_services/form' %>
+      </div>
+      <div class="column is-12">
+        <%= render @service.professional_services %>
+      </div>
     </div>
   </div>
 </div>
+<% render 'shared/establishment_bottom_navigation_bar', tab: 'services' %>

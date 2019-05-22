@@ -1,25 +1,16 @@
-.establishment_form {
-  .cpf_cnpj_buttons {
-    margin-top: 35px;
-  }
+form.establishment {
+  h1.title {
+    color: $primary-color;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f2f2f2;
 
-  #temporary_image > img {
-    min-height: 128px;
-    max-height: 128px;
-    min-width: 128px;
-    max-width: 128px;
-  }
+    .icon {
+      margin-right: 10px;
+    }
 
-  h2 {
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-  }
-
-  .notification.is-danger {
-    padding: 5px;
-    width: max-content;
-    padding-right: 50px;
-    margin-left: 10px;
+    &:last-child {
+      margin-top: 30px;
+    }
   }
 }

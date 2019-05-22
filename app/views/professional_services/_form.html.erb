@@ -2,13 +2,13 @@
               url: establishment_service_professional_services_path(establishment_id: @service.establishment_id, service_id: @service.id) do |f| %>
   <div class="columns">
     <div class="column field">
-      <label class="label">Quais profissionais fazem esse serviço ? </label>
       <div class="select">
-        <%= f.select :professional_id, @professionals.collect { |p| [p.name, p.id] }, prompt: ' -- selecione --' %>
+        <%= f.select :professional_id, @professionals.collect { |p| [p.name, p.id] },
+                    { prompt: 'Qual profissional deseja víncular ?' }, { class: 'has-text-grey', required: true } %>
       </div>
     </div>
     <div class="column">
-      <%= f.submit 'Vincular profissional', class: 'button is-info is-pulled-right' %>  
+      <%= f.submit 'Víncular', class: 'button is-info is-pulled-right' %>
     </div>
   </div>
 <% end %>

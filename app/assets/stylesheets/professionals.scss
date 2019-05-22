@@ -1,0 +1,60 @@
+.professionals_form {
+  .container {
+    @include touch {
+      margin: 15px;
+    }
+
+    @include desktop {
+      padding-left: 125px;
+      padding-right: 125px
+    }
+  }
+
+
+  form {
+    @include mobile {
+      padding-bottom: 55px;
+    }
+  }
+
+  .file {
+    .file-label {
+      margin: 0 auto;
+    }
+  }
+
+  .office_hours {
+    background-color: #f2f2f2;
+    margin: 5px;
+    padding-bottom: 20px;
+    margin-top: 25px;
+  
+    @include tablet {
+      .button[type="submit"] {
+        margin-top: 30px;
+      }
+    }
+
+    .table {
+      background: transparent;
+      color: #7a7a7a;
+
+      th, td {
+        border-color: $grey-color-light;
+        color: #7a7a7a;
+      }
+
+      td:nth-child(1) {
+        text-transform: capitalize;
+      }
+
+      a.button {
+        background: transparent;
+
+        i {
+          color: #f06868 !important;
+        }
+      }
+    }
+  }
+}

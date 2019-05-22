@@ -1,7 +1,9 @@
 .users_dashboard {
-  height: 100vh;
+  height: auto !important;
+  min-height: 100%;
   padding-top: 15px;
   background-color: #f2f2f2;
+  padding-bottom: 60px;
 
   .container {
     @include touch {
@@ -32,20 +34,17 @@
     }
 
     .actions {
-      .button.is-light {
-        background-color: transparent;
-        border: 1px solid #fff;
+      .button.is-text {
         color: #fff;
 
         &:hover {         
           background-color: #fff;
-          color: black;
+          color: black !important;
+          text-decoration: none;
         }
       }
     }
   }
-
-
 }
 
 // HEADER CUSTOM
@@ -70,6 +69,43 @@
         &:hover {
           color:  #fff;
         }
+      }
+    }
+  }
+}
+
+.user.bottom-navigation-bar {
+  background-color: $primary-color;
+
+  .tabs {
+    overflow-x: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .icon:first-child {
+      margin-right: 0.5em;
+      margin-left: 0.5em;
+      margin-top: 0.5em;
+    }
+  }
+
+  ul {
+    border: 0px;
+  }
+
+  .tab {
+    a {
+      color: #fff;
+      height: 60px;
+    }
+
+    &.is-active, &:hover {
+      a {
+        color: #31aeb5;
+        background-color: #fff;
       }
     }
   }

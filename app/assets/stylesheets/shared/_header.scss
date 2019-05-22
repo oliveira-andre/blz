@@ -7,6 +7,18 @@ header {
       background-color: transparent;
     }
 
+    .navbar-brand {
+      a.is-center {
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      a.to-back {
+        margin-left: 5px;
+      }
+    }
+
     .navbar-brand > a.navbar-item, .navbar-menu {
       opacity: 1;
       -webkit-transition: opacity .2s ease-in-out;
@@ -66,6 +78,36 @@ header {
 
       &:hover {
         color:  $primary-color;
+      }
+    }
+  }
+}
+
+// HEADER CUSTOM
+.establishments_dashboard-index, .services-new, .services-edit,
+.professionals-new, .professionals-edit, .sessions-new, .registrations-new,
+.passwords-new, .passwords-edit, .registrations-edit, .establishments-new,
+.establishments-edit {
+  header {
+    background-color: $primary-color;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+
+    .navbar {
+      .navbar-menu {
+        .navbar-item {
+          a {
+            border-color: #fff;
+          }
+        }
+      }
+
+      a {
+        color:  #fff;
+        border-color: #fff;
+
+        &:hover {
+          color:  #fff;
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-<%= render 'shared/header' %>
+<%= render 'shared/header', to_back: false %>
 <div class="users_dashboard">
   <div class="container">
     <div class="columns is-multiline">
@@ -28,4 +28,5 @@
       <% end %>
     </div>
   </div>
+  <%= render 'shared/user_bottom_navigation_bar', tab: 'scheduling' %>
 </div>

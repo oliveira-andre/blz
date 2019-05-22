@@ -1,31 +1,24 @@
-<div class="devise">
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f| %>
-    <section class="hero is-success is-fullheight">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <div class="column is-4 is-offset-4">
-            <h3 class="title has-text-grey">Esqueceu sua senha?</h3>
-            <p class="subtitle has-text-grey">Por favor coloque seu email para receber as instruções</p>
-            <div class="box">
-              <figure class="avatar">
-                <img src="https://placehold.it/128x128">
-              </figure>
-              <%= render "devise/shared/error_messages", resource: resource %>
-
-              <div class="field">
-                <div class="control">
-                  <%= f.email_field :email, placeholder: "Email", class: "input is-large" %>
-                </div>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "Enviar", class: "button is-block is-info is-large is-fullwidth" %>
-              </div>
+<%= render 'shared/header', to_back: true %>
+<div class="form-login">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'custom' }) do |f| %>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h1 class="is-size-4 has-text-grey has-text-centered"> Informe seu email </h1>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.email_field :email, class: "input", placeholder: "ex: exemplo@blz.life", required: true %>
             </div>
-            <%= render "devise/shared/links" %>
           </div>
         </div>
+        <div class="column is-12 has-text-centered">
+          <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
+          <%= f.submit 'Enviar', class: 'button is-light' %>
+        </div>
       </div>
-    </section>
-  <% end %>
+    <% end %>
+  </div>
 </div>

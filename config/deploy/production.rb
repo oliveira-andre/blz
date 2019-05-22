@@ -5,6 +5,8 @@ server fetch(:server_address), user: "deploy", roles: %w{app db web}
 set :nginx_server_name, fetch(:server_address)
 set :puma_preload_app, true
 
+append :linked_files, '.env.production.local'
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

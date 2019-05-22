@@ -1,9 +1,11 @@
 <div class="column is-4 is-3-widescreen">
   <div class="card">
     <% if service.photos.attached? %>
-      <div class="image-mobile" style="<%= liner_gradiente_card_img url_for(service.photos.sample) %>">
+      <div class="image-mobile" style="<%= liner_gradiente_card_img(
+        url_for(service.thumbnail(service.photos.sample, custom: '320x320!'))
+      ) %>">
     <% else %>
-      <div class="image-mobile" style="<%= liner_gradiente_card_img 'images/1280x960.png' %>">
+      <div class="image-mobile" style="<%= liner_gradiente_card_img '/images/256x256.png' %>">
     <% end %>
       <div class="content">
         <h1 class="has-text-white is-size-4 has-text-weight-semibold"><%= service.title %></h1>

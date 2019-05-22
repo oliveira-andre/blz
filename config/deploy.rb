@@ -39,7 +39,6 @@ set :repo_url, "git@gitlab.com:blz/blz.git"
 # set :ssh_options, verify_host_key: :secure
 
 set :deploy_to, "/var/www/blz"
-append :linked_files, "config/database.yml", "config/storage.yml", "config/master.key"
 append :linked_dirs, "log", "tmp"
 set :keep_releases, 5
 set :migration_role, :app
@@ -50,7 +49,7 @@ set :puma_access_log, "#{shared_path}/log/puma_access.log"
 set :puma_error_log, "#{shared_path}/log/puma_error.log"
 set :nginx_sites_available_path, "/etc/nginx/sites-available"
 set :nginx_sites_enabled_path, "/etc/nginx/sites-enabled"
-set :rvm_ruby_version, '2.5.3'
+set :rvm_ruby_version, '2.6.1'
 
 namespace :puma do
   desc 'Create Puma dirs'

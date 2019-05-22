@@ -1,39 +1,30 @@
-.devise {
-  .hero.is-success {
-    background: #F2F6FA;
+.form-login {
+  padding-top: 40px;
+
+  &.edit {
+    padding-bottom: 80px;
   }
 
-  .hero .nav, .hero.is-success .nav {
-    -webkit-box-shadow: none;
-    box-shadow: none;
+  @include desktop {
+    .container {
+      width: 50%;
+    }
   }
 
-  .box {
-    margin-top: 5rem;
+  @include touch {
+    padding: 15px;
   }
 
-  .avatar {
-    margin-top: -70px;
-    padding-bottom: 20px;
+  img {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #2AC5CC;
+    padding: 4px;
   }
 
-  .avatar img {
-    padding: 5px;
-    background: #fff;
-    border-radius: 50%;
-    -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
-    box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
-  }
-
-  input {
-    font-weight: 300;
-  }
-
-  p {
-    font-weight: 700;
-  }
-
-  p.subtitle {
-    padding-top: 1rem;
+  figure {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
   }
 }

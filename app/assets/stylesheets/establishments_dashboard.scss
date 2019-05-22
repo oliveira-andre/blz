@@ -1,80 +1,147 @@
+html, body {
+  height: 100%;
+}
+
 .establishments_dashboard {
+  height: auto !important;
+  min-height: 100%;
+  padding-top: 15px;
+  background-color: #f2f2f2;
+  padding-bottom: 60px;
+
+  @include desktop {
+    padding-bottom: 80px;
+  }
+
   .container {
-    padding-bottom: 50px;
-
-    @include mobile {
-      margin: 0px 12px;
+    @include touch {
+      margin: 15px;
     }
   }
 
-  h1 {
-    border-bottom: 1px solid #efefef;
-    padding-bottom: 15px;
-    color: grey;
-    margin-bottom: 15px;
+  .box {
+    border: 1px solid $light-color;
+    box-shadow: none;
+    border-radius: 0px;
 
-    @include mobile {
-    }
-  }
+    .media {
+      .media-left {
+        max-width: 64px;
 
-  li {
-    width: 50%;
-  }
+        .image {
+          margin: 0 auto;
 
-  .button {
-    &.is-active {
-      background-color: #31aeb5;
-      color: #fff;
-      border-color: #31aeb5;
-    }
-  }
-
-  .media-content {
-    overflow-x: initial;
-  }
-
-  .no-scheduling {
-    margin-top: 10vh;
-  }
-
-  .numbers-cards {
-    .column.is-12 {
-      margin-bottom: 30px;
+          img {
+            border: 2px solid #fff;
+          }
+        }
+      }
     }
 
-    .level-left {
-      width: 30%;
-    }
+    .infos {
+      .column {
+        @include mobile {
+          width: 50%;
+        }
 
-    .level-right {
-      width: 70%;
+        @include desktop {
+          width: 33.33%;
+        }
 
+        &:last-child {
+          @include mobile {
+            width: 100%;
+          }
+        }
+      }
       p {
-        width: 100%;
+        margin-bottom: 2px;
+      }
+    }
+
+    .actions {
+      .button.is-light {
+        background-color: transparent;
+        border: 1px solid $primary-color;
+        color: $primary-color;
+        border-radius: 0px;
+
+        &:hover {
+          background-color: $primary-color;
+          color: #fff;
+        }
       }
     }
   }
 
-  .graph {
-    margin-left: 30px;
-    
-    #curve_chart {
-      height: 280px;
+  #services, #professionals {
+    .button.is-light {
+      background-color: transparent;
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      border-radius: 0px;
+
+      &:hover {
+        background-color: $primary-color;
+        color: #fff;
+      }
     }
-  
+
+    .card {
+      box-shadow: none;
+      border: 1px solid $light-color;
+
+      p.title {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
   }
 
-  .botton-navigtion-bar {
+  #professionals  {
+    a.is-text {
+      margin-top: -45px;
+      color: $primary-color;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .bottom-navigation-bar {
+    background-color: $primary-color;
+    
+    .tabs {
+      overflow-x: scroll;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .icon:first-child {
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        margin-top: 0.5em;
+      }
+    }
+
+    ul {
+      border: 0px;
+    }
+
     .tab {
       a {
-        color: grey;
-        height: 50px;
+        color: #fff;
+        height: 60px;
       }
 
       &.is-active, &:hover {
         a {
           color: #31aeb5;
-          border-bottom-color: #31aeb5;
+          background-color: #fff;
         }
       }
     }

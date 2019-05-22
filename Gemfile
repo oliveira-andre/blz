@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
-
 gem 'devise'
+gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.5'
 gem "mini_magick"
 gem 'rails', '~> 5.2.2'
@@ -19,15 +18,17 @@ gem 'jquery_mask_rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'moip2'
 gem 'rack-cors', require: 'rack/cors'
 gem 'redis'
 gem 'sidekiq'
 gem 'validates_cpf_cnpj'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop'
-  gem 'dotenv-rails'
+  gem 'capistrano-dotenv-tasks', require: false
 end
 
 group :development do

@@ -18,7 +18,7 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -56,7 +56,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -66,6 +66,13 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "blz_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL_OPTIONS') }
+  config.action_mailer.smtp_settings = {
+    port: ENV.fetch('SMTP_PORT', 587),
+    address: Rails.application.credentials[Rails.env.to_sym][:smtp][:address],
+    user_name: Rails.application.credentials[Rails.env.to_sym][:smtp][:username],
+    password: Rails.application.credentials[Rails.env.to_sym][:smtp][:password]
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
