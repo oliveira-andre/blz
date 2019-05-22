@@ -1,6 +1,6 @@
 $(document).on("turbolinks:load", function () {
 
-  bulmaCarousel.attach('#hero-carousel', {
+  bulmaCarousel.attach('#service-images-carousel', {
     slidesToScroll: 1,
     slidesToShow: 1,
   });

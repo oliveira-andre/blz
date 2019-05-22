@@ -335,3 +335,19 @@
     }
   }
 }
+
+#service-images-carousel {
+  .slider-navigation-next, .slider-navigation-previous {
+    background: transparent;
+    color: #fff;
+    border-width: 2px;
+  }
+
+  .slider-navigation-previous {
+    margin-left: 10px;
+  }
+
+  .slider-navigation-next {
+    margin-right: 10px;
+  }
+}
