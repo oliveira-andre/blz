@@ -16,6 +16,7 @@
 @import 'users_dashboard';
 @import 'establishments_dashboard';
 @import 'professionals';
+@import 'scheduling';
 
 html {
   font-family: 'Inter', sans-serif !important;
@@ -41,5 +42,12 @@ h1, h2 {
 .button {
   span {
     margin-left: 5px;
+  }
+}
+
+.container {
+  @include touch {
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
