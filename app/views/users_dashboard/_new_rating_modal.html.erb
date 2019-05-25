@@ -1,0 +1,44 @@
+<% @i = 5 %>
+<div id="rating">
+  <div class="columns is-multiline is-mobile">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head has-background-primary">
+        <p class="modal-card-title has-text-weight-bold has-text-white">
+          Avaliar
+        </p>
+      </header>
+      <section class="modal-card-body">
+        <%= form_with url: reviews_path(reviewable: schedule, review_type: Scheduling) do |f| %>
+          <div class="column is-12">
+            <div class="field">
+              <%= f.label :body, 'Comentário', class: :label %>
+              <div class="control">
+                <%= f.text_area :body, class: :textarea, placeholder: 'O que achou do serviço?' %>
+              </div>
+              <small>
+                Máximo de 255 caracteres
+              </small>
+            </div>
+          </div>
+
+          <div class="column is-12">
+            <fieldset class="rating_field">
+              <% 10.times do |ff| %>
+                <%= f.text_field :rating, value: "#{@i}", type: :radio, id:  "star#{@i}" %>
+                <%= f.label "", for: "star#{@i}", class: ff.even? ? :full : :half %>
+                <% @i -= 0.5 %>
+              <% end %>
+            </fieldset>
+          </div>
+
+          <div class="column is-12 has-text-right">
+            <button class="button close-button">Cancelar</button>
+            <%= f.submit 'Salvar',  class: 'button is-primary' %>
+          </div>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</div>
+<button class="modal-close is-large" aria-label="close"></button>
