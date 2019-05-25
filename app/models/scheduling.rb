@@ -1,3 +1,4 @@
+# coding: utf-8
 class Scheduling < ApplicationRecord
   default_scope { order(:date) }
   scope :history, -> { where.not(status: :scheduled) }
@@ -6,6 +7,8 @@ class Scheduling < ApplicationRecord
 
   belongs_to :user, required: false
   belongs_to :professional_service
+
+  has_one :review, as: :reviewable
 
   before_validation :set_service_duration
 
