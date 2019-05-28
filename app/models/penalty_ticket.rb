@@ -5,8 +5,4 @@ class PenaltyTicket < ApplicationRecord
   belongs_to :scheduling
 
   validates :amount, presence: true
-
-  def create_with_order
-    Moip::CreateOrderMoipService.execute(self)
-  end
 end
