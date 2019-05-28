@@ -25,9 +25,8 @@ Rails.application.routes.draw do
   resources :scheduling, only: %i[new create show] do
     resources :payments, only: %i[new create]
     resources :holders, only: %i[new update]
+    resources :reviews, only: :create
   end
-
-  resources :reviews, only: :create
 
   get '/users/:id/dashboard',
       to: 'users_dashboard#index',
