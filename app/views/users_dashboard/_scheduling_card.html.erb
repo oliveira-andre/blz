@@ -52,16 +52,14 @@
       </div>
       <div class="column is-12 actions">
         <%= link_to 'Ver detalhes', scheduling_path(schedule), class: 'button is-light' %>
-        <%= button_tag :avaliar, type: :button, data: { target: :rating_modal }, class: 'button is-light is-pulled-right modal-button' if policy(schedule).rating?  %>
+        <%= button_tag :avaliar, type: :button, data: { target: :rating_modal }, class: 'button is-light is-pulled-right modal-button is-capitalized' if policy(Review).new?(schedule)  %>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" id="rating_modal">
-  <% if schedule.review %>
-    <%= render 'rating_modal', review: schedule.review %>
-  <% else %>
+<% unless schedule.review %>
+  <div class="modal" id="rating_modal">
     <%= render 'new_rating_modal', schedule: schedule %>
-  <% end %>
-</div>
+  </div>
+<% end %>

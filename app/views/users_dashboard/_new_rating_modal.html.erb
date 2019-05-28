@@ -15,9 +15,6 @@
               <div class="control">
                 <%= f.text_area :body, class: :textarea, placeholder: 'O que achou do serviço?' %>
               </div>
-              <small>
-                Máximo de 255 caracteres
-              </small>
             </div>
           </div>
 
@@ -31,8 +28,8 @@
           </div>
 
           <div class="column is-12 has-text-right">
-            <%= button_tag :Cancelar, class: 'button modal-close-custom', type: :button %>
-            <%= f.submit 'Salvar',  class: 'button is-primary' %>
+            <%= button_tag :cancelar, class: 'button modal-close-custom is-capitalized', type: :button %>
+            <%= f.submit :salvar,  class: 'button is-primary is-capitalized' %>
           </div>
         <% end %>
       </section>
