@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_23_205856) do
+ActiveRecord::Schema.define(version: 2019_05_28_125238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,17 @@ ActiveRecord::Schema.define(version: 2019_05_23_205856) do
     t.index ["user_id"], name: "index_payment_cards_on_user_id"
   end
 
+  create_table "penalty_tickets", force: :cascade do |t|
+    t.bigint "scheduling_id"
+    t.string "moip_order_id"
+    t.integer "amount", null: false
+    t.integer "status", default: 0
+    t.integer "kind", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scheduling_id"], name: "index_penalty_tickets_on_scheduling_id"
+  end
+
   create_table "professional_services", force: :cascade do |t|
     t.bigint "professional_id"
     t.bigint "service_id"
@@ -174,6 +185,7 @@ ActiveRecord::Schema.define(version: 2019_05_23_205856) do
   add_foreign_key "establishments", "users"
   add_foreign_key "office_hours", "professionals"
   add_foreign_key "payment_cards", "users"
+  add_foreign_key "penalty_tickets", "schedulings"
   add_foreign_key "professional_services", "professionals"
   add_foreign_key "professional_services", "services"
   add_foreign_key "professionals", "establishments"
