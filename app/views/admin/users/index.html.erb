@@ -6,7 +6,7 @@
     <%= form_tag(admin_users_path, method: :get, id: 'form_search', class:'custom') do %>
       <div class="field is-grouped">
         <p class="control is-expanded">
-          <%= text_field_tag :search, params[:search], class:'input' ,placeholder:'Pesquise algum usuário...',autocomplete: 'off' %>
+          <%= text_field_tag :search, params[:search], class:'input', placeholder:'Pesquise algum usuário...',autocomplete: 'off' %>
         </p>
 
         <p class="control">
