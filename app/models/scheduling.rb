@@ -26,7 +26,6 @@ class Scheduling < ApplicationRecord
   after_save :set_schedule_busy
   after_create :notifications
 
-
   private
 
   def date_in_schedule?
