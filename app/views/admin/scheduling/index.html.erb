@@ -23,7 +23,7 @@
             <td><%= sheduling.user.name %></td>
             <td><%= sheduling.professional_service.service.establishment.name %></td>
             <td><%= "#{day_month(sheduling.date)} às #{time(sheduling.date)}" %></td>
-            <td><%= sheduling.professional_service.service.amount %></td>
+            <td><%= sheduling.service.amount %></td>
             <td><a href="#">detalhes</a></td>
           </tr>
         <% end %>
