@@ -9,10 +9,7 @@
               <h1 class="is-size-4 has-text-grey"> Minha agenda </h1>
             </div>
             <% @scheduling.each do |s| %>
-              <%= render 'scheduling_card',
-                          schedule: s,
-                          service: s.professional_service.service,
-                          professional: s.professional_service.professional %>
+              <%= render 'scheduling_card', scheduling: s %>
             <% end %>
           </div>
         <% else %>

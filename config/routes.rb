@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :photos, only: :destroy
   resources :services, only: :show
 
-  resources :scheduling, only: %i[new create] do
+  resources :scheduling, only: %i[new create show] do
     resources :payments, only: %i[new create]
     resources :holders, only: %i[new update]
   end

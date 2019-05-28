@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_152246) do
+ActiveRecord::Schema.define(version: 2019_05_23_205856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,22 @@ ActiveRecord::Schema.define(version: 2019_05_08_152246) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["professional_id"], name: "index_office_hours_on_professional_id"
+  end
+
+  create_table "payment_cards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "moip_card_id", null: false
+    t.string "brand", null: false
+    t.string "expiration_month", null: false
+    t.string "expiration_year", null: false
+    t.string "number", null: false
+    t.string "holder_name", null: false
+    t.string "holder_cpf", null: false
+    t.date "holder_birth_date", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payment_cards_on_user_id"
   end
 
   create_table "professional_services", force: :cascade do |t|
@@ -149,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_152246) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "moip_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -156,6 +173,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_152246) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "establishments", "users"
   add_foreign_key "office_hours", "professionals"
+  add_foreign_key "payment_cards", "users"
   add_foreign_key "professional_services", "professionals"
   add_foreign_key "professional_services", "services"
   add_foreign_key "professionals", "establishments"

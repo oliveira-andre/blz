@@ -1,5 +1,21 @@
 <div class="galery">
   <div class="image-mobile" style='background: url("<%= url_for(@service.photos.sample)%>"); background-size: cover;'>
-    <button class="button is-ligth">MAIS FOTOS</button>
+    <% if @service.photos.attached? %>
+      <button class="button is-ligth modal-button" data-target="modal-photos">MAIS FOTOS</button>
+    <% end%>
   </div>
+</div>
+
+<div class="modal" id="modal-photos">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <div id="service-images-carousel" class="carousel">
+      <% @service.photos.each_with_index do |photo, index| %>
+        <div class="item-<%= index %>">
+            <%= image_tag(@service.thumbnail(photo, :large)) %>
+        </div>
+      <% end%>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
 </div>
