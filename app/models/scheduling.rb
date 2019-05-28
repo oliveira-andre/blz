@@ -7,6 +7,9 @@ class Scheduling < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :professional_service
 
+  has_one :service, through: :professional_service
+  has_one :professional, through: :professional_service
+
   before_validation :set_service_duration
 
   validates :status, presence: true
@@ -33,7 +36,6 @@ class Scheduling < ApplicationRecord
   end
 
   def professional_date_busy?
-    professional = professional_service.professional
     professional_services_ids = professional.professional_services.ids
 
     scheduling_ids = Scheduling.where(
@@ -57,7 +59,7 @@ class Scheduling < ApplicationRecord
   end
 
   def service_approved?
-    return if professional_service.service.approved?
+    return if service.approved?
 
     @errors.add(:professional_service, 'não esta disponível')
   end
@@ -68,7 +70,7 @@ class Scheduling < ApplicationRecord
   end
 
   def set_service_duration
-    self.service_duration = professional_service.service.duration
+    self.service_duration = service.duration
   end
 
   def notifications

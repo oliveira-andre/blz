@@ -10,8 +10,8 @@
 
   <div class="item">
     <p class="has-text-centered is-size-3">
-      O agendamento do serviço <strong><%= @scheduling.professional_service.service.title %></strong>
-      com <strong><%= @scheduling.professional_service.service.establishment.name %></strong> foi
+      O agendamento do serviço <strong><%= @scheduling.service.title %></strong>
+      com <strong><%= @scheduling.service.establishment.name %></strong> foi
       realizado com sucesso.
     </p>
   </div>
@@ -21,7 +21,7 @@
       Valor
     </p>
     <p class="has-text-centered is-size-3">
-      R$ <%= @scheduling.professional_service.service.amount %>
+      R$ <%= @scheduling.service.amount %>
     </p>
   </div>
 
@@ -39,7 +39,7 @@
       Onde
     </p>
     <p class="has-text-centered is-size-3">
-      <%= @scheduling.professional_service.service.establishment.address.full %>
+      <%= @scheduling.service.establishment.address.full %>
     </p>
   </div>
 

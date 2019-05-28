@@ -9,8 +9,8 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <% if @scheduling.professional_service.professional.photo.attached? %>
-                  <%= image_tag @scheduling.thumbnail(@scheduling.professional_service.professional.photo, :avatar), 
+                <% if @scheduling.professional.photo.attached? %>
+                  <%= image_tag @scheduling.thumbnail(@scheduling.professional.photo, :avatar),
                                 class:'image is-rounded' %>
                 <% else %>
                   <img src="/images/128x128.png" class="image is-rounded">
@@ -18,14 +18,14 @@
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-size-5 is-size-4-desktop"><%= @scheduling.professional_service.service.title %></p>
-              <p class="subtitle is-size-7 is-size-6-desktop"><%= @scheduling.professional_service.professional.name %></p>
+              <p class="title is-size-5 is-size-4-desktop"><%= @scheduling.service.title %></p>
+              <p class="subtitle is-size-7 is-size-6-desktop"><%= @scheduling.professional.name %></p>
             </div>
           </article>
         </div>
         <% unless establishment? %>
           <div class="column is-12">
-            <p class="is-size-6 is-size-5-desktop"><%= @scheduling.professional_service.service.description %></p>
+            <p class="is-size-6 is-size-5-desktop"><%= @scheduling.service.description %></p>
           </div>
         <% end %>
         <div class="column is-12">
@@ -38,7 +38,7 @@
             <div class="column is-6">
               <p class="is-size-7 is-size-6-desktop">Duração estimada</p>
               <span class="icon is-size-5"><i class="fas fa-hourglass-start"></i></span>
-              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.professional_service.service.duration %> min</span>
+              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.service.duration %> min</span>
             </div>
             <div class="column is-6">
               <p class="is-size-7 is-size-6-desktop">Situação</p>
@@ -48,13 +48,13 @@
             <div class="column is-6">
               <p class="is-size-7 is-size-6-desktop">Valor</p>
               <span class="icon is-size-5"><i class="fas fa-money-check-alt"></i></span>
-              <span class="is-size-6 is-size-5-desktop">R$ <%= @scheduling.professional_service.service.amount %></span>
+              <span class="is-size-6 is-size-5-desktop">R$ <%= @scheduling.service.amount %></span>
             </div>
             <% unless establishment? %>
               <div class="column is-12">
                 <p class="is-size-7 is-size-6-desktop">Endereço</p>
                 <span class="icon is-size-5"><i class="fas fa-map-marker-alt"></i></span>
-                <span class="is-size-6 is-size-5-desktop"><%= @scheduling.professional_service.service.establishment.address.full %></span>
+                <span class="is-size-6 is-size-5-desktop"><%= @scheduling.service.establishment.address.full %></span>
               </div>
             <% else %>
               <div class="column is-12">
