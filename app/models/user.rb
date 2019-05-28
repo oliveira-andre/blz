@@ -20,7 +20,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :address, allow_destroy: true
 
   def self.search(search)
-    where('name LIKE ?', "%#{search}%")
+    where('name ILIKE ?', "%#{search}%")
   end
 
   def self.from_omniauth(auth)
