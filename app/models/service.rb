@@ -37,6 +37,10 @@ class Service < ApplicationRecord
     updated
   end
 
+  def self.search(search)
+    where(['title LIKE ?', "%#{search}%"])
+  end
+
   private
 
   def limit_number_photos

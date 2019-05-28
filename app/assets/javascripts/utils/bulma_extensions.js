@@ -12,6 +12,6 @@ function bulmaStepAttach() {
 
   pages.forEach(function(page) {
     var page = $(`.${page}`);
-    if(page.length > 0) bulmaSteps.attach();  
-  });  
+    if(page.length > 0) bulmaSteps.attach();
+  });
 }

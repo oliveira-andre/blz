@@ -36,4 +36,10 @@ Rails.application.routes.draw do
       as: :establishments_dashboard
 
   resources :callbacks, only: :index
+
+  namespace :admin do
+    resources :scheduling, only: :index
+    resources :services, only: :index
+    resources :users, only: :index
+  end
 end

@@ -1,0 +1,27 @@
+<header style="background-color: #2AC5CC;">
+  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item is-size-3 has-text-light" href="/">
+        BLZ
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-end ">
+        <div class="navbar-item ">
+          <% if user_signed_in? %>
+            <%= link_to 'Agendamentos', admin_scheduling_index_path,class:"navbar-item has-text-light" %>
+            <%= link_to 'Serviços', admin_services_path,class:"navbar-item has-text-light"  %>
+            <%= link_to 'Usuário', admin_users_path,class:"navbar-item has-text-light"  %>
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete,class:"navbar-item has-text-light"  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
