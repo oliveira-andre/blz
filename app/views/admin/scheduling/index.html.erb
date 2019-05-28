@@ -19,7 +19,7 @@
       <tbody>
         <% @shedulings.each do |sheduling| %>
           <tr>
-            <td><%= sheduling.professional_service.service.title %></td>
+            <td><%= sheduling.service.title %></td>
             <td><%= sheduling.user.name %></td>
             <td><%= sheduling.professional_service.service.establishment.name %></td>
             <td><%= "#{day_month(sheduling.date)} às #{time(sheduling.date)}" %></td>
