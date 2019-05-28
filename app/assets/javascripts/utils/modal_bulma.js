@@ -7,7 +7,7 @@ function modalListener() {
   if(modals.length <= 0) return;
 
   var modalButton = document.querySelectorAll('.modal-button');
-  
+
   if(modalButton.length > 0) {
     modalButton.forEach(function(btn, index) {
       btn.addEventListener('click', function(e) {
@@ -19,14 +19,18 @@ function modalListener() {
     });
   }
 
-  var modalsClose = document.querySelectorAll('.modal-close');
-  if(modalsClose <= 0) return;
+    var modalsClose = document.querySelectorAll('.modal-close');
+    if(modalsClose <= 0) return;
 
-  modalsClose.forEach(function(modalClose) {
-    modalClose.addEventListener('click', function(e) {
-      e.currentTarget.parentElement.classList.remove('is-active')
+    modalsClose.forEach(function(modalClose) {
+        modalClose.addEventListener('click', function(e) {
+            e.currentTarget.parentElement.classList.remove('is-active')
+        });
     });
-  });
+
+    $(".modal-close-custom").click(function() {
+        $(".modal").removeClass("is-active");
+    });
 
 
   var modalsBackground= document.querySelectorAll('.modal-background');
