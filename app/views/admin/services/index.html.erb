@@ -1,19 +1,17 @@
-<%= render '/admin/shared/header', to_back: true %>
+<%= render 'admin/shared/header', to_back: true %>
 
 <div class="container">
   <div class="content">
     <h1 class="has-text-grey">Serviços</h1>
-    <%= form_tag(admin_services_path, method: :get, id: 'form_search', class:"custom") do %>
+    <%= form_tag(admin_services_path, method: :get, id: 'form_search', class:'custom') do %>
       <div class="field is-grouped">
         <p class="control is-expanded">
-          <%= text_field_tag :search, params[:search], class:'input' ,placeholder: 'Pesquise algum serviço...',
-          autocomplete: 'off' %>
+          <%= text_field_tag :query, params[:query], class:'input', placeholder:'Pesquise algum serviço...' %>
         </p>
 
         <p class="control is-expanded">
-          <%= select_tag :filter, options_for_select([['Aprovado','approved'],["Arquivado",'archived'],[
-          'Recusado', 'recused'],['Aguardando aprovação', 'awaiting_avaliation']]), class:'input' ,include_blank: 'Pesquise algum usuário...',
-          autocomplete: 'off' %>
+          <%= select_tag :status, options_for_select([['Aprovado','approved'],["Arquivado",'archived'],[
+          'Recusado', 'recused'],['Aguardando aprovação', 'awaiting_avaliation']]), class:'input', include_blank:'Pesquise algum usuário...' %>
         </p>
 
         <p class="control">
@@ -39,7 +37,7 @@
             <td><%= service.title %></td>
             <td><%= service.category.name %></td>
             <td><%= service.duration %></td>
-            <td><%= service.amount %></td>
+            <td>R$ <%= service.amount %></td>
             <td><a href="#">detalhes</a></td>
           </tr>
         <% end %>
@@ -47,6 +45,6 @@
     </table>
   </div>
   <% if @services.present? %>
-    <%== pagy_bulma_nav(@pagy) %>
+    <%= pagy_bulma_nav(@pagy).html_safe %>
   <% end %>
 </div>

@@ -37,8 +37,8 @@ class Service < ApplicationRecord
     updated
   end
 
-  def self.search(search)
-    where(['title LIKE ?', "%#{search}%"])
+  def self.search(query)
+    where(['title LIKE ?', "%#{query}%"])
   end
 
   private

@@ -1,4 +1,4 @@
-<%= render '/admin/shared/header', to_back: true %>
+<%= render 'admin/shared/header', to_back: true %>
 
 <div class="container">
   <div class="content">
@@ -31,7 +31,7 @@
     </table>
   </div>
   <% if @shedulings.present? %>
-   <%== pagy_bulma_nav(@pagy) %>
+    <%= pagy_bulma_nav(@pagy).html_safe %>
   <% end %>
 </div>
 

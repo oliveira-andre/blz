@@ -1,13 +1,12 @@
-<%= render '/admin/shared/header', to_back: true %>
+<%= render 'admin/shared/header', to_back: true %>
 
 <div class="container">
   <div class="content">
     <h1 class="has-text-grey">Usuários</h1>
-    <%= form_tag(admin_users_path, method: :get, id: 'form_search', class:"custom") do %>
+    <%= form_tag(admin_users_path, method: :get, id: 'form_search', class:'custom') do %>
       <div class="field is-grouped">
         <p class="control is-expanded">
-          <%= text_field_tag :search, params[:search], class:'input' ,placeholder: 'Pesquise algum usuário...',
-          autocomplete: 'off' %>
+          <%= text_field_tag :search, params[:search], class:'input' ,placeholder:'Pesquise algum usuário...',autocomplete: 'off' %>
         </p>
 
         <p class="control">
@@ -41,6 +40,6 @@
     </table>
   </div>
   <% if @users.present? %>
-   <%== pagy_bulma_nav(@pagy) %>
+    <%= pagy_bulma_nav(@pagy).html_safe %>
   <% end %>
 </div>

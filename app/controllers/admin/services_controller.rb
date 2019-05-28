@@ -1,10 +1,10 @@
 module Admin
   class ServicesController < AdminController
     def index
-      if params[:filter].present?
-        @services = Service.where(status: params[:filter]) || Service.all
+      if params[:status].present?
+        @services = Service.where(status: params[:status]) || Service.all
       else
-        @services = Service.search(params[:search]) || Service.all
+        @services = Service.search(params[:query]) || Service.all
       end
       @pagy, @services = pagy(@services)
     end
