@@ -1,5 +1,3 @@
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
 #rating {
   .rating_field {
     border: none;
@@ -13,14 +11,7 @@
     label:before {
       margin: 5px;
       font-size: 1.25em;
-      font-family: FontAwesome;
       display: inline-block;
-      content: "\f005";
-    }
-
-    .half:before {
-      content: "\f089";
-      position: absolute;
     }
 
     label {
