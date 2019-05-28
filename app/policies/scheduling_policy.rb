@@ -5,6 +5,6 @@ class SchedulingPolicy < ApplicationPolicy
 
   def show?
     record.user == user ||
-      record.professional_service.service.establishment.user == user
+      record.service.establishment.user == user
   end
 end

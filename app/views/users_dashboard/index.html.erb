@@ -6,11 +6,8 @@
         <div class="column is-12">
           <h1 class="is-size-4 has-text-grey"> Meus agendamentos </h1>
         </div>
-        <% @scheduling.each do |schedule| %>
-          <%= render 'scheduling_card',
-                      schedule: schedule,
-                      service: schedule.professional_service.service,
-                      professional: schedule.professional_service.professional %>
+        <% @scheduling.each do |s| %>
+          <%= render 'scheduling_card', scheduling: s %>
         <% end %>
       <% else %>
         <div class="column is-12">

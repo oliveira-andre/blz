@@ -6,16 +6,16 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <% if @scheduling.professional_service.professional.photo.attached? %>
-                  <%= image_tag @scheduling.professional_service.professional.photo, class:'image is-rounded' %>
+                <% if @scheduling.professional.photo.attached? %>
+                  <%= image_tag @scheduling.professional.photo, class:'image is-rounded' %>
                 <% else %>
                   <img src="https://bulma.io/images/placeholders/128x128.png" class="is-rounded">
                 <% end %>
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-size-4"><%= @scheduling.professional_service.service.title %></p>
-              <p class="subtitle is-size-6"><%= @scheduling.professional_service.professional.name %></p>
+              <p class="title is-size-4"><%= @scheduling.service.title %></p>
+              <p class="subtitle is-size-6"><%= @scheduling.professional.name %></p>
             </div>
           </article>
         </div>
@@ -27,12 +27,12 @@
         <div class="column is-12 is-duration-service">
           <p>Duração estimada</p>
           <span class="icon is-duration"><%= image_tag '/images/time.png' %></span>
-          <span class="is-size-4 has-text-weight-semibold"><%= @scheduling.professional_service.service.duration %> min</span>
+          <span class="is-size-4 has-text-weight-semibold"><%= @scheduling.service.duration %> min</span>
         </div>
         <div class="column is-12">
           <div class="columns is-mobile">
             <div class="column is-8">
-              <p class="title">R$ <%= @scheduling.professional_service.service.amount %></p>
+              <p class="title">R$ <%= @scheduling.service.amount %></p>
             </div>
             <div class="column is-4">
               <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
