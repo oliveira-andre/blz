@@ -11,14 +11,14 @@
 
         <p class="control is-expanded">
           <%= select_tag :status, options_for_select([['Aprovado','approved'],["Arquivado",'archived'],[
-          'Recusado', 'recused'],['Aguardando aprovação', 'awaiting_avaliation']]), class:'input', include_blank:'Pesquise algum usuário...' %>
+          'Recusado', 'recused'],['Aguardando aprovação', 'awaiting_avaliation']]), class:'input', include_blank:'Pesquise por status...' %>
         </p>
 
         <p class="control">
-        <% if @services.present?%>
-          <%= submit_tag 'Buscar',  class: 'button is-info' %>
+          <% if @services.present?%>
+            <%= submit_tag 'Buscar',  class: 'button is-info' %>
           <% else %>
-          <%= submit_tag 'Limpar filtros',  class: 'button is-info' %>
+            <a class="button is-info" type="submit" href="/admin/services">Limpar filtros</a>
           <% end %>
         </p>
       </div>
