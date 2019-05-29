@@ -6,9 +6,18 @@
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="column is-12">
-          <figure class="image is-128x128">
-            <img class="is-rounded" src="https://placehold.it/128x128">
-          </figure>
+          <div class="field">
+            <label class="file-label">
+              <%= f.file_field :photo, class: 'file-input', accept: 'image/*', id: 'user-photo-add' %>
+              <figure class="image is-128x128" id="temporary_image">
+                <% if current_user.photo.attached? %>
+                  <%= image_tag current_user.photo, class: "is-rounded" %>
+                <% else %>
+                  <img class="is-rounded" src="/images/128x128.png">
+                <% end %>
+              </figure>
+            </label>
+          </div>
         </div>
 
         <div class="column is-12">
@@ -46,10 +55,10 @@
             </div>
           </div>
         </div>
-         <div class="column is-12">
+        <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Telefone <small class="is-danger">*</small></label>
-            <div class="control"> 
+            <div class="control">
               <%= f.text_field :phone, class: "input phone", placeholder: "Informe seu telefone", required: true %>
             </div>
           </div>
@@ -57,7 +66,7 @@
         <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Sua senha atual <small class="is-danger">*</small></label>
-            <div class="control"> 
+            <div class="control">
               <%= f.password_field :current_password, class: "input", placeholder: "Sua senha atual", required: true %>
             </div>
           </div>
@@ -65,7 +74,7 @@
         <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Nova senha (para alterar a senha)</label>
-            <div class="control"> 
+            <div class="control">
               <%= f.password_field :password, class: "input", placeholder: "Informe uma senha" %>
             </div>
           </div>
@@ -73,7 +82,7 @@
         <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Cofirme sua nova senhaara alterar a senha)</label>
-            <div class="control"> 
+            <div class="control">
               <%= f.password_field :password_confirmation, class: "input", placeholder: "Confirme sua senha" %>
             </div>
           </div>
