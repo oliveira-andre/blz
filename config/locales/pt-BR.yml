@@ -47,6 +47,11 @@ pt-BR:
         hour_begin: 'Hora inicial'
         hour_end: 'Hora final'
 
+      review:
+        body: Comentário
+        rating: Avaliação
+        reviewable: Agendamento
+
     enums:
       scheduling:
         scheduled: Agendado
