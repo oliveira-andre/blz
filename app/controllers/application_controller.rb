@@ -1,3 +1,4 @@
+# coding: utf-8
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
@@ -15,6 +16,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(
       :sign_up,
       keys: %i[name cpf phone terms_acceptation birth_date]
+    )
+    devise_parameter_sanitizer.permit(
+      :account_update,
+      keys: %i[photo name cpf phone terms_acceptation birth_date]
     )
   end
 end

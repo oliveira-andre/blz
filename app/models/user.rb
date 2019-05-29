@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :scheduling
   has_one :establishment
   has_one :address, as: :addressable
-  has_many :scheduling
+  has_one_attached :photo
 
   accepts_nested_attributes_for :address, allow_destroy: true
 
