@@ -1,4 +1,4 @@
-<%= render 'shared/header', to_back: true %>
+<%= render 'shared/header', to_back: root_path %>
 <div class="form-login">
   <div class="container">
     <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'custom' }) do |f| %>

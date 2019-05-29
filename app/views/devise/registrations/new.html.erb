@@ -1,4 +1,4 @@
-<%= render 'shared/header', to_back: true %>
+<%= render 'shared/header', to_back: new_user_session_path %>
 <div class="form-login">
   <div class="container">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {  class: 'custom' }) do |f| %>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="column is-12 has-text-centered">
-          <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
+          <%= link_to 'Voltar', new_user_session_path, class: 'button is-text has-text-grey' %>
           <%= f.submit 'Salvar', class: 'button is-light' %>
         </div>
         <div class="column is-12">
