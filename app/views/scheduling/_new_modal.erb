@@ -38,7 +38,7 @@
               <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
                 <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
                 <%= f.hidden_field :date, value:  @scheduling.date %>
-                <%= f.submit 'AGENDAR', class: 'button is-light'%>
+                <%= f.submit 'Continuar', class: 'button is-light'%>
               <% end %>
             </div>
           </div>
