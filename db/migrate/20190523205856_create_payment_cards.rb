@@ -7,6 +7,7 @@ class CreatePaymentCards < ActiveRecord::Migration[5.2]
       t.string :expiration_month, null: false
       t.string :expiration_year, null: false
       t.string :number, null: false
+      t.string :hash, null: false
       t.string :holder_name, null: false
       t.string :holder_cpf, null: false
       t.date :holder_birth_date, null: false
