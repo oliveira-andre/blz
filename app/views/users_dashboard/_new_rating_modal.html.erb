@@ -20,9 +20,9 @@
 
           <div class="column is-12">
             <fieldset class="rating_field">
-              <% 5.times do |ff| %>
-                <%= f.text_field :rating, value: 5 - ff, type: :radio, id:  "star#{5 - ff}" %>
-                <%= f.label "", for: "star#{5 - ff}", class: 'fas fa-star' %>
+              <% 5.times do |number| %>
+                <%= f.text_field :rating, value: 5 - number, type: :radio, id:  "star#{5 - number}" %>
+                <%= f.label "", for: "star#{5 - number}", class: 'fas fa-star' %>
               <% end %>
             </fieldset>
           </div>
