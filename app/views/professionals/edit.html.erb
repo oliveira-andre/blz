@@ -1,4 +1,4 @@
-<%= render 'pages/shared/header', to_back: true %>
+<%= render 'shared/header', to_back: establishments_dashboard_path(current_user.establishment) %>
 <div class="professionals_form">
   <div class="container">
     <%= render "form", url: establishment_professional_path(establishment_id: @establishment.id, id: @professional.id) %>
