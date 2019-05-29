@@ -10,7 +10,11 @@
         </p>
 
         <p class="control">
-          <%= submit_tag 'Buscar',  class: 'button is-info' %>
+            <% if @users.present?%>
+            <%= submit_tag 'Buscar',  class: 'button is-info' %>
+          <% else %>
+            <a class="button is-info" type="submit" href="/admin/users">Limpar filtros</a>
+          <% end %>
         </p>
       </div>
     <% end %>
