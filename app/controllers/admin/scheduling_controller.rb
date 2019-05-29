@@ -2,7 +2,7 @@ module Admin
   class SchedulingController < AdminController
     def index
       @shedulings = Scheduling.all
-      @pagy, @shedulings = pagy(@shedulings)
+      @pagy, @records  = pagy_countless(@shedulings)
     end
   end
 end

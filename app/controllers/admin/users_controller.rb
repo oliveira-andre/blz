@@ -1,7 +1,11 @@
 module Admin
   class UsersController < AdminController
     def index
-      @users = User.search(params[:search]) ||  User.all
+      if params[:search]
+        @users = User.search(params[:search])
+      else
+        @users = User.all
+      end
       @pagy, @users = pagy(@users)
     end
   end

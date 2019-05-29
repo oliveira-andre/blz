@@ -15,7 +15,11 @@
         </p>
 
         <p class="control">
+        <% if @services.present?%>
           <%= submit_tag 'Buscar',  class: 'button is-info' %>
+          <% else %>
+          <%= submit_tag 'Limpar filtros',  class: 'button is-info' %>
+          <% end %>
         </p>
       </div>
     <% end %>
