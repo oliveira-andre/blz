@@ -112,7 +112,7 @@
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Data de nascimento<small class="is-danger">*</small></label>
           <div class="control">
-            <%= form_user.date_field :birth_date, class: 'input', required: true, placeholder:"Quando você nasceu ?"%>
+            <%= form_user.date_field :birth_date, id: :birthdate, class: 'input', required: true %>
           </div>
         </div>
       </div>
