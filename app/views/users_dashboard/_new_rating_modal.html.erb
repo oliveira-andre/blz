@@ -3,15 +3,15 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head has-background-primary">
-        <p class="modal-card-title has-text-weight-bold has-text-white">
+        <h1 class="modal-card-title has-text-weight-bold has-text-white">
           Avaliar
-        </p>
+        </h1>
       </header>
       <section class="modal-card-body">
-        <%= form_with url: scheduling_reviews_path(schedule) do |f| %>
+        <%= form_with url: scheduling_reviews_path(schedule), class: :custom do |f| %>
           <div class="column is-12">
             <div class="field">
-              <%= f.label :body, 'Comentário', class: :label %>
+              <label class="label has-text-grey has-text-weight-normal">Comentário <small class="is-danger">*</small></label>
               <div class="control">
                 <%= f.text_area :body, class: :textarea, placeholder: 'O que achou do serviço?' %>
               </div>
