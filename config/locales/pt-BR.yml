@@ -1,4 +1,8 @@
 pt-BR:
+  pagy:
+    nav:
+      prev: "&lsaquo;&nbsp;Anterior"
+      next: "Próximo&nbsp;&rsaquo;"
   activerecord:
     models:
       user: Usuário

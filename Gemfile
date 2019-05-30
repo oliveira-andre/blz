@@ -24,6 +24,7 @@ gem 'redis'
 gem 'sidekiq'
 gem 'validates_cpf_cnpj'
 gem 'whenever', require: false
+gem 'pagy'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

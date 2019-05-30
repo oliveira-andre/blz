@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def week_day(date_time)
     I18n.l(date_time, format: :week_day)
   end
