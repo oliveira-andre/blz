@@ -122,7 +122,7 @@
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Data de nascimento<small class="is-danger">*</small></label>
           <div class="control">
-            <%= form_user.date_field :birth_date, id: :birthdate, class: 'input', required: true %>
+            <%= form_user.date_field :birth_date, class: 'input', required: true, placeholder:"Quando você nasceu ?"%>
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Senha<small class="is-danger">*</small></label>
           <div class="control">
-            <%= form_user.password_field :password_field, class: 'input', required: true, placeholder:"Informa uma senha"%>
+            <%= form_user.password_field :password, class: 'input', required: true, placeholder:"Informa uma senha"%>
           </div>
         </div>
       </div>
@@ -156,8 +156,8 @@
 
       <div class="column is-12">
         <div class="field">
-           <%= f.check_box :terms_acceptation, class: 'is-checkradio', id: 'local_type_home' %>
-           <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <a href="#">termos de uso</a> do sistema.</label>
+          <%= form_user.check_box :terms_acceptation, class: 'is-checkradio', id: 'local_type_home' %>
+          <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <a href="#">termos de uso</a> do sistema.</label>
         </div>
       </div>
 
