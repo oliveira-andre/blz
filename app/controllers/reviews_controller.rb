@@ -4,13 +4,14 @@ class ReviewsController < ApplicationController
   def create
     authorize @scheduling, policy_class: ReviewPolicy
     @review = Review.new(review_params)
-    redirect_to users_dashboard_path(current_user)
 
     if @review.save
       flash[:success] =  'Avaliado com sucesso!'
     else
       @review.errors.full_messages.each { |error| flash[:error] = error }
     end
+
+    redirect_to users_dashboard_path(current_user)
   end
 
   private
