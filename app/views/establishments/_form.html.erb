@@ -10,11 +10,21 @@
         <% end %>
       <% end %>
     </div>
+
     <div class="column is-12">
       <h1 class="title is-size-4 has-text-weight-normal">
         <span class="icon"><i class="fas fa-store-alt"></i></span>
          Sobre o estabelecimento
       </h1>
+    </div>
+
+    <div class="column is-12">
+      <div class="field">
+        <div class="control">
+          <%= f.check_box :self_employed, class: 'is-checkradio' %>
+          <label for="establishment_self_employed" class="label has-text-grey has-text-weight-normal">Autônomo?</label>
+        </div>
+      </div>
     </div>
 
     <div class="column is-12">
