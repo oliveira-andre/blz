@@ -17,12 +17,22 @@
          Sobre o estabelecimento
       </h1>
     </div>
-
     <div class="column is-12">
+      <p class="is-pulled-left">Autônomo?</p>
       <div class="field">
         <div class="control">
-          <%= f.check_box :self_employed, class: 'is-checkradio' %>
-          <label for="establishment_self_employed" class="label has-text-grey has-text-weight-normal">Autônomo?</label>
+          <div class="field">
+            <%= f.check_box :self_employed, class: 'is-checkradio', id:'establishment_self_employed_1' %>
+            <label for="establishment_self_employed_1">Sim</label>
+          </div>
+          <div class="field">
+            <%= f.check_box :self_employed, class: 'is-checkradio', id:'establishment_self_employed_2' %>
+            <label for="establishment_self_employed_2">Não</label>
+          </div>
+          <div class="field">
+            <%= f.check_box :self_employed, class: 'is-checkradio', id:'establishment_self_employed_3' %>
+            <label for="establishment_self_employed_3">Ambos</label>
+          </div>
         </div>
       </div>
     </div>
