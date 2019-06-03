@@ -9,7 +9,7 @@ class SchedulingMailer < ApplicationMailer
   def to_establishment(scheduling)
     @scheduling = scheduling
 
-    mail to: @scheduling.professional_service.service.establishment.user.email,
+    mail to: @scheduling.service.establishment.user.email,
          subject: 'BLZ - Novo agendamento'
   end
 end

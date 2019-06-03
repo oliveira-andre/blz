@@ -4,7 +4,7 @@
 
   <div class="item">
     <p class=" has-text-centered has-text-primary is-size-3">
-      Olá, <%= @scheduling.professional_service.service.establishment.name %>!
+      Olá, <%= @scheduling.service.establishment.name %>!
     </p>
   </div>
 
@@ -19,7 +19,7 @@
       Serviço
     </p>
     <p class="has-text-centered is-size-3">
-      <%= @scheduling.professional_service.service.title %>
+      <%= @scheduling.service.title %>
     </p>
   </div>
 
@@ -28,7 +28,7 @@
       Profissional
     </p>
     <p class="has-text-centered is-size-3">
-      <%= @scheduling.professional_service.professional.name %>
+      <%= @scheduling.professional.name %>
     </p>
   </div>
 
@@ -42,7 +42,7 @@
   </div>
 
   <div class="item has-text-centered">
-    <%= link_to 'Mais detalhes', establishments_dashboard_url(@scheduling.professional_service.service.establishment), class: 'button is-primary is-size-4' %>
+    <%= link_to 'Mais detalhes', establishments_dashboard_url(@scheduling.service.establishment), class: 'button is-primary is-size-4' %>
   </div>
 
   <div class="item">
