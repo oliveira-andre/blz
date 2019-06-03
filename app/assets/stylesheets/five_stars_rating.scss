@@ -1,0 +1,31 @@
+#rating {
+  .rating_field {
+    border: none;
+    float: left;
+    position: absolute;
+    left: 30%;
+    transform: translate(50%, -50%);
+
+    input { display: none; }
+
+    label:before {
+      margin: 5px;
+      font-size: 1.25em;
+      display: inline-block;
+    }
+
+    label {
+      color: #ddd;
+      float: right;
+    }
+
+    input:checked ~ label,
+    &:not(:checked) > label:hover,
+    &:not(:checked) > label:hover ~ label { color: #FFD700;  }
+
+    input:checked + label:hover,
+    input:checked ~ label:hover,
+    label:hover ~ input:checked ~ label,
+    input:checked ~ label:hover ~ label { color: #FFED85;  }
+  }
+}
