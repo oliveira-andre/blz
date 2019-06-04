@@ -1,5 +1,6 @@
 class Establishment < ApplicationRecord
   enum status: %i[analyze approved disapproved canceled]
+  enum self_employed: { altonomo: true, estabelecimento: false }
 
   validates :name, presence: true
   validates :timetable, presence: true

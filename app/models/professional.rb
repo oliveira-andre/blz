@@ -11,7 +11,7 @@ class Professional < ApplicationRecord
   def restrict_establishment
     cont_arry = []
     cont_arry.push(establishment.user_id)
-    if establishment.self_employed == 0
+    if establishment.self_employed == true
       errors.add(:base, 'Apenas um profissional!') if cont_arry.length == 1
     end
   end

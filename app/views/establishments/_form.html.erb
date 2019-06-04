@@ -17,22 +17,17 @@
          Sobre o estabelecimento
       </h1>
     </div>
+
     <div class="column is-12">
-      <p class="is-pulled-left">Autônomo?</p>
-      <div class="field">
-        <div class="control">
-          <div class="field">
-            <%= f.check_box :self_employed, class: 'is-checkradio', id:'establishment_self_employed_1' %>
-            <label for="establishment_self_employed_1">Sim</label>
+      <p class="is-pulled-left">Onde você trabalha?</p>
+      <div class="field ">
+        <div class="control columns">
+        <% Establishment.self_employeds.each do |value| %>
+          <div class="column">
+            <%= check_box_tag 'establishment[self_employed][]',value[1] ,false,class: 'is-checkradio',id: value[1] %>
+            <label for="<%=value[1] %>"><%= value[0].to_s %></label>
           </div>
-          <div class="field">
-            <%= f.check_box :self_employed, class: 'is-checkradio', id:'establishment_self_employed_2' %>
-            <label for="establishment_self_employed_2">Não</label>
-          </div>
-          <div class="field">
-            <%= f.check_box :self_employed, class: 'is-checkradio', id:'establishment_self_employed_3' %>
-            <label for="establishment_self_employed_3">Ambos</label>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
