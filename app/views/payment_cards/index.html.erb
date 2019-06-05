@@ -1,0 +1,33 @@
+<%= render 'shared/header', to_back: false %>
+<div class="form-login edit">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <div class="tabs is-centered">
+          <ul>
+            <li>
+              <%= link_to 'Geral', edit_user_registration_path %>
+            </li>
+            <li class="is-active">
+              <%= link_to 'Cartão', payment_cards_path %>
+            </li>
+            <li>
+              <a>Endereço</a>
+            </li>
+          </ul>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <% if @payment_cards.empty? %>
+            <p> TEXTO A SER CRIADO </p>
+            <button class="button is-primary modal-button" data-target="add_payment_card">
+              Informe um cartão
+            </button>
+          <% else %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'shared/user_bottom_navigation_bar', tab: 'profile' %>
+<%= render 'add_payment_card' %>
