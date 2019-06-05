@@ -1,0 +1,23 @@
+<div id="rating" class="column is-12">
+  <h1 class="is-size-4 has-text-grey">Sua Avaliação</h1>
+
+  <div class="column is-12">
+    <div class="field">
+      <label class="label has-text-grey has-text-weight-normal">Comentário <small class="is-danger">*</small></label>
+      <div class="control">
+        <textarea class='textarea' placeholder='O que achou do serviço?' required disabled>
+          <%= review.body %>
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-12">
+    <fieldset class="rating_field">
+      <% 5.times do |number| %>
+        <input name="rating" type="radio" value="<%= 5 - number %>" id="star<%= 5 - number%>" disabled <%= "checked" if review.rating == (5 - number) %>/>
+        <label for="star<%=5 - number%>", class='fas fa-star'></label>
+      <% end %>
+    </fieldset>
+  </div>
+</div>
