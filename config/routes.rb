@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
+  mount ActionCable.server => '/notification'
 
   root 'pages#home'
   devise_for :users, controllers: {
