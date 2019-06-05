@@ -85,6 +85,8 @@
             <%= link_to 'Voltar', users_dashboard_path(current_user), class: 'button is-text' %>
           <% end %>
         </div>
+        <%= render 'scheduling/new_rating', schedule: @scheduling if policy(Review).new?(@scheduling) %>
+        <%= render 'scheduling/rating', review: @scheduling.review if policy(Review).show?(@scheduling) %>
     </div>
   </div>
 </div>
