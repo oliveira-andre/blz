@@ -19,15 +19,13 @@
     </div>
 
     <div class="column is-12">
-      <p class="is-pulled-left">Onde você trabalha?</p>
+      <p class="is-pulled-left">Você trabalha de forma autônoma?</p>
       <div class="field ">
         <div class="control columns">
-        <% Establishment.self_employeds.each do |value| %>
           <div class="column">
-            <%= check_box_tag 'establishment[self_employed][]',value[1] ,false,class: 'is-checkradio',id: value[1] %>
-            <label for="<%=value[1] %>"><%= value[0].to_s %></label>
+            <%= f.check_box :self_employed, class: 'is-checkradio', checked: false %>
+            <label for="establishment_self_employed">Sim</label>
           </div>
-          <% end %>
         </div>
       </div>
     </div>
