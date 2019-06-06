@@ -4,15 +4,13 @@ class Professional < ApplicationRecord
   has_many :office_hours
   has_one_attached :photo
 
-  validate :restrict_establishment
+  validate :self_employed_restriction, on: :create
 
   private
 
-  def restrict_establishment
-    cont_arry = []
-    cont_arry.push(establishment.user_id)
+  def self_employed_restriction
     if establishment.self_employed == true
-      errors.add(:base, 'Apenas um profissional!') if cont_arry.length == 1
+      errors.add(:base, 'Apenas um profissional!')
     end
   end
 end
