@@ -13,7 +13,8 @@
           crossorigin="anonymous">
   </head>
 
-  <body class='<%="#{controller_name}-#{action_name}"%>'>
+  <body class='<%="#{controller_name}-#{action_name}"%>'
+        data-userEmail="<%= (user_signed_in? ? current_user.email : '')%>">
      <%= render 'shared/flashs' %>
     <%= yield %>
   </body>
