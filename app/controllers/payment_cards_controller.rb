@@ -19,6 +19,7 @@ class PaymentCardsController < ApplicationController
 
   def card_params
     params.require(:payment_card).permit(:number, :holder_name, :holder_cpf,
-                                         :expiration_month, :expiration_year)
+                                         :expiration_month, :expiration_year,
+                                         :public_key)
   end
 end
