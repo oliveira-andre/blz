@@ -1,6 +1,7 @@
+<div class="flashtoastr" style="display: none">
   <% flash.each do |key, value| %>
-    <div class="notification is-<%= key == 'error' ? 'danger' : key == 'success' ? 'success' : 'info'%> toast show">
-      <button class="delete"></button>
+    <div class="flashtoastr-item" data-type="<%= key %>">
       <%= value %>
     </div>
   <% end %>
+</div>
