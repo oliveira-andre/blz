@@ -1,24 +1,24 @@
+# frozen_string_literal: true
+
 class PaymentCardsController < ApplicationController
   def index
     @payment_cards = current_user.payment_cards
   end
 
   def create
-    @payment_card = current_user.payment_cards.build(card_params)
-
-    if @payment_card.save
-      flash[:success] = 'Adicionado com sucesso'
-    else
-      @payment_card.errors.full_messages.each { |error| flash[:error] = error }
-    end
-
+    Moip::AddCreditCardMoipService.execute(
+      current_user.payment_cards.build(card_params), params[:payment_card][:cvv]
+    )
+    redirect_to payment_cards_path, notice: 'Adicionado com sucesso'
+  rescue ActiveRecord::RecordInvalid => e
+    e.record.errors.full_messages.each { |error| flash[:error] = error }
     redirect_to payment_cards_path
   end
 
   private
 
   def card_params
-    params.permit(:number, :holder_name, :holder_cpf, :expiration_month,
-                  :expiration_year)
+    params.require(:payment_card).permit(:number, :holder_name, :holder_cpf,
+                                         :expiration_month, :expiration_year)
   end
 end
