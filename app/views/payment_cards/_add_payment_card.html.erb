@@ -50,7 +50,7 @@
           </div>
           <div class="column is-6">
             <label class="has-text-grey has-text-weight-normal field-label">CVV <small class="is-danger">*</small></label>
-            <input type="text" placeholder="ex: 635" class='input'>
+            <%= f.text_field :cvv, class: :input, placeholder: 'ex: 635', maxlength: '3'%>
           </div>
         </div>
         <div class="column is-12 has-text-right">
