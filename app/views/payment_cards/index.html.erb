@@ -3,6 +3,22 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-12">
+        <div class="field">
+          <label class="file-label">
+            <figure class="image is-128x128" id="temporary_image">
+              <% if current_user.photo.attached? %>
+                <%= image_tag current_user.photo, class: "is-rounded" %>
+              <% else %>
+                <img class="is-rounded" src="/images/128x128.png">
+              <% end %>
+            </figure>
+          </label>
+        </div>
+      </div>
+      <div class="column is-12">
+        <h1 class="is-size-4 has-text-grey has-text-centered"> <%= current_user.name %> </h1>
+      </div>
+      <div class="column is-12">
         <div class="tabs is-centered">
           <ul>
             <li>
@@ -11,17 +27,15 @@
             <li class="is-active">
               <%= link_to 'Cartão', payment_cards_path %>
             </li>
-            <li>
-              <a>Endereço</a>
-            </li>
           </ul>
         </div>
         <div class="column is-12 has-text-centered">
           <% if @payment_cards.empty? %>
-            <p> TEXTO A SER CRIADO </p>
-            <button class="button is-primary modal-button" data-target="add_payment_card">
-              Informe um cartão
-            </button>
+            <p class="has-text-grey">
+              <i class="fas fa-question-circle is-size-3"></i>
+              Texto a ser criado para informar o usuário que não terá cobranças. Mais informações nos <a href="#" class="has-text-grey" style="text-decoration: underline;">termos de uso</a>
+            </p>
+            <%= link_to 'Informe um cartão', '#add_payment_card', class: 'modal-button', data: { target: :add_payment_card }, style: 'text-decoration: underline;'%>
           <% else %>
           <% end %>
         </div>
