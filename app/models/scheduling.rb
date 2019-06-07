@@ -78,5 +78,6 @@ class Scheduling < ApplicationRecord
   def notifications
     SchedulingMailer.to_user(self).deliver_later
     SchedulingMailer.to_establishment(self).deliver_later
+    NotificationBroadcastJob.perform_later(self)
   end
 end
