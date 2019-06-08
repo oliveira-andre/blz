@@ -9,7 +9,8 @@ class Professional < ApplicationRecord
   private
 
   def self_employed_restriction
-    if establishment.self_employed?
+    professionals = Professional.where(establishment_id: establishment_id).count
+    if professionals > 0 && establishment.self_employed?
       errors.add(:base, 'Profissional autônomo e só pode cadastrar 1 profissional.')
     end
   end

@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_021236) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "self_employed", default: true
+    t.boolean "self_employed", default: false
     t.index ["user_id"], name: "index_establishments_on_user_id"
   end
 
