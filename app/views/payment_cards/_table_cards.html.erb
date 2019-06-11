@@ -1,0 +1,18 @@
+<% payment_cards.each do |payment_card| %>
+  <div class="box has-background-light" style="margin-top: 10px;">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p class="has-text-weight-bold">Cartão de crédito</p>
+          <p><i class="fas fa-credit-card is-size-4"></i> <%= payment_card_number(payment_card.number) %> </p>
+        </div>
+      </div>
+      <div class="media-right">
+        <% if payment_card.active? %>
+          <p class="has-text-primary has-text-weight-bold">Ativo</p>
+        <% end %>
+      </div>
+      <%= link_to :editar, '#', class: 'has-text-black', style: 'position: absolute; bottom: 45px; right: 32px; text-decoration: underline;' %>
+    </article>
+  </div>
+<% end %>
