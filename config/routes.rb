@@ -37,6 +37,10 @@ Rails.application.routes.draw do
       to: 'establishments_dashboard#index',
       as: :establishments_dashboard
 
+
+  post '/push',
+    to: 'push_notifications#index'
+
   resources :callbacks, only: :index
 
   namespace :admin do

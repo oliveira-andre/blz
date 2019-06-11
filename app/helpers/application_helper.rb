@@ -24,4 +24,8 @@ module ApplicationHelper
   def establishment?
     !current_user.establishment.nil?
   end
+
+  def valid_public_key
+    Rails.application.credentials[Rails.env.to_sym][:vapid][:public_key]
+  end
 end

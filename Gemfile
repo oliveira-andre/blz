@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+source 'http://rubygems.org'
+git_source(:github) { |repo| "http://github.com/#{repo}.git" }
 
 gem 'devise'
 gem 'dotenv-rails'
@@ -27,6 +27,7 @@ gem 'validates_cpf_cnpj'
 gem 'whenever', require: false
 gem 'pagy'
 gem 'toastr-rails'
+gem 'webpush'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
