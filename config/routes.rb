@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :holders, only: %i[new update]
   end
 
-  resources :payment_cards, only: %i[create index]
+  resources :payment_cards, only: %i[create index show destroy]
 
   get '/users/:id/dashboard',
       to: 'users_dashboard#index',
