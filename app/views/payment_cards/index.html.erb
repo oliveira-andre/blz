@@ -39,7 +39,9 @@
           <% else %>
             <div class="has-text-right">
               <%= link_to :novo, '#add_payment_card', class: 'button is-primary is-outlined modal-button is-capitalized', data: { target: :add_payment_card } %>
-              <%= render 'table_cards', payment_cards: @payment_cards %>
+              <div id="swich_table_edit">
+                <%= render 'table_cards', payment_cards: @payment_cards %>
+              </div>
             </div>
           <% end %>
         </div>
