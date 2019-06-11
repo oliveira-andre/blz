@@ -33,29 +33,19 @@ $(document).on("turbolinks:load", function () {
     .subscribe({
       userVisibleOnly: true,
       applicationServerKey: window.vapidPublicKey
-    }).then(
-      function(pushSubscription) {
-        console.log(pushSubscription.subscriptionId);
-        console.log(pushSubscription.endpoint);
-        // The push subscription details needed by the application
-        // server are now available, and can be sent to it using,
-        // for example, an XMLHttpRequest.
-        $.post("/push", { subscription: pushSubscription.toJSON(), message: "You clicked a button!" });
-      }, function(error) {
-        // During development it often helps to log errors to the
-        // console. In a production environment it might make sense to
-        // also report information about errors back to the
-        // application server.
-        console.log(error);
-      }
-    );
+    });
   });
 
 
   $(".btn-push").on("click", (e) => {
     navigator.serviceWorker.ready
     .then((serviceWorkerRegistration) => {
-        serviceWorkerRegistration.showNotification("Testando the notification");
+        serviceWorkerRegistration.showNotification(
+          "Título da notificação",
+          {
+            body: "Colocar alguma coisa da notificação",
+            icon: "/images/logo.png"
+          });
     });
   });
 
