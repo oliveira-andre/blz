@@ -14,9 +14,7 @@ function createHash() {
   });
   if (cc.isValid()) {
     $('input[type=submit]').prop('disabled', false);
-    template_string = `<input id='payment_card_hash_card'
-    value='${cc.hash()}' class='is-hidden' name='payment_card[hash_card]'>`;
-    $('#encrypted_value').replaceWith(template_string);
+    $("#payment_card_hash_card").val(cc.hash());
   }
 }
 
