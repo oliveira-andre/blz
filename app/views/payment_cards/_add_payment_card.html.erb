@@ -65,17 +65,21 @@
         </div>
         <div class="column is-12" id='hidden_keys'>
           <%= f.text_area :public_key,
-      value: "-----BEGIN PUBLIC KEY-----
-      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsj7uzpy+cahCaQfe3TmJ
-      yhqG2xfePhpKNkc7W3fpp+5xYrgFOUxz9ZYYl7dHnB67B0eErInK5EhikCq19yax
-      4o+ZW5QUfhBGu/6ec8Nmkfo/4jtCU3Hbd1nvYdbsiGA6MeKfGtFMoxJBP107lMuU
-      wMi44yEjZPvc1Iw8R4/CYx/K5C6on1GjOlwJ4CYBtWJXuMceexkRHNKYVHjq2NrS
-      d/6NtT6yzwqcKqnO2WAp4Qe4Q5oOhWB0mR157V5dTSNdbDMJUi91lYvJoXBskDcN
-      yLLsaIJH4+HlJH1gmeM+AqTtivFNDTucOpV0AHsnTGgMEeubIxS4vNCKg1JBcsVx
-      2QIDAQAB
-      -----END PUBLIC KEY-----", class: 'is-hidden' %>
-          <div id="encrypted_value"></div>
+        value: "-----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsj7uzpy+cahCaQfe3TmJ
+        yhqG2xfePhpKNkc7W3fpp+5xYrgFOUxz9ZYYl7dHnB67B0eErInK5EhikCq19yax
+        4o+ZW5QUfhBGu/6ec8Nmkfo/4jtCU3Hbd1nvYdbsiGA6MeKfGtFMoxJBP107lMuU
+        wMi44yEjZPvc1Iw8R4/CYx/K5C6on1GjOlwJ4CYBtWJXuMceexkRHNKYVHjq2NrS
+        d/6NtT6yzwqcKqnO2WAp4Qe4Q5oOhWB0mR157V5dTSNdbDMJUi91lYvJoXBskDcN
+        yLLsaIJH4+HlJH1gmeM+AqTtivFNDTucOpV0AHsnTGgMEeubIxS4vNCKg1JBcsVx
+        2QIDAQAB
+        -----END PUBLIC KEY-----", class: 'is-hidden' %>
+          <%= f.text_field :hash_card, class: 'is-hidden' %>
         </div>
+        <p class="has-text-danger">
+          <i class="fas fa-question-circle is-size-4"></i>
+          Texto a ser criado para informar o usuário que não terá cobranças. Mais informações nos <a href="#" class="has-text-danger" style="text-decoration: underline;">termos de uso</a>
+        </p>
         <div class="column is-12 has-text-right">
           <%= button_tag :cancelar, class: 'button modal-close-custom is-capitalized', type: :button %>
           <%= f.submit :salvar,  class: 'button is-primary is-capitalized', disabled: true %>
