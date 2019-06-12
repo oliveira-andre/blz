@@ -22,6 +22,7 @@ gem 'moip2'
 gem 'rack-cors', require: 'rack/cors'
 gem 'redis'
 gem 'sidekiq'
+gem 'serviceworker-rails'
 gem 'validates_cpf_cnpj'
 gem 'whenever', require: false
 gem 'pagy'
