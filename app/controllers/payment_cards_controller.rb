@@ -5,7 +5,6 @@ class PaymentCardsController < ApplicationController
 
   def index
     @payment_cards = current_user.payment_cards
-    authorize @payment_cards
   end
 
   def create
@@ -13,6 +12,7 @@ class PaymentCardsController < ApplicationController
       current_user.payment_cards.build(card_params), params[:payment_card][:cvv]
     )
     flash[:success] = 'Adicionado com sucesso'
+    redirect_to payment_cards_path
   rescue ActiveRecord::RecordInvalid => e
     e.record.errors.full_messages.each { |error| flash[:error] = error }
     redirect_to payment_cards_path
