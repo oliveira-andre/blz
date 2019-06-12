@@ -13,8 +13,8 @@ class PaymentCardsController < ApplicationController
     )
     flash[:success] = 'Adicionado com sucesso'
     redirect_to payment_cards_path
-  rescue ActiveRecord::RecordInvalid => e
-    e.record.errors.full_messages.each { |error| flash[:error] = error }
+  rescue StandardError => e
+    flash[:error] = e.message
     redirect_to payment_cards_path
   end
 
