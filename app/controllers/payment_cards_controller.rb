@@ -2,24 +2,33 @@
 
 class PaymentCardsController < ApplicationController
   before_action :load_payment_card, only: %i[show destroy]
+
   def index
     @payment_cards = current_user.payment_cards
+    authorize @payment_cards
   end
 
   def create
     Moip::AddCreditCardMoipService.execute(
       current_user.payment_cards.build(card_params), params[:payment_card][:cvv]
     )
-    redirect_to payment_cards_path, notice: 'Adicionado com sucesso'
+    flash[:success] = 'Adicionado com sucesso'
   rescue ActiveRecord::RecordInvalid => e
     e.record.errors.full_messages.each { |error| flash[:error] = error }
     redirect_to payment_cards_path
   end
 
-  def show; end
+  def show
+    authorize @payment_card
+  end
 
   def destroy
-    redirect_to payment_cards_path, notice: 'Excluído' if @payment_card.destroy
+    authorize @payment_card
+
+    if @payment_card.destroy
+      flash[:success] = 'Excluído com sucesso'
+      redirect_to payment_cards_path
+    end
   end
 
   private
