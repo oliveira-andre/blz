@@ -1,12 +1,10 @@
 <div id="add_payment_card" class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <header class="modal-card-head has-background-primary">
-      <p class="modal-card-title has-text-weight-bold has-text-white">
-        Cartão de crédito
-      </p>
-    </header>
     <section class="modal-card-body">
+      <div class="column is-12">
+        <h1 class="is-size-4 has-text-grey"> Cartão de crédito </h1>
+      </div>
       <%= form_with model: current_user.payment_cards.build, class: :custom do |f| %>
         <div class="column is-12">
           <div class="field">
@@ -46,12 +44,16 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <%= f.text_field :expiration_month, required: true, class: :input, placeholder: 'MM', maxlength: '2' %>
+                  <div class="select">
+                    <%= f.select :expiration_month, credit_card_expiration_month_range, include_blank: true, required: true %>
+                  </div>
                 </div>
               </div>
               <div class="field">
                 <div class="control">
-                  <%= f.text_field :expiration_year, required: true, class: :input, placeholder: 'AA', maxlength: '2' %>
+                  <div class="select">
+                    <%= f.select :expiration_year, credit_card_expiration_year_range, include_blank: true, required: true %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -63,15 +65,15 @@
         </div>
         <div class="column is-12" id='hidden_keys'>
           <%= f.text_area :public_key,
-           value: "-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsj7uzpy+cahCaQfe3TmJ
-yhqG2xfePhpKNkc7W3fpp+5xYrgFOUxz9ZYYl7dHnB67B0eErInK5EhikCq19yax
-4o+ZW5QUfhBGu/6ec8Nmkfo/4jtCU3Hbd1nvYdbsiGA6MeKfGtFMoxJBP107lMuU
-wMi44yEjZPvc1Iw8R4/CYx/K5C6on1GjOlwJ4CYBtWJXuMceexkRHNKYVHjq2NrS
-d/6NtT6yzwqcKqnO2WAp4Qe4Q5oOhWB0mR157V5dTSNdbDMJUi91lYvJoXBskDcN
-yLLsaIJH4+HlJH1gmeM+AqTtivFNDTucOpV0AHsnTGgMEeubIxS4vNCKg1JBcsVx
-2QIDAQAB
------END PUBLIC KEY-----", class: 'is-hidden' %>
+      value: "-----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsj7uzpy+cahCaQfe3TmJ
+      yhqG2xfePhpKNkc7W3fpp+5xYrgFOUxz9ZYYl7dHnB67B0eErInK5EhikCq19yax
+      4o+ZW5QUfhBGu/6ec8Nmkfo/4jtCU3Hbd1nvYdbsiGA6MeKfGtFMoxJBP107lMuU
+      wMi44yEjZPvc1Iw8R4/CYx/K5C6on1GjOlwJ4CYBtWJXuMceexkRHNKYVHjq2NrS
+      d/6NtT6yzwqcKqnO2WAp4Qe4Q5oOhWB0mR157V5dTSNdbDMJUi91lYvJoXBskDcN
+      yLLsaIJH4+HlJH1gmeM+AqTtivFNDTucOpV0AHsnTGgMEeubIxS4vNCKg1JBcsVx
+      2QIDAQAB
+      -----END PUBLIC KEY-----", class: 'is-hidden' %>
           <div id="encrypted_value"></div>
         </div>
         <div class="column is-12 has-text-right">
