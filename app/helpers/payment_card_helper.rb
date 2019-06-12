@@ -2,6 +2,6 @@
 
 module PaymentCardHelper
   def payment_card_number(number)
-    '**** **** **** ' + number[(number.length - 5)..(number.length - 1)]
+    '**** **** **** ' + number.last(4)
   end
 end
