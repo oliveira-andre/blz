@@ -53,3 +53,8 @@ h1, h2 {
     margin-right: 15px;
   }
 }
+
+.tabs li.is-active a {
+  border-bottom-color: #00d1b2 !important;
+  color: #00d1b2 !important;
+}
