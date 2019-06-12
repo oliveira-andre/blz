@@ -3,7 +3,7 @@
   <div class="modal-content">
     <section class="modal-card-body">
       <div class="column is-12">
-        <h1 class="is-size-4 has-text-grey"> Cartão de crédito </h1>
+        <h1 class="is-size-5 has-text-grey has-text-weight-bold"> Cartão de crédito </h1>
       </div>
       <%= form_with model: current_user.payment_cards.build, class: :custom do |f| %>
         <div class="column is-12">
@@ -76,10 +76,16 @@
         -----END PUBLIC KEY-----", class: 'is-hidden' %>
           <%= f.text_field :hash_card, class: 'is-hidden' %>
         </div>
-        <p class="has-text-danger">
-          <i class="fas fa-question-circle is-size-4"></i>
-          Texto a ser criado para informar o usuário que não terá cobranças. Mais informações nos <a href="#" class="has-text-danger" style="text-decoration: underline;">termos de uso</a>
-        </p>
+        <div class="field-body">
+          <div class="column is-1">
+            <i class="fas fa-question-circle is-size-4 has-text-danger"></i>
+          </div>
+          <div class="column is-11">
+            <span class="has-text-danger">
+              Texto a ser criado para informar o usuário que não terá cobranças. Mais informações nos <a href="#" class="has-text-danger" style="text-decoration: underline;">termos de uso.</a>
+            </span>
+          </div>
+        </div>
         <div class="column is-12 has-text-right">
           <%= button_tag :cancelar, class: 'button modal-close-custom is-capitalized', type: :button %>
           <%= f.submit :salvar,  class: 'button is-primary is-capitalized', disabled: true %>
