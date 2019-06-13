@@ -1,3 +1,4 @@
+# coding: utf-8
 class Scheduling < ApplicationRecord
   default_scope { order(:date) }
   scope :history, -> { where.not(status: :scheduled) }
@@ -7,6 +8,7 @@ class Scheduling < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :professional_service
 
+  has_one :review, as: :reviewable
   has_one :service, through: :professional_service
   has_one :professional, through: :professional_service
 
@@ -76,5 +78,6 @@ class Scheduling < ApplicationRecord
   def notifications
     SchedulingMailer.to_user(self).deliver_later
     SchedulingMailer.to_establishment(self).deliver_later
+    NotificationBroadcastJob.perform_later(self)
   end
 end

@@ -4,7 +4,6 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'custom' }) do |f| %>
       <div class="columns is-multiline">
         <%= render "devise/shared/error_messages", resource: resource %>
-
         <div class="column is-12">
           <div class="field">
             <label class="file-label">
@@ -19,9 +18,20 @@
             </label>
           </div>
         </div>
-
         <div class="column is-12">
           <h1 class="is-size-4 has-text-grey has-text-centered"> <%= current_user.name %> </h1>
+        </div>
+        <div class="column is-12">
+          <div class="tabs is-centered">
+            <ul>
+              <li class="is-active">
+                <%= link_to 'Geral', edit_user_registration_path %>
+              </li>
+              <li>
+                <%= link_to 'Cartão', payment_cards_path %>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="column is-12">
           <div class="field">

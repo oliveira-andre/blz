@@ -24,4 +24,8 @@ module ApplicationHelper
   def establishment?
     !current_user.establishment.nil?
   end
+
+  def default_image_service(service, size: '')
+    "/images/default_category#{service.category.order}#{size}.jpg"
+  end
 end

@@ -5,7 +5,7 @@
         <% if service.photos.attached? %>
           <%= image_tag service.thumbnail(service.photos.sample, :medium) %>
         <% else %>
-          <img src="/images/1280x960.png">
+          <img src="<%= default_image_service(service) %>">
         <% end %>
       </figure>
     </div>
