@@ -9,6 +9,7 @@ pt-BR:
       service: Serviço
       establishment: Estabelecimento
       address: Endereço
+      professional: "Profissional"
     attributes:
       user:
         name: Nome
@@ -30,6 +31,9 @@ pt-BR:
         establishment: Estabelecimento
         local_type: Localidade do Serviço
         photos: Fotos
+
+      professional:
+        self_employed: "Profissional autõnomo"
 
       establishment:
         name: Nome
