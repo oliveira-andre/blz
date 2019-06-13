@@ -9,7 +9,7 @@ pt-BR:
       service: Serviço
       establishment: Estabelecimento
       address: Endereço
-      professional: "Profissional"
+      professional: Profissional
 
     attributes:
       user:
