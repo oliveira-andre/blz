@@ -10,6 +10,7 @@ pt-BR:
       establishment: Estabelecimento
       address: Endereço
       professional: "Profissional"
+
     attributes:
       user:
         name: Nome
@@ -33,7 +34,7 @@ pt-BR:
         photos: Fotos
 
       professional:
-        self_employed: "Profissional autõnomo"
+        self_employed: Profissional autônomo
 
       establishment:
         name: Nome
