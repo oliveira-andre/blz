@@ -1,4 +1,6 @@
 class Review < ApplicationRecord
+  enum status: %i[analyze approved recused]
+
   belongs_to :reviewable, polymorphic: true
   belongs_to :user
 

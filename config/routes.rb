@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
+  mount ActionCable.server => '/cable'
 
   root 'pages#home'
   devise_for :users, controllers: {
@@ -39,7 +40,8 @@ Rails.application.routes.draw do
       as: :establishments_dashboard
 
   resources :callbacks, only: :index
-
+  resources :use_rules, only: :index
+  
   namespace :admin do
     resources :scheduling, only: :index
     resources :services, only: :index

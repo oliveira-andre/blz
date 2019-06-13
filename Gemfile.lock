@@ -235,6 +235,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    serviceworker-rails (0.5.5)
+      railties (>= 3.1)
     sidekiq (5.2.5)
       connection_pool (~> 2.2, >= 2.2.2)
       rack (>= 1.5.0)
@@ -258,6 +260,8 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
+    toastr-rails (1.0.3)
+      railties (>= 3.1.0)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -317,9 +321,11 @@ DEPENDENCIES
   redis
   rubocop
   sass-rails (~> 5.0)
+  serviceworker-rails
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
+  toastr-rails
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)

@@ -1,3 +1,4 @@
+// *= require toastr
 @import 'bulma/bulma';
 @import 'bulma-extensions/dist/css/bulma-extensions.min';
 @import 'bulma-extensions/bulma-calendar/dist/css/bulma-calendar.min';
@@ -20,6 +21,7 @@
 @import 'scheduling';
 @import 'five_stars_rating';
 @import 'payment_card';
+@import 'use_rules';
 
 html {
   font-family: 'Inter', sans-serif !important;
