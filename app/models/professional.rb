@@ -9,8 +9,8 @@ class Professional < ApplicationRecord
   private
 
   def self_employed_restriction
-    if establishment.self_employed? && establishment.professionals.count.positive?
-      errors.add(:self_employed, 'só pode cadastrar 1 profissional.')
-    end
+    return unless establishment.self_employed? && establishment.professionals.count.positive?
+
+    errors.add(:self_employed, 'só pode cadastrar 1 profissional.')
   end
 end
