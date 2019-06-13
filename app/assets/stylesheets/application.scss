@@ -19,6 +19,7 @@
 @import 'professionals';
 @import 'scheduling';
 @import 'five_stars_rating';
+@import 'payment_card';
 
 html {
   font-family: 'Inter', sans-serif !important;
@@ -55,6 +56,6 @@ h1, h2 {
 }
 
 .tabs li.is-active a {
-  border-bottom-color: #00d1b2 !important;
-  color: #00d1b2 !important;
+  border-bottom-color: $primary-color;
+  color: $primary-color;
 }

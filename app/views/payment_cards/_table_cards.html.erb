@@ -1,9 +1,9 @@
 <% payment_cards.each do |payment_card| %>
-  <div class="box has-background-light" style="margin-top: 10px;">
+  <div class="box has-background-light">
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <p class="has-text-weight-bold">Cartão de crédito</p>
+          <p class="has-text-black">Cartão de crédito</p>
           <p><i class="fas fa-credit-card is-size-4"></i> <%= payment_card_number(payment_card.number) %> </p>
         </div>
       </div>
@@ -11,8 +11,8 @@
         <% if payment_card.active? %>
           <p class="has-text-primary has-text-weight-bold">Ativo</p>
         <% end %>
+        <%= link_to :detalhes, payment_card_path(payment_card), class: 'has-text-black is-capitalized is-link', remote: true %>
       </div>
-      <%= link_to :editar, payment_card_path(payment_card), class: 'has-text-black is-capitalized', style: 'position: sticky; margin-top: 45px; margin-left: -42px; text-decoration: underline;', remote: true %>
     </article>
   </div>
 <% end %>
