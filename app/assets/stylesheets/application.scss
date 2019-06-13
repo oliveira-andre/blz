@@ -20,6 +20,7 @@
 @import 'professionals';
 @import 'scheduling';
 @import 'five_stars_rating';
+@import 'payment_card';
 @import 'use_rules';
 
 html {
@@ -54,4 +55,9 @@ h1, h2 {
     margin-left: 15px;
     margin-right: 15px;
   }
+}
+
+.tabs li.is-active a {
+  border-bottom-color: $primary-color;
+  color: $primary-color;
 }

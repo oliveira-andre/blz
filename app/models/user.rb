@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates_cpf :cpf, if: :establishment_or_update?
 
   has_many :scheduling
+  has_many :payment_cards
   has_one :establishment
   has_one :address, as: :addressable
   has_one_attached :photo
