@@ -38,7 +38,8 @@
               <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
                 <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
                 <%= f.hidden_field :date, value:  @scheduling.date %>
-                <%= f.submit 'Continuar', class: 'button is-light'%>
+                <%= f.submit 'Continuar', class: 'button is-light' if current_user.payment_cards.present? %>
+                <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user), class: 'button is-light', remote: true if current_user.payment_cards.empty? %>
               <% end %>
             </div>
           </div>
