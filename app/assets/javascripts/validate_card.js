@@ -1,8 +1,12 @@
 $(document).on('turbolinks:load', function () {
+  checkInput();
+});
+
+function checkInput() {
   $('.input').keyup(function () {
     createHash();
   });
-});
+}
 
 function createHash() {
   var cc = new Moip.CreditCard({
