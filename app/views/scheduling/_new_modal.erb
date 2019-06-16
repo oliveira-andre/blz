@@ -39,7 +39,7 @@
                 <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
                 <%= f.hidden_field :date, value:  @scheduling.date %>
                 <%= f.submit 'Continuar', class: 'button is-light' if current_user.payment_cards.present? %>
-                <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user), class: 'button is-light', remote: true if current_user.payment_cards.empty? %>
+                <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service: params[:professional_service_id], professional: @scheduling.professional), class: 'button is-light', remote: true if current_user.payment_cards.empty? %>
               <% end %>
             </div>
           </div>
