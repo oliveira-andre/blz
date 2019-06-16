@@ -11,11 +11,23 @@ class PaymentCardsController < ApplicationController
     Moip::AddCreditCardMoipService.execute(
       current_user.payment_cards.build(card_params), params[:payment_card][:cvv]
     )
-    flash[:success] = 'Adicionado com sucesso'
-    redirect_to payment_cards_path
+    if params[:service_id].nil?
+      flash[:success] = 'Adicionado com sucesso'
+      redirect_to payment_cards_path
+    else
+      @scheduling = Scheduling.new(scheduling_params)
+      if @scheduling.save
+        flash[:success] = "Agendado com sucesso"
+        redirect_to service_path(params[:service_id])
+      end
+    end
   rescue StandardError => e
-    flash[:error] = e.message
-    redirect_to payment_cards_path
+    if params[:service_id].nil?
+      flash[:error] = e.message
+      redirect_to payment_cards_path
+    else
+      @error = e.message
+    end
   end
 
   def show
@@ -39,7 +51,27 @@ class PaymentCardsController < ApplicationController
                                          :hash_card, :holder_birth_date)
   end
 
+  def scheduling_params
+    params.permit(:date)
+    .merge(user: current_user,
+           professional_service: load_professional_service,
+           service: load_service,
+           professional: load_professional)
+  end
+
   def load_payment_card
     @payment_card = PaymentCard.find(params[:id])
+  end
+
+  def load_service
+    Service.find(params[:service_id])
+  end
+
+  def load_professional
+    Professional.find(params[:professional])
+  end
+
+  def load_professional_service
+    ProfessionalService.find(params[:professional_service])
   end
 end
