@@ -1,6 +1,14 @@
-<% errors.each do |msg| %>
+<% if errors %>
+  <% errors.each do |msg| %>
+    <div class="notification is-danger">
+      <button class="delete" type="button"></button>
+      <%= msg %>
+    </div>
+  <% end %>
+<% end %>
+<% if error %>
   <div class="notification is-danger">
     <button class="delete" type="button"></button>
-    <%= msg %>
+    <%= error %>
   </div>
 <% end %>

@@ -1,9 +1,11 @@
-<% if @user %> 
-  $('#new-modal-edit-user').replaceWith("<%= j render 'payment_cards/add_payment_card' %>");
+<% if @user && !@error %> 
+  $('#new-modal-edit-user').replaceWith("<%= j render 'payment_cards/new_modal_add_payment' %>");
   $('#add_payment_card').addClass('is-active');
+  loadMasks();
+  checkInput();
 <% else %>
   <% @errors << 'CPF não pode ficar em branco' if params[:user][:cpf].empty? %>
   <% @errors << 'Data de nascimento não pode ficar em branco' if params[:user][:birth_date].empty? %>
   <% @errors << 'Telefone não pode ficar em branco' if params[:user][:phone].empty? %>
-  $('#errors').html("<%= j render 'users/errors', errors: @errors %>");
+  $('#errors').html("<%= j render 'users/errors', errors: @errors, error: @error %>");
 <% end %>
