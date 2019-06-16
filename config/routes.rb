@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :photos, only: :destroy
   resources :services, only: :show do
     resources :users, only: %i[edit update]
+    resources :payment_cards, only: %i[new create]
   end
 
   resources :scheduling, only: %i[new create show] do
