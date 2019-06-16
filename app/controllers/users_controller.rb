@@ -3,7 +3,10 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user.update(user_params)
+    Moip::CreateCustomerMoipService.execute(current_user)
     @errors = []
+  rescue StandardError => e
+    @error = e
   end
 
   private
