@@ -8,7 +8,7 @@
           <h2 class="is-size-5 has-text-grey has-text-weight-bold">Completar Cadastro</h2>
           <p class="has-text-grey-light">* para agendar um serviço precisamos que complete seu cadastro com as informações abaixo</p>
         </div>
-        <%= form_with model: current_user, url: service_user_path(date: params[:date], professional_service: params[:professional_service], professional: params[:professional]), class: :custom do |f| %>
+        <%= form_with model: current_user, url: service_user_path(date: params[:date], professional_service_id: params[:professional_service_id], professional_id: params[:professional_id]), class: :custom do |f| %>
           <div class="column is-12">
             <div class="field">
               <label class="label has-text-grey has-text-weight-normal">CPF <small class="is-danger">*</small></label>

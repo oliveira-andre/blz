@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PaymentCardsController < ApplicationController
-  before_action :load_payment_card, only: %i[show destroy]
+  before_action :payment_card, only: %i[show destroy]
 
   def index
     @payment_cards = current_user.payment_cards
@@ -17,7 +17,7 @@ class PaymentCardsController < ApplicationController
     else
       @scheduling = Scheduling.new(scheduling_params)
       if @scheduling.save
-        flash[:success] = "Agendado com sucesso"
+        flash[:success] = 'Agendado com sucesso'
         redirect_to service_path(params[:service_id])
       end
     end
@@ -53,25 +53,25 @@ class PaymentCardsController < ApplicationController
 
   def scheduling_params
     params.permit(:date)
-    .merge(user: current_user,
-           professional_service: load_professional_service,
-           service: load_service,
-           professional: load_professional)
+          .merge(user: current_user,
+                 professional_service: professional_service,
+                 service: service,
+                 professional: professional)
   end
 
-  def load_payment_card
+  def payment_card
     @payment_card = PaymentCard.find(params[:id])
   end
 
-  def load_service
+  def service
     Service.find(params[:service_id])
   end
 
-  def load_professional
-    Professional.find(params[:professional])
+  def professional
+    Professional.find(params[:professional_id])
   end
 
-  def load_professional_service
-    ProfessionalService.find(params[:professional_service])
+  def professional_service
+    ProfessionalService.find(params[:professional_service_id])
   end
 end
