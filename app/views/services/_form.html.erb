@@ -91,6 +91,10 @@
             <%= form.radio_button(:local_type, 'establishment', class: 'is-checkradio', id: 'local_type_establishment', required: true) %>
             <label class="has-text-grey" for="local_type_establishment">No estabelecimento</label>
           </div>
+          <div class="field">
+            <%= form.radio_button(:local_type, 'both', class: 'is-checkradio', id: 'local_type_both', required: true) %>
+            <label class="has-text-grey" for="local_type_both">Ambos lugares</label>
+          </div>
         </div>
       </div>
     </div>
