@@ -2,15 +2,13 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: root
-  host: 127.0.0.1
-  port: 5432
+  username: <%= Rails.application.credentials[Rails.env.to_sym][:database][:username] || ENV.fetch("DB_USERNAME") %>
+  password: <%= Rails.application.credentials[Rails.env.to_sym][:database][:password] || ENV.fetch("DB_PASSWORD") %>
+  host: <%= Rails.application.credentials[Rails.env.to_sym][:database][:host] || ENV.fetch("DB_HOST") %>
 
 development:
   <<: *default
   database: blz_development
-
 
 test:
   <<: *default
@@ -19,4 +17,3 @@ test:
 production:
   <<: *default
   database: blz_production
-  username: blz
