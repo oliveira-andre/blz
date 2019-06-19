@@ -51,6 +51,6 @@ class EstablishmentsController < ApplicationController
   def load_establishment
     @establishment = Establishment.find(params[:id] || params[:establishment_id])
     @user = User.find(@establishment.user_id)
-    @address = Address.find_by(establishment: @establishment)
+    @address = Address.find_by(addressable: @establishment)
   end
 end
