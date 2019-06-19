@@ -28,4 +28,12 @@ module ApplicationHelper
   def default_image_service(service, size: '')
     "/images/default_category#{service.category.order}#{size}.jpg"
   end
+
+  def mediun_stars(ratings)
+    total = 0
+    ratings.each do |value|
+      total += value.rating
+    end
+    total/ratings.size
+  end
 end

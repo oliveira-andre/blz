@@ -29,6 +29,16 @@ class Service < ApplicationRecord
                 .where.not(id: professionals_ids)
   end
 
+  def reviews
+    services_ids = ProfessionalService.where(service_id: id)
+                                      .pluck(:id)
+
+    schedulings_ids = Scheduling.where(professional_service_id: services_ids)
+
+    Review.where(reviewable_id: schedulings_ids, status: 'analyze',
+                 reviewable_type: 'Scheduling')
+  end
+
   def update_and_rebuild_schedule(params)
     params = params.to_h
     duration_changed = duration != params[:duration].to_i

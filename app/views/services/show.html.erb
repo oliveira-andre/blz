@@ -35,12 +35,25 @@
 
     <div class="columns is-mobile is-multiline">
       <div class="column is-12">
-        <h2 class=" has-text-weight-semibold is-size-4">Avaliações</h2>
+        <h1 class=" has-text-weight-semibold is-size-12">Avaliações (<%= @service.reviews.count %>)
+          <% mediun_stars(@service.reviews).times do |number| %>
+            <i class="fas fa-star" style="color:#2AC5CC"></i>
+          <% end%>
+        </h1>
       </div>
-      <%= @service.professional_services.scheduling.inspect  %>
-        <div class="column is-5">
-        <a class="">Cabelo</a>
-      </div>
+
+      <% @service.reviews.each do |review| %>
+        <div class="column is-12">
+            <h6><%= review.user.name.split(' ')[0].capitalize %>
+              <% review.rating.times do |number| %>
+                <i class="fas fa-star" style="color:#2AC5CC"></i>
+              <% end%>
+            </h6>
+          <br>
+          <p><%= review.body %></p>
+         <div class="is-divider"></div>
+        </div>
+      <% end %>
     </div>
 
     <div class="columns is-mobile is-multiline categories">
