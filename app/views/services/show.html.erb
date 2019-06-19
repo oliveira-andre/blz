@@ -37,7 +37,7 @@
     <div class="columns is-mobile is-multiline">
       <div class="column is-12">
         <h1 class=" has-text-weight-semibold is-size-12">Avaliações (<%= @service.reviews.count %>)
-          <% mediun_stars(@service.reviews).times do |number| %>
+          <% average_stars(@service.reviews).times do |number| %>
             <i class="fas fa-star" style="color:#2AC5CC"></i>
           <% end%>
         </h1>

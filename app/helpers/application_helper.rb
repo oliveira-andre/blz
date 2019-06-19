@@ -34,6 +34,6 @@ module ApplicationHelper
     ratings.each do |value|
       total += value.rating
     end
-    total/ratings.size
+    total / ratings.size
   end
 end
