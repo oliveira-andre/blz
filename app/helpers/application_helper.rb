@@ -29,7 +29,7 @@ module ApplicationHelper
     "/images/default_category#{service.category.order}#{size}.jpg"
   end
 
-  def mediun_stars(ratings)
+  def average_stars(ratings)
     total = 0
     ratings.each do |value|
       total += value.rating
