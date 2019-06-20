@@ -36,10 +36,11 @@ class EstablishmentsController < ApplicationController
   def establishment_params
     params.require(:establishment)
           .permit(
-            :name, :timetable, :photo, :self_employed, address_attributes: %i[
+            :name, :timetable, :self_employed, address_attributes: %i[
               street number neighborhood zipcode
             ], user_attributes: %i[
-              name cpf email phone terms_acceptation birth_date
+              name cpf email phone terms_acceptation birth_date password
+              password_confirmation
             ]
           )
   end
