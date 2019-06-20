@@ -2,7 +2,7 @@
 
 class ProfessionalsController < ApplicationController
   before_action :load_establishment
-  before_action :load_professional, only: %i[edit update]
+  before_action :load_professional, only: %i[edit update destroy]
 
   def new
     @professional = @establishment.professionals.build
@@ -34,6 +34,12 @@ class ProfessionalsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @professional.destroy!
+    redirect_to establishments_dashboard_path(@establishment),
+                notice: 'Profissional excluído com sucesso'
   end
 
   private
