@@ -27,6 +27,7 @@ gem 'validates_cpf_cnpj'
 gem 'whenever', require: false
 gem 'pagy'
 gem 'toastr-rails'
+gem 'autocomplete_zipcode'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
