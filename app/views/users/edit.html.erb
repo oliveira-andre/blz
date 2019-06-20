@@ -1,0 +1,40 @@
+<%= render 'shared/header', to_back: false %>
+<div class="service-edit-user">
+  <div class="container">
+    <%= form_with model: current_user, url: service_user_path(date: params[:date], professional_service_id: params[:professional_service_id], professional_id: params[:professional_id]), class: :custom do |f| %>
+      <div id="errors"></div>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h2 class="is-size-5 has-text-grey has-text-weight-bold">Completar Cadastro</h2>
+          <p class="has-text-grey-light">* para agendar um serviço precisamos que complete seu cadastro com as informações abaixo</p>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">CPF <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.text_field :cpf, class: 'input cpf', placeholder: 'Informe seu CPF', required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Data de nascimento <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.date_field :birth_date, class: :input, required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <label class="label has-text-grey has-text-weight-normal">Telefone <small class="is-danger">*</small></label>
+          <div class="control">
+            <%= f.text_field :phone, required: true, class: 'input phone', placeholder: "Informe seu telefone com DDD" %>
+          </div>
+        </div>
+        <div class="column is-12 has-text-right">
+          <%= f.submit :continuar, class: 'button is-light is-pulled-right is-capitalized'  %>
+          <%= link_to :cancelar, service_path(params[:service_id], anchor: :schedule),class: 'button modal-close-custom is-text has-text-grey is-pulled-right is-capitalized' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

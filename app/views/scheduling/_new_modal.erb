@@ -1,50 +1,54 @@
 <div id="new-modal-scheduling" class="modal modal-fx-fadeInScale">
   <div class="modal-background"></div>
   <div class="modal-content">
-      <div class="columns content is-multiline">
-        <div class="column is-12">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-64x64">
-                <% if @scheduling.professional.photo.attached? %>
-                  <%= image_tag @scheduling.professional.photo, class:'image is-rounded' %>
-                <% else %>
-                  <img src="https://bulma.io/images/placeholders/128x128.png" class="is-rounded">
-                <% end %>
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-size-4"><%= @scheduling.service.title %></p>
-              <p class="subtitle is-size-6"><%= @scheduling.professional.name %></p>
-            </div>
-          </article>
-        </div>
-        <div class="column is-12 is-date-scheduling">
-          <p>Horário escolhido</p>
-          <span class="icon"><%= image_tag '/images/hours.png' %></span>
-          <span class="is-size-4 has-text-weight-semibold"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
-        </div>
-        <div class="column is-12 is-duration-service">
-          <p>Duração estimada</p>
-          <span class="icon is-duration"><%= image_tag '/images/time.png' %></span>
-          <span class="is-size-4 has-text-weight-semibold"><%= @scheduling.service.duration %> min</span>
-        </div>
-        <div class="column is-12">
-          <div class="columns is-mobile">
-            <div class="column is-8">
-              <p class="title">R$ <%= @scheduling.service.amount %></p>
-            </div>
-            <div class="column is-4">
-              <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
-                <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
-                <%= f.hidden_field :date, value:  @scheduling.date %>
-                <%= f.submit 'Continuar', class: 'button is-light' if current_user.payment_cards.present? %>
-                <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light', remote: true if current_user.payment_cards.empty? %>
+    <div class="columns content is-multiline">
+      <div class="column is-12">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <% if @scheduling.professional.photo.attached? %>
+                <%= image_tag @scheduling.professional.photo, class:'image is-rounded' %>
+              <% else %>
+                <img src="https://bulma.io/images/placeholders/128x128.png" class="is-rounded">
               <% end %>
-            </div>
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-size-4"><%= @scheduling.service.title %></p>
+            <p class="subtitle is-size-6"><%= @scheduling.professional.name %></p>
+          </div>
+        </article>
+      </div>
+      <div class="column is-12 is-date-scheduling">
+        <p>Horário escolhido</p>
+        <span class="icon"><%= image_tag '/images/hours.png' %></span>
+        <span class="is-size-4 has-text-weight-semibold"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
+      </div>
+      <div class="column is-12 is-duration-service">
+        <p>Duração estimada</p>
+        <span class="icon is-duration"><%= image_tag '/images/time.png' %></span>
+        <span class="is-size-4 has-text-weight-semibold"><%= @scheduling.service.duration %> min</span>
+      </div>
+      <div class="column is-12">
+        <div class="columns is-mobile">
+          <div class="column is-8">
+            <p class="title">R$ <%= @scheduling.service.amount %></p>
+          </div>
+          <div class="column is-4">
+            <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
+              <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
+              <%= f.hidden_field :date, value:  @scheduling.date %>
+              <% if current_user.payment_cards.present? %>
+                <%= f.submit 'Continuar', class: 'button is-light' %>
+              <% else %>
+                <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' unless current_user.record_completed? %>
+                <%= link_to 'Continuar', new_service_payment_card_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' if current_user.record_completed? %>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
+    </div>
   </div>
   <button class="modal-close is-large" aria-label="close"></button>
 </div>

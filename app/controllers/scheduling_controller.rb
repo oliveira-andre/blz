@@ -27,7 +27,7 @@ class SchedulingController < ApplicationController
 
   def scheduling_params
     params.permit(:professional_service_id, :date)
-          .merge(user_id: current_user.id)
+    .merge(user_id: current_user.id)
   end
 
   def load_scheduling

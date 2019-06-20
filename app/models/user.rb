@@ -37,4 +37,8 @@ class User < ApplicationRecord
   def establishment_or_update?
     !establishment.nil? || !id.nil?
   end
+
+  def record_completed?
+    cpf.present? && phone.present? && birth_date.present?
+  end
 end
