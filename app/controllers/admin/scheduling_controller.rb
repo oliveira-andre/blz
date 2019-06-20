@@ -3,6 +3,7 @@
 module Admin
   class SchedulingController < AdminController
     before_action :scheduling, only: :show
+
     def index
       @shedulings = Scheduling.all
       @pagy, @records = pagy_countless(@shedulings)
