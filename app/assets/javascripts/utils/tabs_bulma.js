@@ -30,3 +30,11 @@ $(document).on("turbolinks:load", function () {
     });
   });
 });
+
+$(document).on("turbolinks:request-start", function () {
+  var tabs = document.getElementsByClassName("tab");
+
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].className = tabs[i].className.replace(" is-active", "");
+  }
+});

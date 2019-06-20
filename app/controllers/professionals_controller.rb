@@ -4,6 +4,8 @@ class ProfessionalsController < ApplicationController
   before_action :load_establishment
   before_action :load_professional, only: %i[edit update destroy]
 
+  def index; end
+
   def new
     @professional = @establishment.professionals.build
     authorize @professional
@@ -13,9 +15,10 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.new professional_params
     authorize @professional
     if @professional.save
-      redirect_to edit_establishment_professional_path(@establishment,
-                                                       @professional),
-                  notice: 'Profissional criado com sucesso'
+      redirect_to edit_establishment_professional_path(
+        @establishment,
+        @professional
+      ), notice: 'Profissional criado com sucesso'
     else
       render 'new'
     end

@@ -1,8 +1,8 @@
-<%= render 'shared/header', to_back: false %>
+<%= render 'shared/header', to_back: false, fixed: true %>
 <div class="establishments_dashboard">
   <div class="container">
     <div class="columns is-multiline">
-      <div class="column is-12 content-tab" id="scheduling">
+      <div class="column is-12">
         <% if @scheduling.any? %>
           <div class="columns is-multiline">
             <div class="column is-12">
@@ -20,44 +20,12 @@
           </div>
         <% end %>
       </div>
-      <div class="column is-12 content-tab" id="services" style="display:none">
-        <div class="columns is-multiline is-mobile">
-          <div class="column is-6">
-            <h1 class="is-size-4 has-text-grey"> Serviços </h1>
-          </div>
-          <div class="column is-6">
-            <%= link_to 'Novo', new_establishment_service_path(establishment_id: current_user.establishment.id),
-              class: "button is-light is-pulled-right"%>
-          </div>
-        </div>
-        <div class="columns is-multiline">
-          <% current_user.establishment.services.each do |service| %>
-            <%= render 'service_card', service: service %>
-          <% end %>
-        </div>
-      </div>
-      <div class="column is-12 content-tab" id="professionals" style="display:none">
-        <div class="columns is-multiline is-mobile">
-          <div class="column is-6">
-            <h1 class="is-size-4 has-text-grey"> Profissionais </h1>
-          </div>
-          <div class="column is-6">
-            <%= link_to 'Novo', new_establishment_professional_path(establishment_id: current_user.establishment.id),
-              class: "button is-light is-pulled-right"%>
-          </div>
-        </div>
-        <div class="columns is-multiline">
-          <% current_user.establishment.professionals.each do |professional| %>
-            <%= render 'professional_card', professional: professional %>
-          <% end %>
-        </div>
-      </div>
-      <div class="column is-12 content-tab" id="profile" style="display:none">
+      <div class="column is-12" id="profile" style="display:none">
         <div class="columns is-multiline is-mobile">
           <%= render 'establishments/form' %>
         </div>
       </div>
     </div>
   </div>
-  <%= render 'bottom_navigation_bar' %>
+  <%= render 'shared/establishment_bottom_navigation_bar', tab: 'scheduling' %>
 </div>
