@@ -41,10 +41,10 @@ Rails.application.routes.draw do
 
   resources :callbacks, only: :index
   resources :use_rules, only: :index
-  
+
   namespace :admin do
     resources :scheduling, only: %i[index show]
-    resources :services, only: :index
+    resources :services, only: %i[index show update]
     resources :users, only: :index
   end
 end
