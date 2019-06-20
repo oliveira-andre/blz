@@ -64,7 +64,7 @@
                   method: :delete,
                   data: { confirm: 'Você tem certeza?' } unless @professional.new_record? %>
       <%= f.submit 'Salvar', class: 'button is-light is-pulled-right' %>
-      <%= link_to 'Voltar', establishments_dashboard_path(current_user.establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
+      <%= link_to 'Voltar', establishment_professionals_path(current_user.establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
     </div>
   </div>
 <% end %>

@@ -1,7 +1,7 @@
 <% if establishment? %>
-  <%= render 'shared/header', to_back: establishments_dashboard_path(current_user.establishment), fixed: false %>
+  <%= render 'shared/header', to_back: false, fixed: true %>
 <% else %>
-  <%= render 'shared/header', to_back: users_dashboard_path(current_user), fixed: false %>
+  <%= render 'shared/header', to_back: users_dashboard_path(current_user), fixed: true %>
 <% end %>
 <div class="scheduling-details">
   <div class="container">
