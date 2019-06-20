@@ -1,7 +1,7 @@
 <% if establishment? %>
-  <%= render 'shared/header', to_back: establishments_dashboard_path(current_user.establishment) %>
+  <%= render 'shared/header', to_back: establishments_dashboard_path(current_user.establishment), fixed: false %>
 <% else %>
-  <%= render 'shared/header', to_back: users_dashboard_path(current_user) %>
+  <%= render 'shared/header', to_back: users_dashboard_path(current_user), fixed: false %>
 <% end %>
 <div class="scheduling-details">
   <div class="container">
@@ -89,5 +89,6 @@
         <%= render 'scheduling/rating', review: @scheduling.review if policy(Review).show?(@scheduling) %>
     </div>
   </div>
+  <%= render 'shared/establishment_bottom_navigation_bar', tab: 'scheduling' %>
 </div>
 <%= render 'cancel_modal' %>

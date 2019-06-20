@@ -1,7 +1,7 @@
-<%= render 'shared/header', to_back: establishments_dashboard_path(current_user.establishment) %>
+<%= render 'shared/header', to_back: establishments_dashboard_path(current_user.establishment), fixed: false %>
 <div class="services_form">
   <div class="container">
     <%= render "form", url: establishment_services_path  %>
   </div>
+  <%= render 'shared/establishment_bottom_navigation_bar', tab: 'services' %>
 </div>
-<% render 'shared/establishment_bottom_navigation_bar', tab: 'services' %>

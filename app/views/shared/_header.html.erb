@@ -1,6 +1,6 @@
 <header>
   <div class="container">
-    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-transparent <%= fixed ? 'is-fixed-top' : ''%>" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <% if to_back %>
           <%= link_to to_back, class: 'navbar-item to-back' do %>
