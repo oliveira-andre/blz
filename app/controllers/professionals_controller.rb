@@ -36,10 +36,9 @@ class ProfessionalsController < ApplicationController
   end
 
   def destroy
-    if @professional.destroy
-      redirect_to establishments_dashboard_path(@establishment),
-                  notice: 'Profissional excluído com sucesso'
-    end
+    @professional.destroy!
+    redirect_to establishments_dashboard_path(@establishment),
+                notice: 'Profissional excluído com sucesso'
   end
 
   private
