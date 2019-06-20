@@ -109,41 +109,4 @@ html, body {
       }
     }
   }
-
-  .bottom-navigation-bar {
-    background-color: $primary-color;
-    
-    .tabs {
-      overflow-x: scroll;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      .icon:first-child {
-        margin-right: 0.5em;
-        margin-left: 0.5em;
-        margin-top: 0.5em;
-      }
-    }
-
-    ul {
-      border: 0px;
-    }
-
-    .tab {
-      a {
-        color: #fff;
-        height: 60px;
-      }
-
-      &.is-active, &:hover {
-        a {
-          color: #31aeb5;
-          background-color: #fff;
-        }
-      }
-    }
-  }
 }
