@@ -42,7 +42,7 @@
             <td><%= service.category.name %></td>
             <td><%= service.duration %></td>
             <td>R$ <%= service.amount %></td>
-            <td><a href="#">detalhes</a></td>
+            <td><%= link_to :detalhes, admin_service_path(service), class: 'is-capitalized' %></td>
           </tr>
         <% end %>
       </tbody>
