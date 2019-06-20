@@ -4,6 +4,8 @@ class ProfessionalsController < ApplicationController
   before_action :load_establishment
   before_action :load_professional, only: %i[edit update destroy]
 
+  def index; end
+
   def new
     @professional = @establishment.professionals.build
     authorize @professional

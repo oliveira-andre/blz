@@ -1,2 +1,13 @@
-<%= render 'pages/shared/header'%>
-<%= render "form", url: establishment_path %>
+<%= render 'shared/header', to_back: false %>
+<div class="establishments_dashboard">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <div class="columns is-multiline is-mobile">
+          <%= render 'establishments/form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/establishment_bottom_navigation_bar', tab: 'profile' %>
+</div>
