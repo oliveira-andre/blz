@@ -10,15 +10,13 @@ $(document).on("turbolinks:load", function () {
     var files = this.files;
 
     if (!files) return;
-    var imgsElements = $('.content-images').children().children();
-    var lastImgElementIndex = imgsElements.length - 1;
 
     for (var i = 0; i < files.length; i++) {
       var reader = new FileReader();
       reader.onload = function (event) {
         cont = i++
         $(buildPreviewHtml(cont, event.target.result))
-          .insertAfter($(imgsElements[lastImgElementIndex]));
+          .insertBefore('.content-images');
       }
       reader.readAsDataURL(files.item(i));
     }
@@ -43,7 +41,7 @@ function removeImgService(imgIndex){
 
 function buildPreviewHtml(cont, result) {
   return `
-  <div class="column" id="photo-${cont}">
+  <div id="photo-${cont}">
     <div class="image-item">
       <figure class="image is-96x96">
         <img src="${result}">
