@@ -31,7 +31,7 @@ class ProfessionalsController < ApplicationController
   def update
     authorize @professional
     if @professional.update professional_params
-      redirect_to establishments_dashboard_path(@establishment),
+      redirect_to establishment_professionals_path(@establishment),
                   notice: 'Profissional atualizado com sucesso'
     else
       render 'edit'
@@ -40,7 +40,7 @@ class ProfessionalsController < ApplicationController
 
   def destroy
     @professional.destroy!
-    redirect_to establishments_dashboard_path(@establishment),
+    redirect_to establishment_professionals_path(@establishment),
                 notice: 'Profissional excluído com sucesso'
   end
 

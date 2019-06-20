@@ -24,7 +24,7 @@ class EstablishmentsController < ApplicationController
   def update
     @address.update edit_establishment_params[:address_attributes]
     @user.update edit_establishment_params[:user_attributes]
-    redirect_to establishments_dashboard_path(@establishment),
+    redirect_to edit_establishment_path(@establishment),
                 notice: 'Atualização realizada com sucesso'
   rescue ActiveRecord::RecordInvalid => error
     @errors = error.record.errors

@@ -22,7 +22,7 @@ class ServicesController < ApplicationController
     @service = @establishment.services.build(service_params)
     authorize @service
     if @service.save
-      redirect_to establishments_dashboard_path(@establishment),
+      redirect_to edit_establishment_service_path(@establishment, @service),
                   notice: 'Serviço criado com sucesso'
     else
       render 'new'
@@ -40,13 +40,13 @@ class ServicesController < ApplicationController
     if @service.archived?
       @service.awaiting_avaliation!
 
-      redirect_to establishments_dashboard_path(@service.establishment),
+      redirect_to establishment_services_path(@service.establishment),
                   notice: 'Serviço foi desarquivado e para analise!'
       return
     end
 
     if @service.update_and_rebuild_schedule(service_params)
-      redirect_to establishments_dashboard_path(@service.establishment),
+      redirect_to establishment_services_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
     else
       @professionals = @service.professionals_to_link
