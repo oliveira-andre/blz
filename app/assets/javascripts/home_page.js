@@ -81,18 +81,6 @@ function launchBulmaCalendar(filter_date) {
     enableYearSwitch: false,
     enableMonthSwitch: false
   });
-
-  bulmaCalendar.attach('#birthdate', {
-    lang: 'pt-BR',
-    startDate: dateFormartPTBR(filter_date),
-    dateFormat: 'DD/MM/YYYY',
-    color: '$primary-color',
-    cancelLabel: 'Cancelar',
-    todayLabel: 'Hoje',
-    showClearButton: false,
-    enableYearSwitch: false,
-    enableMonthSwitch: false
-  });
 }
 
 function scrollFooterShow() {
