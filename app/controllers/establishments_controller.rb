@@ -22,11 +22,8 @@ class EstablishmentsController < ApplicationController
   def edit; end
 
   def update
-    @establishment.update(
-      establishment_params.except(:address_attributes, :user_attributes)
-    )
-    @address&.update establishment_params[:address_attributes]
-    @user&.update establishment_params[:user_attributes]
+    @address.update edit_establishment_params[:address_attributes]
+    @user.update edit_establishment_params[:user_attributes]
     redirect_to establishments_dashboard_path(@establishment),
                 notice: 'Atualização realizada com sucesso'
   rescue ActiveRecord::RecordInvalid => error
@@ -39,12 +36,20 @@ class EstablishmentsController < ApplicationController
   def establishment_params
     params.require(:establishment)
           .permit(
-            :name, :timetable, :photo, :self_employed, address_attributes: %i[
+            :name, :timetable, :self_employed, address_attributes: %i[
               street number neighborhood zipcode
             ], user_attributes: %i[
-              name cpf email phone password password_confirmation
-              terms_acceptation birth_date
+              name cpf email phone terms_acceptation birth_date password
+              password_confirmation
             ]
+          )
+  end
+
+  def edit_establishment_params
+    params.require(:establishment)
+          .permit(
+            address_attributes: %i[id street number neighborhood zipcode],
+            user_attributes: %i[id phone]
           )
   end
 
