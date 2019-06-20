@@ -15,7 +15,7 @@
   <link rel="manifest" href="/manifest.json" />
 <meta name="apple-mobile-web-app-capable" content="yes"></head>
 
-  <body class='<%="#{controller_name}-#{action_name}"%>'
+  <body class='<%="#{controller_name}-#{action_name}"%> is-fixed-top'
         data-userEmail="<%= (user_signed_in? ? current_user.email : '')%>">
      <%= render 'shared/flashs' %>
     <%= yield %>
