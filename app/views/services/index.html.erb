@@ -1,0 +1,24 @@
+<%= render 'shared/header', to_back: false %>
+<div class="establishments_dashboard">
+  <div class="container" id="services">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <div class="columns is-multiline is-mobile">
+          <div class="column is-6">
+            <h1 class="is-size-4 has-text-grey"> Serviços </h1>
+          </div>
+          <div class="column is-6">
+            <%= link_to 'Novo', new_establishment_service_path(establishment_id: current_user.establishment.id),
+              class: "button is-light is-pulled-right"%>
+          </div>
+        </div>
+        <div class="columns is-multiline">
+          <% @establishment.services.each do |service| %>
+            <%= render 'service_card', service: service %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+   <%= render 'establishments_dashboard/bottom_navigation_bar', tab: 'services' %>
+</div>

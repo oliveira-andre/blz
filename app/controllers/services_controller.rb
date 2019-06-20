@@ -4,6 +4,8 @@ class ServicesController < ApplicationController
   before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update destroy]
 
+  def index; end
+
   def show
     @service = Service.approved.find(params[:id])
   rescue ActiveRecord::RecordNotFound

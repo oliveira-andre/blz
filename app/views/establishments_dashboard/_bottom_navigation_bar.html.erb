@@ -1,8 +1,8 @@
 <div class="bottom-navigation-bar">
   <div class="tabs is-centered">
     <ul>
-      <li class="tab is-active" data-target="scheduling">
-        <a>
+      <li class="tab <%= tab == 'scheduling' ? 'is-active' : ''%>">
+        <%= link_to establishments_dashboard_path(current_user.establishment) do %>
           <div class="columns is-multiline is-gapless has-text-centered">
             <div class="column is-12">
               <span class="icon is-small is-size-4">
@@ -13,10 +13,10 @@
               <span>Agenda</span>
             </div>
           </div>
-        </a>
+        <% end %>
       </li>
-      <li class="tab" data-target="services">
-        <a>
+      <li class="tab <%= tab == 'services' ? 'is-active' : ''%>">
+        <%= link_to establishment_services_path(current_user.establishment) do %>
           <div class="columns is-multiline is-gapless has-text-centered">
             <div class="column is-12">
               <span class="icon is-small is-size-4">
@@ -27,10 +27,10 @@
               <span>Serviços</span>
             </div>
           </div>
-        </a>
+        <% end %>
       </li>
-      <li class="tab" data-target="professionals">
-        <a>
+      <li class="tab <%= tab == 'professionals' ? 'is-active' : ''%>">
+         <%= link_to establishment_professionals_path(current_user.establishment) do %>
           <div class="columns is-multiline is-gapless has-text-centered">
             <div class="column is-12">
               <span class="icon is-small is-size-4">
@@ -41,10 +41,10 @@
               <span>Profissionais</span>
             </div>
           </div>
-        </a>
+        <% end %>
       </li>
-      <li class="tab" data-target="profile">
-        <a>
+      <li class="tab <%= tab == 'profile' ? 'is-active' : ''%>">
+        <%= link_to edit_establishment_path(current_user.establishment) do %>
           <div class="columns is-multiline is-gapless has-text-centered">
             <div class="column is-12">
               <span class="icon is-small is-size-4">
@@ -55,7 +55,7 @@
               <span>Perfil</span>
             </div>
           </div>
-        </a>
+        <% end %>
       </li>
     </ul>
   </div>
