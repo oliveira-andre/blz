@@ -177,7 +177,7 @@
       <% end %>
       <div class="column is-12">
         <%= f.submit @establishment.new_record? ? :cadastrar : :salvar, class: 'button is-light is-pulled-right is-capitalized' %>
-        <%= link_to 'Voltar', @establishment.new_record? ? root_path : establishments_dashboard_path(@establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
+        <%= link_to 'Voltar', root_path, class: 'button is-text has-text-grey  is-pulled-right' if @establishment.new_record? %>
       </div>
     <% end %>
   </div>
