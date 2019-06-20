@@ -10,9 +10,9 @@ class User < ApplicationRecord
   validates :terms_acceptation, presence: true
   validates :email, presence: true, uniqueness: true
   validates :cpf, presence: true,
-                  uniqueness: true,
                   if: :establishment_or_update?
   validates_cpf :cpf, if: :establishment_or_update?
+  validates :cpf, uniqueness: true, unless: :user_register?
 
   has_many :scheduling
   has_many :payment_cards
@@ -36,5 +36,11 @@ class User < ApplicationRecord
 
   def establishment_or_update?
     !establishment.nil? || !id.nil?
+  end
+
+  private
+
+  def user_register?
+    establishment.nil? && id.nil?
   end
 end
