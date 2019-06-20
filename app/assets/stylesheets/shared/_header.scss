@@ -88,7 +88,8 @@ header {
 .professionals-new, .professionals-edit, .sessions-new, .registrations-new,
 .passwords-new, .passwords-edit, .registrations-edit, .establishments-new,
 .establishments-edit, .scheduling-show, .services-index, .scheduling-index,
-.users-index, .payment_cards-index, .use_rules-index, .professionals-index {
+.users-index, .payment_cards-index, .use_rules-index, .professionals-index,
+.users_dashboard-index {
   header {
     background-color: $primary-color;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
@@ -121,7 +122,7 @@ header {
 
 .establishments_dashboard-index, .services-new, .services-edit,
 .professionals-new, .professionals-edit, .establishments-edit,
-.scheduling-show, .services-index, .scheduling-index,
+.scheduling-show, .services-index, .scheduling-index, .users_dashboard-index,
 .users-index, .payment_cards-index, .use_rules-index, .professionals-index {
   &.is-fixed-top {
     padding-top: 3.25rem;
