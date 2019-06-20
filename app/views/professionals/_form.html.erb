@@ -58,6 +58,7 @@
     </div>
 
     <div class="column is-12">
+      <%= link_to :excluir, establishment_professional_path(@establishment, @professional), class: 'button is-text has-text-danger is-capitalized', method: :delete, data: { confirm: 'Você tem certeza?' }%>
       <%= f.submit 'Salvar', class: 'button is-light is-pulled-right' %>
       <%= link_to 'Voltar', establishments_dashboard_path(current_user.establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
     </div>
