@@ -89,7 +89,9 @@ header {
 .passwords-new, .passwords-edit, .registrations-edit, .establishments-new,
 .establishments-edit, .scheduling-show, .services-index, .scheduling-index,
 .users-index, .payment_cards-index, .use_rules-index, .professionals-index,
-.users_dashboard-index{
+.users_dashboard-index, .adminscheduling-index, .adminscheduling-show,
+.adminservices-index, .adminservices-show, .adminusers-index, .adminusers-show,
+.usersregistrations-edit {
   header {
     background-color: $primary-color;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
