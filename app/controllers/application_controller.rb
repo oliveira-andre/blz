@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    if resource.establishment.nil?
+      stored_location_for(resource) || root_path
+    else
+      establishments_dashboard_path(resource.establishment)
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(
       :sign_up,
