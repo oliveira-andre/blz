@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   enum profile: %i[common admin]
+  enum status: %i[active blocked]
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
