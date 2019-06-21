@@ -89,6 +89,10 @@
         <%= render 'scheduling/rating', review: @scheduling.review if policy(Review).show?(@scheduling) %>
     </div>
   </div>
-  <%= render 'shared/establishment_bottom_navigation_bar', tab: 'scheduling' %>
+  <% if establishment? %>
+    <%= render 'shared/establishment_bottom_navigation_bar', tab: 'scheduling' %>
+  <% else %>
+    <%= render 'shared/user_bottom_navigation_bar', tab: 'scheduling' %>
+  <% end %>
 </div>
 <%= render 'cancel_modal' %>
