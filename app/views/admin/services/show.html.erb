@@ -70,7 +70,7 @@
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Título <small class="is-danger">*</small></label>
             <div class="control">
-              <%= form.text_field :title, class: "input", placeholder: "Qual o título do serviço ? (obrigatório)", required: true, readonly: true %>
+              <%= form.text_field :title, class: "input", placeholder: "Qual o título do serviço ? (obrigatório)", required: true, disabled: true %>
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Descrição <small class="is-danger">*</small></label>
             <div class="control">
-              <%= form.text_area :description, class: "textarea", placeholder: "Dê uma descrição para esse serviço (obrigatório)", required: true, readonly: true %>
+              <%= form.text_area :description, class: "textarea", placeholder: "Dê uma descrição para esse serviço (obrigatório)", required: true, disabled: true %>
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Valor <small class="is-danger">*</small></label>
             <div class="control">
-              <%= form.number_field :amount, class: "input", placeholder: "ex: R$ 109.0 (obrigatório)", required: true, readonly: true %>
+              <%= form.number_field :amount, class: "input", placeholder: "ex: R$ 109.0 (obrigatório)", required: true, disabled: true %>
             </div>
           </div>
         </div>
@@ -97,6 +97,14 @@
               <div class="select">
                 <%= form.select :duration, duration_service_range, { prompt: "Selecione (obrigatório)" }, { required: true, disabled: true }%>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Situação <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form.text_field :status, class: :input, required: true, value: t("activerecord.enums.service.#{@service.status}") , disabled: true %>
             </div>
           </div>
         </div>
@@ -133,11 +141,41 @@
         </div>
         <div class="column is-12">
           <%= link_to :voltar, admin_services_path, class: 'button is-text has-text-grey is-capitalized' %>
-          <%= link_to :aceitar, admin_service_path(@service, status: :approved), class: 'button is-primary is-capitalized is-pulled-right', method: :put%>
-          <%= link_to :recusar, admin_service_path(@service, status: :recused), class: 'button is-danger is-capitalized is-pulled-right button_recused', method: :put%>
+          <%= link_to :aceitar, admin_service_path(@service, status: :approved), class: 'button is-primary is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @service.approved?%>
+          <%= link_to :recusar, admin_service_path(@service, status: :recused), class: 'button is-danger is-capitalized is-pulled-right button_recused', method: :put, data: { confirm: "Você tem certeza?" } unless @service.recused?%>
         </div>
       </div>
+    <% end %>
+    <div class="columns is-multiline professional_services">
+      <div class="column is-12">
+        <h1 class="title is-size-4 has-text-grey has-text-weight-normal">Profissionais do serviço</h1>
+      </div>
+      <div class="column is-12">
+        <% if @service.professionals.empty? %>
+          <p class="has-text-black is-size-5">Não há profissionais vinculados a esse serviço</p>
+        <% else %>
+          <% @service.professionals.each do |professional| %>
+            <div class="box">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    <% if professional.photo.attached? %>
+                      <%= image_tag professional.thumbnail(professional.photo, :avatar),
+                        class:'is-rounded' %>
+                    <% else %>
+                      <img src="/images/128x128.png" class="is-rounded">
+                    <% end %>
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title has-text-black is-size-5"><%= professional.name %></p>
+                  <p class="subtitle is-size-6"><%= professional.professional_services.count %> serviço(s)</p>
+                </div>
+              </article>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-</div>
+  </div>
 </div>
