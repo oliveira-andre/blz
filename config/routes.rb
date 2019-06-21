@@ -45,6 +45,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :scheduling, only: %i[index show]
     resources :services, only: %i[index show update]
-    resources :users, only: :index
+    resources :users, only: %i[index show update]
   end
 end
