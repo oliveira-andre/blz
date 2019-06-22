@@ -35,11 +35,12 @@
     </div>
 
     <div class="columns is-mobile is-multiline">
-      <div class="column is-12">
-        <h1 class=" has-text-weight-semibold is-size-12">Avaliações (<%= @service.reviews.count %>)
+      <div class="column is-11">
+        <h1 class="has-text-weight-semibold is-size-4">Avaliações <strong class="has-text-grey-light ">(<%= @service.reviews.count %>)
           <% average_stars(@service.reviews).times do |number| %>
             <i class="fas fa-star" style="color:#2AC5CC"></i>
-          <% end%>
+          <% end %>
+          </strong>
         </h1>
       </div>
 
@@ -52,7 +53,7 @@
             </h6>
           <br>
           <p><%= review.body %></p>
-         <div class="is-divider"></div>
+          <div class="is-divider"></div>
         </div>
       <% end %>
     </div>
@@ -92,6 +93,7 @@
     </div>
   </div>
 </div>
+
 <%= render 'shared/footer' %>
 
 <div class="modal modal-fx-fadeInScale" id="new-modal-scheduling"></div>
