@@ -6,14 +6,11 @@ class UsersController < ApplicationController
   def update
     @errors = []
     @user = current_user.update(user_params)
-    Moip::CreateCustomerMoipService.execute(current_user)
-    redirect_to new_service_payment_card_path(
+    redirect_to new_scheduling_path(
       date: params[:date],
       professional_service_id: params[:professional_service_id],
       professional_id: params[:professional_id]
     )
-  rescue StandardError => e
-    @error = e
   end
 
   private
