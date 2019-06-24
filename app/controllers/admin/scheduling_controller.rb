@@ -2,7 +2,7 @@
 
 module Admin
   class SchedulingController < AdminController
-    before_action :scheduling, only: :show
+    before_action :load_scheduling, only: :show
 
     def index
       @shedulings = Scheduling.all
@@ -13,7 +13,7 @@ module Admin
 
     private
 
-    def scheduling
+    def load_scheduling
       @scheduling = Scheduling.find(params[:id])
     end
   end
