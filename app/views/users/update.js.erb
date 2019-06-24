@@ -1,5 +1,5 @@
 <% @errors << 'CPF não pode ficar em branco' if params[:user][:cpf].empty? %>
 <% @errors << 'Data de nascimento não pode ficar em branco' if params[:user][:birth_date].empty? %>
 <% @errors << 'Telefone não pode ficar em branco' if params[:user][:phone].empty? %>
-$('#errors').html("<%= j render 'users/errors', errors: @errors, error: @error %>");
+$('#errors').html("<%= j render 'users/errors', errors: @errors %>");
 loadButtonDelete();
