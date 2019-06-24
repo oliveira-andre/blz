@@ -2,13 +2,15 @@
 <div class="form-login">
   <div class="container">
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'custom' }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
       <div class="columns is-multiline">
         <div class="column is-12">
           <h1 class="is-size-4 has-text-grey has-text-centered"> Crie uma nova senha </h1>
         </div>
         <div class="column is-12">
           <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Nova senha <small class="is-danger">*</small></label>
+            <label class="label has-text-grey has-text-weight-normal">Nova senha<small class="is-danger"> * (mínimo 6 caracteres)</small></label>
             <div class="control">
               <%= f.password_field :password, class: "input", placeholder: "Informe sua senha", required: true %>
             </div>
@@ -16,7 +18,7 @@
         </div>
         <div class="column is-12">
           <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Confirme a senha <small class="is-danger">*</small></label>
+            <label class="label has-text-grey has-text-weight-normal">Confirme a senha <small class="is-danger"> * (igual a anterior)</small></label>
             <div class="control">
               <%= f.password_field :password_confirmation, class: "input", placeholder: "Informe uma senha", required: true %>
             </div>
