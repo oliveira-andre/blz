@@ -34,15 +34,17 @@
       </div>
     </div>
 
-    <div class="columns is-mobile is-multiline">
-      <div class="column is-11">
-        <h1 class="has-text-weight-semibold is-size-4">Avaliações <strong class="has-text-grey-light ">(<%= @service.reviews.count %>)
-          <% average_stars(@service.reviews).times do |number| %>
-            <i class="fas fa-star starColor" ></i>
-          <% end %>
-          </strong>
-        </h1>
-      </div>
+    <% unless average_stars(@service.reviews).nil? %>
+      <div class="columns is-mobile is-multiline">
+        <div class="column is-11">
+          <h1 class="has-text-weight-semibold is-size-4">Avaliações
+            <strong class="has-text-grey-light ">(<%= @service.reviews.count %>)
+              <% average_stars(@service.reviews).times do |number| %>
+                <i class="fas fa-star starColor" ></i>
+              <% end %>
+            </strong>
+          </h1>
+        </div>
 
       <% @service.reviews.each do |review| %>
         <div class="column is-12">
@@ -55,8 +57,9 @@
           <p><%= review.body %></p>
           <div class="is-divider"></div>
         </div>
-      <% end %>
-    </div>
+       <% end %>
+      </div>
+    <% end %>
 
     <div class="columns is-mobile is-multiline categories">
       <div class="column is-12">

@@ -30,12 +30,10 @@ class Service < ApplicationRecord
   end
 
   def reviews
-    services_ids = ProfessionalService.where(service_id: id)
-                                      .pluck(:id)
+    schedulings_ids = Scheduling.where(professional_service_id:
+                                        professional_services.ids)
 
-    schedulings_ids = Scheduling.where(professional_service_id: services_ids)
-
-    Review.where(reviewable_id: schedulings_ids, status: 'analyze',
+    Review.where(reviewable_id: schedulings_ids, status: 'approved',
                  reviewable_type: 'Scheduling')
   end
 
