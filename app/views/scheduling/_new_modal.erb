@@ -38,12 +38,8 @@
             <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
               <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
               <%= f.hidden_field :date, value:  @scheduling.date %>
-              <% if current_user.payment_cards.present? %>
-                <%= f.submit 'Continuar', class: 'button is-light' %>
-              <% else %>
-                <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' unless current_user.record_completed? %>
-                <%= link_to 'Continuar', new_service_payment_card_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' if current_user.record_completed? %>
-              <% end %>
+              <%= link_to  'Continuar', new_scheduling_path(date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' if current_user.record_completed? %>
+              <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' unless current_user.record_completed? %>
             <% end %>
           </div>
         </div>
