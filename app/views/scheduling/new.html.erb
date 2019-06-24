@@ -1,0 +1,58 @@
+<%= render 'shared/header', to_back: false %>
+<div class="new-scheduling">
+  <div class="container">
+    <%= form_with model: @scheduling, url: scheduling_index_path, class: :custom do |f| %>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h2 class="is-size-4 has-text-grey">Finalizar Agendamento</h2>
+        </div>
+        <div class="column is-12">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <% if @scheduling.professional.photo.attached? %>
+                  <%= image_tag @scheduling.professional_service.thumbnail(@scheduling.professional.photo, :avatar),
+                        class:'is-rounded' %>
+                <% else %>
+                  <img src="/images/128x128.png" class="is-rounded">
+                <% end %>
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title has-text-black is-size-5"><%= @scheduling.service.title %></p>
+              <p class="subtitle is-size-6"><%= @scheduling.professional.name %></p>
+            </div>
+          </article>
+        </div>
+        <div class="column is-12">
+          <p><%= @scheduling.service.title %></p>
+        </div>
+        <div class="column is-12 is-date-scheduling">
+          <p>Horário escolhido</p>
+          <span class="icon has-text-weight-semibold"><%= image_tag '/images/hours.png' %></span>
+          <span class="is-size-4 has-text-weight-semibold"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
+        </div>
+        <div class="column is-12 is-duration-service">
+          <p>Duração estimada</p>
+          <span class="icon is-duration has-text-weight-semibold"><%= image_tag '/images/time.png' %></span>
+          <span class="is-size-4 has-text-weight-semibold"><%= @scheduling.service.duration %> min</span>
+        </div>
+        <div class="column is-12 is-address">
+          <p>Endereço</p>
+          <span class="fas fa-map-marker-alt has-text-weight-semibold is-size-5"></span>
+          <span class="is-size-4 has-text-weight-bold"><%= @scheduling.service.establishment.address.full %></span>
+        </div>
+        <div class="column is-12">
+          <p class="title">R$ <%= @scheduling.service.amount %></p>
+        </div>
+      </div>
+      <div class="column is-12 actions">
+        <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
+        <%= f.hidden_field :date, value:  @scheduling.date %>
+        <%= f.submit :finalizar, class: 'button is-primary is-capitalized is-pulled-right' %>
+        <%= link_to :cancelar, service_path(@scheduling.service), class: 'button is-capitalized is-pulled-right has-text-grey is-text'%>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
