@@ -18,7 +18,6 @@ class Service < ApplicationRecord
   validates :local_type, presence: true
   validates :status, presence: true
 
-  validate :photo_type
   validate :limit_number_photos
 
   def professionals_to_link
@@ -45,15 +44,6 @@ class Service < ApplicationRecord
 
   def limit_number_photos
     errors.add(:photos, '5 no máximo.') if photos.count > 5
-  end
-
-  def photo_type
-    photos.each do |photo|
-      next if photo.content_type.in?(%(image/jpeg image/png))
-
-      errors.add(:photos, 'com tipo não permitido.')
-      break
-    end
   end
 
   def rebuild_schedule
