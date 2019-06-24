@@ -30,6 +30,13 @@ class ProfessionalsController < ApplicationController
 
   def update
     authorize @professional
+
+    unless validate_photo_type(nil, params[:professional][:photo])
+      flash[:error] = 'Tipo de arquivo não permitido'
+      render 'edit'
+      return
+    end
+
     if @professional.update professional_params
       redirect_to establishment_professionals_path(@establishment),
                   notice: 'Profissional atualizado com sucesso'

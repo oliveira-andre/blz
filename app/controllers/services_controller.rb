@@ -37,6 +37,12 @@ class ServicesController < ApplicationController
   def update
     authorize @service
 
+    unless validate_photo_type(params[:service][:photos], nil)
+      flash[:error] = 'Tipo de arquivo não permitido'
+      @professionals = @service.professionals_to_link
+      render 'edit'
+      return
+    end
     if @service.archived?
       @service.awaiting_avaliation!
 
