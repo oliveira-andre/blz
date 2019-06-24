@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 class ProfessionalsController < ApplicationController
   before_action :load_establishment
-  before_action :load_professional, only: %i[edit update]
+  before_action :load_professional, only: %i[edit update destroy]
+
+  def index; end
 
   def new
     @professional = @establishment.professionals.build
@@ -11,8 +15,10 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.new professional_params
     authorize @professional
     if @professional.save
-      redirect_to establishments_dashboard_path(@establishment),
-                  notice: 'Profissional criado com sucesso'
+      redirect_to edit_establishment_professional_path(
+        @establishment,
+        @professional
+      ), notice: 'Profissional criado com sucesso'
     else
       render 'new'
     end
@@ -25,11 +31,17 @@ class ProfessionalsController < ApplicationController
   def update
     authorize @professional
     if @professional.update professional_params
-      redirect_to establishments_dashboard_path(@establishment),
+      redirect_to establishment_professionals_path(@establishment),
                   notice: 'Profissional atualizado com sucesso'
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @professional.destroy!
+    redirect_to establishment_professionals_path(@establishment),
+                notice: 'Profissional excluído com sucesso'
   end
 
   private

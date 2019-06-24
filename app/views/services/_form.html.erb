@@ -1,4 +1,3 @@
-
 <%= form_with model: @service, url: url, class: 'custom', local: true do |form| %>
   <div class="columns is-multiline">
     <% if @service.errors.any? %>
@@ -15,7 +14,6 @@
         </div>
       </div>
     <% end %>
-
     <div class="column is-12">
       <% if @service.new_record? %>
         <h1 class="is-size-4 has-text-grey">Novo Serviço</h1>
@@ -23,13 +21,11 @@
         <h1 class="is-size-4 has-text-grey">Editar Serviço</h1>
       <% end %>
     </div>
-
     <% unless @service.new_record? %>
       <div class="column is-12">
         <%= render 'form_images', form: form %>
       </div>
     <% end %>
-
     <div class="column is-12">
       <div class="field">
         <label class="label has-text-grey has-text-weight-normal">Título <small class="is-danger">*</small></label>
@@ -38,7 +34,6 @@
         </div>
       </div>
     </div>
-
     <div class="column is-12">
       <div class="field">
         <label class="label has-text-grey has-text-weight-normal">Descrição <small class="is-danger">*</small></label>
@@ -47,7 +42,6 @@
         </div>
       </div>
     </div>
-
     <div class="column is-6">
       <div class="field">
         <label class="label has-text-grey has-text-weight-normal">Valor <small class="is-danger">*</small></label>
@@ -56,16 +50,16 @@
         </div>
       </div>
     </div>
-
     <div class="column is-6">
       <div class="field">
         <label class="label has-text-grey has-text-weight-normal">Duração <small>(tempo em minutos)</small></label>
         <div class="control">
-          <%= form.number_field :duration, class: "input", placeholder: "duração deve ser em minutos (obrigatório)", required: true %>
+          <div class="select">
+            <%= form.select :duration, duration_service_range, include_blank: true, required: true %>
+          </div>
         </div>
       </div>
     </div>
-
     <div class="column is-12">
       <div class="field">
         <label class="label has-text-grey has-text-weight-normal">Categoria <small class="is-danger">*</small></label>
@@ -76,7 +70,6 @@
         </div>
       </div>
     </div>
-
     <div class="column is-12">
       <div class="columns is-mobile">
         <div class="column">
@@ -90,6 +83,10 @@
           <div class="field">
             <%= form.radio_button(:local_type, 'establishment', class: 'is-checkradio', id: 'local_type_establishment', required: true) %>
             <label class="has-text-grey" for="local_type_establishment">No estabelecimento</label>
+          </div>
+          <div class="field">
+            <%= form.radio_button(:local_type, 'both', class: 'is-checkradio', id: 'local_type_both', required: true) %>
+            <label class="has-text-grey" for="local_type_both">Ambos lugares</label>
           </div>
         </div>
       </div>
@@ -113,7 +110,7 @@
         <% end %>
       <% end %>
       <%= form.submit 'Salvar', class: 'button is-light is-pulled-right' %>
-      <%= link_to 'Voltar', establishments_dashboard_path(current_user.establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
+      <%= link_to 'Voltar', establishment_services_path(current_user.establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
     </div>
   </div>
 <% end %>

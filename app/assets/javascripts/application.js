@@ -3,6 +3,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require autocomplete_zipcode
 //= require toastr
 //= require_tree .
 //= require bulma-extensions/bulma-calendar/dist/js/bulma-calendar.min

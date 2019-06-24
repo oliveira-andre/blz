@@ -12,10 +12,10 @@ Rails.application.routes.draw do
 
   resources :filters, only: :index
   resources :establishments do
-    resources :services, except: :index do
+    resources :services do
       resources :professional_services, only: %i[create destroy]
     end
-    resources :professionals, except: :index do
+    resources :professionals do
       resources :office_hours, only: %i[create destroy]
     end
   end
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   resources :use_rules, only: :index
 
   namespace :admin do
-    resources :scheduling, only: :index
+    resources :scheduling, only: %i[index show]
     resources :services, only: :index
     resources :users, only: :index
   end
