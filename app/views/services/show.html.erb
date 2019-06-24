@@ -38,7 +38,7 @@
       <div class="column is-11">
         <h1 class="has-text-weight-semibold is-size-4">Avaliações <strong class="has-text-grey-light ">(<%= @service.reviews.count %>)
           <% average_stars(@service.reviews).times do |number| %>
-            <i class="fas fa-star" style="color:#2AC5CC"></i>
+            <i class="fas fa-star starColor" ></i>
           <% end %>
           </strong>
         </h1>
@@ -48,7 +48,7 @@
         <div class="column is-12">
             <h6><%= review.user.name.split(' ')[0].capitalize %>
               <% review.rating.times do |number| %>
-                <i class="fas fa-star" style="color:#2AC5CC"></i>
+                <i class="fas fa-star starColor"></i>
               <% end%>
             </h6>
           <br>
