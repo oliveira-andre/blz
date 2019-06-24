@@ -24,7 +24,7 @@
             <td><%= sheduling.professional_service.service.establishment.name %></td>
             <td><%= "#{day_month(sheduling.date)} às #{time(sheduling.date)}" %></td>
             <td><%= sheduling.service.amount %></td>
-            <td><a href="#">detalhes</a></td>
+            <td><%= link_to :detalhes, admin_scheduling_path(sheduling), class: 'is-capitalized' %></td>
           </tr>
         <% end %>
       </tbody>
