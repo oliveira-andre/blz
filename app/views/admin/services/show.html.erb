@@ -104,7 +104,7 @@
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Situação <small class="is-danger">*</small></label>
             <div class="control">
-              <%= form.text_field :status, class: :input, required: true, value: t("activerecord.enums.service.#{@service.status}") , disabled: true %>
+              <%= form.text_field :status, class: :input, required: true, value: @service.t_status , disabled: true %>
             </div>
           </div>
         </div>

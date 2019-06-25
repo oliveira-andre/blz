@@ -63,7 +63,7 @@
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Status <small class="is-danger">*</small></label>
             <div class="control">
-              <%= f.text_field :status, class: :input, required: true, value: t("activerecord.enums.user.#{@user.status}"), disabled: true %>
+              <%= f.text_field :status, class: :input, required: true, value: @user.t_status, disabled: true %>
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Perfil <small class="is-danger">*</small></label>
             <div class="control">
-              <%= f.text_field :profile, class: :input, required: true, value: t("activerecord.enums.user.#{@user.profile}"), disabled: true %>
+              <%= f.text_field :profile, class: :input, required: true, value: profile(@user), disabled: true %>
             </div>
           </div>
         </div>
