@@ -2,7 +2,7 @@
 
 module Admin
   class UsersController < AdminController
-    before_action :user, only: %i[show update]
+    before_action :load_user, only: %i[show update]
 
     def index
       @users = if params[:search]
@@ -31,7 +31,7 @@ module Admin
 
     private
 
-    def user
+    def load_user
       @user = User.find(params[:id])
     end
   end
