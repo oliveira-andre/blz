@@ -14,13 +14,17 @@ module Admin
     def show; end
 
     def update
-      @service.update(status: params[:status])
+      if params[:status] == 'approved'
+        @service.approved!
+        flash[:success] = 'Aprovado com sucesso'
+      end
+
+      if params[:status] == 'recused'
+        @service.recused!
+        flash[:success] = 'Recusado com sucesso'
+      end
+
       redirect_to admin_services_path
-      flash[:success] = if params[:status] == 'approved'
-                          'Aprovado com sucesso'
-                        else
-                          'Recusado com sucesso'
-                        end
     end
 
     private

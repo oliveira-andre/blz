@@ -16,13 +16,17 @@ module Admin
     def show; end
 
     def update
-      @user.update(status: params[:status])
+      if params[:status] == 'active'
+        @user.active!
+        flash[:success] = 'Ativado com sucesso'
+      end
+
+      if params[:status] == 'blocked'
+        @user.blocked!
+        flash[:success] = 'Bloqueado com sucesso'
+      end
+
       redirect_to admin_users_path
-      flash[:success] = if params[:status] == 'active'
-                          'Ativado com sucesso'
-                        else
-                          'Bloqueado com sucesso'
-                        end
     end
 
     private
