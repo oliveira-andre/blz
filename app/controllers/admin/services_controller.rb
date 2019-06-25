@@ -1,6 +1,6 @@
 module Admin
   class ServicesController < AdminController
-    before_action :service, only: %i[show update]
+    before_action :load_service, only: %i[show update]
 
     def index
       if params[:status].present?
@@ -25,7 +25,7 @@ module Admin
 
     private
 
-    def service
+    def load_service
       @service = Service.find(params[:id])
     end
   end
