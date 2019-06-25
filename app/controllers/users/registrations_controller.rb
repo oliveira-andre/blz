@@ -38,7 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       resource.errors.full_messages.each { |msg| flash[:error] = msg }
     end
-    redirect_to users_dashboard_path(resource)
+    redirect_to edit_user_registration_path
   end
 
   # DELETE /resource
