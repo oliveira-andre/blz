@@ -77,6 +77,11 @@ pt-BR:
         recused: Recusado
         awaiting_avaliation: Analise
         archived: Arquivado
+      user:
+        blocked: Bloqueado
+        active: Ativo
+        admin: Administrador
+        common: Comum
 
     errors:
       messages:
