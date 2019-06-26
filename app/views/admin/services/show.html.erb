@@ -2,20 +2,6 @@
 <div id="admin-services">
   <div class="container">
     <div class="columns is-multiline">
-      <% if @service.errors.any? %>
-        <div class="column is-12">
-          <div id="error_explanation">
-            <ul>
-              <% @service.errors.full_messages.each do |msg| %>
-                <div class="notification is-danger">
-                  <button class="delete" type="button"></button>
-                  <%= msg %>
-                </div>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      <% end %>
       <div class="column is-12">
         <h1 class="is-size-4 has-text-grey">Detalhes do Serviço</h1>
       </div>
