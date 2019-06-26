@@ -22,6 +22,7 @@ pt-BR:
         cpf: CPF
         phone: Telefone
         birth_date: 'Data de nascimento'
+        photo: Foto
 
       service:
         title: Título
@@ -36,6 +37,7 @@ pt-BR:
 
       professional:
         self_employed: Profissional autônomo
+        photo: Foto
 
       establishment:
         name: Nome
