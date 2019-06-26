@@ -31,16 +31,4 @@ class ApplicationController < ActionController::Base
       keys: %i[photo name cpf phone terms_acceptation birth_date]
     )
   end
-
-  def validate_photo_type(photos, image)
-    validate_photo_type = true
-    photos&.each do |photo|
-      next if photo.content_type.in?(%(image/jpeg image/png))
-
-      validate_photo_type = false
-    end
-    validate_photo_type = false unless !image || image.content_type
-                                                      .in?(%(image/jpeg image/png))
-    validate_photo_type
-  end
 end

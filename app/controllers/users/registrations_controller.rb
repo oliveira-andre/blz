@@ -20,11 +20,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def update
-    unless validate_photo_type(nil, params[:user][:photo])
-      flash[:error] = 'Tipo de arquivo não permitido'
-      render 'edit'
-      return
-    end
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
