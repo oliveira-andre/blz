@@ -27,8 +27,8 @@ module Admin
       end
 
       redirect_to admin_services_path
-    rescue ActivveRecord::RecordInvalid => e
-      e.record.errors.each { |error| flash[:error] = error }
+    rescue ActiveRecord::RecordInvalid => e
+      e.record.errors.full_messages.each { |error| flash[:error] = error }
       redirect_to admin_service_path(@service)
     end
 
