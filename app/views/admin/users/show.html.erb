@@ -1,86 +1,52 @@
 <%= render 'admin/shared/header' %>
 <div class="admin-user">
   <div class="container">
-    <%= form_with(model: [:admin, @user]) do |f| %>
-      <div class="columns is-multiline">
-        <div class="column is-12">
-          <div class="field">
-            <label class="file-label">
-              <figure class="image is-128x128" id="temporary_image">
-                <% if @user.photo.attached? %>
-                  <%= image_tag @user.photo, class: "is-rounded" %>
-                <% else %>
-                  <img class="is-rounded" src="/images/128x128.png">
-                <% end %>
-              </figure>
-            </label>
-          </div>
-        </div>
-        <div class="column is-12">
-          <h1 class="is-size-4 has-text-grey has-text-centered"> <%= @user.name %> </h1>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Nome <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= f.text_field :name, class: :input, required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= f.email_field :email, class: :input, required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">CPF <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= f.text_field :cpf, class: "input cpf", required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Data de nascimento <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= f.date_field :birth_date, id: :birthdate, class: :input, required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Telefone <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= f.text_field :phone, class: "input phone", required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Status <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= f.text_field :status, class: :input, required: true, value: t("activerecord.enums.user.#{@user.status}"), disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Perfil <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= f.text_field :profile, class: :input, required: true, value: t("activerecord.enums.user.#{@user.profile}"), disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <%= link_to :voltar, admin_users_path, class: 'button is-text has-text-grey is-capitalized' %>
-          <%= link_to :bloquear, admin_user_path(@user, status: :blocked), class: 'button is-danger is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @user.blocked? %>
-          <%= link_to :ativar, admin_user_path(@user, status: :active), class: 'button is-primary is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @user.active? %>
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <div class="field">
+          <label class="file-label">
+            <figure class="image is-128x128" id="temporary_image">
+              <% if @user.photo.attached? %>
+                <%= image_tag @user.photo, class: "is-rounded" %>
+              <% else %>
+                <img class="is-rounded" src="/images/128x128.png">
+              <% end %>
+            </figure>
+          </label>
         </div>
       </div>
-    <% end %>
+      <div class="column is-12">
+        <h1 class="is-size-4 has-text-grey has-text-centered"> <%= @user.name %> </h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Email</h2>
+        <h1 class="title"><%= @user.email %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">CPF</h2>
+        <h1 class="title cpf"><%= @user.cpf %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Data de nascimento</h2>
+        <h1 class="title"><%= @user.birth_date %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Telefone</h2>
+        <h1 class="title phone"><%= @user.phone %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Status</h2>
+        <h1 class="title"><%= @user.t_status %></h1>
+      </div>
+      <div class="column is-12">
+          <h2 class="subtitle">Perfil</h2>
+          <h1 class="title"><%= profile(@user) %></h1>
+      </div>
+      <div class="column is-12">
+        <%= link_to :voltar, admin_users_path, class: 'button is-text has-text-grey is-capitalized' %>
+        <%= link_to :bloquear, admin_user_path(@user, status: :blocked), class: 'button is-danger is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @user.blocked? %>
+        <%= link_to :ativar, admin_user_path(@user, status: :active), class: 'button is-primary is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @user.active? %>
+      </div>
+    </div>
   </div>
 </div>

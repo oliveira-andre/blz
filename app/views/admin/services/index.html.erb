@@ -40,7 +40,7 @@
           <tr>
             <td><%= service.title %></td>
             <td><%= service.category.name %></td>
-            <td><%= t("activerecord.enums.service.#{service.status}") %></td>
+            <td><%= service.t_status %></td>
             <td>R$ <%= service.amount %></td>
             <td><%= link_to :detalhes, admin_service_path(service), class: 'is-capitalized' %></td>
           </tr>

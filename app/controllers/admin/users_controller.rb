@@ -2,7 +2,7 @@
 
 module Admin
   class UsersController < AdminController
-    before_action :user, only: %i[show update]
+    before_action :load_user, only: %i[show update]
 
     def index
       @users = if params[:search]
@@ -16,18 +16,25 @@ module Admin
     def show; end
 
     def update
-      @user.update(status: params[:status])
+      if params[:status] == 'active'
+        @user.active!
+        flash[:success] = 'Ativado com sucesso'
+      end
+
+      if params[:status] == 'blocked'
+        @user.blocked!
+        flash[:success] = 'Bloqueado com sucesso'
+      end
+
       redirect_to admin_users_path
-      flash[:success] = if params[:status] == 'active'
-                          'Ativado com sucesso'
-                        else
-                          'Bloqueado com sucesso'
-                        end
+    rescue ActiveRecord::RecordInvalid => e
+      e.record.errors.full_messages.each { |error| flash[:error] = error }
+      redirect_to admin_user_path(@service)
     end
 
     private
 
-    def user
+    def load_user
       @user = User.find(params[:id])
     end
   end

@@ -1,151 +1,90 @@
 <%= render 'admin/shared/header' %>
 <div id="admin-services">
   <div class="container">
-    <%= form_with model: @service, class: 'custom', local: true do |form| %>
-      <div class="columns is-multiline">
-        <% if @service.errors.any? %>
-          <div class="column is-12">
-            <div id="error_explanation">
-              <ul>
-                <% @service.errors.full_messages.each do |msg| %>
-                  <div class="notification is-danger">
-                    <button class="delete" type="button"></button>
-                    <%= msg %>
-                  </div>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
-        <div class="column is-12">
-          <h1 class="is-size-4 has-text-grey">Detalhes do Serviço</h1>
-        </div>
-        <div class="column is-12">
-          <div class="columns is-mobile is-gapless service-images">
-            <div class="column content-images">
-              <% if @service.photos.present? %>
-                <div class="columns is-multiline is-mobile is-gapless">
-                  <% @service.photos.each do |photo| %>
-                    <div class="column is-narrow" id="photo-<%= photo.id %>">
-                      <div class="image-item">
-                        <figure class="image is-96x96">
-                          <%= image_tag(@service.thumbnail(photo, :small)) %>
-                        </figure>
-                        <div class="options">
-                          <% unless photo.new_record? %>
-                            <%= link_to photo_path(photo), remote: true, method: :delete,
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <h1 class="is-size-4 has-text-grey">Detalhes do Serviço</h1>
+      </div>
+      <div class="column is-12">
+        <div class="columns is-mobile is-gapless service-images">
+          <div class="column content-images">
+            <% if @service.photos.present? %>
+              <div class="columns is-multiline is-mobile is-gapless">
+                <% @service.photos.each do |photo| %>
+                  <div class="column is-narrow" id="photo-<%= photo.id %>">
+                    <div class="image-item">
+                      <figure class="image is-96x96">
+                        <%= image_tag(@service.thumbnail(photo, :small)) %>
+                      </figure>
+                      <div class="options">
+                        <% unless photo.new_record? %>
+                          <%= link_to photo_path(photo), remote: true, method: :delete,
                               data: { confirm: 'Você tem certeza?' },
                               class: "button is-light" do %>
-                              <span class="icon">
-                                <i class="fas fa-times has-text-danger is-size-4"></i>
-                              </span>
-                            <% end %>
-                            <a class="button is-light modal-button" data-target="photo-show-<%=photo.id%>">
-                              <span class="icon">
-                                <i class="far fa-eye has-text-white is-size-4"></i>
-                              </span>
-                            </a>
+                            <span class="icon">
+                              <i class="fas fa-times has-text-danger is-size-4"></i>
+                            </span>
                           <% end %>
-                        </div>
+                          <a class="button is-light modal-button" data-target="photo-show-<%=photo.id%>">
+                            <span class="icon">
+                              <i class="far fa-eye has-text-white is-size-4"></i>
+                            </span>
+                          </a>
+                        <% end %>
                       </div>
                     </div>
-                    <div class="modal" id="photo-show-<%= photo.id %>">
-                      <div class="modal-background"></div>
-                      <div class="modal-content">
-                        <p class="image is-4by3">
-                          <%= image_tag(@service.thumbnail(photo, :large)) %>
-                        </p>
-                      </div>
-                      <a class="modal-close is-large" aria-label="close"></a>
+                  </div>
+                  <div class="modal" id="photo-show-<%= photo.id %>">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                      <p class="image is-4by3">
+                        <%= image_tag(@service.thumbnail(photo, :large)) %>
+                      </p>
                     </div>
-                  <% end %>
-                </div>
-              <% else %>
-                <p>Não há fotos</p>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Título <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= form.text_field :title, class: "input", placeholder: "Qual o título do serviço ? (obrigatório)", required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Descrição <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= form.text_area :description, class: "textarea", placeholder: "Dê uma descrição para esse serviço (obrigatório)", required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-6">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Valor <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= form.number_field :amount, class: "input", placeholder: "ex: R$ 109.0 (obrigatório)", required: true, disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-6">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Duração <small>(tempo em minutos)</small></label>
-            <div class="control">
-              <div class="select">
-                <%= form.select :duration, duration_service_range, { prompt: "Selecione (obrigatório)" }, { required: true, disabled: true }%>
+                    <a class="modal-close is-large" aria-label="close"></a>
+                  </div>
+                <% end %>
               </div>
-            </div>
+            <% else %>
+              <p>Não há fotos</p>
+            <% end %>
           </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Situação <small class="is-danger">*</small></label>
-            <div class="control">
-              <%= form.text_field :status, class: :input, required: true, value: t("activerecord.enums.service.#{@service.status}") , disabled: true %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="field">
-            <label class="label has-text-grey has-text-weight-normal">Categoria <small class="is-danger">*</small></label>
-            <div class="control">
-              <div class="select">
-                <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, { prompt: "Selecione (obrigatório)" }, { required: true, disabled: true } %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <div class="columns is-mobile">
-            <div class="column">
-              <p class="has-text-grey">Onde <small class="is-danger">*</small></p>
-            </div>
-            <div class="column is-9">
-              <div class="field">
-                <%= form.radio_button(:local_type, 'home', class: 'is-checkradio', id: 'local_type_home', required: true, disabled: true) %>
-                <label class="has-text-grey" for="local_type_home">Em casa</label>
-              </div>
-              <div class="field">
-                <%= form.radio_button(:local_type, 'establishment', class: 'is-checkradio', id: 'local_type_establishment', required: true, disabled: true) %>
-                <label class="has-text-grey" for="local_type_establishment">No estabelecimento</label>
-              </div>
-              <div class="field">
-                <%= form.radio_button(:local_type, 'both', class: 'is-checkradio', id: 'local_type_both', required: true, disabled: true) %>
-                <label class="has-text-grey" for="local_type_both">Ambos lugares</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12">
-          <%= link_to :voltar, admin_services_path, class: 'button is-text has-text-grey is-capitalized' %>
-          <%= link_to :aceitar, admin_service_path(@service, status: :approved), class: 'button is-primary is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @service.approved?%>
-          <%= link_to :recusar, admin_service_path(@service, status: :recused), class: 'button is-danger is-capitalized is-pulled-right button_recused', method: :put, data: { confirm: "Você tem certeza?" } unless @service.recused?%>
         </div>
       </div>
-    <% end %>
+      <div class="column is-12">
+        <h2 class="subtite">Título</h2>
+        <h1 class="title"><%= @service.title %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Descrição</h2>
+        <h1 class="title"><%= @service.description %></h1>
+      </div>
+      <div class="column is-6">
+        <h2 class="subtitle">Valor</h2>
+        <h1 class="title"><%= @service.amount %></h1>
+      </div>
+      <div class="column is-6">
+        <h2 class="subtitle">Duração (em minutos)</h2>
+        <h1 class="title"><%= @service.duration %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Situação</h2>
+        <h1 class="title"><%= @service.t_status %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Categoria</h2>
+        <h1 class="title"><%= @service.category.name %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Onde?</h2>
+        <h1 class="title"><%= "Em casa" if @service.home? %> <%= "No estabelecimento" if @service.establishment? %> <%= "Ambos lugares" if @service.both? %></h1>
+      </div>
+      <div class="column is-12">
+        <%= link_to :voltar, admin_services_path, class: 'button is-text has-text-grey is-capitalized' %>
+        <%= link_to :aceitar, admin_service_path(@service, status: :approved), class: 'button is-primary is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @service.approved?%>
+        <%= link_to :recusar, admin_service_path(@service, status: :recused), class: 'button is-danger is-capitalized is-pulled-right button_recused', method: :put, data: { confirm: "Você tem certeza?" } unless @service.recused?%>
+      </div>
+    </div>
     <div class="columns is-multiline professional_services">
       <div class="column is-12">
         <h1 class="title is-size-4 has-text-grey has-text-weight-normal">Profissionais do serviço</h1>
