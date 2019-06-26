@@ -27,6 +27,9 @@ module Admin
       end
 
       redirect_to admin_users_path
+    rescue ActivveRecord::RecordInvalid => e
+      e.record.errors.each { |error| flash[:error] = error }
+      redirect_to admin_user_path(@user)
     end
 
     private
