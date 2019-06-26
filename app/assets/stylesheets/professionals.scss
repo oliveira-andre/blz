@@ -10,6 +10,10 @@
     }
   }
 
+  #error_explanation {
+    margin-top: 70px;
+  }
+
 
   form {
     @include mobile {
