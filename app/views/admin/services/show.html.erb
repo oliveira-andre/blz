@@ -1,0 +1,120 @@
+<%= render 'admin/shared/header' %>
+<div id="admin-services">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <h1 class="is-size-4 has-text-grey">Detalhes do Serviço</h1>
+      </div>
+      <div class="column is-12">
+        <div class="columns is-mobile is-gapless service-images">
+          <div class="column content-images">
+            <% if @service.photos.present? %>
+              <div class="columns is-multiline is-mobile is-gapless">
+                <% @service.photos.each do |photo| %>
+                  <div class="column is-narrow" id="photo-<%= photo.id %>">
+                    <div class="image-item">
+                      <figure class="image is-96x96">
+                        <%= image_tag(@service.thumbnail(photo, :small)) %>
+                      </figure>
+                      <div class="options">
+                        <% unless photo.new_record? %>
+                          <%= link_to photo_path(photo), remote: true, method: :delete,
+                              data: { confirm: 'Você tem certeza?' },
+                              class: "button is-light" do %>
+                            <span class="icon">
+                              <i class="fas fa-times has-text-danger is-size-4"></i>
+                            </span>
+                          <% end %>
+                          <a class="button is-light modal-button" data-target="photo-show-<%=photo.id%>">
+                            <span class="icon">
+                              <i class="far fa-eye has-text-white is-size-4"></i>
+                            </span>
+                          </a>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal" id="photo-show-<%= photo.id %>">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                      <p class="image is-4by3">
+                        <%= image_tag(@service.thumbnail(photo, :large)) %>
+                      </p>
+                    </div>
+                    <a class="modal-close is-large" aria-label="close"></a>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <p>Não há fotos</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtite">Título</h2>
+        <h1 class="title"><%= @service.title %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Descrição</h2>
+        <h1 class="title"><%= @service.description %></h1>
+      </div>
+      <div class="column is-6">
+        <h2 class="subtitle">Valor</h2>
+        <h1 class="title"><%= @service.amount %></h1>
+      </div>
+      <div class="column is-6">
+        <h2 class="subtitle">Duração (em minutos)</h2>
+        <h1 class="title"><%= @service.duration %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Situação</h2>
+        <h1 class="title"><%= @service.t_status %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Categoria</h2>
+        <h1 class="title"><%= @service.category.name %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Onde?</h2>
+        <h1 class="title"><%= "Em casa" if @service.home? %> <%= "No estabelecimento" if @service.establishment? %> <%= "Ambos lugares" if @service.both? %></h1>
+      </div>
+      <div class="column is-12">
+        <%= link_to :voltar, admin_services_path, class: 'button is-text has-text-grey is-capitalized' %>
+        <%= link_to :aceitar, admin_service_path(@service, status: :approved), class: 'button is-primary is-capitalized is-pulled-right', method: :put, data: { confirm: "Você tem certeza?" } unless @service.approved?%>
+        <%= link_to :recusar, admin_service_path(@service, status: :recused), class: 'button is-danger is-capitalized is-pulled-right button_recused', method: :put, data: { confirm: "Você tem certeza?" } unless @service.recused?%>
+      </div>
+    </div>
+    <div class="columns is-multiline professional_services">
+      <div class="column is-12">
+        <h1 class="title is-size-4 has-text-grey has-text-weight-normal">Profissionais do serviço</h1>
+      </div>
+      <div class="column is-12">
+        <% if @service.professionals.empty? %>
+          <p class="has-text-black is-size-5">Não há profissionais vinculados a esse serviço</p>
+        <% else %>
+          <% @service.professionals.each do |professional| %>
+            <div class="box">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    <% if professional.photo.attached? %>
+                      <%= image_tag professional.thumbnail(professional.photo, :avatar),
+                        class:'is-rounded' %>
+                    <% else %>
+                      <img src="/images/128x128.png" class="is-rounded">
+                    <% end %>
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title has-text-black is-size-5"><%= professional.name %></p>
+                  <p class="subtitle is-size-6"><%= professional.professional_services.count %> serviço(s)</p>
+                </div>
+              </article>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

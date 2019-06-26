@@ -35,9 +35,9 @@
           <tr>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
-            <td><%= user.cpf %></td>
-            <td><%= user.status %></td>
-            <td><a href="#">detalhes</a></td>
+            <td class='cpf'><%= user.cpf %></td>
+            <td><%= user.t_status %></td>
+            <td><%= link_to :detalhes, admin_user_path(user), class: 'is-capitalized' %></td>
           </tr>
         <% end %>
       </tbody>
