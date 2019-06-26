@@ -18,6 +18,7 @@ class Service < ApplicationRecord
   validates :local_type, presence: true
   validates :status, presence: true
 
+  validate :photo_type
   validate :limit_number_photos
   validate :approving_service, on: :update
 
@@ -57,6 +58,15 @@ class Service < ApplicationRecord
       @errors.add(
         :service, 'não pode ser aprovado sem profissionais com agenda.'
       )
+    end
+  end
+
+  def photo_type
+    photos.each do |photo|
+      next if photo.content_type.in?(%(image/jpeg image/png))
+
+      errors.add(:photos, 'com formato inválido')
+      break
     end
   end
 end

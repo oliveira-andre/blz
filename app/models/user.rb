@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validates_cpf :cpf, unless: :skip_validation_to_user?
   validates :cpf, uniqueness: true, unless: :skip_validation_to_user?
 
+  validate :photo_type
+
   has_many :scheduling
   has_many :payment_cards
   has_one :establishment
@@ -41,5 +43,9 @@ class User < ApplicationRecord
     return true if establishment.nil? && id.nil?
 
     false
+  end
+
+  def photo_type
+    errors.add(:photo, 'com formato inválido') unless photo.content_type.in?(%(image/jpeg image/png))
   end
 end
