@@ -34,30 +34,18 @@
       </div>
     </div>
 
-    <% unless average_stars(@service.reviews).nil? %>
+    <% unless @service.reviews.nil? %>
       <div class="columns is-mobile is-multiline">
         <div class="column is-11">
           <h1 class="has-text-weight-semibold is-size-4">Avaliações
             <strong class="has-text-grey-light ">(<%= @service.reviews.count %>)
-              <% average_stars(@service.reviews).times do |number| %>
+              <% @service.reviews.average(:rating).to_i.times do |number| %>
                 <i class="fas fa-star star-color" ></i>
               <% end %>
             </strong>
           </h1>
         </div>
-
-      <% @service.reviews.each do |review| %>
-        <div class="column is-12">
-            <h6><%= review.user.name.split(' ')[0].capitalize %>
-              <% review.rating.times do |number| %>
-                <i class="fas fa-star star-color"></i>
-              <% end%>
-            </h6>
-          <br>
-          <p><%= review.body %></p>
-          <div class="is-divider"></div>
-        </div>
-       <% end %>
+        <%= render '/services/reviews/review' %>
       </div>
     <% end %>
 

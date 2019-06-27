@@ -1,0 +1,12 @@
+<% @service.reviews.each do |review| %>
+  <div class="column is-12">
+    <h6><%= review.user.name.split(' ')[0].capitalize %>
+      <% review.rating.times do |number| %>
+        <i class="fas fa-star star-color"></i>
+      <% end%>
+    </h6>
+    <br>
+    <p><%= review.body %></p>
+   <div class="is-divider"></div>
+  </div>
+<% end %>

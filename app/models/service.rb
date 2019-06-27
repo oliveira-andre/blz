@@ -33,7 +33,7 @@ class Service < ApplicationRecord
     schedulings_ids = Scheduling.where(professional_service_id:
                                         professional_services.ids)
 
-    Review.where(reviewable_id: schedulings_ids, status: 'approved',
+    Review.where(reviewable_id: schedulings_ids, status: :approved,
                  reviewable_type: 'Scheduling')
   end
 
