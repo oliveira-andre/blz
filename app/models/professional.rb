@@ -5,6 +5,7 @@ class Professional < ApplicationRecord
   has_one_attached :photo, dependent: :destroy
 
   validate :self_employed_restriction, on: :create
+  validate :photo_type
 
   private
 
@@ -14,5 +15,9 @@ class Professional < ApplicationRecord
 
       errors.add(:self_employed, 'só pode cadastrar 1 profissional.')
     end
+  end
+
+  def photo_type
+    errors.add(:photo, 'com formato inválido') unless photo.content_type.in?(%(image/jpeg image/png))
   end
 end

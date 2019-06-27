@@ -48,15 +48,6 @@ class Service < ApplicationRecord
     errors.add(:photos, '5 no máximo.') if photos.count > 5
   end
 
-  def photo_type
-    photos.each do |photo|
-      next if photo.content_type.in?(%(image/jpeg image/png))
-
-      errors.add(:photos, 'com tipo não permitido.')
-      break
-    end
-  end
-
   def rebuild_schedule
     professional_services.each { |p_s| Schedule.rebuild(p_s) }
   end
@@ -67,6 +58,15 @@ class Service < ApplicationRecord
       @errors.add(
         :service, 'não pode ser aprovado sem profissionais com agenda.'
       )
+    end
+  end
+
+  def photo_type
+    photos.each do |photo|
+      next if photo.content_type.in?(%(image/jpeg image/png))
+
+      errors.add(:photos, 'com formato inválido')
+      break
     end
   end
 end
