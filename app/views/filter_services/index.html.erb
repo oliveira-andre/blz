@@ -1,0 +1,41 @@
+<%= render 'shared/header', to_back: false, fixed: false %>
+<div class="filter-services">
+  <div class="container">
+    <h1 class="title is-size-4 has-text-grey">Serviços encontrados </h1>
+    <%= form_with url: '/filter_services', class: 'custom', method: :get do |f| %>
+      <div class="columns">
+        <div class="column is-4">
+          <div class="field">
+            <div class="control search">
+              <%= f.text_field :query, class: 'input',
+                              placeholder: 'Busque por um serviço...',
+                              autocomplete: 'off' %>
+              <%= f.submit  'Buscar', class: 'button' %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="field">
+            <div class="control">
+              <div class="select">
+                <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { prompt: "Selecione (obrigatório)" } %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="field">
+            <div class="control">
+              <%= f.date_field :date, class: 'input', id: 'filter-services-date' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="columns results is-multiline">
+      <% @services.each do |service| %>
+        <%= render 'service_card', service: service %>
+      <% end %>
+    </div>
+  </div>
+</div>
