@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :filter_services, only: :index
   resources :filters, only: :index
   resources :establishments do
-    resources :feedbacks, only: :index
+    resources :feedbacks, only: :index, controller: :establishment_feedbacks
     resources :services do
       resources :professional_services, only: %i[create destroy]
     end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FeedbacksController < ApplicationController
+class EstablishmentFeedbacksController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   before_action :load_establishment, only: :index
 
