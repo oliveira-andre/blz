@@ -36,6 +36,10 @@ class User < ApplicationRecord
     end
   end
 
+  def record_completed?
+    cpf.present? && phone.present? && birth_date.present?
+  end
+
   private
 
   def skip_validation_to_user?
@@ -43,10 +47,6 @@ class User < ApplicationRecord
     return true if establishment.nil? && id.nil?
 
     false
-  end
-
-  def record_completed?
-    cpf.present? && phone.present? && birth_date.present?
   end
 
   def photo_type
