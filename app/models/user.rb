@@ -48,10 +48,6 @@ class User < ApplicationRecord
   end
 
   def photo_type
-    errors.add(:photo, 'com formato inválido') unless photo
-                                                      .content_type
-                                                      .in?(
-                                                        %(image/jpeg image/png)
-                                                      )
+    errors.add(:photo, 'com formato inválido') unless photo.content_type.in?(%(image/jpeg image/png))
   end
 end
