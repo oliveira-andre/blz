@@ -1,0 +1,26 @@
+<div class="column is-4 is-3-widescreen">
+  <div class="card">
+    <% if service.photos.attached? %>
+      <div class="image-mobile" style="<%= liner_gradiente_card_img(
+        url_for(service.thumbnail(service.photos.sample, custom: '320x320!'))
+      ) %>">
+    <% else %>
+      <div class="image-mobile"
+           style="<%= liner_gradiente_card_img(default_image_service(service, size: :small)) %>">
+    <% end %>
+      <div class="content">
+        <%= link_to service_path(service) do %>
+          <h1 class="has-text-white is-size-4 has-text-weight-semibold"><%= service.title %></h1>
+        <% end %>
+        <%= link_to service_path(service) do %>
+          <p class="has-text-white">
+            <span class="is-size-4">R$ <%= service.amount %></span>
+            <span class="is-size-1 dot">.</span>
+            <span class="is-size-5"><%= service.category.name %></span>
+          </p>
+        <% end %>
+        <%= link_to 'Mais detalhes', service_path(service), class: 'button is-light is-size-4' %>
+      </div>
+    </div>
+  </div>
+</div>
