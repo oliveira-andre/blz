@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <% unless @service.reviews.nil? %>
+    <% if @service.reviews.size >= 0 %>
       <div class="columns is-mobile is-multiline">
         <div class="column is-11">
           <h1 class="has-text-weight-semibold is-size-4">Avaliações
