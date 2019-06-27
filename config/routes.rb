@@ -42,6 +42,7 @@ Rails.application.routes.draw do
 
   resources :callbacks, only: :index
   resources :use_rules, only: :index
+  resources :feedbacks, only: :index
 
   namespace :admin do
     resources :scheduling, only: %i[index show]
