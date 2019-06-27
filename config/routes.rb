@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :filter_services, only: :index
   resources :filters, only: :index
   resources :establishments do
     resources :services do
