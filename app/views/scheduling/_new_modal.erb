@@ -35,12 +35,8 @@
             <p class="title">R$ <%= @scheduling.service.amount %></p>
           </div>
           <div class="column is-4">
-            <%= form_with url: scheduling_index_path, local: true, method: :post do |f| %>
-              <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
-              <%= f.hidden_field :date, value:  @scheduling.date %>
-              <%= link_to  'Continuar', new_scheduling_path(date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' if current_user.record_completed? %>
-              <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' unless current_user.record_completed? %>
-            <% end %>
+            <%= link_to  'Continuar', new_scheduling_path(date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' if current_user.registration_ok? %>
+            <%= link_to 'Continuar', edit_service_user_path(service_id: @scheduling.service, id: current_user, date: params[:date], professional_service_id: params[:professional_service_id], professional_id: @scheduling.professional.id), class: 'button is-light' unless current_user.registration_ok? %>
           </div>
         </div>
       </div>
