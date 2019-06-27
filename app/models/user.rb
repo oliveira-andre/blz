@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   enum profile: %i[common admin]
   enum status: %i[active blocked]
@@ -36,7 +38,7 @@ class User < ApplicationRecord
     end
   end
 
-  def record_completed?
+  def registration_ok?
     cpf.present? && phone.present? && birth_date.present?
   end
 
@@ -50,6 +52,8 @@ class User < ApplicationRecord
   end
 
   def photo_type
-    errors.add(:photo, 'com formato inválido') unless photo.content_type.in?(%(image/jpeg image/png))
+    if photo.attached? && !photo.content_type.in?(%(image/jpeg image/png))
+      errors.add(:photo, 'com formato inválido')
+    end
   end
 end
