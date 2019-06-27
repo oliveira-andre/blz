@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   enum profile: %i[common admin]
   enum status: %i[active blocked]
@@ -14,7 +16,7 @@ class User < ApplicationRecord
   validates_cpf :cpf, unless: :skip_validation_to_user?
   validates :cpf, uniqueness: true, unless: :skip_validation_to_user?
 
-  validate :photo_type, unless: :skip_validation_to_user?
+  validate :photo_type, on: :update?
 
   has_many :scheduling
   has_many :payment_cards
@@ -46,6 +48,10 @@ class User < ApplicationRecord
   end
 
   def photo_type
-    errors.add(:photo, 'com formato inválido') unless photo.content_type.in?(%(image/jpeg image/png))
+    errors.add(:photo, 'com formato inválido') unless photo
+                                                      .content_type
+                                                      .in?(
+                                                        %(image/jpeg image/png)
+                                                      )
   end
 end
