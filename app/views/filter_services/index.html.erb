@@ -2,15 +2,15 @@
 <div class="filter-services">
   <div class="container">
     <h1 class="title is-size-4 has-text-grey">Serviços encontrados </h1>
-    <%= form_with url: '/filter_services', class: 'custom', method: :get do |f| %>
+    <%= form_with url: '/filter_services', class: 'custom', id: 'filter-services', method: :get, authenticity_token: false, local: true do |f| %>
       <div class="columns">
         <div class="column is-4">
           <div class="field">
             <div class="control search">
-              <%= f.text_field :query, class: 'input',
-                              placeholder: 'Busque por um serviço...',
-                              autocomplete: 'off' %>
-              <%= f.submit  'Buscar', class: 'button' %>
+              <%= text_field_tag :query, @filter['query'], class: 'input',
+                                 placeholder: 'Busque por um serviço...',
+                                 autocomplete: 'off' %>
+              <%= submit_tag 'Buscar', class: 'button', name: nil %>
             </div>
           </div>
         </div>
@@ -18,7 +18,11 @@
           <div class="field">
             <div class="control">
               <div class="select">
-                <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { prompt: "Selecione (obrigatório)" } %>
+                <%= select_tag :category,
+                               options_for_select(
+                                Category.all.collect{ |c| [c.name, c.id] },
+                                selected: @filter['category']
+                               ), { prompt: "selecione uma categória" } %>
               </div>
             </div>
           </div>
@@ -26,7 +30,7 @@
         <div class="column is-4">
           <div class="field">
             <div class="control">
-              <%= f.date_field :date, class: 'input', id: 'filter-services-date' %>
+              <%= date_field_tag :date, @filter['date'], class: 'input' %>
             </div>
           </div>
         </div>
@@ -36,6 +40,15 @@
       <% @services.each do |service| %>
         <%= render 'service_card', service: service %>
       <% end %>
+      <% unless @services.any? %>
+      <div class="column is-12 has-text-centered">
+        <p class="is-size-4 has-text-grey">
+          Nenhum serviço encontro com esse(s) filtro(s)
+        </p>
+        <%= link_to 'Limpar filtros', filter_services_path, class: 'button is-text is-size-4' %>
+      </div>
+      <% end %>
     </div>
   </div>
+  <%= render 'shared/footer' %>
 </div>
