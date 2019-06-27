@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <% if @service.reviews.size >= 0 %>
+    <% if @service.reviews.any? %>
       <div class="columns is-mobile is-multiline">
         <div class="column is-11">
           <h1 class="has-text-weight-semibold is-size-4">Avaliações
@@ -45,7 +45,7 @@
             </strong>
           </h1>
         </div>
-        <%= render '/services/reviews/review' %>
+        <%= render partial: '/services/reviews/review', collection: @service.reviews %>
       </div>
     <% end %>
 
