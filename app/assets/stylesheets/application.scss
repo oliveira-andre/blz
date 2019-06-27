@@ -10,6 +10,7 @@
 @import 'bulma_custom/*';
 @import 'shared/*';
 @import 'home_page/*';
+@import 'admin/*';
 
 @import 'services';
 @import 'devise';
@@ -23,6 +24,7 @@
 @import 'payment_card';
 @import 'use_rules';
 @import 'new_scheduling';
+@import 'filter_services';
 
 html {
   font-family: 'Inter', sans-serif !important;

@@ -30,6 +30,7 @@ class ProfessionalsController < ApplicationController
 
   def update
     authorize @professional
+
     if @professional.update professional_params
       redirect_to establishment_professionals_path(@establishment),
                   notice: 'Profissional atualizado com sucesso'

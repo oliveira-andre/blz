@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :filter_services, only: :index
   resources :filters, only: :index
   resources :establishments do
     resources :services do
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :scheduling, only: %i[index show]
-    resources :services, only: :index
-    resources :users, only: :index
+    resources :services, only: %i[index show update]
+    resources :users, only: %i[index show update]
   end
 end

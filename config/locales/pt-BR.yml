@@ -22,6 +22,7 @@ pt-BR:
         cpf: CPF
         phone: Telefone
         birth_date: 'Data de nascimento'
+        photo: Foto
 
       service:
         title: Título
@@ -32,9 +33,11 @@ pt-BR:
         establishment: Estabelecimento
         local_type: Localidade do Serviço
         photos: Fotos
+        service: Serviço
 
       professional:
         self_employed: Profissional autônomo
+        photo: Foto
 
       establishment:
         name: Nome
@@ -76,6 +79,11 @@ pt-BR:
         recused: Recusado
         awaiting_avaliation: Analise
         archived: Arquivado
+      user:
+        blocked: Bloqueado
+        active: Ativo
+        admin: Administrador
+        common: Comum
 
     errors:
       messages:

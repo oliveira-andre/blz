@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   enum profile: %i[common admin]
+  enum status: %i[active blocked]
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
@@ -12,6 +13,8 @@ class User < ApplicationRecord
   validates :cpf, presence: true, unless: :skip_validation_to_user?
   validates_cpf :cpf, unless: :skip_validation_to_user?
   validates :cpf, uniqueness: true, unless: :skip_validation_to_user?
+
+  validate :photo_type, unless: :skip_validation_to_user?
 
   has_many :scheduling
   has_many :payment_cards
@@ -44,5 +47,9 @@ class User < ApplicationRecord
 
   def record_completed?
     cpf.present? && phone.present? && birth_date.present?
+  end
+
+  def photo_type
+    errors.add(:photo, 'com formato inválido') unless photo.content_type.in?(%(image/jpeg image/png))
   end
 end

@@ -52,6 +52,9 @@ class ServicesController < ApplicationController
       @professionals = @service.professionals_to_link
       render 'edit'
     end
+  rescue ActionView::Template::Error => e
+    @service.errors.full_messages.each { |error| flash[:error] = error }
+    redirect_to edit_establishment_service_path(@service)
   end
 
   def destroy

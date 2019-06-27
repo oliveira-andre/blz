@@ -59,12 +59,22 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/pids -p"
     end
   end
+
+  desc 'Restart puma systemctl'
+  task :systemctl_restart do
+    on roles(:app) do
+      execute 'sudo systemctl restart blzpuma.service'
+    end
+  end
+
   desc "Restart Nginx"
   task :nginx_restart do
     on roles(:app) do
       execute "sudo service nginx restart"
     end
   end
+
   before :start, :create_dirs
+  after :start, :systemctl_restart
   after :start, :nginx_restart
 end
