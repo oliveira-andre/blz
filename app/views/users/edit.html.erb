@@ -1,4 +1,4 @@
-<%= render 'shared/header', to_back: false %>
+<%= render 'shared/header', to_back: false, fixed: false %>
 <div class="service-edit-user">
   <div class="container">
     <%= form_with model: current_user, url: service_user_path(date: params[:date], professional_service_id: params[:professional_service_id], professional_id: params[:professional_id]), class: :custom do |f| %>
