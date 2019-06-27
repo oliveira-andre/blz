@@ -26,7 +26,7 @@
       <div class="field">
         <div class="file is-warning is-boxed">
           <label class="file-label">
-            <%= f.file_field :photo, class: "file-input", id: "user-photo-add" %>
+            <%= f.file_field :photo, class: "file-input", id: "user-photo-add", accept: "image/x-png,image/jpeg" %>
             <figure class="image is-128x128" id="temporary_image">
               <% if @professional.photo.attached? %>
                 <%= image_tag @professional.photo, class: "is-rounded" %>
