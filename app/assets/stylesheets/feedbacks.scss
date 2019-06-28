@@ -1,0 +1,18 @@
+.feedbacks {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .is-size-6-rem {
+    font-size: 6rem !important;
+  }
+
+  .sample-text {
+    margin-top: 20px;
+  }
+
+  a.is-link {
+    text-decoration: underline;
+  }
+}
