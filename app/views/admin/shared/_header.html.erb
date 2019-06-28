@@ -15,10 +15,11 @@
       <div class="navbar-end ">
         <div class="navbar-item ">
           <% if user_signed_in? %>
-            <%= link_to 'Agendamentos', admin_scheduling_index_path,class:"navbar-item has-text-light" %>
-            <%= link_to 'Serviços', admin_services_path,class:"navbar-item has-text-light"  %>
-            <%= link_to 'Usuário', admin_users_path,class:"navbar-item has-text-light"  %>
-            <%= link_to 'Sair', destroy_user_session_path, method: :delete,class:"navbar-item has-text-light"  %>
+            <%= link_to :agendamentos, admin_scheduling_index_path,class:"navbar-item has-text-light is-capitalized" %>
+            <%= link_to :serviços, admin_services_path,class:"navbar-item has-text-light is-capitalized" %>
+            <%= link_to :usuário, admin_users_path,class:"navbar-item has-text-light is-capitalized" %>
+            <%= link_to :estabelecimentos, admin_establishments_path,class:"navbar-item has-text-light is-capitalized" %>
+            <%= link_to :sair, destroy_user_session_path, method: :delete,class:"navbar-item has-text-light is-capitalized"  %>
           <% end %>
         </div>
       </div>

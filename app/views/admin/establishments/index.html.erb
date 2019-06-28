@@ -1,0 +1,32 @@
+<%= render 'admin/shared/header'%>
+<div class="container">
+  <div class="content">
+    <h1 class="has-text-grey">Estabelecimentos</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Estabelecimento</th>
+          <th>Usuário</th>
+          <th>Status</th>
+          <th>Autonomo?</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @establishments.each do |establishment| %>
+          <tr>
+            <td><%= establishment.name %></td>
+            <td><%= establishment.user.name %></td>
+            <td><%= establishment.t_status %></td>
+            <td class="is-capitalized"><%= establishment.self_employed? ? :sim : :não %></td>
+            <td><%= link_to :detalhes, '#', class: 'is-capitalized' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% if @establishments.present? %>
+    <%= pagy_bulma_nav(@pagy).html_safe %>
+  <% end %>
+</div>
+
