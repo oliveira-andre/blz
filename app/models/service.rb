@@ -62,11 +62,13 @@ class Service < ApplicationRecord
   end
 
   def photo_type
-    photos.each do |photo|
-      next if photo.content_type.in?(%(image/jpeg image/png))
+    if photos.attached?
+      photos.each do |photo|
+        next if photo.content_type.in?(%(image/jpeg image/png))
 
-      errors.add(:photos, 'com formato inválido')
-      break
+        errors.add(:photos, 'com formato inválido')
+        break
+      end
     end
   end
 end

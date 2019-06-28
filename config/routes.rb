@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: :destroy
-  resources :services, only: :show
+  resources :services, only: :show do
+    resources :users, only: %i[edit update]
+  end
 
   resources :scheduling, only: %i[new create show] do
     resources :payments, only: %i[new create]
@@ -38,12 +40,12 @@ Rails.application.routes.draw do
   resources :payment_cards, only: %i[create index show destroy]
 
   get '/users/:id/dashboard',
-      to: 'users_dashboard#index',
-      as: :users_dashboard
+    to: 'users_dashboard#index',
+    as: :users_dashboard
 
   get '/establishments/:id/dashboard',
-      to: 'establishments_dashboard#index',
-      as: :establishments_dashboard
+    to: 'establishments_dashboard#index',
+    as: :establishments_dashboard
 
   resources :callbacks, only: :index
   resources :use_rules, only: :index

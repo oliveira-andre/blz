@@ -24,6 +24,7 @@ class Scheduling < ApplicationRecord
   validate :user_date_busy?, on: :create
   validate :professional_date_busy?, on: :create
   validate :service_approved?, on: :create
+  validate :user_registration_ok?, on: :create
 
   after_save :set_schedule_busy
   after_create :notifications
@@ -64,6 +65,12 @@ class Scheduling < ApplicationRecord
     return if service.approved?
 
     @errors.add(:professional_service, 'não esta disponível')
+  end
+
+  def user_registration_ok?
+    return if user.registration_ok?
+
+    @errors.add(:user, 'não está com o cadastro completo')
   end
 
   def set_schedule_busy

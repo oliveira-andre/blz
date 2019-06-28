@@ -54,6 +54,7 @@ pt-BR:
       scheduling:
         date: Horário
         professional_service: Serviço
+        user: Usuário
 
       office_hour:
         hour_begin: 'Hora inicial'
