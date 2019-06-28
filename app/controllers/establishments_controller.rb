@@ -12,8 +12,7 @@ class EstablishmentsController < ApplicationController
     @establishment = Establishment.new establishment_params
     @establishment.save!
 
-    redirect_to establishments_dashboard_path(@establishment),
-                notice: 'Cadastro realizado com sucesso'
+    redirect_to feedbacks_path(email: @establishment.user.email)
   rescue ActiveRecord::RecordInvalid => error
     @messages_errors = error.record.errors.full_messages
     render 'new'

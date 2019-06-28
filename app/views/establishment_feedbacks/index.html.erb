@@ -1,0 +1,24 @@
+<%= render 'shared/header', to_back: false, fixed: false %>
+<div class="feedbacks">
+  <div class="container">
+    <div class="columns is-multiline has-text-centered">
+      <div class="column is-12">
+        <i class="far fa-check-circle is-size-6-rem has-text-primary"></i>
+      </div>
+      <div class="column is-12">
+        <h2 class="is-size-3 has-text-weight-bold has-text-grey">Pronto!</h2>
+      </div>
+      <div class="column is-12 sample-text">
+        <p>Vamos analisar seu cadastro e em <span class="has-text-weight-bold	has-text-grey">4 horas úteis</span> enviaremos para o email: <span class="has-text-weight-bold	has-text-grey"><%= @email %></span> as próximas instruções.</p>
+      </div>
+      <div class="column is-12">
+        <p>Ou se preferir pode entrar em contato:</p>
+        <p class="has-text-weight-bold	has-text-grey">(69) 99865-6588</p>
+        <p class="has-text-weight-bold	has-text-grey">contato@blz.life</p>
+      </div>
+      <div class="column is-12 sample-text">
+        <%= link_to 'Entendido!', root_path ,class: 'has-text-primary is-size-4 is-link'%>
+      </div>
+    </div>
+  </div>
+</div>
