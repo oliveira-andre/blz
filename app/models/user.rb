@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User < ApplicationRecord
   enum profile: %i[common admin]
   enum status: %i[active blocked]
@@ -16,7 +14,7 @@ class User < ApplicationRecord
   validates_cpf :cpf, unless: :skip_validation_to_user?
   validates :cpf, uniqueness: true, unless: :skip_validation_to_user?
 
-  validate :photo_type, on: :skip_validation_to_user?
+  validate :photo_type, unless: :skip_validation_to_user?
 
   has_many :scheduling
   has_many :payment_cards
