@@ -19,7 +19,7 @@
             <td><%= establishment.user.name %></td>
             <td><%= establishment.t_status %></td>
             <td class="is-capitalized"><%= establishment.self_employed? ? :sim : :não %></td>
-            <td><%= link_to :detalhes, '#', class: 'is-capitalized' %></td>
+            <td><%= link_to :detalhes, admin_establishment_path(establishment), class: 'is-capitalized' %></td>
           </tr>
         <% end %>
       </tbody>

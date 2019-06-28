@@ -54,6 +54,6 @@ Rails.application.routes.draw do
     resources :scheduling, only: %i[index show]
     resources :services, only: %i[index show update]
     resources :users, only: %i[index show update]
-    resources :establishments, only: :index
+    resources :establishments, only: %i[update index show]
   end
 end
