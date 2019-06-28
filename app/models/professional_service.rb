@@ -6,6 +6,7 @@ class ProfessionalService < ApplicationRecord
   has_many :scheduling
 
   after_create :rebuild_schedule
+  after_destroy :verify_last_professional_service
 
   def table_schedule
     return [] if schedules.empty?
@@ -24,5 +25,11 @@ class ProfessionalService < ApplicationRecord
 
   def rebuild_schedule
     Schedule.rebuild(self)
+  end
+
+  def verify_last_professional_service
+    return if service.professional_services.count.positive?
+
+    service.awaiting_avaliation!
   end
 end
