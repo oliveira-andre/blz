@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 class Establishment < ApplicationRecord
   enum status: %i[analyze approved disapproved canceled]
 
-  before_save :analyze_services
+  after_save :analyze_services
 
   validates :name, presence: true
   validates :timetable, presence: true
