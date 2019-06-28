@@ -6,7 +6,7 @@ function listeningInputs() {
   if(!$('#filter-services')) return;
 
   var categorySelect = $('select[name="category"]');
-  var dateField = $('input[type="date"]');
+  var dateField = $('input[id="search_date"]');
 
   categorySelect.on('change', sendSubmit);
   dateField.on('change', sendSubmit);
