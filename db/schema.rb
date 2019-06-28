@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_021236) do
+ActiveRecord::Schema.define(version: 2019_06_07_181508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,10 @@ ActiveRecord::Schema.define(version: 2019_06_04_021236) do
     t.string "timetable", null: false
     t.integer "status", default: 0
     t.bigint "user_id"
+    t.string "moip_account_id"
+    t.string "moip_access_token"
+    t.string "moip_refresh_token"
+    t.string "moip_set_password_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "self_employed", default: false
@@ -87,7 +91,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_021236) do
     t.string "expiration_month", null: false
     t.string "expiration_year", null: false
     t.string "number", null: false
-    t.string "hash", null: false
+    t.string "hash_card", null: false
     t.string "holder_name", null: false
     t.string "holder_cpf", null: false
     t.date "holder_birth_date", null: false
@@ -126,6 +130,17 @@ ActiveRecord::Schema.define(version: 2019_06_04_021236) do
     t.index ["establishment_id"], name: "index_professionals_on_establishment_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "body", null: false
+    t.string "reviewable_type"
+    t.bigint "reviewable_id"
+    t.integer "rating", default: 0, null: false
+    t.bigint "user_id"
+    t.integer "status", default: 0
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.boolean "free", default: true
     t.datetime "date", null: false
@@ -140,6 +155,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_021236) do
     t.bigint "professional_service_id"
     t.integer "status", default: 0
     t.integer "service_duration", null: false
+    t.string "moip_order_id"
     t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -192,6 +208,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_021236) do
   add_foreign_key "professional_services", "professionals"
   add_foreign_key "professional_services", "services"
   add_foreign_key "professionals", "establishments"
+  add_foreign_key "reviews", "users"
   add_foreign_key "schedules", "professional_services"
   add_foreign_key "schedulings", "professional_services"
   add_foreign_key "schedulings", "users"
