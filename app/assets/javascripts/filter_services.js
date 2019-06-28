@@ -5,8 +5,8 @@ $(document).on("turbolinks:load", function () {
 function listeningInputs() {
   if(!$('#filter-services')) return;
 
-  var categorySelect = $('select[name="category"]');
-  var dateField = $('input[type="date"]');
+  var categorySelect = $('select[id="filter-services-category"]');
+  var dateField = $('input[id="filter-services-date"]');
 
   categorySelect.on('change', sendSubmit);
   dateField.on('change', sendSubmit);
