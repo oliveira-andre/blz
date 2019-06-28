@@ -5,7 +5,7 @@ class ProfessionalServicesController < ApplicationController
     if @p_s.save
       flash[:success] = 'Profissional vinculado!'
     else
-      flash[:erro] = 'Não foi possível vincular o profissional :('
+      @p_s.errors.full_messages.each { |msg| flash[:error] = msg }
     end
 
     redirect_to edit_establishment_service_path(

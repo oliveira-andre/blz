@@ -39,6 +39,10 @@ pt-BR:
         self_employed: Profissional autônomo
         photo: Foto
 
+      professional_service:
+        professional: Profissional
+        service: Serviço
+
       establishment:
         name: Nome
         email: Email

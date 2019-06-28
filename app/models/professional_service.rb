@@ -5,6 +5,8 @@ class ProfessionalService < ApplicationRecord
   has_many :schedules, dependent: :destroy
   has_many :scheduling
 
+  validate :professional_with_hours
+
   after_create :rebuild_schedule
   after_destroy :verify_last_professional_service
 
@@ -31,5 +33,11 @@ class ProfessionalService < ApplicationRecord
     return if service.professional_services.count.positive?
 
     service.awaiting_avaliation!
+  end
+
+  def professional_with_hours
+    return if professional.office_hours.count.positive?
+
+    @errors.add(:professional, 'não possui horários de trabalho cadastrado.')
   end
 end
