@@ -1,17 +1,30 @@
 <div id="cancel-scheduling-modal" class="modal modal-fx-fadeInScale">
   <div class="modal-background"></div>
   <div class="modal-content">
+    <%= form_with url: scheduling_path(@scheduling), method: :delete, class: :custom do |f| %>
       <div class="columns content is-multiline">
         <div class="column is-12">
           <h1 class="is-size-4 has-text-grey"> Política de cancelamento</h1>
         </div>
         <div class="column is-12">
-          <p>Política sendo elaborada ...</p>
+          <label class="label has-text-grey has-text-weight-normal">Justificativa do cancelamento <small class="is-danger">*</small></label>
+          <%= f.text_area :canceled_reason, class: :textarea %>
+        </div>
+        <div class="field-body">
+          <div class="column is-1">
+            <i class="fas fa-question-circle is-size-4 has-text-danger"></i>
+          </div>
+          <div class="column is-11">
+            <span class="has-text-danger">
+              Ao cancelar um agendamento faltando 4 horas ou menos para o atendimento será cobrado uma taxa de R$ 10,00 (dez reais) e seu usuário será bloqueado até o pagamento da taxa
+            </span>
+          </div>
         </div>
         <div class="column is-12">
-          <a class="button is-danger"> Cancelar </a>
+          <%= f.submit :cancelar, class: 'button is-danger is-capitalized is-pulled-right'%>
         </div>
       </div>
+    <% end %>
   </div>
   <button class="modal-close is-large" aria-label="close"></button>
 </div>
