@@ -59,6 +59,9 @@ pt-BR:
         date: Horário
         professional_service: Serviço
         user: Usuário
+        canceled_reason: Justificativa
+        canceled_by: Cancelador
+        canceled_at: Data de cancelamento
 
       office_hour:
         hour_begin: 'Hora inicial'
