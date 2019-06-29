@@ -2,7 +2,7 @@
 
 class SchedulingController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
-  before_action :load_scheduling, only: :show
+  before_action :load_scheduling, only: %i[show destroy]
 
   def new
     @scheduling = Scheduling.new scheduling_new_params
@@ -26,6 +26,16 @@ class SchedulingController < ApplicationController
     end
   end
 
+  def destroy
+    @scheduling.update(scheduling_cancel_params)
+    @scheduling.canceled!
+    flash[:success] = 'Agendamento cancelado com sucesso'
+    redirect_to scheduling_path(@scheduling)
+  rescue ActiveRecord::RecordInvalid => e
+    @scheduling.errors.full_messages.each { |msg| flash[:error] = msg }
+    redirect_to scheduling_path(@scheduling)
+  end
+
   private
 
   def scheduling_params
@@ -39,5 +49,11 @@ class SchedulingController < ApplicationController
 
   def scheduling_new_params
     params.permit(:professional_service_id, :date)
+  end
+
+  def scheduling_cancel_params
+    params.permit(:canceled_reason).merge(canceled_at: Time.now,
+                                          canceled_by: current_user
+                                          .establishment.nil? ? 0 : 1)
   end
 end
