@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="column is-12 actions">
-          <% unless @scheduling.finished? %>
+          <% unless @scheduling.finished? || @scheduling.canceled? %>
             <a class="button is-light modal-button tooltip is-pulled-right" data-target="cancel-scheduling-modal"
               data-tooltip="Ver políticas de cancelamento">
               <span class="icon has-text-grey is-size-4">
