@@ -6,7 +6,6 @@ class SchedulingController < ApplicationController
 
   def new
     @scheduling = Scheduling.new scheduling_new_params
-    authorize @scheduling
   end
 
   def show
