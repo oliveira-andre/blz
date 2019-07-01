@@ -11,4 +11,9 @@ class SchedulingPolicy < ApplicationPolicy
   def new?
     user.registration_ok?
   end
+
+  def destroy?
+    record.user == user ||
+      record.service.establishment.user == user
+  end
 end
