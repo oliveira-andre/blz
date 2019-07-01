@@ -106,7 +106,7 @@ class Scheduling < ApplicationRecord
   def block_user
     return if establishment?
 
-    user.blocked! if canceled? && canceled_at < (date - 4.hours)
+    user.blocked! if canceled? && canceled_at > (date - 4.hours)
   end
 
   def set_schedule_free
@@ -114,7 +114,6 @@ class Scheduling < ApplicationRecord
       Schedule
         .find_by(date: date, professional_service: professional_service)
         .update(free: true)
-      Schedule.rebuild(professional_service)
     end
   end
 
