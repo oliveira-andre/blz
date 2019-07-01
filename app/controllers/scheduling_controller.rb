@@ -27,8 +27,11 @@ class SchedulingController < ApplicationController
   end
 
   def destroy
-    @scheduling.update(scheduling_cancel_params)
-    @scheduling.canceled!
+    authorize @scheduling
+    @scheduling.transaction do
+      @scheduling.update(scheduling_cancel_params)
+      @scheduling.canceled!
+    end
     flash[:success] = 'Agendamento cancelado com sucesso'
     redirect_to scheduling_path(@scheduling)
   rescue ActiveRecord::RecordInvalid => e
@@ -52,8 +55,12 @@ class SchedulingController < ApplicationController
   end
 
   def scheduling_cancel_params
-    params.permit(:canceled_reason).merge(canceled_at: Time.now,
-                                          canceled_by: current_user
-                                          .establishment.nil? ? 0 : 1)
+    params.require(:scheduling).permit(:canceled_reason)
+          .merge(canceled_at: Time.now,
+                 canceled_by: if current_user.establishment
+                                0
+                              else
+                                1
+                              end)
   end
 end
