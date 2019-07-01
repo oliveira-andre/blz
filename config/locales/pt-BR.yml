@@ -60,7 +60,7 @@ pt-BR:
         professional_service: Serviço
         user: Usuário
         canceled_reason: Justificativa
-        canceled_by: Cancelador
+        canceled_by: Cancelado por
         canceled_at: Data de cancelamento
 
       office_hour:

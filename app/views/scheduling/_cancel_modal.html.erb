@@ -10,16 +10,18 @@
           <label class="label has-text-grey has-text-weight-normal">Motivo do cancelamento <small class="is-danger">*</small></label>
           <%= f.text_area :canceled_reason, class: :textarea, required: true %>
         </div>
-        <div class="field-body">
-          <div class="column is-1">
-            <i class="fas fa-question-circle is-size-4 has-text-danger"></i>
+        <% unless current_user.establishment %>
+          <div class="field-body">
+            <div class="column is-1">
+              <i class="fas fa-question-circle is-size-4 has-text-danger"></i>
+            </div>
+            <div class="column is-11">
+              <span class="has-text-danger">
+                Ao cancelar um agendamento faltando 4 horas ou menos para o atendimento será cobrado uma taxa de R$ 10,00 (dez reais) e seu usuário será bloqueado até o pagamento da taxa
+              </span>
+            </div>
           </div>
-          <div class="column is-11">
-            <span class="has-text-danger">
-              Ao cancelar um agendamento faltando 4 horas ou menos para o atendimento será cobrado uma taxa de R$ 10,00 (dez reais) e seu usuário será bloqueado até o pagamento da taxa
-            </span>
-          </div>
-        </div>
+        <% end %>
         <div class="column is-12">
           <%= f.submit :cancelar, class: 'button is-danger is-capitalized is-pulled-right'%>
         </div>
