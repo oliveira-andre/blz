@@ -52,12 +52,7 @@ class SchedulingController < ApplicationController
 
   def scheduling_cancel_params
     params.require(:scheduling).permit(:canceled_reason)
-          .merge(status: :canceled,
-                 canceled_at: Time.now,
-                 canceled_by: if current_user.establishment
-                                0
-                              else
-                                1
-                              end)
+          .merge(status: :canceled, canceled_at: Time.now,
+                 canceled_by: current_user.establishment.nil? ? 0 : 1)
   end
 end
