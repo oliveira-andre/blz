@@ -25,7 +25,7 @@
           </article>
         </div>
         <div class="column is-12">
-          <p><%= @scheduling.service.title %></p>
+          <p><%= @scheduling.service.description %></p>
         </div>
         <div class="column is-12 is-date-scheduling">
           <p>Horário escolhido</p>
@@ -42,8 +42,9 @@
           <span class="fas fa-map-marker-alt has-text-weight-semibold is-size-5"></span>
           <span class="is-size-4 has-text-weight-bold"><%= @scheduling.service.establishment.address.full %></span>
         </div>
-        <div class="column is-12">
-          <p class="title">R$ <%= @scheduling.service.amount %></p>
+        <div class="column is-12 is-amount">
+          <p>Valor</p>
+          <span class="is-size-3 has-text-weight-bold">R$ <%= @scheduling.service.amount %></span>
         </div>
       </div>
       <div class="column is-12 actions">
