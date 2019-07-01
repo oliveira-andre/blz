@@ -48,8 +48,8 @@ class Scheduling < ApplicationRecord
 
     scheduling_ids = Scheduling.where(
       professional_service_id: professional_services_ids,
-      date: (date..(date + service_duration.minutes - 1.seconds))
-    )
+      date: (date..(date + service_duration.minutes - 1.seconds)),
+    ).scheduled
 
     return if scheduling_ids.empty?
 
@@ -114,6 +114,7 @@ class Scheduling < ApplicationRecord
       Schedule
         .find_by(date: date, professional_service: professional_service)
         .update(free: true)
+      Schedule.rebuild(professional_service)
     end
   end
 
