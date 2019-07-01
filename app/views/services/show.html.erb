@@ -20,6 +20,7 @@
           <% end %>
         <% end %>
       </ul>
+
       <div class="columns">
         <% @service.professional_services.each_with_index do |professional_service, index| %>
           <% if professional_service.table_schedule.any? %>
@@ -32,6 +33,28 @@
         <% end %>
       </div>
     </div>
+
+    <% if @service.reviews.any? %>
+      <div class="reviews">
+        <div class="columns is-mobile is-multiline">
+          <div class="column is-12">
+            <h1 class="has-text-weight-semibold is-size-4">
+              Avaliações
+              <span class="is-size-6">
+                (<%= @service.reviews.count %>)
+              </span>
+            </h1>
+            <p>
+              <% @service.reviews.average(:rating).to_i.times do |number| %>
+                <i class="fas fa-star active" ></i>
+              <% end %>
+            </p>
+          </div>
+          <%= render @service.reviews %>
+        </div>
+      </div>
+    <% end %>
+
     <div class="columns is-mobile is-multiline categories">
       <div class="column is-12">
         <h2 class=" has-text-weight-semibold is-size-4">Explore mais serviços</h2>
@@ -67,6 +90,7 @@
     </div>
   </div>
 </div>
+
 <%= render 'shared/footer' %>
 
 <div class="modal modal-fx-fadeInScale" id="new-modal-scheduling"></div>

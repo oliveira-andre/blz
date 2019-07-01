@@ -1,0 +1,24 @@
+
+<div class="column is-12">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <% if review.user.photo.attached? %>
+          <%= image_tag review.user.photo, class:'image is-rounded' %>
+        <% else %>
+          <img src="/images/128x128.png" class="is-rounded">
+        <% end %>
+      </figure>
+    </div>
+    <div class="media-content">
+      <p class="title is-size-4 has-text-weight-normal"><%= review.user.name.split(' ')[0].capitalize %></p>
+      <p class="subtitle is-size-6 has-text-weight-normal">
+        <% review.rating.times do |number| %>
+          <i class="fas fa-star star-color"></i>
+        <% end%>
+      </p>
+    </div>
+  </article>
+  <p class="review-content"><%= review.body %></p>
+  <div class="is-divider"></div>
+</div>
