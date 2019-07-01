@@ -31,6 +31,7 @@ class Scheduling < ApplicationRecord
 
   after_save :set_schedule_busy
   after_save :block_user
+  after_save :set_schedule_free
   after_create :notifications
 
   private
@@ -104,6 +105,16 @@ class Scheduling < ApplicationRecord
 
   def block_user
     return if establishment?
+
+    user.blocked! if canceled? && canceled_at < (date - 4.hours)
+  end
+
+  def set_schedule_free
+    if canceled?
+      Schedule
+        .find_by(date: date, professional_service: professional_service)
+        .update(free: true)
+    end
   end
 
   def notifications
