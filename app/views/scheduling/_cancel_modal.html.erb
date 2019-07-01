@@ -7,8 +7,8 @@
           <h1 class="is-size-4 has-text-grey"> Política de cancelamento</h1>
         </div>
         <div class="column is-12">
-          <label class="label has-text-grey has-text-weight-normal">Justificativa do cancelamento <small class="is-danger">*</small></label>
-          <%= f.text_area :canceled_reason, class: :textarea %>
+          <label class="label has-text-grey has-text-weight-normal">Motivo do cancelamento <small class="is-danger">*</small></label>
+          <%= f.text_area :canceled_reason, class: :textarea, required: true %>
         </div>
         <div class="field-body">
           <div class="column is-1">
