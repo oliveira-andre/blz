@@ -209,6 +209,21 @@
     }
   }
 
+  .reviews {
+    padding-top: 50px;
+
+    .fa-star {
+      &.active {
+        color: $primary-color;
+      }
+    }
+
+    .review-content {
+      padding-top: 10px;
+      margin-left: 10px;
+    }
+  }
+
   .categories {
     margin-top: 20px;
 

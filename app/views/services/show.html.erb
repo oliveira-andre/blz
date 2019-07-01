@@ -35,17 +35,23 @@
     </div>
 
     <% if @service.reviews.any? %>
-      <div class="columns is-mobile is-multiline">
-        <div class="column is-11">
-          <h1 class="has-text-weight-semibold is-size-4">Avaliações
-            <strong class="has-text-grey-light ">(<%= @service.reviews.count %>)
+      <div class="reviews">
+        <div class="columns is-mobile is-multiline">
+          <div class="column is-12">
+            <h1 class="has-text-weight-semibold is-size-4">
+              Avaliações
+              <span class="is-size-6">
+                (<%= @service.reviews.count %>)
+              </span>
+            </h1>
+            <p>
               <% @service.reviews.average(:rating).to_i.times do |number| %>
-                <i class="fas fa-star star-color" ></i>
+                <i class="fas fa-star active" ></i>
               <% end %>
-            </strong>
-          </h1>
+            </p>
+          </div>
+          <%= render @service.reviews %>
         </div>
-        <%= render partial: '/services/reviews/review', collection: @service.reviews %>
       </div>
     <% end %>
 
