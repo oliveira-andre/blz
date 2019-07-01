@@ -25,12 +25,13 @@
           </article>
         </div>
         <div class="column is-12">
-          <p><%= @scheduling.service.title %></p>
+          <p><%= @scheduling.service.description %></p>
         </div>
         <div class="column is-12 is-date-scheduling">
           <p>Horário escolhido</p>
           <span class="icon has-text-weight-semibold"><%= image_tag '/images/hours.png' %></span>
-          <span class="is-size-4 has-text-weight-semibold"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
+          <span
+          class="is-size-4 has-text-weight-semibold"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
         </div>
         <div class="column is-12 is-duration-service">
           <p>Duração estimada</p>
@@ -42,17 +43,18 @@
           <span class="fas fa-map-marker-alt has-text-weight-semibold is-size-5"></span>
           <span class="is-size-4 has-text-weight-bold"><%= @scheduling.service.establishment.address.full %></span>
         </div>
-        <div class="column is-12">
-          <p class="title">R$ <%= @scheduling.service.amount %></p>
+        <div class="column is-12 is-amount">
+          <p>Valor</p>
+          <span class="is-size-3 has-text-weight-bold">R$ <%= @scheduling.service.amount %></span>
+        </div>
+        <div class="column is-12 actions">
+          <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
+          <%= f.hidden_field :date, value:  @scheduling.date %>
+          <%= f.submit :finalizar, class: 'button is-primary is-capitalized is-pulled-right' %>
+          <%= link_to :cancelar, service_path(@scheduling.service), class: 'button is-capitalized is-pulled-right has-text-grey is-text'%>
         </div>
       </div>
-      <div class="column is-12 actions">
-        <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
-        <%= f.hidden_field :date, value:  @scheduling.date %>
-        <%= f.submit :finalizar, class: 'button is-primary is-capitalized is-pulled-right' %>
-        <%= link_to :cancelar, service_path(@scheduling.service), class: 'button is-capitalized is-pulled-right has-text-grey is-text'%>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-</div>
+<%= render 'shared/footer' %>
