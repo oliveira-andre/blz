@@ -1,0 +1,47 @@
+.new-scheduling {
+  article {
+    .image {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+
+  .is-date-scheduling, .is-duration-service {
+    p {
+      margin-bottom: 5px;
+      color: black;
+    }
+
+    span {
+      color: black;
+      margin-left: 5px;
+    }
+  }
+
+  .is-date-scheduling {
+    span.icon {
+      color: black;
+      img {
+        max-width: 22px;
+        min-width: 22px;
+      }
+    }
+  }
+
+  .is-duration-service {
+    span.icon {
+      color: black;
+      img {
+        max-width: 17px;
+        min-width: 17px;
+      }
+    }
+  }
+
+  .is-address {
+    span {
+      color: black;
+      margin-left: 5px;
+    }
+  }
+}

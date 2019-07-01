@@ -1,18 +1,22 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   enum profile: %i[common admin]
+  enum status: %i[active blocked]
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
   validates :name, presence: true
-  validates :birth_date, presence: true, if: :establishment_or_update?
-  validates :phone, presence: true, if: :establishment_or_update?
+  validates :birth_date, presence: true, unless: :skip_validation_to_user?
+  validates :phone, presence: true, unless: :skip_validation_to_user?
   validates :terms_acceptation, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :cpf, presence: true,
-                  uniqueness: true,
-                  if: :establishment_or_update?
-  validates_cpf :cpf, if: :establishment_or_update?
+  validates :cpf, presence: true, unless: :skip_validation_to_user?
+  validates_cpf :cpf, unless: :skip_validation_to_user?
+  validates :cpf, uniqueness: true, unless: :skip_validation_to_user?
+
+  validate :photo_type, unless: :skip_validation_to_user?
 
   has_many :scheduling
   has_many :payment_cards
@@ -34,7 +38,22 @@ class User < ApplicationRecord
     end
   end
 
-  def establishment_or_update?
-    !establishment.nil? || !id.nil?
+  def registration_ok?
+    cpf.present? && phone.present? && birth_date.present?
+  end
+
+  private
+
+  def skip_validation_to_user?
+    return true if reset_password_token?
+    return true if establishment.nil? && id.nil?
+
+    false
+  end
+
+  def photo_type
+    if photo.attached? && !photo.content_type.in?(%(image/jpeg image/png))
+      errors.add(:photo, 'com formato inválido')
+    end
   end
 end

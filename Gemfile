@@ -27,6 +27,7 @@ gem 'validates_cpf_cnpj'
 gem 'whenever', require: false
 gem 'pagy'
 gem 'toastr-rails'
+gem 'autocomplete_zipcode'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -45,6 +46,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-yarn'
   gem 'capistrano-sidekiq'
+  gem 'pry-rails'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

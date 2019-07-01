@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
@@ -10,18 +12,24 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :filter_services, only: :index
   resources :filters, only: :index
   resources :establishments do
-    resources :services, except: :index do
+    collection do
+      resources :feedbacks, only: :index, controller: :establishment_feedbacks
+    end
+    resources :services do
       resources :professional_services, only: %i[create destroy]
     end
-    resources :professionals, except: :index do
+    resources :professionals do
       resources :office_hours, only: %i[create destroy]
     end
   end
 
   resources :photos, only: :destroy
-  resources :services, only: :show
+  resources :services, only: :show do
+    resources :users, only: %i[edit update]
+  end
 
   resources :scheduling, only: %i[new create show] do
     resources :payments, only: %i[new create]
@@ -32,19 +40,20 @@ Rails.application.routes.draw do
   resources :payment_cards, only: %i[create index show destroy]
 
   get '/users/:id/dashboard',
-      to: 'users_dashboard#index',
-      as: :users_dashboard
+    to: 'users_dashboard#index',
+    as: :users_dashboard
 
   get '/establishments/:id/dashboard',
-      to: 'establishments_dashboard#index',
-      as: :establishments_dashboard
+    to: 'establishments_dashboard#index',
+    as: :establishments_dashboard
 
   resources :callbacks, only: :index
   resources :use_rules, only: :index
-  
+
   namespace :admin do
-    resources :scheduling, only: :index
-    resources :services, only: :index
-    resources :users, only: :index
+    resources :scheduling, only: %i[index show]
+    resources :services, only: %i[index show update]
+    resources :users, only: %i[index show update]
+    resources :establishments, only: %i[update index show]
   end
 end

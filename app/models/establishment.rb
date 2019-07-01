@@ -1,6 +1,8 @@
 class Establishment < ApplicationRecord
   enum status: %i[analyze approved disapproved canceled]
 
+  after_save :analyze_services
+
   validates :name, presence: true
   validates :timetable, presence: true
   validates :user_id, uniqueness: true
@@ -22,5 +24,11 @@ class Establishment < ApplicationRecord
     ).ids.uniq
     ::Scheduling.where(professional_service_id: professional_services_ids)
                 .scheduled.order(:date)
+  end
+
+  private
+
+  def analyze_services
+    services&.each { |service| service.awaiting_avaliation! } unless approved?
   end
 end

@@ -20,6 +20,7 @@ class Service < ApplicationRecord
 
   validate :photo_type
   validate :limit_number_photos
+  validate :approving_service, on: :update
 
   def professionals_to_link
     professionals_ids = ProfessionalService.where(service_id: id)
@@ -55,16 +56,27 @@ class Service < ApplicationRecord
     errors.add(:photos, '5 no máximo.') if photos.count > 5
   end
 
-  def photo_type
-    photos.each do |photo|
-      next if photo.content_type.in?(%(image/jpeg image/png))
+  def rebuild_schedule
+    professional_services.each { |p_s| Schedule.rebuild(p_s) }
+  end
 
-      errors.add(:photos, 'com tipo não permitido.')
-      break
+  def approving_service
+    if approved? && professional_services.empty? &&
+       Schedule.where(professional_service_id: professional_services.ids).empty?
+      @errors.add(
+        :service, 'não pode ser aprovado sem profissionais com agenda.'
+      )
     end
   end
 
-  def rebuild_schedule
-    professional_services.each { |p_s| Schedule.rebuild(p_s) }
+  def photo_type
+    if photos.attached?
+      photos.each do |photo|
+        next if photo.content_type.in?(%(image/jpeg image/png))
+
+        errors.add(:photos, 'com formato inválido')
+        break
+      end
+    end
   end
 end

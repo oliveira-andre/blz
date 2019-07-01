@@ -1,6 +1,22 @@
+.filter-services {
+  padding-top: 30px;
 
-.home_page { 
+  .datetimepicker-dummy {
+    height: 37px !important;
+  }
+
+  .search {
+    .button[type="submit"] {
+      position: absolute;
+      width: 70px;
+      top: 0px;
+      left: calc(100% - 70px);
+      border-color: $primary-color !important;
+    }
+  }
+
   .results {
+    padding-top: 20px;
     padding-bottom: 55px;
 
     .container {

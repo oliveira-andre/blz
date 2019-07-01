@@ -26,7 +26,7 @@
       <div class="field">
         <div class="file is-warning is-boxed">
           <label class="file-label">
-            <%= f.file_field :photo, class: "file-input", id: "user-photo-add" %>
+            <%= f.file_field :photo, class: "file-input", id: "user-photo-add", accept: "image/x-png,image/jpeg" %>
             <figure class="image is-128x128" id="temporary_image">
               <% if @professional.photo.attached? %>
                 <%= image_tag @professional.photo, class: "is-rounded" %>
@@ -52,14 +52,19 @@
       <div class="field">
          <label class="label has-text-grey has-text-weight-normal">Descrição</label>
         <div class="control">
-          <%= f.text_area :description, class: "textarea", placeholder: 'Dẽ uma descrição para esse profissional (opcional)' %>
+          <%= f.text_area :description, class: "textarea", placeholder: 'Dê uma descrição para esse profissional (opcional)' %>
         </div>
       </div>
     </div>
 
     <div class="column is-12">
+      <%= link_to :excluir,
+                  establishment_professional_path(@establishment, @professional),
+                  class: 'button is-text has-text-danger is-capitalized',
+                  method: :delete,
+                  data: { confirm: 'Você tem certeza?' } unless @professional.new_record? %>
       <%= f.submit 'Salvar', class: 'button is-light is-pulled-right' %>
-      <%= link_to 'Voltar', establishments_dashboard_path(current_user.establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
+      <%= link_to 'Voltar', establishment_professionals_path(current_user.establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
     </div>
   </div>
 <% end %>

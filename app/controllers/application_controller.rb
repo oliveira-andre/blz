@@ -1,4 +1,5 @@
-# coding: utf-8
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
@@ -11,6 +12,14 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def after_sign_in_path_for(resource)
+    if resource.establishment.nil?
+      stored_location_for(resource) || root_path
+    else
+      establishments_dashboard_path(resource.establishment)
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(

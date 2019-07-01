@@ -1,4 +1,4 @@
-<%= render 'shared/header', to_back: establishments_dashboard_path(current_user.establishment) %>
+<%= render 'shared/header', to_back: false, fixed: true %>
 <div class="services_form">
   <div class="container">
     <%= render "form", url: establishment_service_path %>
@@ -14,5 +14,5 @@
       </div>
     </div>
   </div>
+  <%= render 'shared/establishment_bottom_navigation_bar', tab: 'services' %>
 </div>
-<% render 'shared/establishment_bottom_navigation_bar', tab: 'services' %>

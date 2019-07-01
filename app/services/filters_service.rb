@@ -3,13 +3,13 @@ module FiltersService
     def execute(filter_params)
       query = filter_params.fetch('query', '')
       date = filter_params.fetch('date', '')
-      categories_ids = filter_params.fetch('categories_ids', [])
+      category = filter_params.fetch('category', '')
       local_type = filter_params.fetch('local_type', [])
 
       services = Service.approved
       services.where!(local_type: local_type) if local_type.present?
       services.where!('title ILIKE ?', "%#{query}%") if query.present?
-      services.where!(category_id: categories_ids) if categories_ids.present?
+      services.where!(category_id: category) if category.present?
 
       apply_date_filter(services, date) if date.present?
       services

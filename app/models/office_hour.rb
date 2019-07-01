@@ -13,6 +13,7 @@ class OfficeHour < ApplicationRecord
 
   after_save :rebuild_schedule
   after_destroy :rebuild_schedule
+  after_destroy :verify_professional_without_hour
 
   private
 
@@ -46,5 +47,14 @@ class OfficeHour < ApplicationRecord
 
   def rebuild_schedule
     professional.professional_services.each { |p_s| Schedule.rebuild(p_s) }
+  end
+
+  def verify_professional_without_hour
+    return if professional.office_hours.count.positive?
+
+    services_ids = ProfessionalService.where(professional_id: professional.id)
+                                      .pluck(:service_id)
+
+    Service.where(id: services_ids).update_all(status: :awaiting_avaliation)
   end
 end

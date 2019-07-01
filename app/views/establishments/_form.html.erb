@@ -1,33 +1,30 @@
 <%= form_with model: @establishment, local: true, class: 'custom establishment' do |f| %>
   <div class="columns is-multiline">
-    <div class="column is-12">
-      <% unless @messages_errors.nil? %>
+    <% unless @messages_errors.nil? %>
+      <div class="column is-12">
         <% @messages_errors.each do |msg| %>
-        <div class="notification is-danger">
-          <button class="delete" type="button"></button>
-          <%= msg %>
-        </div>
+          <div class="notification is-danger">
+            <button class="delete" type="button"></button>
+            <%= msg %>
+          </div>
         <% end %>
-      <% end %>
-    </div>
-
+      </div>
+    <% end %>
     <div class="column is-12">
       <h1 class="title is-size-4 has-text-weight-normal">
         <span class="icon"><i class="fas fa-store-alt"></i></span>
-         Sobre o estabelecimento
+        Sobre o estabelecimento
       </h1>
     </div>
-
-    <div class="column is-12">
-      <div class="field">
-        <label class="label has-text-grey has-text-weight-normal">Nome do estabelecimento <small class="is-danger">*</small></label>
-        <div class="control">
-          <%= f.text_field :name, class: 'input', required: true, placeholder:"Diga o nome fantasia do estabelecimento.." %>
+    <% if @establishment.new_record? %>
+      <div class="column is-12">
+        <div class="field">
+          <label class="label has-text-grey has-text-weight-normal">Nome do estabelecimento <small class="is-danger">*</small></label>
+          <div class="control">
+            <%= f.text_field :name, class: 'input', required: true, placeholder:"Diga o nome fantasia do estabelecimento.." %>
+          </div>
         </div>
       </div>
-    </div>
-
-    <% if @establishment.new_record? %>
       <div class="column is-12">
         <div class="field ">
           <label class="label has-text-grey has-text-weight-normal">Para autônomos</label>
@@ -37,36 +34,40 @@
           </div>
         </div>
       </div>
-    <% end %>
-
-    <div class="column is-12">
-      <div class="field">
-        <label class="label has-text-grey has-text-weight-normal">Horario de funcionamento <small class="is-danger">*</small></label>
-        <div class="control">
-          <%= f.text_field :timetable, class: 'input', required: true, placeholder:"Em qual horário você trabalha ?"%>
+      <div class="column is-12">
+        <div class="field">
+          <label class="label has-text-grey has-text-weight-normal">Horario de funcionamento <small class="is-danger">*</small></label>
+          <div class="control">
+            <%= f.text_field :timetable, class: 'input', required: true, placeholder:"Em qual horário você trabalha ?"%>
+          </div>
         </div>
       </div>
-    </div>
-
+    <% end %>
     <%= f.fields_for :address do |form_address| %>
       <div class="column is-12">
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">CEP <small class="is-danger">*</small></label>
           <div class="control">
-            <%= form_address.text_field :zipcode, class: 'input zipcode', required: true, placeholder:"Qual o CEP do endereço do estabelecimento ?" %>
+            <%= form_address.text_field :zipcode, class: 'input zipcode', required: true, placeholder:"Qual o CEP do endereço do estabelecimento ?", data: { provider: :zipcode } %>
           </div>
         </div>
       </div>
-
       <div class="column is-12">
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Rua <small class="is-danger">*</small></label>
           <div class="control">
-            <%= form_address.text_field :street, class: 'input', required: true, placeholder:"Rua do seu estabelecimento ?" %>
+            <%= form_address.text_field :street, class: 'input', required: true, placeholder:"Rua do seu estabelecimento ?", data: { provider: :street }, readonly: true %>
           </div>
         </div>
       </div>
-
+      <div class="column is-12">
+        <div class="field">
+          <label class="label has-text-grey has-text-weight-normal">Bairro <small class="is-danger">*</small></label>
+          <div class="control">
+            <%= form_address.text_field :neighborhood, class: 'input', required: true, placeholder:"Bairro do seu estabelecimento", data: { provider: :neighborhood }, readonly: true %>
+          </div>
+        </div>
+      </div>
       <div class="column is-12">
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Numero <small class="is-danger">*</small></label>
@@ -75,18 +76,7 @@
           </div>
         </div>
       </div>
-
-      <div class="column is-12">
-        <div class="field">
-          <label class="label has-text-grey has-text-weight-normal">Bairro <small class="is-danger">*</small></label>
-          <div class="control">
-            <%= form_address.text_field :neighborhood, class: 'input', required: true, placeholder:"Bairro do seu estabelecimento" %>
-          </div>
-        </div>
-      </div>
     <% end %>
-
-
     <div class="column is-12">
       <h1 class="title is-size-4 has-text-weight-normal">
         <span class="icon"><i class="fas fa-user-cog"></i></span>
@@ -94,42 +84,40 @@
       </h1>
     </div>
     <%= f.fields_for :user do |form_user| %>
-      <div class="column is-12">
-        <div class="field">
-          <label class="label has-text-grey has-text-weight-normal">Nome do dono <small class="is-danger">*</small></label>
-          <div class="control">
-            <%= form_user.text_field :name, class: 'input', required: true, placeholder:"Qual seu nome ?"%>
+      <% if @establishment.new_record? %>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Nome do dono <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form_user.text_field :name, class: 'input', required: true, placeholder:"Qual seu nome ?"%>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="column is-12">
-        <div class="field">
-          <label class="label has-text-grey has-text-weight-normal">CPF <small class="is-danger">*</small></label>
-          <div class="control">
-            <%= form_user.text_field :cpf, class: 'input cpf', required: true, placeholder:"Informe seu CPF..."%>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">CPF <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form_user.text_field :cpf, class: 'input cpf', required: true, placeholder:"Informe seu CPF..."%>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="column is-12">
-        <div class="field">
-          <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
-          <div class="control">
-            <%= form_user.email_field :email, class: 'input', required: true, placeholder:"Informe seu email..."%>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form_user.email_field :email, class: 'input', required: true, placeholder:"Informe seu email..."%>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="column is-12">
-        <div class="field">
-          <label class="label has-text-grey has-text-weight-normal">Data de nascimento <small class="is-danger">*</small></label>
-          <div class="control">
-            <%= form_user.date_field :birth_date, class: 'input', required: true, placeholder:"Quando você nasceu ?"%>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Data de nascimento <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form_user.date_field :birth_date, class: 'input', required: true, placeholder:"Quando você nasceu ?"%>
+            </div>
           </div>
         </div>
-      </div>
-
+      <% end %>
       <div class="column is-12">
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Telefone <small class="is-danger">*</small></label>
@@ -138,7 +126,6 @@
           </div>
         </div>
       </div>
-
       <% if @establishment.new_record? %>
         <div class="column is-12">
           <div class="field">
@@ -148,7 +135,6 @@
             </div>
           </div>
         </div>
-
         <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Confirme sua senha <small class="is-danger">*</small></label>
@@ -157,7 +143,6 @@
             </div>
           </div>
         </div>
-
         <div class="column is-12">
           <div class="field">
             <%= form_user.check_box :terms_acceptation, class: 'is-checkradio', id: 'local_type_home' %>
@@ -173,7 +158,6 @@
             </div>
           </div>
         </div>
-
         <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Nova senha (para alterar a senha)</label>
@@ -182,7 +166,6 @@
             </div>
           </div>
         </div>
-
         <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Cofirme sua nova senha (para alterar a senha)</label>
@@ -192,14 +175,9 @@
           </div>
         </div>
       <% end %>
-
       <div class="column is-12">
-        <%= f.submit 'Cadastrar', class: 'button is-light is-pulled-right' %>
-         <% if @establishment.new_record? %>
-          <%= link_to 'Voltar', root_path, class: 'button is-text has-text-grey  is-pulled-right' %>
-        <% else %>
-          <%= link_to 'Voltar', establishments_dashboard_path(@establishment), class: 'button is-text has-text-grey  is-pulled-right' %>
-        <% end %>
+        <%= f.submit @establishment.new_record? ? :cadastrar : :salvar, class: 'button is-light is-pulled-right is-capitalized' %>
+        <%= link_to 'Voltar', root_path, class: 'button is-text has-text-grey  is-pulled-right' if @establishment.new_record? %>
       </div>
     <% end %>
   </div>

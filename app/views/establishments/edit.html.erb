@@ -1,2 +1,7 @@
-<%= render 'pages/shared/header'%>
-<%= render "form", url: establishment_path %>
+<%= render 'shared/header', to_back: false, fixed: true %>
+<div class="establishments_dashboard">
+  <div class="container">
+      <%= render 'establishments/form' %>
+   </div>
+  <%= render 'shared/establishment_bottom_navigation_bar', tab: 'profile' %>
+</div>

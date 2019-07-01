@@ -1,0 +1,44 @@
+<%= render 'admin/shared/header' %>
+<div class="admin-establishments-show">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <h1 class="is-size-4 has-text-grey"> Estabelecimento </h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Nome do estabelecimento</h2>
+        <h1 class="title"><%= @establishment.name %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Horário de funcionamento</h2>
+        <h1 class="title"><%= @establishment.timetable %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Status</h2>
+        <h1 class="title"><%= @establishment.t_status %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Dono</h2>
+        <h1 class="title"><%= @establishment.user.name %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Endereço</h2>
+        <h1 class="title"><%= @establishment.address.full %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Serviços</h2>
+        <% if @establishment.services.empty? %>
+          <h1 class="title">Não há serviços</h1>
+        <% end %>
+        <% @establishment.services&.each do |service| %>
+          <h1 class="title"><%= service.title %> / <%= service.t_status %></h1>
+        <% end %>
+      </div>
+      <div class="column is-12 actions">
+        <%= link_to :voltar, admin_establishments_path, class: 'button is-text is-capitalized' %>
+        <%= link_to :aprovar, admin_establishment_path(status: :approved), class: 'button is-primary is-pulled-right is-capitalized', method: :put unless @establishment.approved? %>
+        <%= link_to :reprovar, admin_establishment_path(status: :disapproved), class: 'button is-danger is-pulled-right is-capitalized disapproved', method: :put, data: { confirm: 'Você tem certeza?' } unless @establishment.disapproved? %>
+      </div>
+    </div>
+  </div>
+</div>
