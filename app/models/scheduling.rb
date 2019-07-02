@@ -49,7 +49,7 @@ class Scheduling < ApplicationRecord
     scheduling_ids = Scheduling.where(
       professional_service_id: professional_services_ids,
       date: (date..(date + service_duration.minutes - 1.seconds))
-    ).scheduled
+    ).scheduled.ids
 
     return if scheduling_ids.empty?
 
