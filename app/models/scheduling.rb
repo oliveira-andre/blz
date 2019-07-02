@@ -112,7 +112,11 @@ class Scheduling < ApplicationRecord
   def set_schedule_free
     return unless canceled?
 
-    professional_service.schedules.where(date: date).update_all(free: true)
+    professional.professional_services.each do |ps|
+      start_date = date - (ps.service.duration.minutes - 1.minute)
+      end_date = date + (service_duration.minutes - 1.minute)
+      ps.schedules.where(date: (start_date..end_date)).update_all(free: true)
+    end
   end
 
   def notifications
