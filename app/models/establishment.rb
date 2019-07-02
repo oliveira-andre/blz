@@ -2,7 +2,7 @@ class Establishment < ApplicationRecord
   enum status: %i[analyze approved disapproved canceled]
 
   after_save :analyze_services
-  after_create :send_confirmation
+  after_create :send_registration_success
 
   validates :name, presence: true
   validates :timetable, presence: true
@@ -33,7 +33,7 @@ class Establishment < ApplicationRecord
     services&.each { |service| service.awaiting_avaliation! } unless approved?
   end
 
-  def send_confirmation
+  def send_registration_success
     EstablishmentMailer.registration_success(self).deliver_later
   end
 end
