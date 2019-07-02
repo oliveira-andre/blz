@@ -26,7 +26,7 @@ class Scheduling < ApplicationRecord
   validate :service_approved?, on: :create
   validate :user_registration_ok?, on: :create
 
-  after_save :set_schedule_busy
+  after_create :set_schedule_busy
   after_create :notifications
 
   private
@@ -74,8 +74,11 @@ class Scheduling < ApplicationRecord
   end
 
   def set_schedule_busy
-    schedule = professional_service.schedules.where(date: date).first
-    schedule.update! free: false
+    professional.professional_services.each do |ps|
+      start_date = date - (ps.service.duration.minutes - 1.minute)
+      end_date = date + (service_duration.minutes - 1.minute)
+      ps.schedules.where(date: (start_date..end_date)).update_all(free: false)
+    end
   end
 
   def set_service_duration
