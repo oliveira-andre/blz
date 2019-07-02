@@ -1,13 +1,11 @@
 <div class="container">
   <h1 class="title has-text-centered has-text-primary is-size-1">BLZ</h1>
   <h2 class="subtitle has-text-centered has-text-white  is-size-2">Agendamento cancelado</h2>
-
   <div class="item">
     <p class=" has-text-centered has-text-primary is-size-3">
       Olá, <%= @scheduling.user.name %>!
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered is-size-3">
       O agendamento do serviço <strong><%= @scheduling.service.title %></strong>
@@ -15,7 +13,6 @@
       cancelado com sucesso.
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-4">
       Valor
@@ -24,7 +21,6 @@
       R$ <%= @scheduling.service.amount %>
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-4">
       Quando
@@ -33,7 +29,6 @@
       <%= "#{I18n.l(@scheduling.canceled_at, format: :day_month)} às #{I18n.l(@scheduling.canceled_at, format: :time)}" %>
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-4">
       Onde
@@ -42,15 +37,20 @@
       <%= @scheduling.service.establishment.address.full %>
     </p>
   </div>
-
   <div class="item has-text-centered">
     <%= link_to 'Mais detalhes', users_dashboard_url(@scheduling.user), class: 'button is-primary is-size-4' %>
   </div>
-
+  <% if @scheduling.user.blocked? %>
+    <div class="item">
+      <p class="has-text-centered has-text-danger is-size-3">
+        De acordo com os <%= link_to 'termos de uso', use_rules_url, class: 'has-text-danger is-link is-size-3'%>
+        seu usuário foi bloqueado, para a liberação do mesmo será necessário pagar uma multa de R$10,00 (dez reais)
+      </p>
+    </div>
+  <% end %>
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-4">
       Abraços, </br>
-      Equipe BLZ
-    </p>
-  </div>
+    Equipe BLZ
+  </p>
 </div>
