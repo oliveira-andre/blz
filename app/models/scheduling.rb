@@ -50,7 +50,7 @@ class Scheduling < ApplicationRecord
     scheduling_ids = Scheduling.where(
       professional_service_id: professional_services_ids,
       date: (date..(date + service_duration.minutes - 1.seconds))
-    ).scheduled
+    ).scheduled.ids
 
     return if scheduling_ids.empty?
 
@@ -60,7 +60,7 @@ class Scheduling < ApplicationRecord
   def user_date_busy?
     scheduling_ids = user.scheduling.where(
       date: (date..(date + service_duration.minutes - 1.seconds))
-    ).ids
+    ).scheduled.ids
 
     return if scheduling_ids.empty?
 
@@ -113,7 +113,11 @@ class Scheduling < ApplicationRecord
   def set_schedule_free
     return unless canceled?
 
-    professional_service.schedules.where(date: date).update_all(free: true)
+    professional.professional_services.each do |ps|
+      start_date = date - (ps.service.duration.minutes - 1.minute)
+      end_date = date + (service_duration.minutes - 1.minute)
+      ps.schedules.where(date: (start_date..end_date)).update_all(free: true)
+    end
   end
 
   def cancel_notification
