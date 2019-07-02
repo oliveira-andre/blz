@@ -7,4 +7,9 @@ class SchedulingPolicy < ApplicationPolicy
     record.user == user ||
       record.service.establishment.user == user
   end
+
+  def destroy?
+    record.user == user ||
+      record.service.establishment.user == user
+  end
 end

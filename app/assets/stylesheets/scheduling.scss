@@ -35,6 +35,15 @@
         margin-left: 10px;
         margin-right: 10px;
       }
+
+      input.is-danger {
+        background: #ff3860 !important;
+        border-radius: 4px;
+      }
+
+      a.has-text-danger {
+        text-decoration: underline;
+      }
     }
   }
 }

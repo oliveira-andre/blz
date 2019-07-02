@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  before_action :check_user
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError do
@@ -30,5 +31,12 @@ class ApplicationController < ActionController::Base
       :account_update,
       keys: %i[photo name cpf phone terms_acceptation birth_date]
     )
+  end
+
+  def check_user
+    if current_user&.blocked?
+      sign_out_and_redirect('user')
+      flash[:error] = 'Seu usuário está bloqueado'
+    end
   end
 end
