@@ -59,7 +59,7 @@ class Scheduling < ApplicationRecord
   def user_date_busy?
     scheduling_ids = user.scheduling.where(
       date: (date..(date + service_duration.minutes - 1.seconds))
-    ).ids
+    ).scheduled.ids
 
     return if scheduling_ids.empty?
 
