@@ -110,11 +110,9 @@ class Scheduling < ApplicationRecord
   end
 
   def set_schedule_free
-    if canceled?
-      Schedule
-        .find_by(date: date, professional_service: professional_service)
-        .update(free: true)
-    end
+    return unless canceled?
+
+    professional_service.schedules.where(date: date).update_all(free: true)
   end
 
   def notifications
