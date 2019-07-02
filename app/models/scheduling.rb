@@ -32,6 +32,7 @@ class Scheduling < ApplicationRecord
   after_save :set_schedule_busy
   after_save :block_user
   after_save :set_schedule_free
+  after_save :cancel_notification
   after_create :notifications
 
   private
@@ -113,6 +114,13 @@ class Scheduling < ApplicationRecord
     return unless canceled?
 
     professional_service.schedules.where(date: date).update_all(free: true)
+  end
+
+  def cancel_notification
+    return unless canceled? && user?
+
+    CanceledSchedulingMailer.to_establishment(self).deliver_later
+    CanceledSchedulingMailer.to_user(self).deliver_later
   end
 
   def notifications
