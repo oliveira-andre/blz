@@ -34,6 +34,6 @@ class Establishment < ApplicationRecord
   end
 
   def send_confirmation
-    EstablishmentMailer.feedback(self).deliver_later
+    EstablishmentMailer.registration_success(self).deliver_later
   end
 end
