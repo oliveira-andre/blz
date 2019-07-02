@@ -14,6 +14,6 @@ class Schedule < ApplicationRecord
       date: date..(date + professional_service.service.duration - 1.seconds)
     ).first
 
-    self.free = scheduling.nil?
+    self.free = scheduling.nil? || scheduling&.canceled?
   end
 end
