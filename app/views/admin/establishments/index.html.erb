@@ -2,6 +2,26 @@
 <div class="container">
   <div class="content">
     <h1 class="has-text-grey">Estabelecimentos</h1>
+    <%= form_tag(admin_establishments_path, method: :get, id: 'form_search', class:'custom') do %>
+      <div class="field is-grouped">
+        <p class="control is-expanded">
+          <%= text_field_tag :query, params[:query], class:'input', placeholder:'Pesquise algum serviço...' %>
+        </p>
+
+        <p class="control is-expanded">
+          <%= select_tag :status, options_for_select([['Aprovado','approved'],["Em analise",'analyze'],[
+          'Desaprovado', 'disapproved'],['Cancelado', 'canceled']]), class:'input', include_blank:'Pesquise por status...' %>
+        </p>
+
+        <p class="control">
+          <% if @establishments.present?%>
+            <%= submit_tag 'Buscar',  class: 'button is-info' %>
+          <% else %>
+            <a class="button is-info" type="submit" href="/admin/establishments">Limpar filtros</a>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
     <table class="table">
       <thead>
         <tr>
