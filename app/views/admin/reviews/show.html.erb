@@ -31,7 +31,7 @@
       <h2 class="subtitle">Estrelas</h2>
         <fieldset class="rating_field">
           <% 5.times do |number| %>
-            <input name="rating" type="radio" value="<%= 5 - number %>" id="star<%= 5 - number%>" disabled <%= "checked" if @review.rating == (5 - number) %>/>
+            <input name="rating" type="radio", class="is-hidden" value="<%= 5 - number %>" id="star<%= 5 - number%>" disabled <%= "checked" if @review.rating == (5 - number) %>/>
             <label for="star<%=5 - number%>", class='fas fa-star'></label>
           <% end %>
         </fieldset>
