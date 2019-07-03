@@ -14,4 +14,14 @@ module ServicesHelper
     end
     duration_service_range
   end
+
+  def has_schedules_to_service(service)
+    professional_services_ids = ProfessionalService.where(
+      service_id: service.id
+    ).ids
+
+    Schedule.where(
+      professional_service_id: professional_services_ids
+    ).ids.any?
+  end
 end
