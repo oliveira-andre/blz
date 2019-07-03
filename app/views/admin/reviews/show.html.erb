@@ -1,0 +1,45 @@
+<%= render 'admin/shared/header' %>
+<div class="review-details">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <h1 class="has-text-grey is-size-4">
+          Avaliação
+        </h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Serviço</h2>
+        <h1 class="title"><%= @scheduling.service.title %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Profissional</h2>
+        <h1 class="title"><%= @scheduling.professional_service.professional.name %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Usuário</h2>
+        <h1 class="title"><%= @review.user.name %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Status</h2>
+        <h1 class="title"><%= @review.t_status %></h1>
+      </div>
+      <div class="column is-12">
+        <h2 class="subtitle">Comentário</h2>
+        <h1 class="title"><%= @review.body %></h1>
+      </div>
+      <div class="column is-12">
+      <h2 class="subtitle">Estrelas</h2>
+        <fieldset class="rating_field">
+          <% 5.times do |number| %>
+            <input name="rating" type="radio" value="<%= 5 - number %>" id="star<%= 5 - number%>" disabled <%= "checked" if @review.rating == (5 - number) %>/>
+            <label for="star<%=5 - number%>", class='fas fa-star'></label>
+          <% end %>
+        </fieldset>
+      </div>
+      <div class="column is-12">
+        <%= link_to :recusar, admin_review_path(@review, status: :recused), class: 'button is-danger is-pulled-right is-capitalized', method: :put, data: { confirm: 'Você tem certeza?' } unless @review.recused? %>
+        <%= link_to :aprovar, admin_review_path(@review, status: :approved), class: 'button is-primary is-pulled-right is-capitalized', method: :put, data: { confirm: 'Você tem certeza?' } unless @review.approved? %>
+      </div>
+    </div>
+  </div>
+</div>
