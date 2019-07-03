@@ -36,7 +36,7 @@
             <td><%= Scheduling.find(review.reviewable_id).professional_service.service.establishment.name %></td>
             <td><%= review.rating %></td>
             <td><%= review.t_status %></td>
-            <td><%= link_to :detalhes, '#', class: 'is-capitalized' %></td>
+            <td><%= link_to :detalhes, admin_review_path(review), class: 'is-capitalized' %></td>
           </tr>
         <% end %>
       </tbody>
