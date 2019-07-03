@@ -27,6 +27,10 @@ class Establishment < ApplicationRecord
                 .scheduled.order(:date)
   end
 
+  def self.search(query)
+    where('name ILIKE ?', "%#{query}%")
+  end
+
   private
 
   def analyze_services

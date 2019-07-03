@@ -1,9 +1,15 @@
+# frozen_string_literal: true
+
 module Admin
   class EstablishmentsController < AdminController
     before_action :load_establishment, only: %i[show update]
 
     def index
-      @establishments = Establishment.all
+      @establishments = if params[:status].present?
+                          Establishment.where(status: params[:status]) || Establishment.all
+                        else
+                          Establishment.search(params[:query]) || Establishment.all
+                        end
       @pagy, @establishments = pagy(@establishments)
     end
 
