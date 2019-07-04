@@ -1,7 +1,7 @@
 class Schedule < ApplicationRecord
   belongs_to :professional_service
 
-  before_save :busy_role
+  before_save :verify_busy
 
   def self.rebuild(professional_service)
     BuildScheduleJob.perform_later(professional_service)
@@ -9,11 +9,11 @@ class Schedule < ApplicationRecord
 
   private
 
-  def busy_role
+  def verify_busy
     scheduling = professional_service.scheduling.where(
       date: date..(date + professional_service.service.duration - 1.seconds)
-    ).first
+    ).scheduled.first
 
-    self.free = scheduling.nil? || scheduling&.canceled?
+    self.free = scheduling.nil?
   end
 end
