@@ -35,8 +35,8 @@
             <p class="title">R$ <%= professional_service.service.amount %></p>
           </div>
           <%= form_with url: current_user&.registration_ok? ? new_scheduling_path : edit_service_users_path(professional_service.service.id), local: true, method: :get do |f| %>
-            <%= f.text_field :date, class: 'is-hidden' %>
-            <%= f.text_field :professional_service_id, class: 'is-hidden', value: professional_service.id %>
+            <%= f.hidden_field :date %>
+            <%= f.hidden_field :professional_service_id, value: professional_service.id %>
 
             <div class="column is-4">
               <%= f.submit :continuar, class: 'button is-light is-capitalized'%>
