@@ -83,7 +83,9 @@ class Scheduling < ApplicationRecord
   def verify_finishing
     return unless finished?
 
-    @errors.add(:date, 'inválido') if date > Time.now
+    if date > Time.now
+      @errors.add(:scheduling, 'não pode ser finalizado antes a data combinada')
+    end
   end
 
   def cancel_fields
