@@ -99,7 +99,9 @@ class Scheduling < ApplicationRecord
   def verify_canceling
     return unless canceled?
 
-    @errors.add(:date, 'inválido') if Time.now > date
+    if Time.now > date
+      @errors.add(:scheduling, 'não pode ser cancelado após a data combinada')
+    end
   end
 
   def set_schedule_busy
