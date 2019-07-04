@@ -27,7 +27,7 @@ class Scheduling < ApplicationRecord
   validate :professional_date_busy?, on: :create
   validate :service_approved?, on: :create
   validate :user_registration_ok?, on: :create
-  validate :cant_finalize_before_start
+  validate :verify_finishing
   validate :cancel_fields
 
   after_create :set_schedule_busy
@@ -80,7 +80,7 @@ class Scheduling < ApplicationRecord
     @errors.add(:user, 'não está com o cadastro completo')
   end
 
-  def cant_finalize_before_start
+  def verify_finishing
     return unless finished?
 
     @errors.add(:date, 'inválido') if date > Time.now
