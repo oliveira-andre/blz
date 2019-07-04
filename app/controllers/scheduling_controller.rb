@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class SchedulingController < ApplicationController
-  skip_before_action :authenticate_user!, only: :new
   before_action :load_scheduling, only: %i[show destroy update]
 
   def new
