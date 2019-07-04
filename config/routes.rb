@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :photos, only: :destroy
   resources :services, only: :show do
-    resources :users, only: %i[edit update]
+    resource :users, only: %i[edit update]
   end
 
   resources :scheduling, except: :edit do
