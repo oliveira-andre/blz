@@ -36,8 +36,6 @@ class Scheduling < ApplicationRecord
   after_save :cancel_notification
   after_create :notifications
 
-  # TODO: create a valiation on cancel option creating a after_save and validating if the scheduling pass the date
-
   private
 
   def date_in_schedule?
