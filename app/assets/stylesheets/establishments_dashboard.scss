@@ -62,18 +62,6 @@ html, body {
     .actions {
       .button.is-light {
         background-color: transparent;
-        border: 1px solid #209cee;
-        color: #209cee;
-        border-radius: 0px;
-
-        &:hover {
-          background-color: #209cee;
-          color: #fff;
-        }
-      }
-
-      .button.is-primary-custom {
-        background-color: transparent;
         border: 1px solid $primary-color;
         color: $primary-color;
         border-radius: 0px;
@@ -81,6 +69,16 @@ html, body {
         &:hover {
           background-color: $primary-color;
           color: #fff;
+        }
+      }
+
+      .button.is-primary-custom {
+        color: #fff;
+        background-color: $primary-color;
+
+        &:nth-child(2) {
+          background-color: #fff;
+          color: rgba(0, 0, 0, .6);
         }
       }
     }

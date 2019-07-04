@@ -5,21 +5,22 @@
     <%= render 'service_details' %>
     <div id="schedule">
       <h2 class="has-text-weight-semibold is-size-4">Agenda</h2>
-      <ul class="columns is-mobile is-centered tabs">
-        <% @service.professional_services.each_with_index do |professional_service, index| %>
-          <% if professional_service.table_schedule.any? %>
-            <div class="column is-5">
-              <li class="tab <%= index == 0 ? 'is-active' : ''%>"
-                  data-target='<%= "professional-service-#{professional_service.id}" %>'>
-                <%= render 'shared/avatar', resource: professional_service.professional %>
-                <p class="has-text-centered">
-                  <%= first_name(professional_service.professional) %>
-                </p>
-              </li>
-            </div>
+      <% if has_schedules_to_service(@service) %>
+        <ul class="columns is-mobile is-centered tabs">
+          <% @service.professional_services.each_with_index do |professional_service, index| %>
+            <% if professional_service.table_schedule.any? %>
+              <div class="column is-5">
+                <li class="tab <%= index == 0 ? 'is-active' : ''%>"
+                    data-target='<%= "professional-service-#{professional_service.id}" %>'>
+                  <%= render 'shared/avatar', resource: professional_service.professional %>
+                  <p class="has-text-centered">
+                    <%= first_name(professional_service.professional) %>
+                  </p>
+                </li>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
 
       <div class="columns">
         <% @service.professional_services.each_with_index do |professional_service, index| %>
@@ -31,10 +32,13 @@
             </div>
             <%= render 'scheduling/new_modal', professional_service: professional_service %>
           <% end %>
-        <% end %>
+        </div>
       </div>
-    </div>
-
+    <% else %>
+      <p class="has-text-grey is-size-5">
+        Não possui horários disponível para esse serviço
+      </p>
+    <% end %>
     <% if @service.reviews.any? %>
       <div class="reviews">
         <div class="columns is-mobile is-multiline">
