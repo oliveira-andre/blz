@@ -28,6 +28,7 @@ class Scheduling < ApplicationRecord
   validate :service_approved?, on: :create
   validate :user_registration_ok?, on: :create
   validate :cancel_fields
+  validate :cant_cancel_after_start
 
   after_create :set_schedule_busy
   after_save :block_user
@@ -93,6 +94,12 @@ class Scheduling < ApplicationRecord
     if !canceled_by || canceled_by.blank?
       @errors.add(:canceled_by, 'não pode ficar em branco')
     end
+  end
+
+  def cant_cancel_after_start
+    return unless canceled?
+
+    @errors.add(:date, 'inválido') if Time.now > date
   end
 
   def set_schedule_busy
