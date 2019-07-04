@@ -29,6 +29,7 @@ class Scheduling < ApplicationRecord
   validate :user_registration_ok?, on: :create
   validate :verify_finishing
   validate :cancel_fields
+  validate :verify_canceling
 
   after_create :set_schedule_busy
   after_save :block_user
@@ -101,6 +102,14 @@ class Scheduling < ApplicationRecord
 
     if !canceled_by || canceled_by.blank?
       @errors.add(:canceled_by, 'não pode ficar em branco')
+    end
+  end
+
+  def verify_canceling
+    return unless canceled?
+
+    if Time.now > date
+      @errors.add(:scheduling, 'não pode ser cancelado após a data combinada')
     end
   end
 
