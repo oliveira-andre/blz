@@ -29,7 +29,6 @@
               style="display:<%= index == 0 ? ' block' : ' none'%>;">
                 <%= render 'schedules', professional_service: professional_service %>
               </div>
-              <%= render 'scheduling/new_modal', professional_service: professional_service %>
             <% end %>
           <% end %>
         </div>
@@ -95,3 +94,6 @@
   </div>
 </div>
 <%= render 'shared/footer' %>
+<% @service.professionals.each do |professional| %>
+  <%= render 'scheduling/new_modal', professional: professional %>
+<% end %>

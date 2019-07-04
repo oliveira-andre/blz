@@ -1,47 +1,48 @@
-<div id="new-modal-scheduling" class="modal modal-fx-fadeInScale">
-  <div class="modal-background"></div>
-  <div class="modal-content">
-    <div class="columns content is-multiline">
-      <div class="column is-12">
-        <article class="media">
-          <div class="media-left">
-            <figure class="image is-64x64">
-              <% if professional_service.professional.photo.attached? %>
-                <%= image_tag professional_service.professional.photo, class:'image is-rounded' %>
-              <% else %>
-                <img src="https://bulma.io/images/placeholders/128x128.png" class="is-rounded">
-              <% end %>
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-size-4"><%= professional_service.service.title %></p>
-            <p class="subtitle is-size-6"><%= professional_service.professional.name %></p>
-          </div>
-        </article>
-      </div>
-      <div class="column is-12 is-date-scheduling">
-        <p>Horário escolhido</p>
-        <span class="icon"><%= image_tag '/images/hours.png' %></span>
-        <span class="is-size-4 has-text-weight-semibold" id="scheduling_date"></span>
-      </div>
-      <div class="column is-12 is-duration-service">
-        <p>Duração estimada</p>
-        <span class="icon is-duration"><%= image_tag '/images/time.png' %></span>
-        <span class="is-size-4 has-text-weight-semibold"><%= professional_service.service.duration %> min</span>
-      </div>
-      <div class="column is-12">
-        <div class="columns is-mobile">
-          <div class="column is-8">
-            <p class="title">R$ <%= professional_service.service.amount %></p>
-          </div>
-          <%= form_with url: current_user&.registration_ok? ? new_scheduling_path : edit_service_users_path(professional_service.service.id), local: true, method: :get do |f| %>
-            <%= f.hidden_field :date %>
-            <%= f.hidden_field :professional_service_id, value: professional_service.id %>
-
-            <div class="column is-4">
-              <%= f.submit :continuar, class: 'button is-light is-capitalized'%>
+<div id="new-modal-scheduling-<%= professional.id %>" class="modal modal-fx-fadeInScale">
+  <div id="new-modal-scheduling">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="columns content is-multiline">
+        <div class="column is-12">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <% if professional.photo.attached? %>
+                  <%= image_tag professional.photo, class:'image is-rounded' %>
+                <% else %>
+                  <img src="https://bulma.io/images/placeholders/128x128.png" class="is-rounded">
+                <% end %>
+              </figure>
             </div>
-          <% end %>
+            <div class="media-content">
+              <p class="title is-size-4"><%= @service.title %></p>
+              <p class="subtitle is-size-6"><%= professional.name %></p>
+            </div>
+          </article>
+        </div>
+        <div class="column is-12 is-date-scheduling">
+          <p>Horário escolhido</p>
+          <span class="icon"><%= image_tag '/images/hours.png' %></span>
+          <span class="is-size-4 has-text-weight-semibold scheduling_date"></span>
+        </div>
+        <div class="column is-12 is-duration-service">
+          <p>Duração estimada</p>
+          <span class="icon is-duration"><%= image_tag '/images/time.png' %></span>
+          <span class="is-size-4 has-text-weight-semibold"><%= @service.duration %> min</span>
+        </div>
+        <div class="column is-12">
+          <div class="columns is-mobile">
+            <div class="column is-8">
+              <p class="title">R$ <%= @service.amount %></p>
+            </div>
+            <%= form_with url: current_user&.registration_ok? ? new_scheduling_path : edit_service_users_path(@service.id), local: true, method: :get do |f| %>
+              <%= f.hidden_field :date, class: 'date' %>
+              <%= f.hidden_field :professional_service_id, value: ProfessionalService.find_by(professional: professional, service: @service).id %>
+              <div class="column is-4">
+                <%= f.submit :continuar, class: 'button is-light is-capitalized'%>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

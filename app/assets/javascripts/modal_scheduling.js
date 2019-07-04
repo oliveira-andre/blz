@@ -10,8 +10,8 @@ function insertDataIntoModal(button) {
   var month = setMonth(date);
   var hour = setHour(date);
   var minute = setMinute(date);
-  $('#scheduling_date').html(`${day}/${month} às ${hour}:${minute}`);
-  $('#date').val(date);
+  $('.scheduling_date').html(`${day}/${month} às ${hour}:${minute}`);
+  $('.date').val(date);
 }
 
 function setDay(date) {
