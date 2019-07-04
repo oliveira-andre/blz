@@ -31,12 +31,14 @@ class SchedulingController < ApplicationController
       flash[:success] = 'Finalizado com sucesso'
     end
 
-    redirect_to establishments_dashboard_path(@scheduling.professional_service
-                                                         .service.establishment)
+    redirect_to establishments_dashboard_path(
+      @scheduling.professional_service.service.establishment
+    )
   rescue ActiveRecord::RecordInvalid => e
     @scheduling.errors.full_messages.each { |error| flash[:error] = error }
-    establishments_dashboard_path(@scheduling.professional_service
-                                                         .service.establishment)
+    redirect_to establishments_dashboard_path(
+      @scheduling.professional_service.service.establishment
+    )
   end
 
   def destroy
