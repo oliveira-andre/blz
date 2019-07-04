@@ -28,7 +28,7 @@ class Scheduling < ApplicationRecord
   validate :service_approved?, on: :create
   validate :user_registration_ok?, on: :create
   validate :cancel_fields
-  validate :cant_cancel_after_start
+  validate :verify_canceling
 
   after_create :set_schedule_busy
   after_save :block_user
@@ -96,7 +96,7 @@ class Scheduling < ApplicationRecord
     end
   end
 
-  def cant_cancel_after_start
+  def verify_canceling
     return unless canceled?
 
     @errors.add(:date, 'inválido') if Time.now > date
