@@ -71,6 +71,16 @@ html, body {
           color: #fff;
         }
       }
+
+      .button.is-primary-custom {
+        color: #fff;
+        background-color: $primary-color;
+
+        &:nth-child(2) {
+          background-color: #fff;
+          color: rgba(0, 0, 0, .6);
+        }
+      }
     }
   }
 

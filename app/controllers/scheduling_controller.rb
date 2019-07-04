@@ -2,7 +2,7 @@
 
 class SchedulingController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
-  before_action :load_scheduling, only: %i[show destroy]
+  before_action :load_scheduling, only: %i[show destroy update]
 
   def new
     @scheduling = Scheduling.new scheduling_new_params
@@ -23,6 +23,22 @@ class SchedulingController < ApplicationController
       @scheduling.errors.full_messages.each { |msg| flash[:error] = msg }
       redirect_to service_path(id: @scheduling.service)
     end
+  end
+
+  def update
+    if params[:status] == 'finished'
+      @scheduling.finished!
+      flash[:success] = 'Finalizado com sucesso'
+    end
+
+    redirect_to establishments_dashboard_path(
+      @scheduling.professional_service.service.establishment
+    )
+  rescue ActiveRecord::RecordInvalid => e
+    @scheduling.errors.full_messages.each { |error| flash[:error] = error }
+    redirect_to establishments_dashboard_path(
+      @scheduling.professional_service.service.establishment
+    )
   end
 
   def destroy

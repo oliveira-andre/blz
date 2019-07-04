@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[edit update]
   end
 
-  resources :scheduling, only: %i[new create show destroy] do
+  resources :scheduling, except: :edit do
     resources :payments, only: %i[new create]
     resources :holders, only: %i[new update]
     resources :reviews, only: :create

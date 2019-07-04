@@ -20,13 +20,14 @@ class Scheduling < ApplicationRecord
   validates :date, presence: true
   validates :service_duration, presence: true
 
-  validates_with DatePastValidator
+  validates_with DatePastValidator, on: :create
 
   validate :date_in_schedule?, on: :create
   validate :user_date_busy?, on: :create
   validate :professional_date_busy?, on: :create
   validate :service_approved?, on: :create
   validate :user_registration_ok?, on: :create
+  validate :verify_finishing
   validate :cancel_fields
 
   after_create :set_schedule_busy
@@ -77,6 +78,14 @@ class Scheduling < ApplicationRecord
     return if user.registration_ok?
 
     @errors.add(:user, 'não está com o cadastro completo')
+  end
+
+  def verify_finishing
+    return unless finished?
+
+    unless Time.now > date
+      @errors.add(:scheduling, 'não pode ser finalizado antes a data combinada')
+    end
   end
 
   def cancel_fields
