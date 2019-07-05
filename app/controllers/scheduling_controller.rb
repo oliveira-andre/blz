@@ -4,7 +4,11 @@ class SchedulingController < ApplicationController
   before_action :load_scheduling, only: %i[show destroy update]
 
   def new
-    @scheduling = Scheduling.new scheduling_new_params
+    if current_user.registration_ok?
+      @scheduling = Scheduling.new scheduling_new_params
+    else
+      redirect_to edit_service_users_path(load_service, scheduling_new_params)
+    end
   end
 
   def show
@@ -69,5 +73,9 @@ class SchedulingController < ApplicationController
     params.require(:scheduling).permit(:canceled_reason)
           .merge(status: :canceled, canceled_at: Time.now,
                  canceled_by: current_user.establishment.nil? ? 0 : 1)
+  end
+
+  def load_service
+    ProfessionalService.find(params[:professional_service_id]).service
   end
 end
