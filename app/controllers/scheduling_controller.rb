@@ -7,7 +7,7 @@ class SchedulingController < ApplicationController
     if current_user.registration_ok?
       @scheduling = Scheduling.new scheduling_new_params
     else
-      redirect_to edit_service_users_path(load_service, scheduling_new_params)
+      redirect_to edit_service_users_path(service, scheduling_new_params)
     end
   end
 
@@ -75,7 +75,8 @@ class SchedulingController < ApplicationController
                  canceled_by: current_user.establishment.nil? ? 0 : 1)
   end
 
-  def load_service
-    ProfessionalService.find(params[:professional_service_id]).service
+  def service
+    @service ||= ProfessionalService.find(params[:professional_service_id])
+                                    .service
   end
 end

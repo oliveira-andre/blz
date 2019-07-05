@@ -36,7 +36,7 @@
               <p class="title">R$ <%= @service.amount %></p>
             </div>
             <%= form_with url: new_scheduling_path, local: true, method: :get do |f| %>
-              <%= f.hidden_field :date, class: 'date' %>
+              <%= f.hidden_field :date, class: :date_scheduling_details %>
               <%= f.hidden_field :professional_service_id, value: professional_service.id %>
               <div class="column is-4">
                 <%= f.submit :continuar, class: 'button is-light is-capitalized'%>
