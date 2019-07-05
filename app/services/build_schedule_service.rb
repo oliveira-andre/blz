@@ -6,47 +6,37 @@ class BuildScheduleService
       @service = professional_service.service
 
       professional_service.schedules.destroy_all
-      generate_schedule
+      Date.today.step(Date.today + 30.days) { |date| schedules_to(date) }
     end
 
     private
 
-    attr_accessor :professional, :service, :professional_service, :work_at
+    attr_accessor :professional, :service, :professional_service
 
-    def generate_schedule
-      (0..30).each do |day|
-        @work_at = Date.today + day.days
-        wday = work_at.strftime('%w').to_i
-        wday_office_hours = professional.office_hours.where(week_day: wday)
-        wday_office_hours.each { |office_hour| create_schedule office_hour }
-      end
-    end
+    def schedules_to(date)
+      professional.office_hours.where(week_day: date.cwday).each do |o_f|
+        start_day = date_join_time(date, o_f.hour_begin)
+        finish_day = date_join_time(date, o_f.hour_end)
 
-    def create_schedule(office_hour)
-      work_until = date_join_time(work_at, office_hour.hour_end)
-      schedule_date_begin = date_join_time(work_at, office_hour.hour_begin)
-      loop do
-        schedule_date_end = schedule_date_begin + service.duration.minutes
-        break unless schedule_date_valid?(schedule_date_end, work_until)
-        Schedule.create!(
-          date: schedule_date_begin,
-          professional_service_id: professional_service.id
-        )
-        schedule_date_begin += service.duration.minutes
+        start_day.step(finish_day, duration_to_day) do |datetime|
+          Schedule.create!(
+            date: datetime,
+            professional_service_id: professional_service.id
+          )
+        end
       end
     end
 
     def date_join_time(date, hour_int)
-      (date.to_s + ' ' + hour_mask(hour_int)).to_datetime
+      hour = hour_int.to_s.insert(hour_int.to_s.length - 2, ':')
+      (date.to_s + ' ' + hour).to_datetime
     end
 
-    def hour_mask(hour)
-      length = hour.to_s.length
-      hour.to_s.insert(length - 2, ':')
-    end
+    def duration_to_day
+      duration_in_hour = service.duration.to_f / 60.0
+      hour_in_day = 1.0 / 24.0
 
-    def schedule_date_valid?(data_end, work_end)
-      data_end <= work_end
+      hour_in_day * duration_in_hour
     end
   end
 end
