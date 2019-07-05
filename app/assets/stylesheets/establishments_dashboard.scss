@@ -9,6 +9,18 @@ html, body {
   background-color: #f2f2f2;
   padding-bottom: 100px;
 
+  .button.is-danger-custom {
+    background-color: transparent;
+    border: 1px solid #ff3860;
+    color: #ff3860;
+    border-radius: 0px;
+
+    &:hover {
+      background-color: #ff3860;
+      color: #fff;
+    }
+  }
+
   @include desktop {
     padding-bottom: 80px;
   }
