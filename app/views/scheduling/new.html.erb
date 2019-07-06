@@ -1,7 +1,7 @@
 <%= render 'shared/header', to_back: false, fixed: false %>
 <div class="new-scheduling">
   <div class="container">
-    <%= form_with model: @scheduling, url: scheduling_index_path, class: :custom do |f| %>
+    <%= form_with model: @scheduling, url: scheduling_index_path, class: :custom, local: true do |f| %>
       <div class="columns is-multiline">
         <div class="column is-12">
           <h2 class="is-size-4 has-text-grey">Finalizar Agendamento</h2>

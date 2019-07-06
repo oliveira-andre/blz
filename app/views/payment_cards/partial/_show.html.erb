@@ -1,5 +1,5 @@
 <div class="has-text-left">
-  <%= form_with model: @payment_card, method: :delete, class: :custom do |f| %>
+  <%= form_with model: @payment_card, method: :delete, class: :custom, local: true do |f| %>
     <div class="column is-12">
       <div class="field">
         <label class="label has-text-grey has-text-weight-normal">Número do cartão</label>

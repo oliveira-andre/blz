@@ -5,7 +5,7 @@
       <div class="column is-12">
         <h1 class="is-size-5 has-text-grey has-text-weight-bold"> Cartão de crédito </h1>
       </div>
-      <%= form_with model: current_user.payment_cards.build, class: :custom do |f| %>
+      <%= form_with model: current_user.payment_cards.build, class: :custom, local: true do |f| %>
         <div class="column is-12">
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Número do cartão <small class="is-danger">*</small></label>
