@@ -4,7 +4,7 @@ class Scheduling < ApplicationRecord
   default_scope { order(:date) }
   scope :history, -> { where.not(status: :scheduled) }
 
-  enum status: %i[scheduled finished canceled]
+  enum status: %i[scheduled finished canceled busy]
   enum canceled_by: %i[user establishment]
 
   belongs_to :user, required: false
@@ -122,7 +122,7 @@ class Scheduling < ApplicationRecord
   end
 
   def set_service_duration
-    self.service_duration = service.duration
+    self.service_duration = service.duration unless busy?
   end
 
   def block_user

@@ -2,7 +2,7 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <section class="modal-card-body">
-      <%= form_with class: :custom do |f| %>
+      <%= form_with url: busies_path, class: :custom do |f| %>
         <div class="columns is-multiline">
           <div class="column is-12">
             <h1 class="is-size-4 has-text-grey">Deixe um período ocupado</h1>
@@ -12,7 +12,7 @@
               <label class="label has-text-grey has-text-weight-normal">Profissional <small class="is-danger">*</small></label>
               <div class="control">
                 <div class="select">
-                  <%= establishment_professionals(@establishment) %>
+                  <%= f.select :professional, establishment_professionals(@establishment), required: true %>
                 </div>
               </div>
             </div>
@@ -23,7 +23,7 @@
               <div class="field-body">
                 <div class="field">
                   <div class="control">
-                    <%= f.date_field :date, class: :input, required: true  %>
+                    <%= f.date_field :date_only, class: :input, required: true  %>
                   </div>
                 </div>
                 <div class="field">
@@ -39,7 +39,7 @@
               <label class="label has-text-grey has-text-weight-normal">por <small class="is-danger">*</small></label>
               <div class="control">
                 <div class="select">
-                  <%= f.select :duration, duration_service_range, required: true %>
+                  <%= f.select :service_duration, duration_service_range, required: true %>
                 </div>
               </div>
             </div>
