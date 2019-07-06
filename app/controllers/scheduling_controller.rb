@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class SchedulingController < ApplicationController
-  skip_before_action :authenticate_user!, only: :new
   before_action :load_scheduling, only: %i[show destroy update]
 
   def new
-    @scheduling = Scheduling.new scheduling_new_params
+    if current_user.registration_ok?
+      @scheduling = Scheduling.new scheduling_new_params
+    else
+      redirect_to edit_service_users_path(service, scheduling_new_params)
+    end
   end
 
   def show
@@ -70,5 +73,10 @@ class SchedulingController < ApplicationController
     params.require(:scheduling).permit(:canceled_reason)
           .merge(status: :canceled, canceled_at: Time.now,
                  canceled_by: current_user.establishment.nil? ? 0 : 1)
+  end
+
+  def service
+    @service ||= ProfessionalService.find(params[:professional_service_id])
+                                    .service
   end
 end
