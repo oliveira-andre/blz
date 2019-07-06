@@ -37,7 +37,8 @@ Rails.application.routes.draw do
     resources :reviews, only: :create
   end
 
-  resources :payment_cards, only: %i[create index show destroy]
+  # TODO uncomment when start to create the credit_card
+  # resources :payment_cards, only: %i[create index show destroy]
 
   get '/users/:id/dashboard',
     to: 'users_dashboard#index',
