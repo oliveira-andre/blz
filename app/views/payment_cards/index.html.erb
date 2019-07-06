@@ -34,7 +34,7 @@
         <% if @payment_cards.empty? %>
           <p class="has-text-grey">
             <i class="fas fa-question-circle is-size-4"></i>
-            Texto a ser criado para informar o usuário que não terá cobranças. Mais informações nos <a href="#" class="has-text-grey">termos de uso.</a>
+            Texto a ser criado para informar o usuário que não terá cobranças. Mais informações nos <%= link_to 'termos de uso', use_rules_path, class: 'has-text-grey' %>
           </p>
           <div class="column is-12">
             <%= link_to 'Informe um cartão', '#add_payment_card', class: 'modal-button has-text-primary', data: { target: :add_payment_card }, style: 'text-decoration: underline;'%>
