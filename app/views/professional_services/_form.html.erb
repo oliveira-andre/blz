@@ -1,5 +1,5 @@
 <%= form_with model: ProfessionalService, class: 'professional_services',
-              url: establishment_service_professional_services_path(establishment_id: @service.establishment_id, service_id: @service.id) do |f| %>
+              url: establishment_service_professional_services_path(establishment_id: @service.establishment_id, service_id: @service.id), local: true do |f| %>
   <div class="columns">
     <div class="column field">
       <div class="select">

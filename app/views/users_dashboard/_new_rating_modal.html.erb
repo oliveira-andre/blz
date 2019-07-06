@@ -8,7 +8,7 @@
         </h1>
       </header>
       <section class="modal-card-body">
-        <%= form_with url: scheduling_reviews_path(schedule), class: :custom do |f| %>
+        <%= form_with url: scheduling_reviews_path(schedule), class: :custom, local: true do |f| %>
           <div class="column is-12">
             <div class="field">
               <label class="label has-text-grey has-text-weight-normal">Comentário <small class="is-danger">*</small></label>
