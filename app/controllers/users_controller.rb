@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       )
     else
       current_user.errors.full_messages.each { |error| flash[:error] = error }
-      redirect_to edit_service_user_path(
+      redirect_to edit_service_users_path(
         date: params[:date],
         professional_service_id: params[:professional_service_id],
         professional_id: params[:professional_id]

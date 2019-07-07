@@ -44,7 +44,7 @@
         <div class="column is-12">
           <div class="field">
             <%= f.check_box :terms_acceptation, class: 'is-checkradio', id: 'local_type_home' %>
-            <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <a href="#">termos de uso</a> do sistema.</label>
+            <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <%= link_to 'termos de uso', use_rules_path, target: '_blank' %>  do sistema.</label>
           </div>
         </div>
         <div class="column is-12 has-text-centered">
