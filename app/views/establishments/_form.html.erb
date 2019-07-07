@@ -146,7 +146,7 @@
         <div class="column is-12">
           <div class="field">
             <%= form_user.check_box :terms_acceptation, class: 'is-checkradio', id: 'local_type_home' %>
-            <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <%= link_to 'termos de uso', use_rules_path %> do sistema.</label>
+            <label for="local_type_home" class="label has-text-grey has-text-weight-normal">Estou de acordo os <%= link_to 'termos de uso', use_rules_path, target: '_blank' %> do sistema.</label>
           </div>
         </div>
       <% else %>
