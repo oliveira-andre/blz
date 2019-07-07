@@ -28,4 +28,8 @@ module ApplicationHelper
   def default_image_service(service, size: '')
     "/images/default_category#{service.category.order}#{size}.jpg"
   end
+
+  def self_employed?
+    current_user.establishment.self_employed?
+  end
 end
