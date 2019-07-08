@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :photos, only: :destroy
   resources :services, only: :show do
-    resources :users, only: %i[edit update]
+    resource :users, only: %i[edit update]
   end
 
   resources :scheduling, except: :edit do
@@ -40,7 +40,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :payment_cards, only: %i[create index show destroy]
+  # TODO uncomment when start to create the credit_card
+  # resources :payment_cards, only: %i[create index show destroy]
 
   get '/users/:id/dashboard',
       to: 'users_dashboard#index',

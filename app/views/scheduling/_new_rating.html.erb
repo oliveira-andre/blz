@@ -1,6 +1,6 @@
 <div id="rating" class="column is-12">
-  <h1 class="is-size-4 has-text-grey">Avaliar</h1>
-    <%= form_with url: scheduling_reviews_path(schedule), class: :custom do |f| %>
+  <h1 class="is-size-4 has-text-grey">Avaliar</h>
+    <%= form_with url: scheduling_reviews_path(schedule), class: :custom, local: true do |f| %>
       <div class="column is-12">
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Comentário <small class="is-danger">*</small></label>

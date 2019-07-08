@@ -1,4 +1,4 @@
-<%= form_with url: establishment_professional_office_hours_path(establishment_id: @establishment.id, professional_id: @professional.id), class: 'custom' do |f| %>
+<%= form_with url: establishment_professional_office_hours_path(establishment_id: @establishment.id, professional_id: @professional.id), class: :custom, local: true do |f| %>
   <div class="columns is-multiline">
     <div class="column is-4">
       <div class="field">

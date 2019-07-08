@@ -13,10 +13,10 @@ class ProfessionalService < ApplicationRecord
   def table_schedule
     return [] if schedules.empty?
 
-    schedules.pluck(:date)
+    schedules.order(:date).pluck(:date)
              .uniq { |date| date.strftime('%d/%m/%Y') }.map! do |date|
 
-      schedule = schedules.select(:date, :free).where(date: date.all_day)
+      schedule = schedules.select(:date, :free).where(date: date.all_day).order(:date)
       {
         I18n.l(date, format: :day_month) => schedule
       }
