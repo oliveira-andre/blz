@@ -39,7 +39,7 @@
               <label class="label has-text-grey has-text-weight-normal">por <small class="is-danger">*</small></label>
               <div class="control">
                 <div class="select">
-                  <%= f.select :service_duration, duration_service_range, required: true %>
+                  <%= f.select :service_duration, duration_busy_range, required: true %>
                 </div>
               </div>
             </div>
@@ -52,4 +52,5 @@
       <% end %>
     </section>
   </div>
+  <button class="modal-close is-large" aria-label="close"></button>
 </div>
