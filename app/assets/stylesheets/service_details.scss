@@ -299,6 +299,10 @@
 
 .new-modal-scheduling {
   .modal-content {
+    @include mobile {
+      margin: 0px;
+    }
+
     .columns.content {
       max-width: 450px;
       margin: 0 auto;
