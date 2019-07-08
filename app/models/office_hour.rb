@@ -2,7 +2,9 @@ class OfficeHour < ApplicationRecord
   default_scope { order(:week_day, :hour_begin) }
 
   belongs_to :professional
-  enum week_day: %i[domingo segunda terça quarta quinta sexta sabado]
+  enum week_day: {
+    segunda: 1, terça: 2, quarta: 3, quinta: 4, sexta: 5, sabado: 6, domingo: 7
+  }
 
   validates :week_day, presence: true
   validates :hour_begin, presence: true, length: { in: 1..2359 }
