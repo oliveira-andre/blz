@@ -15,7 +15,6 @@ class Scheduling < ApplicationRecord
   has_one :professional, through: :professional_service
 
   before_validation :set_service_duration
-  before_validation :create_schedule
 
   validates :status, presence: true
   validates :date, presence: true
@@ -41,6 +40,7 @@ class Scheduling < ApplicationRecord
   private
 
   def date_in_schedule?
+    return if busy?
     schedule = professional_service.schedules.where(date: date).first
     return unless schedule.nil?
 
@@ -126,15 +126,6 @@ class Scheduling < ApplicationRecord
 
   def set_service_duration
     self.service_duration = service.duration unless busy?
-  end
-
-  def create_schedule
-    return unless busy?
-
-    schedule = professional_service.schedules.find_by(date: date)
-    return if schedule.present?
-
-    Schedule.create!(date: date, professional_service: professional_service)
   end
 
   def block_user

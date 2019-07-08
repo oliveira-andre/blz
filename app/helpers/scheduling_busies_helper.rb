@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module BusiesHelper
+module SchedulingBusiesHelper
   def duration_busy_range
     duration_busy_range = duration_service_range
     duration_busy_range << ['1 dia', 1440]

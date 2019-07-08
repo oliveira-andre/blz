@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :holders, only: %i[new update]
     resources :reviews, only: :create
     collection do
-      resources :busies, only: :create
+      resources :busies, only: :create, controller: :scheduling_busies
     end
   end
 
