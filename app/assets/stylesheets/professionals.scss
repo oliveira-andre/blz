@@ -1,7 +1,7 @@
 .professionals_form {
   .container {
     @include touch {
-      margin: 15px;
+      padding: 15px;
     }
 
     @include desktop {
