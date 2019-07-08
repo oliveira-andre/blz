@@ -1,11 +1,9 @@
 <%= render 'shared/header', to_back: false, fixed: false %>
 <div class="new-scheduling">
   <div class="container">
+    <h1 class="title is-size-4 has-text-black">Finalizar Agendamento</h1>
     <%= form_with model: @scheduling, url: scheduling_index_path, class: :custom, local: true do |f| %>
       <div class="columns is-multiline">
-        <div class="column is-12">
-          <h2 class="is-size-4 has-text-grey">Finalizar Agendamento</h2>
-        </div>
         <div class="column is-12">
           <article class="media">
             <div class="media-left">
@@ -19,33 +17,33 @@
               </figure>
             </div>
             <div class="media-content">
-              <p class="title has-text-black is-size-5"><%= @scheduling.service.title %></p>
-              <p class="subtitle is-size-6"><%= @scheduling.professional.name %></p>
+              <p class="title has-text-black has-text-weight-normal is-size-6"><%= @scheduling.service.title %></p>
+              <p class="subtitle is-size-7"><%= @scheduling.professional.name %></p>
             </div>
           </article>
         </div>
         <div class="column is-12">
-          <p><%= @scheduling.service.description %></p>
+          <p class="is-size-6"><%= @scheduling.service.description %></p>
         </div>
-        <div class="column is-12 is-date-scheduling">
-          <p>Horário escolhido</p>
-          <span class="icon has-text-weight-semibold"><%= image_tag '/images/hours.png' %></span>
+        <div class="column is-4">
+          <p class="is-size-6 has-text-grey">Horário escolhido</p>
+          <span class="icon has-text-black"><i class="far fa-clock"></i></span>
           <span
-          class="is-size-4 has-text-weight-semibold"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
+          class="is-size-6 has-text-black"><%= "#{day_month(@scheduling.date)} às #{time(@scheduling.date)}" %></span>
         </div>
-        <div class="column is-12 is-duration-service">
-          <p>Duração estimada</p>
-          <span class="icon is-duration has-text-weight-semibold"><%= image_tag '/images/time.png' %></span>
-          <span class="is-size-4 has-text-weight-semibold"><%= @scheduling.service.duration %> min</span>
+        <div class="column is-4">
+          <p class="is-size-6 has-text-grey">Duração estimada</p>
+          <span class="icon is-duration has-text-black"><i class="fas fa-hourglass-half"></i></span>
+          <span class="is-size-6 has-text-black"><%= @scheduling.service.duration %> min</span>
         </div>
-        <div class="column is-12 is-address">
-          <p>Endereço</p>
-          <span class="fas fa-map-marker-alt has-text-weight-semibold is-size-5"></span>
-          <span class="is-size-4 has-text-weight-bold"><%= @scheduling.service.establishment.address.full %></span>
+        <div class="column is-4">
+           <p class="is-size-6 has-text-grey">Valor</p>
+          <span class="is-size-6 has-text-black">R$ <%= @scheduling.service.amount %></span>
         </div>
-        <div class="column is-12 is-amount">
-          <p>Valor</p>
-          <span class="is-size-3 has-text-weight-bold">R$ <%= @scheduling.service.amount %></span>
+        <div class="column is-12">
+          <p class="is-size-6 has-text-grey">Endereço</p>
+          <span class="fas fa-map-marker-alt has-text-black"></span>
+          <span class="is-size-6 has-text-black"><%= @scheduling.service.establishment.address.full %></span>
         </div>
         <div class="column is-12 actions">
           <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
