@@ -15,6 +15,7 @@ class Scheduling < ApplicationRecord
   has_one :professional, through: :professional_service
 
   before_validation :set_service_duration
+  before_validation :create_schedule
 
   validates :status, presence: true
   validates :date, presence: true
@@ -60,6 +61,8 @@ class Scheduling < ApplicationRecord
   end
 
   def user_date_busy?
+    return if busy?
+
     scheduling_ids = user.scheduling.where(
       date: (date..(date + service_duration.minutes - 1.seconds))
     ).scheduled.ids
@@ -76,7 +79,7 @@ class Scheduling < ApplicationRecord
   end
 
   def user_registration_ok?
-    return if user.registration_ok?
+    return if busy? || user.registration_ok?
 
     @errors.add(:user, 'não está com o cadastro completo')
   end
@@ -125,6 +128,15 @@ class Scheduling < ApplicationRecord
     self.service_duration = service.duration unless busy?
   end
 
+  def create_schedule
+    return unless busy?
+
+    schedule = professional_service.schedules.find_by(date: date)
+    return if schedule.present?
+
+    Schedule.create!(date: date, professional_service: professional_service)
+  end
+
   def block_user
     return if establishment?
 
@@ -149,6 +161,8 @@ class Scheduling < ApplicationRecord
   end
 
   def notifications
+    return if busy?
+
     SchedulingMailer.to_user(self).deliver_later
     SchedulingMailer.to_establishment(self).deliver_later
     NotificationBroadcastJob.perform_later(self)
