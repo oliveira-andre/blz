@@ -7,7 +7,7 @@
     </p>
   </div>
   <div class="item">
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       O agendamento do serviço <strong><%= @scheduling.service.title %></strong>
       com <strong><%= @scheduling.service.establishment.name %></strong> foi
       cancelado com sucesso.
@@ -17,7 +17,7 @@
     <p class="has-text-centered has-text-grey is-size-5">
       Valor
     </p>
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       R$ <%= @scheduling.service.amount %>
     </p>
   </div>
@@ -25,7 +25,7 @@
     <p class="has-text-centered has-text-grey is-size-5">
       Quando
     </p>
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       <%= "#{I18n.l(@scheduling.canceled_at, format: :day_month)} às #{I18n.l(@scheduling.canceled_at, format: :time)}" %>
     </p>
   </div>
@@ -33,7 +33,7 @@
     <p class="has-text-centered has-text-grey is-size-5">
       Onde
     </p>
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       <%= @scheduling.service.establishment.address.full %>
     </p>
   </div>

@@ -9,7 +9,7 @@
   </div>
 
   <div class="item">
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       O cliente <strong><%= @scheduling.user.name %></strong> fez um novo agendamento.
     </p>
   </div>
@@ -18,7 +18,7 @@
     <p class="has-text-centered has-text-grey is-size-5">
       Serviço
     </p>
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       <%= @scheduling.service.title %>
     </p>
   </div>
@@ -27,7 +27,7 @@
     <p class="has-text-centered has-text-grey is-size-5">
       Profissional
     </p>
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       <%= @scheduling.professional.name %>
     </p>
   </div>
@@ -36,7 +36,7 @@
     <p class="has-text-centered has-text-grey is-size-5">
       Quando
     </p>
-    <p class="has-text-centered is-size-5">
+    <p class="has-text-centered has-text-black is-size-5">
       <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %>
     </p>
   </div>
