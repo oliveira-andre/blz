@@ -3,7 +3,7 @@
     padding-bottom: 100px;
 
     @include touch {
-      margin: 0 15px;
+      padding: 0 15px;
     }
   }
 
@@ -297,18 +297,13 @@
   }
 }
 
-#new-modal-scheduling {
+.new-modal-scheduling {
   .modal-content {
     .columns.content {
       max-width: 450px;
       margin: 0 auto;
-      padding: 25px 5px 20px 5px;
+      padding: 30px;
       background-color: #fff;
-
-      @media (max-width: 450px) {
-        margin-left: 10px;
-        margin-right: 10px;
-      }
 
       article {
         .image {
