@@ -1,9 +1,3 @@
-$(document).on('turbolinks:load', function () {
-  $('.input').keyup(function () {
-    createHash();
-  });
-});
-
 function createHash() {
   var cc = new Moip.CreditCard({
     number: getCardNumber(),
