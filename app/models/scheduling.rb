@@ -19,6 +19,7 @@ class Scheduling < ApplicationRecord
   validates :status, presence: true
   validates :date, presence: true
   validates :service_duration, presence: true
+  validates :home, presence: true, unless: :busy?
 
   validates_with DatePastValidator, on: :create
 
