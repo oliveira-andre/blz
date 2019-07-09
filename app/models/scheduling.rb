@@ -41,6 +41,7 @@ class Scheduling < ApplicationRecord
 
   def date_in_schedule?
     return if busy?
+
     schedule = professional_service.schedules.where(date: date).first
     return unless schedule.nil?
 
@@ -50,12 +51,22 @@ class Scheduling < ApplicationRecord
   def professional_date_busy?
     professional_services_ids = professional.professional_services.ids
 
-    scheduling_ids = Scheduling.where(
+    schedulings = Scheduling.where(
       professional_service_id: professional_services_ids,
-      date: (date..(date + service_duration.minutes - 1.seconds))
-    ).scheduled.ids
+      status: %i[scheduled busy]
+    )
 
-    return if scheduling_ids.empty?
+    date_inside = false
+    schedulings.each do |scheduling|
+      range_date = (scheduling.date)..(scheduling.date + scheduling.service_duration.minutes - 1.seconds)
+
+      if range_date.include?(date)
+        date_inside = true
+        break
+      end
+    end
+
+    return unless date_inside
 
     @errors.add(:date, 'já esta ocupado para esse salão/profissional')
   end
