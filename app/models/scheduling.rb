@@ -13,13 +13,15 @@ class Scheduling < ApplicationRecord
   has_one :review, as: :reviewable
   has_one :service, through: :professional_service
   has_one :professional, through: :professional_service
+  has_one :address, as: :addressable
 
   before_validation :set_service_duration
 
   validates :status, presence: true
   validates :date, presence: true
   validates :service_duration, presence: true
-  validates :home, presence: true, unless: :busy?
+  validates :home, inclusion: { in: [true, false] }
+  # TODO: when merge with busy do: unless: :busy?
 
   validates_with DatePastValidator, on: :create
 
@@ -37,6 +39,9 @@ class Scheduling < ApplicationRecord
   after_save :set_schedule_free
   after_save :cancel_notification
   after_create :notifications
+
+  accepts_nested_attributes_for :address, allow_destroy: true,
+                                          reject_if: :in_establishment?
 
   private
 
@@ -153,5 +158,9 @@ class Scheduling < ApplicationRecord
     SchedulingMailer.to_user(self).deliver_later
     SchedulingMailer.to_establishment(self).deliver_later
     NotificationBroadcastJob.perform_later(self)
+  end
+
+  def in_establishment?
+    !home?
   end
 end

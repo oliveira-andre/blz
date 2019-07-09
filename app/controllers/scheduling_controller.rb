@@ -6,7 +6,9 @@ class SchedulingController < ApplicationController
   def new
     if current_user.registration_ok?
       @scheduling = Scheduling.new scheduling_new_params
-      @address = Address.new unless @scheduling.service.establishment?
+      unless @scheduling.service.establishment?
+        @scheduling.address = Address.new
+      end
     else
       redirect_to edit_service_users_path(service, scheduling_new_params)
     end
@@ -58,7 +60,10 @@ class SchedulingController < ApplicationController
   private
 
   def scheduling_params
-    params.require(:scheduling).permit(:professional_service_id, :date)
+    params.require(:scheduling).permit(
+      :professional_service_id, :date, :home,
+      address_attributes: %i[id street number neighborhood zipcode]
+    )
           .merge(user_id: current_user.id)
   end
 

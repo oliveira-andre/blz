@@ -35,9 +35,6 @@ Rails.application.routes.draw do
     resources :payments, only: %i[new create]
     resources :holders, only: %i[new update]
     resources :reviews, only: :create
-    collection do
-      resources :addresses, only: :create
-    end
   end
 
   # TODO uncomment when start to create the credit_card
