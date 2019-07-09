@@ -54,20 +54,24 @@
             <span class="icon is-size-5"><i class="fas fa-money-check-alt"></i></span>
             <span class="is-size-6 is-size-5-desktop">R$ <%= @scheduling.service.amount %></span>
           </div>
-          <% unless establishment? %>
-            <div class="column is-12">
-              <p class="is-size-7 is-size-6-desktop">Endereço</p>
-              <span class="icon is-size-5"><i class="fas fa-map-marker-alt"></i></span>
-              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.service.establishment.address.full %></span>
-            </div>
-          <% else %>
-            <div class="column is-12">
-              <p class="is-size-7 is-size-6-desktop">Cliente</p>
-              <span class="icon is-size-5"><i class="far fa-user"></i></span>
-              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.user.name %></span>
-            </div>
-          <% end %>
+          <div class="column is-6">
+            <p class="is-size-7 is-size-6-desktop">Endereço</p>
+            <span class="icon is-size-5"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="is-size-6 is-size-5-desktop"><%= @scheduling.home? ? @scheduling.address.full : @scheduling.service.establishment.address.full %></span>
+          </div>
+          <div class="column is-6">
+            <p class="is-size-7 is-size-6-desktop">Local</p>
+            <span class="icon is-size-5"><i class="fas fa-map-marked"></i></span>
+            <span class="is-size-6 is-size-5-desktop"><%= @scheduling.home? ? 'Em casa' : 'No estabelecimento' %></span>
+          </div>
         </div>
+        <% if establishment? %>
+          <div class="column is-12">
+            <p class="is-size-7 is-size-6-desktop">Cliente</p>
+            <span class="icon is-size-5"><i class="far fa-user"></i></span>
+            <span class="is-size-6 is-size-5-desktop"><%= @scheduling.user.name %></span>
+          </div>
+        <% end %>
       </div>
       <div class="column is-12 actions">
         <% unless @scheduling.finished? || @scheduling.canceled? || Time.now > @scheduling.date %>
