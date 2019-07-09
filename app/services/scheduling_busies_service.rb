@@ -3,25 +3,33 @@
 module SchedulingBusiesService
   class << self
     def execute(params)
-      professional_services(params).each do |professional_service|
-        @scheduling = Scheduling.new(
-          scheduling_params(params, professional_service)
-        )
-        @scheduling.busy!
-      end
+      @date_only = params.fetch(:date_only)
+      @time = params.fetch(:time)
+      @professional_id = params.fetch(:professional_id)
+      @service_duration = params.fetch(:service_duration)
+
+      professional_services.each { |p_s| create_scheduling!(p_s) }
     end
 
-    def scheduling_params(params, professional_service)
-      params.permit(:service_duration).merge(
-        date: "#{params[:date_only]} #{params[:time]} UTC".to_time,
-        professional_service: professional_service
+    private
+
+    attr_accessor :professional_id, :date_only, :time, :service_duration
+
+    def create_scheduling!(professional_service)
+      Scheduling.create!(
+        service_duration: service_duration,
+        date: date_formated,
+        professional_service: professional_service,
+        status: :busy
       )
     end
 
-    def professional_services(params)
-      @professional_services ||= ProfessionalService.where(
-        professional_id: params[:professional_id]
-      )
+    def professional_services
+      ProfessionalService.where(professional_id: professional_id)
+    end
+
+    def date_formated
+      "#{date_only} #{time} UTC"
     end
   end
 end
