@@ -37,14 +37,34 @@
           <span class="is-size-6 has-text-black"><%= @scheduling.service.duration %> min</span>
         </div>
         <div class="column is-4">
-           <p class="is-size-6 has-text-grey">Valor</p>
+          <p class="is-size-6 has-text-grey">Valor</p>
           <span class="is-size-6 has-text-black">R$ <%= @scheduling.service.amount %></span>
         </div>
-        <div class="column is-12">
-          <p class="is-size-6 has-text-grey">Endereço</p>
-          <span class="fas fa-map-marker-alt has-text-black"></span>
-          <span class="is-size-6 has-text-black"><%= @scheduling.service.establishment.address.full %></span>
-        </div>
+        <% if @scheduling.service.both? %>
+          <div class="column is-12">
+            <div class="field">
+              <div class="control">
+                <div class="select">
+                  <%= f.select :home, [['Estabelecimento', 0], ['Em casa', 1]] %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% unless @scheduling.service.home? %>
+          <div class="column is-12" id="establishment_address">
+            <p class="is-size-6 has-text-grey">Endereço</p>
+            <span class="fas fa-map-marker-alt has-text-black"></span>
+            <span class="is-size-6 has-text-black"><%= @scheduling.service.establishment.address.full %></span>
+          </div>
+        <% end %>
+        <% unless @scheduling.service.establishment? %>
+          <div id='address_form'>
+            <%= f.fields_for @address do |ff| %>
+              <%= render 'form_address', f: ff%>
+            <% end %>
+          </div>
+        <% end %>
         <div class="column is-12 actions">
           <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
           <%= f.hidden_field :date, value:  @scheduling.date %>
