@@ -6,10 +6,11 @@ module Admin
 
     def index
       @users = if params[:search]
-                 User.search(params[:search])
+                 User.no_establishment.search(params[:search])
                else
-                 User.all
+                 User.no_establishment
                end
+
       @pagy, @users = pagy(@users)
     end
 
