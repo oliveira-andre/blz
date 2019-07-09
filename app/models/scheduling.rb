@@ -14,7 +14,7 @@ class Scheduling < ApplicationRecord
   has_one :service, through: :professional_service
   has_one :professional, through: :professional_service
 
-  before_validation :set_service_duration
+  before_validation :set_service_duration, unless: :busy?
 
   validates :status, presence: true
   validates :date, presence: true
@@ -22,8 +22,8 @@ class Scheduling < ApplicationRecord
 
   validates_with DatePastValidator, on: :create
 
-  validate :date_in_schedule?, on: :create
-  validate :user_date_busy?, on: :create
+  validate :date_in_schedule?, on: :create, unless: :busy?
+  validate :user_date_busy?, on: :create, unless: :busy?
   validate :professional_date_busy?, on: :create
   validate :service_approved?, on: :create
   validate :user_registration_ok?, on: :create
@@ -40,8 +40,6 @@ class Scheduling < ApplicationRecord
   private
 
   def date_in_schedule?
-    return if busy?
-
     schedule = professional_service.schedules.where(date: date).first
     return unless schedule.nil?
 
@@ -58,22 +56,20 @@ class Scheduling < ApplicationRecord
 
     date_inside = false
     schedulings.each do |scheduling|
-      range_date = (scheduling.date)..(scheduling.date + scheduling.service_duration.minutes - 1.seconds)
+      range_date = (scheduling.date)..
+            (scheduling.date + scheduling.service_duration.minutes - 1.seconds)
 
-      if range_date.include?(date)
+      if range_date.include?(date) && scheduled?
         date_inside = true
         break
       end
     end
-
     return unless date_inside
 
     @errors.add(:date, 'já esta ocupado para esse salão/profissional')
   end
 
   def user_date_busy?
-    return if busy?
-
     scheduling_ids = user.scheduling.where(
       date: (date..(date + service_duration.minutes - 1.seconds))
     ).scheduled.ids
@@ -136,7 +132,7 @@ class Scheduling < ApplicationRecord
   end
 
   def set_service_duration
-    self.service_duration = service.duration unless busy?
+    self.service_duration = service.duration
   end
 
   def block_user

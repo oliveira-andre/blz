@@ -2,7 +2,7 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <section class="modal-card-body">
-      <%= form_with url: busies_path, class: :custom do |f| %>
+      <%= form_with url: busies_path(establishment_id: params[:id]), class: :custom do |f| %>
         <div class="columns is-multiline">
           <div class="column is-12">
             <h1 class="is-size-4 has-text-grey">Deixe um período ocupado</h1>
