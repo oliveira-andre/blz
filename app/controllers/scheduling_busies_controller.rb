@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BusiesController < ApplicationController
+class SchedulingBusiesController < ApplicationController
   def create
     professional_services.each do |professional_service|
       @scheduling = Scheduling.new(scheduling_params.merge(
@@ -8,7 +8,7 @@ class BusiesController < ApplicationController
                                    ))
       @scheduling.busy!
     end
-    flash[:success] = 'Profissional ocupado com sucesso'
+    flash[:success] = 'Período marcado como indisponível'
     redirect_to establishments_dashboard_path(@scheduling.service.establishment)
   rescue ActiveRecord::RecordInvalid => e
     @scheduling.errors.full_messages.each { |error| flash[:error] = error }
@@ -26,7 +26,7 @@ class BusiesController < ApplicationController
 
   def professional_services
     @professional_services ||= ProfessionalService.where(
-      professional: params[:professional]
+      professional_id: params[:professional_id]
     )
   end
 end

@@ -1,4 +1,4 @@
-<div class="modal", id="busy-scheduling-modal">
+<div class="modal" id="busy-scheduling-modal">
   <div class="modal-background"></div>
   <div class="modal-card">
     <section class="modal-card-body">
@@ -12,7 +12,7 @@
               <label class="label has-text-grey has-text-weight-normal">Profissional <small class="is-danger">*</small></label>
               <div class="control">
                 <div class="select">
-                  <%= f.select :professional, establishment_professionals(@establishment), required: true %>
+                  <%= f.select :professional_id, establishment_professionals_collection(@establishment), required: true %>
                 </div>
               </div>
             </div>
