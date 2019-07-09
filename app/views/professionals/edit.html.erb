@@ -13,6 +13,24 @@
         <%= render "office_hours/table_list", office_hours: @professional.office_hours %>
       </div>
     </div>
+
+    <div class="columns is-multiline professional_services">
+      <h1 class="title is-size-4 has-text-grey has-text-weight-normal">Serviços (<%= @professional.services.count%>)</h1>
+       <% @professional.services.each do |service| %>
+        <div class="column is-12">
+          <p>
+            <%= service.title %>
+            <span class="icon is-pulled-right">
+              <%= link_to edit_establishment_service_path(service.establishment_id, service.id),
+                    class: "button is-light" do %>
+                <i class="fas fa-external-link-alt"></i>
+              <% end %>
+            </span>
+          </p>
+          <div class="is-divider"></div>
+        </div>
+      <% end %>
+    </div>
   </div>
   <%= render 'shared/establishment_bottom_navigation_bar', tab: 'professionals' %>
 </div>
