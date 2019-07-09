@@ -24,7 +24,7 @@ class Scheduling < ApplicationRecord
 
   validate :date_in_schedule?, on: :create, unless: :busy?
   validate :user_date_busy?, on: :create, unless: :busy?
-  validate :professional_date_busy?, on: :create
+  validate :professional_date_busy?, on: :create, unless: :busy?
   validate :service_approved?, on: :create
   validate :user_registration_ok?, on: :create
   validate :verify_finishing
@@ -54,24 +54,20 @@ class Scheduling < ApplicationRecord
       status: %i[scheduled busy]
     )
 
-    date_inside = false
-    schedulings.each do |scheduling|
-      range_date = (scheduling.date)..
-            (scheduling.date + scheduling.service_duration.minutes - 1.seconds)
+    schedulings.each do |s|
+      date_start = s.date
+      date_finish = s.date + s.service_duration.minutes - 1.second
 
-      if range_date.include?(date) && scheduled?
-        date_inside = true
-        break
+      if date.between?(date_start, date_finish) ||
+         (date + service_duration.minutes).between?(date_start, date_finish)
+        @errors.add(:date, 'já esta ocupado para esse salão/profissional')
       end
     end
-    return unless date_inside
-
-    @errors.add(:date, 'já esta ocupado para esse salão/profissional')
   end
 
   def user_date_busy?
     scheduling_ids = user.scheduling.where(
-      date: (date..(date + service_duration.minutes - 1.seconds))
+      date: (date..(date + service_duration.minutes - 1.second))
     ).scheduled.ids
 
     return if scheduling_ids.empty?
