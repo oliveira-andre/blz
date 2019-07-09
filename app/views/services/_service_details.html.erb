@@ -23,17 +23,22 @@
       </div>
     </div>
 
-    <div class="columns is-mobile info">
-      <div class="column is-6">
+    <div class="columns is-multiline is-mobile">
+      <div class="column is-12 info">
         <p>Atendimento</p>
         <%= image_tag '/images/hours.png' %>
         <p><%= @service.establishment.timetable %></p>
       </div>
-      <div class="column is-6 info">
+      <div class="column is-12 info">
         <p>Duração estimada</p>
         <%= image_tag '/images/time.png' %>
         <p><%= @service.duration %> minutos</p>
       </div>
+      <div class="column is-12 info">
+          <p>Local de atendimento</p>
+          <p class='is-size-4'><i class="fas fa-map-marker-alt has-text-grey"></i></p>
+          <p><%= @service.home? ? 'Em casa' : "No estabelecimento (#{@service.establishment.address.full})" %></p>
+        </div>
     </div>
   </div>
 
@@ -53,6 +58,11 @@
           <p>Duração estimada</p>
           <%= image_tag '/images/time.png' %>
           <p><%= @service.duration %> minutos</p>
+        </div>
+        <div class="column is-12">
+          <p>Local de atendimento</p>
+          <p class='is-size-4'><i class="fas fa-map-marker-alt has-text-grey"></i></p>
+          <p><%= @service.home? ? 'Em casa' : "No estabelecimento (#{@service.establishment.address.full})" %></p>
         </div>
          <div class="column is-12">
           <a href="#schedule" class="button is-light btn-schedule">Horários</a>
