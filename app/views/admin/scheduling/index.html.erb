@@ -1,37 +1,38 @@
 <%= render 'admin/shared/header'%>
+<div class="scheduling-admin">
+  <div class="container">
+    <div class="content">
+      <h1 class="has-text-grey">Agendamentos</h1>
 
-<div class="container">
-  <div class="content">
-    <h1 class="has-text-grey">Agendamentos</h1>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Serviço</th>
-          <th>Usuário</th>
-          <th>Estabelecimento</th>
-          <th>Quanto</th>
-          <th>Valor</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @shedulings.each do |sheduling| %>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= sheduling.service.title %></td>
-            <td><%= sheduling.user.name %></td>
-            <td><%= sheduling.professional_service.service.establishment.name %></td>
-            <td><%= "#{day_month(sheduling.date)} às #{time(sheduling.date)}" %></td>
-            <td><%= sheduling.service.amount %></td>
-            <td><%= link_to :detalhes, admin_scheduling_path(sheduling), class: 'is-capitalized' %></td>
+            <th>Serviço</th>
+            <th>Usuário</th>
+            <th>Estabelecimento</th>
+            <th>Quanto</th>
+            <th>Valor</th>
+            <th colspan="3"></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @shedulings.each do |sheduling| %>
+            <tr>
+              <td><%= sheduling.service.title %></td>
+              <td><%= sheduling.user&.name %></td>
+              <td><%= sheduling.professional_service.service.establishment.name %></td>
+              <td><%= "#{day_month(sheduling.date)} às #{time(sheduling.date)}" %></td>
+              <td><%= sheduling.service.amount %></td>
+              <td><%= link_to :detalhes, admin_scheduling_path(sheduling), class: 'is-capitalized' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% if @shedulings.present? %>
+      <%= pagy_bulma_nav(@pagy).html_safe %>
+    <% end %>
   </div>
-  <% if @shedulings.present? %>
-    <%= pagy_bulma_nav(@pagy).html_safe %>
-  <% end %>
 </div>
 

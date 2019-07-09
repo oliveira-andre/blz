@@ -18,29 +18,29 @@
       <div class="column is-12">
         <h1 class="is-size-4 has-text-grey has-text-centered"> <%= @user.name %> </h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">Email</h2>
-        <h1 class="title"><%= @user.email %></h1>
+      <div class="column is-4">
+        <h2 class="subtitle is-size-6 has-text-grey">Email</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @user.email %></h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">CPF</h2>
-        <h1 class="title cpf"><%= @user.cpf %></h1>
+      <div class="column is-4">
+        <h2 class="subtitle is-size-6 has-text-grey">CPF</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6 cpf"><%= @user.cpf %></h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">Data de nascimento</h2>
-        <h1 class="title"><%= @user.birth_date %></h1>
+      <div class="column is-4">
+        <h2 class="subtitle is-size-6 has-text-grey">Data de nascimento</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @user.birth_date %></h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">Telefone</h2>
-        <h1 class="title phone"><%= @user.phone %></h1>
+      <div class="column is-4">
+        <h2 class="subtitle is-size-6 has-text-grey">Telefone</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6 phone"><%= @user.phone %></h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">Status</h2>
-        <h1 class="title"><%= @user.t_status %></h1>
+      <div class="column is-4">
+        <h2 class="subtitle is-size-6 has-text-grey">Status</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @user.t_status %></h1>
       </div>
-      <div class="column is-12">
-          <h2 class="subtitle">Perfil</h2>
-          <h1 class="title"><%= profile(@user) %></h1>
+      <div class="column is-4">
+          <h2 class="subtitle is-size-6 has-text-grey">Perfil</h2>
+          <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= profile(@user) %></h1>
       </div>
       <div class="column is-12">
         <%= link_to :voltar, admin_users_path, class: 'button is-text has-text-grey is-capitalized' %>
