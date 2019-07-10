@@ -78,6 +78,7 @@ pt-BR:
         scheduled: Agendado
         finished: Finalizado
         canceled: Cancelado
+        busy: Ocupado
       establishment:
         analyze: Em análise
         approved: Aprovado

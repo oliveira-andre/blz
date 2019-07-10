@@ -3,7 +3,7 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-12">
-        <h1 class="is-size-4 has-text-grey">Detalhes do Serviço</h1>
+        <h1 class="title has-text-grey">Detalhes do Serviço</h1>
       </div>
       <div class="column is-12">
         <div class="columns is-mobile is-gapless service-images">
@@ -52,32 +52,36 @@
         </div>
       </div>
       <div class="column is-12">
-        <h2 class="subtite">Título</h2>
-        <h1 class="title"><%= @service.title %></h1>
+        <h2 class="subtitle is-size-6 has-text-grey">Título</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @service.title %></h1>
       </div>
       <div class="column is-12">
-        <h2 class="subtitle">Descrição</h2>
-        <h1 class="title"><%= @service.description %></h1>
+        <h2 class="subtitle is-size-6 has-text-grey">Descrição</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @service.description %></h1>
       </div>
-      <div class="column is-6">
-        <h2 class="subtitle">Valor</h2>
-        <h1 class="title"><%= @service.amount %></h1>
+      <div class="column is-3">
+        <h2 class="subtitle is-size-6 has-text-grey">Valor</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @service.amount %></h1>
       </div>
-      <div class="column is-6">
-        <h2 class="subtitle">Duração (em minutos)</h2>
-        <h1 class="title"><%= @service.duration %></h1>
+      <div class="column is-3">
+        <h2 class="subtitle is-size-6 has-text-grey">Duração (em minutos)</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @service.duration %></h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">Situação</h2>
-        <h1 class="title"><%= @service.t_status %></h1>
+      <div class="column is-3">
+        <h2 class="subtitle is-size-6 has-text-grey">Situação</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @service.t_status %></h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">Categoria</h2>
-        <h1 class="title"><%= @service.category.name %></h1>
+      <div class="column is-3">
+        <h2 class="subtitle is-size-6 has-text-grey">Categoria</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @service.category.name %></h1>
       </div>
-      <div class="column is-12">
-        <h2 class="subtitle">Onde?</h2>
-        <h1 class="title"><%= "Em casa" if @service.home? %> <%= "No estabelecimento" if @service.establishment? %> <%= "Ambos lugares" if @service.both? %></h1>
+      <div class="column is-3">
+        <h2 class="subtitle is-size-6 has-text-grey">Estabelecimento</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @service.establishment.name %></h1>
+      </div>
+      <div class="column is-9">
+        <h2 class="subtitle is-size-6 has-text-grey">Onde?</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= "Em casa" if @service.home? %> <%= "No estabelecimento" if @service.establishment? %> <%= "Ambos lugares" if @service.both? %></h1>
       </div>
       <div class="column is-12">
         <%= link_to :voltar, admin_services_path, class: 'button is-text has-text-grey is-capitalized' %>

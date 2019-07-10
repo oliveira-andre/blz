@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  scope :no_establishment, -> { where.not(id: establishement_users_ids) }
+
   enum profile: %i[common admin]
   enum status: %i[active blocked]
 
@@ -40,6 +42,10 @@ class User < ApplicationRecord
 
   def registration_ok?
     cpf.present? && phone.present? && birth_date.present?
+  end
+
+  def self.establishement_users_ids
+    Establishment.all.pluck(:user_id)
   end
 
   private

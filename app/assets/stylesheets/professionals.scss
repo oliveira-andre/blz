@@ -27,7 +27,7 @@
     }
   }
 
-  .office_hours {
+  .office_hours, .professional_services {
     background-color: #f2f2f2;
     margin: 5px;
     padding-bottom: 20px;
@@ -59,6 +59,16 @@
           color: #f06868 !important;
         }
       }
+    }
+  }
+
+  .professional_services {
+    padding-top: 10px;
+    padding-left: 10px;
+
+    .is-divider {
+      margin-top: 8px;
+      margin-bottom: 8px;
     }
   }
 }

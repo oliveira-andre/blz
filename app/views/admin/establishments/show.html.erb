@@ -1,37 +1,37 @@
 <%= render 'admin/shared/header' %>
-<div class="admin-establishments-show">
+<div class="admin-establishments">
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-12">
-        <h1 class="is-size-4 has-text-grey"> Estabelecimento </h1>
+        <h1 class="title has-text-grey"> Sobre o estabelecimento </h1>
       </div>
       <div class="column is-12">
-        <h2 class="subtitle">Nome do estabelecimento</h2>
-        <h1 class="title"><%= @establishment.name %></h1>
+        <h2 class="subtitle is-size-6 has-text-grey">Nome do estabelecimento</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @establishment.name %></h1>
       </div>
       <div class="column is-12">
-        <h2 class="subtitle">Horário de funcionamento</h2>
-        <h1 class="title"><%= @establishment.timetable %></h1>
+        <h2 class="subtitle is-size-6 has-text-grey">Horário de funcionamento</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @establishment.timetable %></h1>
       </div>
       <div class="column is-12">
-        <h2 class="subtitle">Status</h2>
-        <h1 class="title"><%= @establishment.t_status %></h1>
+        <h2 class="subtitle is-size-6 has-text-grey">Status</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @establishment.t_status %></h1>
       </div>
       <div class="column is-12">
-        <h2 class="subtitle">Dono</h2>
-        <h1 class="title"><%= @establishment.user.name %></h1>
+        <h2 class="subtitle is-size-6 has-text-grey">Dono</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= link_to @establishment.user.name, admin_user_path(@establishment.user), target: '_blank' %></h1>
       </div>
       <div class="column is-12">
-        <h2 class="subtitle">Endereço</h2>
-        <h1 class="title"><%= @establishment.address.full %></h1>
+        <h2 class="subtitle is-size-6 has-text-grey">Endereço</h2>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= @establishment.address.full %></h1>
       </div>
       <div class="column is-12">
-        <h2 class="subtitle">Serviços</h2>
+        <h2 class="subtitle is-size-6 has-text-grey">Serviços</h2>
         <% if @establishment.services.empty? %>
-          <h1 class="title">Não há serviços</h1>
+          <h1 class="title has-text-weight-normal has-text-black is-size-6">Não há serviços</h1>
         <% end %>
         <% @establishment.services&.each do |service| %>
-          <h1 class="title"><%= service.title %> / <%= service.t_status %></h1>
+          <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= service.title %> / <%= service.t_status %></h1>
         <% end %>
       </div>
       <div class="column is-12 actions">
