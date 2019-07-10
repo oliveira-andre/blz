@@ -1,4 +1,7 @@
 .new-scheduling {
+  height: auto !important;
+  min-height: calc(100% - 200px);
+
   article {
     .image {
       margin-left: 0px;
