@@ -20,8 +20,7 @@ class Scheduling < ApplicationRecord
   validates :status, presence: true
   validates :date, presence: true
   validates :service_duration, presence: true
-  validates :home, inclusion: { in: [true, false] }
-  # TODO: when merge with busy do: unless: :busy?
+  validates :home, inclusion: { in: [true, false] }, unless: :busy?
 
   validates_with DatePastValidator, on: :create
 
