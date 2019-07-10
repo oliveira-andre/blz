@@ -25,7 +25,7 @@ class Scheduling < ApplicationRecord
   validate :date_in_schedule?, on: :create, unless: :busy?
   validate :user_date_busy?, on: :create, unless: :busy?
   validate :professional_date_busy?, on: :create, unless: :busy?
-  validate :service_approved?, on: :create
+  validate :service_approved?, on: :create, unless: :busy?
   validate :user_registration_ok?, on: :create
   validate :verify_finishing
   validate :cancel_fields
