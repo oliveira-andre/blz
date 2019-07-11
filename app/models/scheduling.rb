@@ -32,6 +32,7 @@ class Scheduling < ApplicationRecord
   validate :verify_finishing
   validate :cancel_fields
   validate :verify_canceling
+  validate :verify_in_home, unless: :busy?
 
   after_create :set_schedule_busy
   after_save :block_user
@@ -121,6 +122,14 @@ class Scheduling < ApplicationRecord
 
     if Time.now > date
       @errors.add(:scheduling, 'não pode ser cancelado após a data combinada')
+    end
+  end
+
+  def verify_in_home
+    if in_home? && service.establishment?
+      @errors.add(:service, 'não permite essa localidade')
+    elsif in_establishment? && service.home?
+      @errors.add(:service, 'não permite essa localidade')
     end
   end
 
