@@ -16,7 +16,7 @@
           </span>
         </p>
         <% schedule.values.flatten.each do |s| %>
-          <% if s.free %>
+          <% if s.free && !date_past?(s.date) %>
             <%= button_tag time(s.date), class: 'button is-size-6 is-size-7-touch has-text-centered is-text modal-button btn-show-scheduling-details',
                            title: 'Horário livre', data: { target: "new-modal-scheduling-#{professional_service.id}", date: s.date.strftime('%d/%m/%Y %H:%M') }%>
           <% else %>

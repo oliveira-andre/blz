@@ -25,7 +25,10 @@ class SchedulingController < ApplicationController
       redirect_to users_dashboard_path(current_user)
     else
       @scheduling.errors.full_messages.each { |msg| flash[:error] = msg }
-      redirect_to service_path(id: @scheduling.service)
+      redirect_to new_scheduling_path(
+        professional_service_id: params[:scheduling][:professional_service_id],
+        date: params[:scheduling][:date]
+      )
     end
   end
 

@@ -1,7 +1,7 @@
 class RebuildAllSchedulesService
   class << self
     def execute
-      ProfessionalService.all.each { |p_s| BuildScheduleService.execute(p_s) }
+      Professional.all.each { |p| BuildScheduleService.execute(p) }
 
       Scheduling.scheduled.each do |scheduling|
         professional = scheduling.professional_service.professional

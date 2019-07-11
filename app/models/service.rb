@@ -61,7 +61,7 @@ class Service < ApplicationRecord
   end
 
   def rebuild_schedule
-    professional_services.each { |p_s| Schedule.rebuild(p_s) }
+    professionals.each { |professional| Schedule.rebuild(professional) }
   end
 
   def approving_service

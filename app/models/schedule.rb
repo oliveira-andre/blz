@@ -3,8 +3,8 @@ class Schedule < ApplicationRecord
 
   before_save :verify_busy
 
-  def self.rebuild(professional_service)
-    BuildScheduleJob.perform_later(professional_service)
+  def self.rebuild(professional)
+    BuildScheduleJob.perform_later(professional)
   end
 
   private
