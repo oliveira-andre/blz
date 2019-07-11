@@ -14,6 +14,7 @@ class SchedulingController < ApplicationController
 
   def show
     authorize @scheduling
+    @report = ReportSchedulingProblem.new
   end
 
   def create

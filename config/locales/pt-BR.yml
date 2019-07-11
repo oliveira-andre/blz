@@ -73,6 +73,9 @@ pt-BR:
         body: Comentário
         rating: Avaliação
         reviewable: Agendamento
+      
+      report_scheduling_problem:
+        category: Categoria
 
     enums:
       scheduling:
@@ -99,6 +102,9 @@ pt-BR:
         analyze: Em análise
         approved: Aprovado
         recused: Recusado
+      report_problem_category:
+        not_appear: Não apareceu
+        bad_treatment: O profissional não me tratou bem
 
     errors:
       messages:
