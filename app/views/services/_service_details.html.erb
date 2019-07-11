@@ -24,7 +24,7 @@
     <div class="columns is-multiline is-mobile">
       <div class="column is-12 info">
         <p>Atendimento</p>
-         <p class='is-size-5'><i class="far fa-clock"></i></p>
+        <p class='is-size-5'><i class="far fa-clock"></i></p>
         <p><%= @service.establishment.timetable %></p>
       </div>
       <div class="column is-12 info">
@@ -35,7 +35,13 @@
       <div class="column is-12 info">
         <p>Local de atendimento</p>
         <p class='is-size-5'><i class="fas fa-map-marker-alt has-text-grey"></i></p>
-        <p><%= @service.home? ? 'Em casa' : "No estabelecimento (#{@service.establishment.address.full})" %></p>
+        <% if @service.home? %>
+          <p>Em casa</p>
+        <% elsif @service.establishment? %>
+          <p>No estabelecimento <%= @service.establishment.address.full %></p>
+        <% else %>
+          Em casa ou no estabelecimento <%= @service.establishment.address.full %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -55,17 +61,23 @@
             <div class="column is-12 info">
               <p>Duração estimada</p>
               <p class='is-size-5'><i class="fas fa-hourglass-start"></i>
-              <p><%= @service.duration %> minutos</p>
-            </div>
-            <div class="column is-12">
-              <p>Local de atendimento</p>
-              <p class='is-size-5'><i class="fas fa-map-marker-alt"></i></p>
-              <p><%= @service.home? ? 'Em casa' : "No estabelecimento (#{@service.establishment.address.full})" %></p>
-            </div>
-            <div class="column is-12">
-              <a href="#schedule" class="button is-light btn-schedule">Horários</a>
+                <p><%= @service.duration %> minutos</p>
+              </div>
+              <div class="column is-12">
+                <p>Local de atendimento</p>
+                <p class='is-size-5'><i class="fas fa-map-marker-alt"></i></p>
+                <% if @service.home? %>
+                  <p>Em casa</p>
+                <% elsif @service.establishment? %>
+                  <p>No estabelecimento <%= @service.establishment.address.full %></p>
+                <% else %>
+                  Em casa ou no estabelecimento <%= @service.establishment.address.full %>
+                <% end %>
+              </div>
+              <div class="column is-12">
+                <a href="#schedule" class="button is-light btn-schedule">Horários</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
