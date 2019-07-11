@@ -63,7 +63,7 @@
           <div class="column is-12" id="establishment_address">
             <p class="is-size-6 has-text-grey">Endereço</p>
             <span class="fas fa-map-marker-alt has-text-black"></span>
-            <span class="is-size-6 has-text-black"><%= @scheduling.in_home? ? @scheduling.address.full : @scheduling.service.establishment.address.full %></span>
+            <span class="is-size-6 has-text-black"><%= @scheduling.service.establishment.address.full %></span>
           </div>
         <% end %>
         <% unless @scheduling.service.establishment? %>
