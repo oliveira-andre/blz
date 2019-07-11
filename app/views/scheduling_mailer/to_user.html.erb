@@ -39,7 +39,7 @@
       Onde
     </p>
     <p class="has-text-centered has-text-black is-size-5">
-      <%= @scheduling.home? ? @scheduling.address.full : @scheduling.service.establishment.address.full %>
+      <%= @scheduling.in_home? ? @scheduling.address.full : @scheduling.service.establishment.address.full %>
     </p>
   </div>
 
