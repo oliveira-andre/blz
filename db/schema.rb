@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 2019_07_08_205239) do
     t.datetime "canceled_at"
     t.text "canceled_reason"
     t.integer "canceled_by"
-    t.boolean "home"
+    t.boolean "in_home"
     t.index ["professional_service_id"], name: "index_schedulings_on_professional_service_id"
     t.index ["user_id"], name: "index_schedulings_on_user_id"
   end

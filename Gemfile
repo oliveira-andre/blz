@@ -28,6 +28,7 @@ gem 'whenever', require: false
 gem 'pagy'
 gem 'toastr-rails'
 gem 'autocomplete_zipcode'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

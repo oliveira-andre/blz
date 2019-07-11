@@ -1,4 +1,7 @@
 .new-scheduling {
+  height: auto !important;
+  min-height: calc(100% - 200px);
+
   article {
     .image {
       margin-left: 0px;
@@ -46,6 +49,8 @@
   }
 
   .custom_form {
-    margin-left: -0.10rem;    
+    input {
+      padding-right: 210px;
+    }    
   }
 }

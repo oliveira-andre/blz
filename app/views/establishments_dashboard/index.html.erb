@@ -4,9 +4,13 @@
     <div class="columns is-multiline">
       <div class="column is-12">
         <% if @scheduling.any? %>
-          <div class="columns is-multiline">
-            <div class="column is-12">
+          <div class="columns is-multiline is-mobile">
+            <div class="column is-9">
               <h1 class="is-size-4 has-text-grey"> Minha agenda </h1>
+            </div>
+            <div class="column is-3">
+              <%= link_to :ocupado, '#busy-scheduling-modal', class: 'button is-danger-custom is-pulled-right is-capitalized modal-button',
+                          data: { target: 'busy-scheduling-modal' }%>
             </div>
             <% @scheduling.each do |s| %>
               <%= render 'scheduling_card', scheduling: s %>
@@ -29,3 +33,5 @@
   </div>
   <%= render 'shared/establishment_bottom_navigation_bar', tab: 'scheduling' %>
 </div>
+
+<%= render 'busy_scheduling' %>

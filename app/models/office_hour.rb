@@ -48,7 +48,7 @@ class OfficeHour < ApplicationRecord
   end
 
   def rebuild_schedule
-    professional.professional_services.each { |p_s| Schedule.rebuild(p_s) }
+    Schedule.rebuild(professional)
   end
 
   def verify_professional_without_hour

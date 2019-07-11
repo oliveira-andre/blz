@@ -3,7 +3,7 @@
     <div class="field">
       <label class="label has-text-grey has-text-weight-normal">CEP <small class="is-danger">*</small></label>
       <div class="control">
-        <%= f.text_field :zipcode, class: 'input zipcode', required: true, placeholder:"Qual o CEP do endereço do estabelecimento ?", data: { provider: :zipcode } %>
+        <%= f.text_field :zipcode, class: 'input zipcode address_field', required: true, placeholder:"Qual o CEP do endereço do estabelecimento ?", data: { provider: :zipcode } %>
       </div>
     </div>
   </div>
@@ -11,7 +11,7 @@
     <div class="field">
       <label class="label has-text-grey has-text-weight-normal">Rua <small class="is-danger">*</small></label>
       <div class="control">
-        <%= f.text_field :street, class: :input, required: true, placeholder:"Rua do seu estabelecimento ?", data: { provider: :street }, readonly: true %>
+        <%= f.text_field :street, class: 'input address_field', required: true, placeholder:"Rua do seu estabelecimento ?", data: { provider: :street }, readonly: true %>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
     <div class="field">
       <label class="label has-text-grey has-text-weight-normal">Bairro <small class="is-danger">*</small></label>
       <div class="control">
-        <%= f.text_field :neighborhood, class: :input, required: true, placeholder:"Bairro do seu estabelecimento", data: { provider: :neighborhood }, readonly: true %>
+        <%= f.text_field :neighborhood, class: 'input address_field', required: true, placeholder:"Bairro do seu estabelecimento", data: { provider: :neighborhood }, readonly: true %>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
     <div class="field">
       <label class="label has-text-grey has-text-weight-normal">Numero <small class="is-danger">*</small></label>
       <div class="control">
-        <%= f.text_field :number, class: :input, required: true, placeholder:"Numero do seu estabelecimento ?" %>
+        <%= f.text_field :number, class: 'input address_field', required: true, placeholder:"Numero do seu estabelecimento ?" %>
       </div>
     </div>
   </div>

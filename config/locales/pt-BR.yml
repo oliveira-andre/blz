@@ -63,6 +63,7 @@ pt-BR:
         canceled_reason: Justificativa
         canceled_by: Cancelado por
         canceled_at: Data de cancelamento
+        service: Serviço
 
       office_hour:
         hour_begin: 'Hora inicial'
@@ -78,6 +79,7 @@ pt-BR:
         scheduled: Agendado
         finished: Finalizado
         canceled: Cancelado
+        busy: Ocupado
       establishment:
         analyze: Em análise
         approved: Aprovado

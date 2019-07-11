@@ -1,0 +1,56 @@
+<div class="modal" id="busy-scheduling-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <section class="modal-card-body">
+      <%= form_with url: busies_path(establishment_id: params[:id]), class: :custom do |f| %>
+        <div class="columns is-multiline">
+          <div class="column is-12">
+            <h1 class="is-size-4 has-text-grey">Deixe um período ocupado</h1>
+          </div>
+          <div class="column is-12">
+            <div class="field">
+              <label class="label has-text-grey has-text-weight-normal">Profissional <small class="is-danger">*</small></label>
+              <div class="control">
+                <div class="select">
+                  <%= f.select :professional_id, establishment_professionals_collection(@establishment), required: true %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="column is-8">
+              <label class="label has-text-grey has-text-weight-normal">De <small class="is-danger">*</small></label>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <%= f.date_field :date_only, class: :input, required: true, value: Date.today %>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <%= f.text_field :time, class: 'input clock', required: true, placeholder: '08:35', value: Time.now.strftime('%H:%M') %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-12">
+            <div class="field">
+              <label class="label has-text-grey has-text-weight-normal">por <small class="is-danger">*</small></label>
+              <div class="control">
+                <div class="select">
+                  <%= f.select :service_duration, duration_busy_range, required: true %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-12 actions">
+            <%= f.submit :salvar, class: 'button is-light is-pulled-right is-capitalized'  %>
+            <%= button_tag :cancelar, class: 'button modal-close-custom is-text has-text-grey is-pulled-right is-capitalized', type: :button  %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>

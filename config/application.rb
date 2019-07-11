@@ -25,5 +25,6 @@ module Blz
     config.generators.assets = false
     config.generators.helper = false
     config.active_job.queue_adapter = :sidekiq
+    config.active_record.default_timezone = :local
   end
 end

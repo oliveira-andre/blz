@@ -1,54 +1,55 @@
 <%= render 'admin/shared/header'%>
+<div id="admin-services">
+  <div class="container">
+    <div class="content">
+      <h1 class="has-text-grey">Serviços</h1>
+      <%= form_tag(admin_services_path, method: :get, id: 'form_search', class:'custom') do %>
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            <%= text_field_tag :query, params[:query], class:'input', placeholder:'Pesquise algum serviço...' %>
+          </p>
 
-<div class="container">
-  <div class="content">
-    <h1 class="has-text-grey">Serviços</h1>
-    <%= form_tag(admin_services_path, method: :get, id: 'form_search', class:'custom') do %>
-      <div class="field is-grouped">
-        <p class="control is-expanded">
-          <%= text_field_tag :query, params[:query], class:'input', placeholder:'Pesquise algum serviço...' %>
-        </p>
+          <p class="control is-expanded">
+            <%= select_tag :status, options_for_select([['Aprovado','approved'],["Arquivado",'archived'],[
+            'Recusado', 'recused'],['Aguardando aprovação', 'awaiting_avaliation']]), class:'input', include_blank:'Pesquise por status...' %>
+          </p>
 
-        <p class="control is-expanded">
-          <%= select_tag :status, options_for_select([['Aprovado','approved'],["Arquivado",'archived'],[
-          'Recusado', 'recused'],['Aguardando aprovação', 'awaiting_avaliation']]), class:'input', include_blank:'Pesquise por status...' %>
-        </p>
+          <p class="control">
+            <% if @services.present?%>
+              <%= submit_tag 'Buscar',  class: 'button is-info' %>
+            <% else %>
+              <a class="button is-info" type="submit" href="/admin/services">Limpar filtros</a>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
 
-        <p class="control">
-          <% if @services.present?%>
-            <%= submit_tag 'Buscar',  class: 'button is-info' %>
-          <% else %>
-            <a class="button is-info" type="submit" href="/admin/services">Limpar filtros</a>
-          <% end %>
-        </p>
-      </div>
-    <% end %>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Categoria</th>
-          <th>Status</th>
-          <th>Valor</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @services.each do |service| %>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= service.title %></td>
-            <td><%= service.category.name %></td>
-            <td><%= service.t_status %></td>
-            <td>R$ <%= service.amount %></td>
-            <td><%= link_to :detalhes, admin_service_path(service), class: 'is-capitalized' %></td>
+            <th>Título</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th>Estabelecimento</th>
+            <th colspan="3"></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @services.each do |service| %>
+            <tr>
+              <td><%= service.title %></td>
+              <td><%= service.category.name %></td>
+              <td><%= service.t_status %></td>
+              <td><%= service.establishment.name %></td>
+              <td><%= link_to :detalhes, admin_service_path(service), class: 'is-capitalized' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% if @services.present? %>
+      <%= pagy_bulma_nav(@pagy).html_safe %>
+    <% end %>
   </div>
-  <% if @services.present? %>
-    <%= pagy_bulma_nav(@pagy).html_safe %>
-  <% end %>
 </div>

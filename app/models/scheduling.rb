@@ -4,7 +4,7 @@ class Scheduling < ApplicationRecord
   default_scope { order(:date) }
   scope :history, -> { where.not(status: :scheduled) }
 
-  enum status: %i[scheduled finished canceled]
+  enum status: %i[scheduled finished canceled busy]
   enum canceled_by: %i[user establishment]
 
   belongs_to :user, required: false
@@ -15,24 +15,24 @@ class Scheduling < ApplicationRecord
   has_one :professional, through: :professional_service
   has_one :address, as: :addressable
 
-  before_validation :set_service_duration
+  before_validation :set_service_duration, unless: :busy?
 
   validates :status, presence: true
   validates :date, presence: true
   validates :service_duration, presence: true
-  validates :home, inclusion: { in: [true, false] }
-  # TODO: when merge with busy do: unless: :busy?
+  validates :in_home, inclusion: { in: [true, false] }, unless: :busy?
 
   validates_with DatePastValidator, on: :create
 
-  validate :date_in_schedule?, on: :create
-  validate :user_date_busy?, on: :create
-  validate :professional_date_busy?, on: :create
-  validate :service_approved?, on: :create
+  validate :date_in_schedule?, on: :create, unless: :busy?
+  validate :user_date_busy?, on: :create, unless: :busy?
+  validate :professional_date_busy?, on: :create, unless: :busy?
+  validate :service_approved?, on: :create, unless: :busy?
   validate :user_registration_ok?, on: :create
   validate :verify_finishing
   validate :cancel_fields
   validate :verify_canceling
+  validate :verify_in_home, unless: :busy?
 
   after_create :set_schedule_busy
   after_save :block_user
@@ -55,19 +55,25 @@ class Scheduling < ApplicationRecord
   def professional_date_busy?
     professional_services_ids = professional.professional_services.ids
 
-    scheduling_ids = Scheduling.where(
+    schedulings = Scheduling.where(
       professional_service_id: professional_services_ids,
-      date: (date..(date + service_duration.minutes - 1.seconds))
-    ).scheduled.ids
+      status: %i[scheduled busy]
+    )
 
-    return if scheduling_ids.empty?
+    schedulings.each do |s|
+      date_start = s.date
+      date_finish = s.date + s.service_duration.minutes - 1.second
 
-    @errors.add(:date, 'já esta ocupado para esse salão/profissional')
+      if date.between?(date_start, date_finish) ||
+         (date + service_duration.minutes).between?(date_start, date_finish)
+        @errors.add(:date, 'já esta ocupado para esse salão/profissional')
+      end
+    end
   end
 
   def user_date_busy?
     scheduling_ids = user.scheduling.where(
-      date: (date..(date + service_duration.minutes - 1.seconds))
+      date: (date..(date + service_duration.minutes - 1.second))
     ).scheduled.ids
 
     return if scheduling_ids.empty?
@@ -82,7 +88,7 @@ class Scheduling < ApplicationRecord
   end
 
   def user_registration_ok?
-    return if user.registration_ok?
+    return if busy? || user.registration_ok?
 
     @errors.add(:user, 'não está com o cadastro completo')
   end
@@ -116,6 +122,14 @@ class Scheduling < ApplicationRecord
 
     if Time.now > date
       @errors.add(:scheduling, 'não pode ser cancelado após a data combinada')
+    end
+  end
+
+  def verify_in_home
+    if in_home? && service.establishment?
+      @errors.add(:service, 'não permite essa localidade')
+    elsif in_establishment? && service.home?
+      @errors.add(:service, 'não permite essa localidade')
     end
   end
 
@@ -155,12 +169,14 @@ class Scheduling < ApplicationRecord
   end
 
   def notifications
+    return if busy?
+
     SchedulingMailer.to_user(self).deliver_later
     SchedulingMailer.to_establishment(self).deliver_later
     NotificationBroadcastJob.perform_later(self)
   end
 
   def in_establishment?
-    !home?
+    !in_home?
   end
 end
