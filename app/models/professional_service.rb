@@ -26,7 +26,7 @@ class ProfessionalService < ApplicationRecord
   private
 
   def rebuild_schedule
-    Schedule.rebuild(self)
+    Schedule.rebuild(professional)
   end
 
   def verify_last_professional_service
