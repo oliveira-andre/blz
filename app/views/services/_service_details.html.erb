@@ -38,9 +38,9 @@
         <% if @service.home? %>
           <p>Em casa</p>
         <% elsif @service.establishment? %>
-          <p>No estabelecimento <%= @service.establishment.address.full %></p>
+          <p>No estabelecimento: <%= @service.establishment.address.full %></p>
         <% else %>
-          Em casa ou no estabelecimento <%= @service.establishment.address.full %>
+          Em casa ou no estabelecimento: <%= @service.establishment.address.full %>
         <% end %>
       </div>
     </div>
