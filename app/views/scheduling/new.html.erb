@@ -68,8 +68,8 @@
         <% end %>
         <% unless @scheduling.service.establishment? %>
           <div id='address_form'>
-            <%= f.fields_for :address do |ff| %>
-              <%= render 'form_address', f: ff%>
+            <%= f.fields_for :address do |f_address| %>
+              <%= render 'form_address', f: f_address%>
             <% end %>
           </div>
         <% end %>
