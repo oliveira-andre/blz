@@ -62,7 +62,11 @@
           <div class="column is-6">
             <p class="is-size-7 is-size-6-desktop">Local</p>
             <span class="icon is-size-5"><i class="fas fa-map-marked"></i></span>
-            <span class="is-size-6 is-size-5-desktop"><%= @scheduling.in_home? ? 'Em casa' : 'No estabelecimento' %></span>
+            <% if establishment? %>
+              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.in_home? ? 'Na casa do cliente' : 'No seu estabelecimento' %></span>
+            <% else %>
+              <span class="is-size-6 is-size-5-desktop"><%= @scheduling.in_home? ? 'Na sua casa' : 'No estabelecimento' %></span>
+            <% end %>
           </div>
         </div>
         <% if establishment? %>

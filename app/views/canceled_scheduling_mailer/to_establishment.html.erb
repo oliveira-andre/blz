@@ -41,6 +41,15 @@
     </p>
   </div>
 
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-5">
+      Onde
+    </p>
+    <p class="has-text-centered has-text-black is-size-5">
+      <%= @scheduling.in_home? ? "Na casa do cliente: #{@scheduling.address.full}" : "No seu estabelecimento: #{@scheduling.service.establishment.address.full}" %>
+    </p>
+  </div>
+
   <div class="item has-text-centered">
     <%= link_to 'Mais detalhes', establishments_dashboard_url(@scheduling.service.establishment), class: 'button is-primary is-size-5' %>
   </div>
