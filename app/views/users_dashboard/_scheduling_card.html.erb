@@ -40,6 +40,11 @@
             <span class="icon is-size-5 has-text-white"><i class="fas fa-info-circle"></i></span>
             <span class="is-size-6 is-size-5-desktop has-text-white"><%= scheduling.t_status %></span>
           </div>
+          <div class="column is-6">
+            <p class="is-size-7 is-size-6-desktop has-text-white">Local escolhido</p>
+            <span class="icon is-size-5 has-text-white"><i class="<%= scheduling.in_home? ? 'fas fa-home' : 'fas fa-store-alt' %>"></i></span>
+            <span class="is-size-6 is-size-5-desktop has-text-white"><%= scheduling.in_home? ? 'Na sua casa' : 'No estabelecimento' %></span>
+          </div>
           <div class="column is-12">
             <p class="is-size-7 is-size-6-desktop has-text-white">Endereço</p>
             <span class="icon is-size-5 has-text-white"><i class="fas fa-map-marker-alt"></i></span>
@@ -57,7 +62,6 @@
     </div>
   </div>
 </div>
-
 <% unless scheduling.review %>
   <div class="modal" id="rating_modal">
     <%= render 'new_rating_modal', schedule: scheduling %>
