@@ -42,10 +42,18 @@
         </div>
         <% if @scheduling.service.both? %>
           <div class="column is-12">
-            <div class="field">
-              <div class="control">
-                <div class="select">
-                  <%= f.select :home, [['Estabelecimento', 0], ['Em casa', 1]] %>
+            <div class="columns is-mobile">
+              <div class="column">
+                <p class="has-text-grey">Aonde quer ser atendido? <small class="is-danger">*</small></p>
+              </div>
+              <div class="column is-9">
+                <div class="field">
+                  <%= f.radio_button(:in_home, true, class: 'is-checkradio new_scheduling_radio', id: :in_home, required: true, checked: true) %>
+                  <label class="has-text-grey" for="in_home">Em casa</label>
+                </div>
+                <div class="field">
+                  <%= f.radio_button(:in_home, false, class: 'is-checkradio new_scheduling_radio', id: :in_establishment, required: true) %>
+                  <label class="has-text-grey" for="in_establishment">No estabelecimento</label>
                 </div>
               </div>
             </div>

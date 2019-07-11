@@ -1,16 +1,16 @@
 $(document).on('turbolinks:load', function () {
   switchLocalScheduling();
-  $('#scheduling_home').change(function () {
+  $('.new_scheduling_radio').change(function () {
     switchLocalScheduling();
   });
 });
 
-function switchLocalScheduling(select) {
-  if ($('#scheduling_home').val() == 1) {
+function switchLocalScheduling() {
+  if ($('#in_home').prop("checked") == true) {
     $('#establishment_address').addClass('is-hidden');
     $('#address_form').removeClass('is-hidden');
     $('.address_field').prop('required', true);
-  } else if($('#scheduling_home').val() == 0) {
+  } else if($('#in_establishment').prop("checked") == true) {
     $('#establishment_address').removeClass('is-hidden');
     $('#address_form').addClass('is-hidden');
     $('.address_field').prop('required', false);
