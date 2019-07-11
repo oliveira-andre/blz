@@ -13,12 +13,14 @@ class Scheduling < ApplicationRecord
   has_one :review, as: :reviewable
   has_one :service, through: :professional_service
   has_one :professional, through: :professional_service
+  has_one :address, as: :addressable
 
   before_validation :set_service_duration, unless: :busy?
 
   validates :status, presence: true
   validates :date, presence: true
   validates :service_duration, presence: true
+  validates :in_home, inclusion: { in: [true, false] }, unless: :busy?
 
   validates_with DatePastValidator, on: :create
 
@@ -30,12 +32,16 @@ class Scheduling < ApplicationRecord
   validate :verify_finishing
   validate :cancel_fields
   validate :verify_canceling
+  validate :verify_in_home, unless: :busy?
 
   after_create :set_schedule_busy
   after_save :block_user
   after_save :set_schedule_free
   after_save :cancel_notification
   after_create :notifications
+
+  accepts_nested_attributes_for :address, allow_destroy: true,
+                                          reject_if: :in_establishment?
 
   private
 
@@ -119,6 +125,14 @@ class Scheduling < ApplicationRecord
     end
   end
 
+  def verify_in_home
+    if in_home? && service.establishment?
+      @errors.add(:service, 'não permite essa localidade')
+    elsif in_establishment? && service.home?
+      @errors.add(:service, 'não permite essa localidade')
+    end
+  end
+
   def set_schedule_busy
     professional.professional_services.each do |ps|
       start_date = date - (ps.service.duration.minutes - 1.minute)
@@ -160,5 +174,9 @@ class Scheduling < ApplicationRecord
     SchedulingMailer.to_user(self).deliver_later
     SchedulingMailer.to_establishment(self).deliver_later
     NotificationBroadcastJob.perform_later(self)
+  end
+
+  def in_establishment?
+    !in_home?
   end
 end

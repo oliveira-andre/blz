@@ -6,6 +6,7 @@ class SchedulingController < ApplicationController
   def new
     if current_user.registration_ok?
       @scheduling = Scheduling.new scheduling_new_params
+      @scheduling.address = Address.new
     else
       redirect_to edit_service_users_path(service, scheduling_new_params)
     end
@@ -24,7 +25,10 @@ class SchedulingController < ApplicationController
       redirect_to users_dashboard_path(current_user)
     else
       @scheduling.errors.full_messages.each { |msg| flash[:error] = msg }
-      redirect_to service_path(id: @scheduling.service)
+      redirect_to new_scheduling_path(
+        professional_service_id: params[:scheduling][:professional_service_id],
+        date: params[:scheduling][:date]
+      )
     end
   end
 
@@ -57,7 +61,10 @@ class SchedulingController < ApplicationController
   private
 
   def scheduling_params
-    params.require(:scheduling).permit(:professional_service_id, :date)
+    params.require(:scheduling).permit(
+      :professional_service_id, :date, :in_home,
+      address_attributes: %i[id street number neighborhood zipcode]
+    )
           .merge(user_id: current_user.id)
   end
 
