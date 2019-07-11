@@ -9,10 +9,10 @@ function switchLocalScheduling(select) {
   if ($('#scheduling_home').val() == 1) {
     $('#establishment_address').addClass('is-hidden');
     $('#address_form').removeClass('is-hidden');
-    $('#address_field').prop('required', true);
+    $('.address_field').prop('required', true);
   } else if($('#scheduling_home').val() == 0) {
     $('#establishment_address').removeClass('is-hidden');
     $('#address_form').addClass('is-hidden');
-    $('#address_field').prop('required', false);
+    $('.address_field').prop('required', false);
   }
 }

@@ -68,7 +68,7 @@
         <div class="column is-12 actions">
           <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
           <%= f.hidden_field :date, value:  @scheduling.date %>
-          <%= f.hidden_field :home, value: @scheduling.service.home? ? 1 : 0 unless @scheduling.service.both? %>
+          <%= f.hidden_field :in_home, value: @scheduling.service.home? ? 1 : 0 unless @scheduling.service.both? %>
           <%= f.submit :finalizar, class: 'button is-primary is-capitalized is-pulled-right' %>
           <%= link_to :cancelar, service_path(@scheduling.service), class: 'button is-capitalized is-pulled-right has-text-grey is-text'%>
         </div>

@@ -20,7 +20,7 @@ class Scheduling < ApplicationRecord
   validates :status, presence: true
   validates :date, presence: true
   validates :service_duration, presence: true
-  validates :home, inclusion: { in: [true, false] }, unless: :busy?
+  validates :in_home, inclusion: { in: [true, false] }, unless: :busy?
 
   validates_with DatePastValidator, on: :create
 
@@ -168,6 +168,6 @@ class Scheduling < ApplicationRecord
   end
 
   def in_establishment?
-    !home?
+    !in_home?
   end
 end

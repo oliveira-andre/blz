@@ -61,7 +61,7 @@ class SchedulingController < ApplicationController
 
   def scheduling_params
     params.require(:scheduling).permit(
-      :professional_service_id, :date, :home,
+      :professional_service_id, :date, :in_home,
       address_attributes: %i[id street number neighborhood zipcode]
     )
           .merge(user_id: current_user.id)
