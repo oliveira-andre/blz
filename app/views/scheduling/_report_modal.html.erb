@@ -1,0 +1,34 @@
+<div id="report-scheduling-modal" class="modal modal-fx-fadeInScale">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <section class="modal-card-body">
+      <%= form_with model: @report, url: scheduling_report_problems_path(@scheduling), class: :custom do |f| %>
+        <div class="columns is-multiline">
+          <div class="column is-12">
+            <div class="field">
+              <label class="label has-text-grey has-text-weight-normal">Categoria <small class="is-danger">*</small></label>
+              <div class="control">
+                <div class="select">
+                  <%= f.select :category, report_problem_category_collection, required: true %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-12">
+            <div class="field">
+              <label class="label has-text-grey has-text-weight-normal">Mensagem <small class="is-danger">*</small></label>
+              <div class="control">
+                <%= f.text_area :body, placeholder: '(opicional)', class: :textarea %>
+              </div>
+            </div>
+          </div>
+          <div class="column is-12 actions">
+            <%= f.submit :salvar, class: 'button is-primary is-capitalized is-pulled-right'%>
+            <%= link_to :cancelar, scheduling_path(@scheduling), class: 'button is-text has-text-grey is-capitalized is-pulled-right' %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>

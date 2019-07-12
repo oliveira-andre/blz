@@ -35,12 +35,14 @@ Rails.application.routes.draw do
     resources :payments, only: %i[new create]
     resources :holders, only: %i[new update]
     resources :reviews, only: :create
+    resources :report_problems, only: :create,
+                                controller: :report_scheduling_problems
     collection do
       resources :busies, only: :create, controller: :scheduling_busies
     end
   end
 
-  # TODO uncomment when start to create the credit_card
+  # TODO: uncomment when start to create the credit_card
   # resources :payment_cards, only: %i[create index show destroy]
 
   get '/users/:id/dashboard',

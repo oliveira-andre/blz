@@ -28,6 +28,10 @@
       &.is-primary {
         background: $primary-color;
       }
+
+      &.is-danger {
+        background: #ff3860;
+      }
     }
   }
 }
