@@ -126,11 +126,14 @@ ActiveRecord::Schema.define(version: 2019_07_11_215241) do
     t.index ["establishment_id"], name: "index_professionals_on_establishment_id"
   end
 
-  create_table "report_scheduling_problems", force: :cascade do |t|
+  create_table "report_problems", force: :cascade do |t|
     t.integer "category", null: false
     t.text "body"
     t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_report_scheduling_problems_on_user_id"
+    t.string "reportable_type"
+    t.bigint "reportable_id"
+    t.index ["reportable_type", "reportable_id"], name: "index_report_problems_on_reportable_type_and_reportable_id"
+    t.index ["user_id"], name: "index_report_problems_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|

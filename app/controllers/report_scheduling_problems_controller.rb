@@ -2,24 +2,26 @@ class ReportSchedulingProblemsController < ApplicationController
   before_action :load_scheduling
 
   def create
-    @report = ReportSchedulingProblem.new report_params
+    @report = ReportProblem.new report_params
 
     if @report.save
-      flash[:success] = 'O seu reporte foi criado e enviado para os
-                         adminstradores'
+      flash[:success] = 'O seu problema foi reportado e enviado para
+                         a equipe BLZ'
     else
       @report.errors.full_messages.each { |error| flash[:error] = error }
     end
-    redirect_to scheduling_path(@load_scheduling)
+    redirect_to scheduling_path(@scheduling)
   end
 
   private
 
   def report_params
-    params.require(:report_scheduling_problem).permit(:category, :body)
+    params.require(:report_problem).permit(:category, :body)
+                                   .merge(user: current_user,
+                                          reportable: @scheduling)
   end
 
   def load_scheduling
-    @load_scheduling = Scheduling.find(params[:scheduling_id])
+    @scheduling = Scheduling.find(params[:scheduling_id])
   end
 end

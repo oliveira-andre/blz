@@ -10,10 +10,11 @@ class Scheduling < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :professional_service
 
-  has_one :review, as: :reviewable
   has_one :service, through: :professional_service
   has_one :professional, through: :professional_service
   has_one :address, as: :addressable
+  has_one :review, as: :reviewable
+  has_one :report_problem, as: :reportable
 
   before_validation :set_service_duration, unless: :busy?
 
