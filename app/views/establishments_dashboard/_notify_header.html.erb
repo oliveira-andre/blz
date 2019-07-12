@@ -1,14 +1,14 @@
 <% if current_user.establishment.analyze?%>
   <div class="notify_header">
     <nav class="is-white has-text-centered">
-      <p>A equipe BLZ está analizando seu perfil, para mais informações entre em contato pelo email: contato@blz.life</p>
+      <p>Aviso: a equipe BLZ está analizando seu perfil, para mais informações entre em contato pelo email: contato@blz.life</p>
     </nav>
   </div>
 <% end %>
 <% if current_user.establishment.services.empty? && current_user.establishment.approved?%>
   <div class="notify_header">
     <nav class="is-white has-text-centered">
-      <p>Crie pelo menos um serviço para aparecer nas buscas dos usuários</p>
+      <p>Dica: crie pelo menos um serviço para aparecer nas buscas dos usuários</p>
     </nav>
   </div>
 <% end %>
