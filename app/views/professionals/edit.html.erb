@@ -1,4 +1,5 @@
 <%= render 'shared/header', to_back: false, fixed: true %>
+<%= render 'notify_header' if @professional.office_hours.empty? %>
 <div class="professionals_form">
   <div class="container">
     <%= render "form", url: establishment_professional_path(establishment_id: @establishment.id, id: @professional.id) %>
