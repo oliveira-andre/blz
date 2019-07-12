@@ -7,7 +7,7 @@ module FiltersService
       local_type = filter_params.fetch('local_type', [])
 
       services = Service.approved
-      services.where!(local_type: local_type) if local_type.present?
+      services.where!(local_type: [local_type, :both]) if local_type.present?
       services.where!('title ILIKE ?', "%#{query}%") if query.present?
       services.where!(category_id: category) if category.present?
 
