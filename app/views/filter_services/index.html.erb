@@ -4,7 +4,7 @@
     <h1 class="title is-size-4 has-text-grey">Serviços encontrados </h1>
     <%= form_with url: '/filter_services', class: 'custom', id: 'filter-services', method: :get, authenticity_token: false, local: true do |f| %>
       <div class="columns">
-        <div class="column is-4">
+        <div class="column is-3">
           <div class="field">
             <div class="control search">
               <%= text_field_tag :query, @filter['query'], class: 'input',
@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="column is-4">
+        <div class="column is-3">
           <div class="field">
             <div class="control">
               <div class="select">
@@ -27,10 +27,23 @@
             </div>
           </div>
         </div>
-        <div class="column is-4">
+        <div class="column is-3">
           <div class="field">
             <div class="control">
               <%= date_field_tag :date, @filter['date'], class: :input, id: 'filter-services-date' %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="field">
+            <div class="control">
+              <div class="select">
+                <%= select_tag :local_type,
+                               options_for_select(
+                                local_type_collection,
+                                selected: @filter['local_type']
+                               ), { prompt: "selecione o local de atendimento", id: 'filter-services-local-type' } %>
+              </div>
             </div>
           </div>
         </div>

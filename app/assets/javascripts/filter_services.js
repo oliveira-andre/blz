@@ -7,9 +7,11 @@ function listeningInputs() {
 
   var categorySelect = $('select[id="filter-services-category"]');
   var dateField = $('input[id="filter-services-date"]');
+  var localTypeSelect = $('select[id="filter-services-local-type"]')
 
   categorySelect.on('change', sendSubmit);
   dateField.on('change', sendSubmit);
+  localTypeSelect.on('change', sendSubmit);
 }
 
 function sendSubmit(e) {
