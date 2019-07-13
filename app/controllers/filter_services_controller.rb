@@ -9,6 +9,6 @@ class FilterServicesController < ApplicationController
   private
 
   def filter_params
-    params.permit(:query, :category, :date)
+    params.permit(:query, :category, :date, :local_type)
   end
 end

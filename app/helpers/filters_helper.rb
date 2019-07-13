@@ -6,4 +6,13 @@ module FiltersHelper
   def category_name(value)
     Category.find(value).name
   end
+
+  def local_type_collection
+    [
+      { name: 'Em casa', value: :home },
+      { name: 'No estabelecimento', value: :establishment }
+    ].collect do |local_type|
+      [local_type[:name], local_type[:value]]
+    end
+  end
 end
