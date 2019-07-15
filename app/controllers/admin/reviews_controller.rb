@@ -6,12 +6,7 @@ module Admin
     before_action :load_scheduling, only: :show
 
     def index
-      @reviews = if params[:status].present?
-                   Review.where(status: params[:status]) || Review.all
-                 else
-                   Review.all
-                 end
-      @pagy, @reviews = pagy(@reviews)
+      @pagy, @reviews = pagy(reviews)
     end
 
     def show; end
@@ -41,6 +36,16 @@ module Admin
 
     def load_scheduling
       @scheduling = Scheduling.find(@review.reviewable_id)
+    end
+
+    def reviews
+      if params[:status].present?
+        Review.where(status: params[:status]) || Review.analyze
+      elsif Review.analyze.empty?
+        Review.all
+      else
+        Review.analyze
+      end
     end
   end
 end

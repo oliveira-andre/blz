@@ -5,12 +5,7 @@ module Admin
     before_action :load_service, only: %i[show update]
 
     def index
-      @services = if params[:status].present?
-                    Service.where(status: params[:status]) || Service.all
-                  else
-                    Service.search(params[:query]) || Service.all
-                  end
-      @pagy, @services = pagy(@services)
+      @pagy, @services = pagy(services)
     end
 
     def show; end
@@ -36,6 +31,18 @@ module Admin
 
     def load_service
       @service = Service.find(params[:id])
+    end
+
+    def services
+      if params[:status].present?
+        Service.where(status: params[:status])
+      elsif params[:query].present?
+        Service.search(params[:query])
+      elsif Service.awaiting_avaliation.empty?
+        Service.all
+      else
+        Service.awaiting_avaliation
+      end
     end
   end
 end

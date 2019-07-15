@@ -5,12 +5,7 @@ module Admin
     before_action :load_establishment, only: %i[show update]
 
     def index
-      @establishments = if params[:status].present?
-                          Establishment.where(status: params[:status]) || Establishment.all
-                        else
-                          Establishment.search(params[:query]) || Establishment.all
-                        end
-      @pagy, @establishments = pagy(@establishments)
+      @pagy, @establishments = pagy(establishments)
     end
 
     def show; end
@@ -36,6 +31,18 @@ module Admin
 
     def load_establishment
       @establishment = Establishment.find(params[:id])
+    end
+
+    def establishments
+      if params[:status].present?
+        Establishment.where(status: params[:status])
+      elsif params[:query].present?
+        Establishment.search(params[:query])
+      elsif Establishment.analyze.empty?
+        Establishment.all
+      else
+        Establishment.analyze
+      end
     end
   end
 end
