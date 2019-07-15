@@ -7,7 +7,7 @@ class User < ApplicationRecord
   enum status: %i[active blocked]
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable, :omniauthable, :trackable
 
   validates :name, presence: true
   validates :birth_date, presence: true, unless: :skip_validation_to_user?
