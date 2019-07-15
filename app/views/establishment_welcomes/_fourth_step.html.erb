@@ -1,0 +1,38 @@
+<div class="column is-12 is-size-4">
+  <p>Pronto agora você pode usar a plataforma e começar a sua agenda de clientes</p>
+</div>
+<div class="column is-12 is-size-4">
+  <p>Caso continue com dúvidas, não se preocupe estaremos disponível para ajudar você através do email: <span class="has-text-weight-bold">contato@blz.life</span>
+  ou telefone: <span class="has-text-weight-bold">69 99274-0628</span> (com WhatsApp)</p>
+</div>
+<div class="column is-12 is-size-4">
+  <p>Estamos muito felizes de ter você conosco, seja muitoooo bem vindo(a)</p>
+</div>
+<div class="column is-12">
+  <%= link_to :voltar, establishment_welcomes_path(@establishment, step: 4), class: "has-text-primary is-link is-size-4"%>
+  <%= link_to :começar, establishments_dashboard_path(@establishment), class: "has-text-primary is-link is-size-4"%>
+  <div class="tabs is-toggle is-toggle-rounded is-centered is-size-7">
+    <ul>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 1) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 2) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 3) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <a>
+          <i class="fas fa-circle"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

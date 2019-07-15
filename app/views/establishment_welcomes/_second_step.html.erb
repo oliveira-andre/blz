@@ -1,0 +1,37 @@
+<div class="column is-12 is-size-3">
+  <p>Barra superior</p>
+</div>
+<div class="column is-12 is-size-4">
+  <p>No topo da tela você vai encontrar a logo do BLZ que vai te levar para a tela inicial do sistema</p>
+</div>
+<div class="column is-12 is-size-4">
+  <p>E no canto direito você encontra o menu que pode te levar para <span class="has-text-weight-bold">minha conta, sair do sistema</span> e a opção de <span class="has-text-weight-bold">ajuda</span> para voltar a esse guia</p>
+</div>
+<div class="column is-12">
+  <%= link_to :voltar, establishment_welcomes_path(@establishment, step: 1), class: "has-text-primary is-link is-size-4"%>
+  <%= link_to :continuar, establishment_welcomes_path(@establishment, step: 3), class: "has-text-primary is-link is-size-4"%>
+  <div class="tabs is-toggle is-toggle-rounded is-centered is-size-7">
+    <ul>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 1) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <a>
+          <i class="fas fa-circle"></i>
+        </a>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 3) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 4) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

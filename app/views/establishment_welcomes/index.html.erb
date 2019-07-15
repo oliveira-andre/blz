@@ -1,0 +1,9 @@
+<%= render 'shared/header', to_back: false, fixed: false %>
+<div class="establishment_welcome">
+  <div class="columns is-multiline has-text-centered">
+    <%= render 'first_step' if params[:step].nil? || params[:step] == '1'%>
+    <%= render 'second_step' if params[:step] == '2'%>
+    <%= render 'third_step' if params[:step] == '3'%>
+    <%= render 'fourth_step' if params[:step] == '4'%>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="column is-12 is-size-3">
+  <p>Barra inferior</p>
+</div>
+<div class="column is-12 is-size-4">
+  <p>No final da tela tem a barra de navegação, a partir dela você sabe em qual local está e também pode navegar para outras telas</p>
+</div>
+<div class="column is-12 is-size-4">
+  <p>Você pode navegar até sua <span class="has-text-weight-bold">agenda, serviços, profissionais e seu perfil</span></p>
+</div>
+<div class="column is-12">
+  <%= link_to :voltar, establishment_welcomes_path(@establishment, step: 2), class: "has-text-primary is-link is-size-4"%>
+  <%= link_to :continuar, establishment_welcomes_path(@establishment, step: 4), class: "has-text-primary is-link is-size-4"%>
+  <div class="tabs is-toggle is-toggle-rounded is-centered is-size-7">
+    <ul>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 1) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 2) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <a>
+          <i class="fas fa-circle"></i>
+        </a>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 4) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="column is-12 is-size-3">
+  <p>Olá, <%= @establishment.name %></p>
+  <p>Seja bem vindo ao BLZ</p>
+</div>
+<div class="column is-12 is-size-4">
+  <p>Esse guia vai ajudar você a entender como nossa plataforma funciona para os estabelecimentos</p>
+</div>
+<div class="column is-12">
+  <%= link_to :continuar, establishment_welcomes_path(@establishment, step: 2), class: "has-text-primary is-link is-size-4"%>
+  <div class="tabs is-toggle is-toggle-rounded is-centered is-size-7">
+    <ul>
+      <li>
+        <a>
+          <i class="fas fa-circle"></i>
+        </a>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 2) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 3) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to establishment_welcomes_path(@establishment, step: 4) do %>
+          <i class="far fa-circle"></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
