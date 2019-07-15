@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :professionals do
       resources :office_hours, only: %i[create destroy]
     end
+    resources :welcomes, only: :index, controller: :establishment_welcomes
   end
 
   resources :photos, only: :destroy
