@@ -41,8 +41,6 @@ module Admin
     def reviews
       if params[:status].present?
         Review.where(status: params[:status]) || Review.analyze
-      elsif Review.analyze.empty?
-        Review.all
       else
         Review.analyze
       end

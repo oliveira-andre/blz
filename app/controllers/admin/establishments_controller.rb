@@ -38,8 +38,6 @@ module Admin
         Establishment.where(status: params[:status])
       elsif params[:query].present?
         Establishment.search(params[:query])
-      elsif Establishment.analyze.empty?
-        Establishment.all
       else
         Establishment.analyze
       end

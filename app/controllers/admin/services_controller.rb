@@ -38,8 +38,6 @@ module Admin
         Service.where(status: params[:status])
       elsif params[:query].present?
         Service.search(params[:query])
-      elsif Service.awaiting_avaliation.empty?
-        Service.all
       else
         Service.awaiting_avaliation
       end
