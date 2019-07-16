@@ -15,7 +15,7 @@
           </p>
 
           <p class="control">
-            <% if @services.present?%>
+            <% if @services.present? || params[:status].nil? || params[:query].nil? %>
               <%= submit_tag 'Buscar',  class: 'button is-info' %>
             <% else %>
               <a class="button is-info" type="submit" href="/admin/services">Limpar filtros</a>
@@ -47,6 +47,13 @@
           <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="has-text-centered">
+      <% if params[:status].present? || params[:query].present? %>
+        <%= "Nenhum serviço encontrado com esse(s) filtro(s)" unless @services.any? %>
+      <% else %>
+        <%= "Não possui serviço em análise. (use o filtro)" unless @services.any? %>
+      <% end %>
     </div>
     <% if @services.present? %>
       <%= pagy_bulma_nav(@pagy).html_safe %>
