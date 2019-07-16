@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
     if resource.establishment.nil?
       stored_location_for(resource) || root_path
     else
-      establishments_dashboard_path(resource.establishment)
+      if resource.sign_in_count <= 1
+        establishment_welcomes_path(resource.establishment)
+      else
+        establishments_dashboard_path(resource.establishment)
+      end
     end
   end
 

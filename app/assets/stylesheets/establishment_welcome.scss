@@ -1,0 +1,54 @@
+.establishment_welcome {
+  padding-top: 50px;
+  max-width: 90%;
+  margin-left: 5%;
+
+  @include desktop {
+    max-width: 30%;
+    margin-left: 35%;
+  }
+
+  .links {
+    padding-top: 30px;
+
+    .tabs {
+      margin-top: 10px;
+    }
+  }
+
+  img.second-step {
+    width: 180px;
+  }
+
+  .is-link {
+    text-decoration: underline;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .tabs.is-toggle {
+    
+    li + li {
+      margin-left: -10px;
+    }
+
+    & li.is-active a {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      color: #4a4a4a;;
+    }
+
+    & li a {
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+
+  .tabs.is-toggle a {
+    border-color: transparent;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
