@@ -9,7 +9,7 @@
           ['Recusado', 'recused']]), class:'input', include_blank:'Pesquise por status...' %>
         </p>
         <p class="control">
-          <% if @reviews.present?%>
+          <% if @reviews.present? || params[:status].nil? || params[:query].nil? %>
             <%= submit_tag 'Buscar',  class: 'button is-info' %>
           <% else %>
             <a class="button is-info" type="submit" href="/admin/reviews">Limpar filtros</a>
@@ -41,6 +41,13 @@
         <% end %>
       </tbody>
     </table>
+  </div>
+  <div class="has-text-centered">
+    <% if params[:status].present? || params[:query].present? %>
+      <%= "Nenhuma avaliação encontrado com esse(s) filtro(s)" unless @reviews.any? %>
+    <% else %>
+      <%= "Não possui avaliação em análise. (use o filtro)" unless @reviews.any? %>
+    <% end %>
   </div>
   <% if @reviews.present? %>
     <%= pagy_bulma_nav(@pagy).html_safe %>
