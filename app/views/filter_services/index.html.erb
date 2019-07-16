@@ -49,7 +49,7 @@
         </div>
       <% end %>
     </div>
-    <% if @services.present? %>
+    <% if @services.present? && @services.count > 30 %>
       <%= pagy_bulma_nav(@pagy).html_safe %>
     <% end %>
   </div>
