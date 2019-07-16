@@ -22,17 +22,17 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <% if user_signed_in? && establishment? %>
-              <%= link_to establishment_welcomes_path(current_user.establishment), class: 'button is-pulled-right' do %>
+              <%= link_to establishment_welcomes_path(current_user.establishment), class: 'button is-pulled-right is-size-7-mobile' do %>
                 <i class="far fa-question-circle"></i>
               <% end %>
-              <%= link_to 'Minha conta', establishments_dashboard_path(current_user.establishment), class: 'button is-pulled-right' %>
-              <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
+              <%= link_to 'Minha conta', establishments_dashboard_path(current_user.establishment), class: 'button is-pulled-right is-size-7-mobile' %>
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right is-size-7-mobile' %>
             <% elsif user_signed_in? %>
-              <%= link_to 'Minha conta', users_dashboard_path(current_user), class: 'button is-pulled-right' %>
-              <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right' %>
+              <%= link_to 'Minha conta', users_dashboard_path(current_user), class: 'button is-pulled-right is-size-7-mobile' %>
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'button is-pulled-right is-size-7-mobile' %>
             <% else %>
-              <%= link_to 'Entrar', new_user_session_path, class: 'button is-pulled-right' %>
-              <%= link_to 'Cadastre seu serviço', new_establishment_path, class: 'button is-pulled-right' %>
+              <%= link_to 'Entrar', new_user_session_path, class: 'button is-pulled-right is-size-7-mobile' %>
+              <%= link_to 'Cadastre seu serviço', new_establishment_path, class: 'button is-pulled-right is-size-7-mobile' %>
             <% end %>
           </div>
         </div>
