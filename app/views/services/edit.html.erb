@@ -8,7 +8,18 @@
         <h1 class="title is-size-4 has-text-grey has-text-weight-normal">Profissionais do serviço</h1>
       </div>
       <div class="column is-12">
-        <%= render 'professional_services/form' %>
+        <% if current_user.establishment.professionals.count > 0 %>
+          <%= render 'professional_services/form' %>
+        <% else %>
+          <div class="column is-12">
+            <p class="is-size-5 has-text-grey">
+              Você não possui profissionais cadastrados
+              <%= link_to 'Adicionar novo profissional',
+                        new_establishment_professional_path(current_user.establishment),
+                        class: 'button is-text has-text-primary' %>
+            </p>
+          </div>
+        <% end %>
       </div>
       <div class="column is-12">
         <%= render @service.professional_services %>
