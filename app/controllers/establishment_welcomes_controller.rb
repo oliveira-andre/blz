@@ -1,7 +1,9 @@
 class EstablishmentWelcomesController < ApplicationController
   before_action :load_establishment
 
-  def index; end
+  def index
+    authorize @establishment
+  end
 
   private
 

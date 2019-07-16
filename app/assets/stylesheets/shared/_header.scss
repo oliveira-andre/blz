@@ -56,14 +56,16 @@ header {
       }
 
       @include desktop {
-        a:nth-child(1) {
+        a:nth-child(2) {
           margin-right: 15px;
+          margin-left: 15px;
         }
       }
 
       @include touch {
-        a.button:first-child, a.button:nth-child(2) {
+        a.button:first-child, a.button:nth-child(3) {
           margin-right: 50px;
+          margin-left: 5px;
         }
 
         a.button:last-child {
