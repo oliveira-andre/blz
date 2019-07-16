@@ -1,21 +1,21 @@
-<div class="column is-12 is-size-3">
+<div class="column is-12 is-size-5">
   <p>Barra superior</p>
 </div>
-<div class="column is-12 is-size-4">
+<div class="column is-12 is-size-6">
   <p>No topo da tela você vai encontrar a logo do BLZ que vai te levar para a tela inicial do sistema</p>
 </div>
 <div class="column is-12">
-  <%= image_tag '/images/logo_help.png' %>
+  <%= image_tag '/images/logo_help.png', class: 'second-step' %>
 </div>
-<div class="column is-12 is-size-4">
+<div class="column is-12 is-size-6">
   <p>E no canto direito você encontra o menu que pode te levar para <span class="has-text-weight-bold">minha conta, sair do sistema</span> e a opção de <span class="has-text-weight-bold">ajuda</span> para voltar a esse guia</p>
 </div>
 <div class="column is-12">
-  <%= image_tag '/images/burguer_help.png' %>
+  <%= image_tag '/images/burguer_help.png', class: 'second-step' %>
 </div>
 <div class="column is-12">
-  <%= link_to :voltar, establishment_welcomes_path(@establishment, step: 1), class: "has-text-primary is-link is-size-4"%>
-  <%= link_to :continuar, establishment_welcomes_path(@establishment, step: 3), class: "has-text-primary is-link is-size-4"%>
+  <%= link_to :voltar, establishment_welcomes_path(@establishment, step: 1), class: "has-text-primary is-link is-size-6"%>
+  <%= link_to :continuar, establishment_welcomes_path(@establishment, step: 3), class: "has-text-primary is-link is-size-6"%>
   <div class="tabs is-toggle is-toggle-rounded is-centered is-size-7">
     <ul>
       <li>
