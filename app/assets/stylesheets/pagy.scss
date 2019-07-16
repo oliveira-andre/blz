@@ -1,0 +1,8 @@
+.pagy-bulma-nav {
+  margin-bottom: 20px;
+
+  .is-current {
+    background: $primary-color;
+    border-color: $primary-color;
+  }
+}
