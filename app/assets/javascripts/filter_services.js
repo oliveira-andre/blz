@@ -1,5 +1,6 @@
 $(document).on("turbolinks:load", function () {
   listeningInputs();
+  toggleFilters();
 });
 
 function listeningInputs() {
@@ -12,6 +13,16 @@ function listeningInputs() {
   categorySelect.on('change', sendSubmit);
   dateField.on('change', sendSubmit);
   localTypeSelect.on('change', sendSubmit);
+}
+
+function toggleFilters() {
+  if(!$('.toggle-filter-services')) return;
+
+  $('.toggle-filter-services').on('click', function(e){
+    var contentTargetId = e.currentTarget.dataset.target;
+    $('.toggle-filter-services').toggleClass('active');
+    $(`#${contentTargetId}`).toggleClass('active');
+  });
 }
 
 function sendSubmit(e) {
