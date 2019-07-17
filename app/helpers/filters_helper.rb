@@ -4,7 +4,7 @@ module FiltersHelper
   end
 
   def category_name(value)
-    Category.find(value).name
+    Category.find_by(id: value)&.name
   end
 
   def local_type_collection
