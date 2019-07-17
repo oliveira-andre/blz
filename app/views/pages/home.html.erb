@@ -2,7 +2,7 @@
 <div class="home_page">
   <div class="section-search">
     <div class="container">
-      <h1 class="title has-text-white has-text-weight-normal">O jeito mais rápido de encontrar serviços de beleza</h1>
+      <h1 class="title has-text-grey has-text-weight-normal is-size-4">O jeito mais rápido de encontrar serviços de beleza</h1>
       <%= form_with url: filter_services_path, method: :get, authenticity_token: false, local: true do |f| %>
         <div class="field">
           <div class="control">
@@ -19,6 +19,7 @@
   <div class="section-category">
     <div class="container">
       <h1 class="has-text-grey is-size-4 has-text-centered">Explore nossos serviços</h1>
+      <div class="is-divider"></div>
       <div class="columns is-multiline is-gapless">
         <% Category.all.each do |category| %>
           <div class="column is-4">
@@ -29,6 +30,38 @@
             <% end %>
           </div>
         <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="how-work">
+    <div class="container">
+      <h1 class="has-text-grey is-size-4 has-text-centered">Como funciona</h1>
+      <div class="is-divider"></div>
+      <div class="columns is-multiline">
+        <div class="column is-4 has-text-centered">
+          <%= image_tag '/images/find_service.png', class: 'image' %>
+          <p class="is-size-4 has-text-grey">
+            Encontre o serviço
+          </p>
+        </div>
+        <div class="column is-4 has-text-centered">
+          <%= image_tag '/images/choose_hour.png', class: 'image' %>
+          <p class="is-size-4 has-text-grey">
+            Escolha um horário
+          </p>
+        </div>
+        <div class="column is-4 has-text-centered">
+          <%= image_tag '/images/finished.png', class: 'image' %>
+          <p class="is-size-4 has-text-grey">
+            Pronto
+          </p>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <p class="has-text-grey is-size-5">
+            No BLZ é rápido, simples e fácil. Você encontra o serviço e profissional
+            que te agrade, escolhe o horário e pronto
+          </p>
+        </div>
       </div>
     </div>
   </div>
