@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :professional do
+  factory :category do
     name             { FFaker::Lorem.word }
     description      { FFaker::Lorem.sentence }
   end
