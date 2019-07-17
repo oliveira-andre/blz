@@ -1,10 +1,9 @@
-<%= render 'shared/header', to_back: false, fixed: false %>
+<%= render 'shared/header', to_back: false, fixed: true %>
 <div class="filter-services">
   <div class="container">
-    <h1 class="title is-size-4 has-text-grey">Serviços encontrados </h1>
     <%= form_with url: '/filter_services', class: 'custom', id: 'filter-services', method: :get, authenticity_token: false, local: true do |f| %>
-      <div class="columns">
-        <div class="column is-3">
+      <div class="columns is-mobile no-bottom-margin">
+        <div class="column">
           <div class="field">
             <div class="control search">
               <%= text_field_tag :query, @filter['query'], class: 'input',
@@ -14,8 +13,17 @@
             </div>
           </div>
         </div>
+        <div class="column is-2 is-1-desktop">
+          <span class="icon is-size-3 is-pulled-right has-text-grey toggle-filter-services"
+            data-target="filter-services-content">
+            <i class="fas fa-sliders-h"></i>
+          </span>
+        </div>
+      </div>
+      <div class="columns" id="filter-services-content">
         <div class="column is-3">
           <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Categoria</label>
             <div class="control">
               <div class="select">
                 <%= select_tag :category,
@@ -29,6 +37,7 @@
         </div>
         <div class="column is-3">
           <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Data</label>
             <div class="control">
               <%= date_field_tag :date, @filter['date'], class: :input, id: 'filter-services-date' %>
             </div>
@@ -36,6 +45,7 @@
         </div>
         <div class="column is-3">
           <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Local</label>
             <div class="control">
               <div class="select">
                 <%= select_tag :local_type,
@@ -48,6 +58,32 @@
           </div>
         </div>
       </div>
+    <% end %>
+    <% if @filter['query'] || @filter['category'] || @filter['date'] %>
+      <p class="has-text-grey is-size-6">
+        <div class="tags are-medium">
+          <% if @filter['query'].present? %>
+            <span class='tag is-rounded'>Serviços com <%= @filter['query'] %></span>
+          <% end %>
+
+          <% if @filter['category'].present? %>
+            <span class='tag is-rounded'>Serviços de <%= category_name(@filter['category']) %></span>
+          <% end %>
+
+          <% if @filter['date'].present? %>
+            <span class='tag is-rounded'>No dia <%= day_month(@filter['date'].to_datetime) %></span>
+          <% end %>
+
+          <% if @filter['local_type'].present? %>
+            <span class='tag is-rounded'>
+              <%= @filter['local_type'] == 'home' ? "Em casa" : "No estabelecimento" %></span>
+          <% end %>
+
+          <span>
+            <%= link_to 'Limpar filtros', filter_services_path, class: 'button is-text' %>
+          </span>
+        </div>
+      </p>
     <% end %>
     <div class="columns results is-multiline">
       <% @services.each do |service| %>
