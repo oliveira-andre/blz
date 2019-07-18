@@ -4,4 +4,6 @@ class PagesController < ApplicationController
   def home
     @services = Service.approved
   end
+
+  def sales; end
 end
