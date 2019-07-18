@@ -5,8 +5,8 @@ module Admin
     before_action :load_scheduling, only: :show
 
     def index
-      @shedulings = Scheduling.all
-      @pagy, @records = pagy_countless(@shedulings)
+      @schedulings = Scheduling.all
+      @pagy, @records = pagy_countless(@schedulings)
     end
 
     def show; end

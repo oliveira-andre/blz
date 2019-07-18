@@ -18,7 +18,7 @@
       Valor
     </p>
     <p class="has-text-centered has-text-black is-size-5">
-      R$ <%= @scheduling.service.amount %>
+    <%= "A partir de" if @scheduling.service.start_from %>  R$ <%= @scheduling.service.amount %>
     </p>
   </div>
   <div class="item">

@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="column is-12">
-        <p class="is-size-3 has-text-white">R$ <%= scheduling.service.amount %></p>
+        <p class="is-size-3 has-text-white"><%= "A partir de" if scheduling.service.start_from %> R$ <%= scheduling.service.amount %></p>
       </div>
       <div class="column is-12 actions">
         <%= link_to 'Ver detalhes', scheduling_path(scheduling), class: 'button is-light' %>

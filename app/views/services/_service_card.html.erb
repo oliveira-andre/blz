@@ -23,7 +23,7 @@
           <span class="is-size-6 has-text-black has-text-weight-semibold"><%= service.t_status %></span>
         </div>
         <div class="column is-6">
-          <p class="is-size-5 has-text-black has-text-weight-semibold">R$ <%= service.amount %></p>
+          <p class="is-size-5 has-text-black has-text-weight-semibold"><%= "A partir de" if service.start_from %> R$ <%= service.amount %></p>
         </div>
         <div class="column is-6 has-text-centered">
           <%= link_to 'Detalhes', edit_establishment_service_path(service.establishment_id, service.id),

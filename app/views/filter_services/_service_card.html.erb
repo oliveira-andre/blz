@@ -30,7 +30,7 @@
           </div>
         </article>
         <p class="infos has-text-black">
-          <span class="is-size-4">R$ <%= service.amount %></span>
+          <span class="is-size-4"><%= "A partir de" if service.start_from %>R$ <%= service.amount %></span>
           <span class="is-size-1 dot">.</span>
           <span class="is-size-5"><%= service.category.name %></span>
         </p>
