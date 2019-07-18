@@ -54,6 +54,10 @@ Rails.application.routes.draw do
       to: 'establishments_dashboard#index',
       as: :establishments_dashboard
 
+  get '/para_empresas',
+      to: 'pages#sales',
+      as: :sales_page
+
   resources :callbacks, only: :index
   resources :use_rules, only: :index
 
