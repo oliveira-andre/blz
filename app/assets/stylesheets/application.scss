@@ -29,6 +29,7 @@
 @import 'notify_header';
 @import 'establishment_welcome';
 @import 'pagy';
+@import 'sales';
 
 html {
   font-family: 'Inter', sans-serif !important;
@@ -67,4 +68,8 @@ h1, h2 {
 .tabs li.is-active a {
   border-bottom-color: $primary-color;
   color: $primary-color;
+}
+
+.has-text-primary {
+  color: $primary-color !important;
 }

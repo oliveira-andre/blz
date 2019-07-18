@@ -1,0 +1,155 @@
+<div class="sales_page">
+  <div class="image-background" id="search-filters">
+    <div class="container">
+      <header>
+        <div class="brand">
+          <%= link_to 'BLZ', root_path, class: 'has-text-white is-size-2' %>
+        </div>
+        <div class="sign-in">
+          <%= link_to 'Entrar', root_path, class: 'button has-text-white is-pulled-right' %>
+        </div>
+      </header>
+      <section class="has-text-centered">
+        <h1 class="title has-text-white has-text-centered has-text-weight-normal  is-size-5-mobile">
+          Tenha uma agenda sempre lotada de clientes
+        </h1>
+        <h2 class="subtitle has-text-centered has-text-white  is-size-6-mobile">
+          Seus serviços de beleza e estética ficam disponíveis para milhares de pessoas
+        </h2>
+        <%= link_to 'EXPERIMENTE GRÁTIS POR 30 DIAS', new_establishment_path, class: 'button is-size-4 is-size-6-mobile' %>
+      </section>
+    </div>
+  </div>
+  <div class="container">
+    <div class="columns is-centered benefits is-multiline">
+      <div class="column is-12 has-text-centered">
+        <h1 class="has-text-grey is-size-4">Vantagens</h1>
+        <div class="is-divider"></div>
+      </div>      
+      <div class="column is-4 block-item">
+        <div class="card">
+          <div class="card-content">
+            <div class="icon-top  has-text-centered">
+              <img src="/images/goal.png" alt="Fique no topo">
+            </div>
+            <p class="title is-size-5 has-text-centered  has-text-grey">
+              Fique no topo
+            </p>
+            <p class="description is-size-6 has-text-grey has-text-centered">
+              Seus serviços são apresentados de forma atraente em nosso site, onde as pessoas possam ver o
+              seu trabalho, sua disponibilidade e as avaliações de outros usuários, possibilitando que
+              você conquiste cada vez mais clientes.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-4 block-item">
+        <div class="card">
+          <div class="card-content">
+            <div class="icon-top  has-text-centered">
+              <img src="/images/planning.png" alt="Agenda Lotada">
+            </div>
+            <p class="title is-size-5 has-text-centered  has-text-grey">
+              Agenda Lotada
+            </p>
+            <p class="description is-size-6 has-text-grey has-text-centered">
+              Além de tornar o agendamento mais simples e rápido, nós implementamos uma poderosa
+              estratégia de marketing que atrairá mais clientes para o seu negócio. </p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-4 block-item">
+        <div class="card">
+          <div class="card-content">
+            <div class="icon-top  has-text-centered">
+              <img src="/images/work-time.png" alt="Dimínua o cancelamento">
+            </div>
+            <p class="title is-size-5 has-text-centered  has-text-grey">
+              Menos cancelamento
+            </p>
+            <p class="description is-size-6 has-text-grey has-text-centered">
+              Nossa política de cancelamento e os lembretes que enviamos faz com que os clientes fiquem
+              mais comprometidos e garantam o pagamento pelo seu tempo, otimizando sua agenda e seu
+              rendimento.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered plans is-multiline">
+      <div class="column is-12 has-text-centered">
+        <h1 class="has-text-grey is-size-4">Planos</h1>
+        <div class="is-divider"></div>
+      </div>      
+      <div class="column is-4 block-item">
+        <div class="card">
+          <div class="card-content has-text-centered">
+            <p class="is-size-4 has-text-grey">
+              Autônomo
+            </p>
+            <p class="title is-size-2 has-text-primary">
+              R$ 29,00
+            </p>
+            <div class="description is-size-6 has-text-grey">
+              <p> Agendamentos ilimitados </p>
+              <p> 5 serviços por profissional </p>
+              <p> 1 profissional</p>
+              <p> Suporte por email ou telefone </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-4 block-item">
+        <div class="card">
+          <div class="card-content has-text-centered">
+            <p class="is-size-4 has-text-grey">
+              Empresarial
+            </p>
+            <p class="title is-size-2 has-text-primary">
+              R$ 99,00
+            </p>
+            <div class="description is-size-6 has-text-grey">
+              <p> Agendamentos ilimitados </p>
+              <p> 5 serviços por profissional </p>
+              <p> 3 profissionais </p>
+              <p> Suporte por email ou telefone </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-4 block-item">
+        <div class="card">
+          <div class="card-content has-text-centered">
+            <p class="is-size-4 has-text-grey">
+              Empresarial PRO
+            </p>
+            <p class="title is-size-2 has-text-primary">
+              R$ 149,00
+            </p>
+            <div class="description is-size-6 has-text-grey">
+              <p> Agendamentos ilimitados </p>
+              <p> 7 serviços por profissional </p>
+              <p> 10 profissionais </p>
+              <p> Suporte por email ou telefone </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-12 has-text-centered">
+        <%= link_to 'EXPERIMENTE GRÁTIS POR 30 DIAS', new_establishment_path, class: 'button is-size-4 is-size-6-mobile' %>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="normal footer">
+  <div class="columns is-mobile">
+    <div class="column has-text-centered">
+      <a class="is-size-3" href="/">
+        BLZ
+      </a>
+    </div>
+    <div class="column has-text-centered">
+      <p>© Todos os direitos revervados</p>
+    </div>
+  </div>
+</footer>

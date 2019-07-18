@@ -1,0 +1,119 @@
+.sales_page {
+  padding-bottom: 50px;
+
+  .image-background {
+    position: absolute;
+    width: 100%;
+    height: 450px;
+    background: -moz-linear-gradient(rgba(42, 197, 204, 0.87), rgba(28, 130, 136, 0.87)), url('/images/spotlight.jpg');
+    background: -webkit-linear-gradient(rgba(42, 197, 204, 0.87), rgba(28, 130, 136, 0.87)), url('/images/spotlight.jpg');
+    background: -ms-linear-gradient(rgba(42, 197, 204, 0.87), rgba(28, 130, 136, 0.87)), url('/images/spotlight.jpg');
+    background: linear-gradient(rgba(42, 197, 204, 0.87), rgba(28, 130, 136, 0.87)), url('/images/spotlight.jpg');
+    background-size: cover;
+
+    @include mobile {
+      height: 370px;
+    }
+
+    @include desktop {
+      height: 400px;
+    }
+
+    header {
+      height: 70px;
+      padding-top: 30px;
+  
+      .brand, .sign-in {
+        width: 49%;
+        display: inline-block;
+      }
+  
+      .button {
+        border: 1px solid #fff;
+        background: transparent !important;
+        color: #fff;
+        border-radius: 0px;
+      }
+    }
+
+    section {
+      @include desktop {
+        width: 70%;
+        margin-left: 15%;
+        margin-right: 15%;
+      }
+
+      margin-top: 70px;
+
+      .title {
+        margin-bottom: 20px;
+      }
+
+      .subtitle {
+        margin-top: 0px;
+        margin-bottom: 50px;
+      }
+
+      .button {
+        border-radius: 0px;
+        border: 0px;
+        background-color: $primary-color;
+        color: #fff;
+      }
+    }
+  }
+
+  .is-divider {
+    padding-top: 0px;
+    width: 70px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    color: grey;
+    border: 1px solid grey;
+  }
+
+  .benefits {
+    padding-top: 480px;
+    
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    @include mobile {
+      padding-top: 400px;
+    }
+
+    @include desktop {
+      padding-top: 430px;
+    }
+  }
+
+  .plans {
+    margin-top: 30px;
+
+    .title {
+      margin-top: 10px;
+    }
+
+    .description {
+      p {
+        padding-bottom: 6px;
+      }
+    }
+
+    .button {
+      margin-top: 30px;
+      border-radius: 0px;
+      border: 0px;
+      background-color: $primary-color;
+      color: #fff;
+    }
+  }
+
+  .block-item {
+    .card {
+      height: 100%;
+      border-color: #D8EDEE;
+    }
+  }
+}
