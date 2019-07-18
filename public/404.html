@@ -35,13 +35,8 @@
       font-weight: normal;
     }
 
-    .top_side {
-      padding-left: 280.500px;
-      background: #2AC5CC;
-    }
-
     .bottom_side {
-      padding-left: 280.500px;
+      padding-left: 20%;
       color: #ffffff;
     }
 
@@ -49,8 +44,41 @@
       margin-top: 40px;
     }
 
-    img {
-      width: 500px;
+    @media screen and (min-width: 600px) {
+      img {
+        width: 500px;
+      }
+
+      .top_side {
+        padding-left: 280.500px;
+        background: #2AC5CC;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      img {
+        width: 80%;
+      }
+
+      .top_side {
+        text-align: center;
+        background: #2AC5CC;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .footer {
+        background: #2AC5CC;
+        padding: 3rem 1.5rem 6rem;
+        display: block;
+        margin-top: 120px;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      .footer {
+        display: none;
+      }
     }
 
     .has-text-centered {
@@ -89,20 +117,8 @@
       font-size: 1rem;
     }
 
-    .footer {
-      background: #2AC5CC;
-      padding: 3rem 1.5rem 6rem;
-      display: block;
-      margin-top: 120px;
-    }
-
     .about {
-      padding-left: 100px;
-      color: #fff;
-    }
-
-    .questions {
-      padding-left: 50px;
+      padding-left: 40%;
       color: #fff;
     }
   </style>
@@ -127,15 +143,14 @@
   </div>
 </body>
 <footer class="footer">
-  <a class="is-size-3 bottom_side" href="/">
-    BLZ
-  </a>
-  <a class="is-size-5 about" href="/">
-    Sobre o BLZ
-  </a>
-  <a class="is-size-5 questions" href="/">
-    Dúvidas
-  </a>
+  <div>
+    <a class="is-size-3 bottom_side" href="/">
+      BLZ
+    </a>
+    <span class="is-size-5 about">
+      © Todos os direitos revervados
+    </span>
+  </div>
 </footer>
 
 </html>
