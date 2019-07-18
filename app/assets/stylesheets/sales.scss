@@ -18,11 +18,13 @@
     @include desktop {
       height: 400px;
     }
+  }
 
+  .header-top {
     header {
       height: 70px;
       padding-top: 30px;
-  
+
       .brand, .sign-in {
         width: 49%;
         display: inline-block;
@@ -73,18 +75,18 @@
   }
 
   .benefits {
-    padding-top: 480px;
+    padding-top: 170px;
     
     h1 {
       margin-bottom: 8px;
     }
 
     @include mobile {
-      padding-top: 400px;
+      padding-top: 90px;
     }
 
     @include desktop {
-      padding-top: 430px;
+      padding-top: 120px;
     }
   }
 

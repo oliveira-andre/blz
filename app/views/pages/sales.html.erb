@@ -1,12 +1,12 @@
 <div class="sales_page">
-  <div class="image-background" id="search-filters">
-    <div class="container">
+  <div class="image-background" id="search-filters"></div>
+   <div class="container header-top">
       <header>
         <div class="brand">
           <%= link_to 'BLZ', root_path, class: 'has-text-white is-size-2' %>
         </div>
         <div class="sign-in">
-          <%= link_to 'Entrar', root_path, class: 'button has-text-white is-pulled-right' %>
+          <%= link_to 'Entrar', new_user_session_path, class: 'button has-text-white is-pulled-right' %>
         </div>
       </header>
       <section class="has-text-centered">
@@ -19,7 +19,6 @@
         <%= link_to 'EXPERIMENTE GRÁTIS POR 30 DIAS', new_establishment_path, class: 'button is-size-4 is-size-6-mobile' %>
       </section>
     </div>
-  </div>
   <div class="container">
     <div class="columns is-centered benefits is-multiline">
       <div class="column is-12 has-text-centered">
