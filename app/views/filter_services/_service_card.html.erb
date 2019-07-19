@@ -30,10 +30,10 @@
           </div>
         </article>
         <% if service.start_from %>
-          <p class="is-size-4 has-text-weight-bold">A partir de</p>
+          <p class="is-size-4 has-text-weight-bold start_from">A partir de</p>
         <% end %>
         <p class="infos has-text-black">
-          <span class="is-size-4 ">R$ <%= service.amount %></span>
+          <span class="is-size-4">R$ <%= service.amount %></span>
           <span class="is-size-1 dot">.</span>
           <span class="is-size-5"><%= service.category.name %></span>
         </p>

@@ -61,7 +61,7 @@
       </div>
       <div class="column is-3">
         <h2 class="subtitle is-size-6 has-text-grey">Valor</h2>
-        <h1 class="title has-text-weight-normal has-text-black is-size-6"><% "A partir de" if @service.start_from %> <%= @service.amount %></h1>
+        <h1 class="title has-text-weight-normal has-text-black is-size-6"><%= "A partir de" if @service.start_from %> <%= @service.amount %></h1>
       </div>
       <div class="column is-3">
         <h2 class="subtitle is-size-6 has-text-grey">Duração (em minutos)</h2>
