@@ -20,6 +20,8 @@ pt-BR:
     use_rules: termos_de_uso
     sales: para_empresas
     dashboard: painel
+    sign_in: acessar
+    sign_up: cadastrar
   pagy:
     nav:
       prev: "&lsaquo;&nbsp;Anterior"
