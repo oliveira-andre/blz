@@ -35,11 +35,6 @@
       font-weight: normal;
     }
 
-    .bottom_side {
-      padding-left: 20%;
-      color: #ffffff;
-    }
-
     .link_bottom {
       margin-top: 40px;
     }
@@ -52,6 +47,8 @@
       .top_side {
         padding-left: 280.500px;
         background: #2AC5CC;
+        padding-top: 20px;
+        height: 50px;
       }
     }
 
@@ -63,22 +60,40 @@
       .top_side {
         text-align: center;
         background: #2AC5CC;
+        padding-top: 20px;
+        height: 50px;
       }
     }
 
     @media screen and (min-width: 1024px) {
-      .footer {
-        background: #2AC5CC;
-        padding: 3rem 1.5rem 6rem;
-        display: block;
-        margin-top: 120px;
+      .about {
+        padding-left: 40%;
+        color: #fff;
       }
+
+      .bottom_side {
+        padding-left: 20%;
+        color: #ffffff;
+      }
+
     }
 
     @media screen and (max-width: 1024px) {
-      .footer {
-        display: none;
+      .about {
+        white-space: pre;
+        color: #fff;
       }
+
+      .bottom_side {
+        color: #ffffff;
+      }
+    }
+
+    .footer {
+      background: #2AC5CC;
+      padding: 3rem 1.5rem 6rem;
+      display: block;
+      margin-top: 120px;
     }
 
     .has-text-centered {
@@ -117,10 +132,6 @@
       font-size: 1rem;
     }
 
-    .about {
-      padding-left: 40%;
-      color: #fff;
-    }
   </style>
 </head>
 
@@ -143,7 +154,7 @@
   </div>
 </body>
 <footer class="footer">
-  <div>
+  <div class="has-text-centered">
     <a class="is-size-3 bottom_side" href="/">
       BLZ
     </a>
