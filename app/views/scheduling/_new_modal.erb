@@ -33,7 +33,10 @@
         <div class="column is-12">
           <div class="columns is-mobile">
             <div class="column is-8">
-              <p class="title"><%= "A partir de" if @service.start_from %> R$ <%= @service.amount %></p>
+              <% if @service.start_from %>
+                <p class="start_from">A partir de</p>
+              <% end %>
+              <p class="title">R$ <%= @service.amount %></p>
             </div>
             <%= form_with url: new_scheduling_path, local: true, method: :get do |f| %>
               <%= f.hidden_field :date, class: :date_scheduling_details %>

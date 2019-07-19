@@ -1,13 +1,11 @@
 <div class="container">
   <h1 class="title has-text-centered has-text-primary is-size-2">BLZ</h1>
   <h2 class="subtitle has-text-centered has-text-white  is-size-4">Agendamento realizado</h2>
-
   <div class="item">
     <p class=" has-text-centered has-text-primary is-size-4">
       Olá, <%= @scheduling.user.name %>!
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-black is-size-5">
       O agendamento do serviço <strong><%= @scheduling.service.title %></strong>
@@ -15,16 +13,21 @@
       realizado com sucesso.
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-5">
       Valor
     </p>
+    <% if @scheduling.service.start_from %>
+      <p class="has-text-centered has-text-black is-size-5">
+        <strong>
+          A partir de
+        </strong>
+      </p>
+    <% end %>
     <p class="has-text-centered has-text-black is-size-5">
-      <%= "A partir de" if @scheduling.service.start_from %> R$ <%= @scheduling.service.amount %>
+      R$ <%= @scheduling.service.amount %>
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-5">
       Quando
@@ -33,7 +36,6 @@
       <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %>
     </p>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-5">
       Onde
@@ -42,15 +44,13 @@
       <%= @scheduling.in_home? ? "Na sua casa: #{@scheduling.address.full}" : "No estabelecimento: #{@scheduling.service.establishment.address.full}" %>
     </p>
   </div>
-
   <div class="item has-text-centered">
     <%= link_to 'Mais detalhes', users_dashboard_url(@scheduling.user), class: 'button is-primary is-size-5' %>
   </div>
-
   <div class="item">
     <p class="has-text-centered has-text-grey is-size-5">
       Abraços, </br>
-      Equipe BLZ
-    </p>
-  </div>
+    Equipe BLZ
+  </p>
+</div>
 </div>

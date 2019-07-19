@@ -38,7 +38,10 @@
         </div>
         <div class="column is-4">
           <p class="is-size-6 has-text-grey">Valor</p>
-          <span class="is-size-6 has-text-black"><%= "A partir de" if @scheduling.service.start_from %> R$ <%= @scheduling.service.amount %></span>
+          <% if @scheduling.service.start_from %>
+            <p class="has-text-weight-bold">A partir de</p>
+          <% end %>
+          <span class="is-size-6 has-text-black">R$ <%= @scheduling.service.amount %></span>
         </div>
         <% if @scheduling.service.both? %>
           <div class="column is-12">

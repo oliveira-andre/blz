@@ -23,7 +23,7 @@
               <td><%= scheduling.user&.name %></td>
               <td><%= scheduling.professional_service.service.establishment.name %></td>
               <td><%= "#{day_month(scheduling.date)} às #{time(scheduling.date)}" %></td>
-              <td><%= "A partir de" if scheduling.service.start_from %> <%= scheduling.service.amount %></td>
+              <td><%= scheduling.service.amount %></td>
               <td><%= link_to :detalhes, admin_scheduling_path(scheduling), class: 'is-capitalized' %></td>
             </tr>
           <% end %>
