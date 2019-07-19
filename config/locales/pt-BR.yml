@@ -1,4 +1,25 @@
 pt-BR:
+  routes:
+    new: novo
+    edit: editar
+    users: usuarios
+    filter_services: filtrar_servicos
+    filters: filtros
+    establishments: estabelecimentos
+    services: servicos
+    professionals: profissionais
+    welcomes: bem_vindo
+    photos: fotos
+    scheduling: agendamento
+    office_hours: expediente
+    payments: pagamentos
+    holders: titulares
+    reviews: avaliacoes
+    report_problems: reportar_problemas
+    busies: ocupados
+    use_rules: termos_de_uso
+    sales: para_empresas
+    dashboard: painel
   pagy:
     nav:
       prev: "&lsaquo;&nbsp;Anterior"
