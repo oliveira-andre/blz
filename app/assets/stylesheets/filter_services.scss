@@ -73,12 +73,6 @@
       border-radius: 5px;
       height: auto;
 
-      p.title {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
       @include desktop {
         height: 100%;
       }
@@ -89,10 +83,10 @@
 
       .service-image {
         img {
-          width: auto;
+          width: 100%;
           height: 250px !important;
           box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1) !important;
-          object-fit: cover;
+          object-fit: fill;
         }
       }
 
