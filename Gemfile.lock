@@ -228,6 +228,9 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    route_translator (6.0.0)
+      actionpack (>= 5.0.0.1, < 6.1)
+      activesupport (>= 5.0.0.1, < 6.1)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.3)
@@ -354,6 +357,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.2.2)
   redis
+  route_translator
   rspec-rails
   rubocop
   sass-rails (~> 5.0)

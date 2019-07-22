@@ -29,6 +29,7 @@ gem 'pagy'
 gem 'toastr-rails'
 gem 'autocomplete_zipcode'
 gem 'newrelic_rpm'
+gem 'route_translator'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
