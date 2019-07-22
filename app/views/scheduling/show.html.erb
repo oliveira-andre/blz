@@ -50,9 +50,9 @@
             <span class="is-size-6 is-size-5-desktop"><%= @scheduling.t_status %></span>
           </div>
           <div class="column is-6">
-            <p class="is-size-7 is-size-6-desktop">Valor</p>
+            <p class="is-size-7 is-size-6-desktop">Valor <%= "a partir de" if @scheduling.service.start_from %></p>
             <span class="icon is-size-5"><i class="fas fa-money-check-alt"></i></span>
-            <span class="is-size-6 is-size-5-desktop"><%= "A partir de" if @scheduling.service.start_from %> R$ <%= @scheduling.service.amount %></span>
+            <span class="is-size-6 is-size-5-desktop">R$ <%= @scheduling.service.amount %></span>
           </div>
           <div class="column is-6">
             <p class="is-size-7 is-size-6-desktop">Endereço</p>
