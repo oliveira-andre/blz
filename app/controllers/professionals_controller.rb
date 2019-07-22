@@ -17,7 +17,8 @@ class ProfessionalsController < ApplicationController
     if @professional.save
       redirect_to edit_establishment_professional_path(
         @establishment,
-        @professional
+        @professional,
+        anchor: :office_hours
       ), notice: 'Profissional criado com sucesso'
     else
       render 'new'
