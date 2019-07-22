@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
 
@@ -22,8 +24,9 @@ class ServicesController < ApplicationController
     @service = @establishment.services.build(service_params)
     authorize @service
     if @service.save
-      redirect_to edit_establishment_service_path(@establishment, @service),
-                  notice: 'Serviço criado com sucesso'
+      redirect_to edit_establishment_service_path(
+        @establishment, @service, anchor: :professional_services
+      ), notice: 'Serviço criado com sucesso'
     else
       render 'new'
     end
