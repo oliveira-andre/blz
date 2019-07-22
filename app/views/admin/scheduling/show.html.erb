@@ -56,7 +56,7 @@
           <div class="column is-6">
             <p class="is-size-7 is-size-6-desktop">Local</p>
             <span class="icon is-size-5"><i class="<%= @scheduling.in_home? ? 'fas fa-home' : 'fas fa-store-alt' %>"></i></span>
-            <span class="is-size-6 is-size-5-desktop"><%= @scheduling.in_home? ? 'Na casa do cliente' : 'No estabelecimento' %></span>
+            <span class="is-size-6 is-size-5-desktop"><%= @scheduling.in_home? ? 'A domicílio' : 'No estabelecimento' %></span>
           </div>
           <% if @scheduling.user %>
             <div class="column is-12">

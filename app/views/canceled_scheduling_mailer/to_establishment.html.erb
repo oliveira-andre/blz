@@ -46,7 +46,7 @@
       Onde
     </p>
     <p class="has-text-centered has-text-black is-size-5">
-      <%= @scheduling.in_home? ? "Na casa do cliente: #{@scheduling.address.full}" : "No seu estabelecimento: #{@scheduling.service.establishment.address.full}" %>
+      <%= @scheduling.in_home? ? "A domicílio: #{@scheduling.address.full}" : "No seu estabelecimento: #{@scheduling.service.establishment.address.full}" %>
     </p>
   </div>
 
