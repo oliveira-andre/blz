@@ -112,6 +112,7 @@ html, body {
     .card {
       box-shadow: none;
       border: 1px solid $light-color;
+      height: 100%;
 
       p.title {
         text-overflow: ellipsis;
