@@ -17,20 +17,20 @@
         </thead>
 
         <tbody>
-          <% @shedulings.each do |sheduling| %>
+          <% @schedulings.each do |scheduling| %>
             <tr>
-              <td><%= sheduling.service.title %></td>
-              <td><%= sheduling.user&.name %></td>
-              <td><%= sheduling.professional_service.service.establishment.name %></td>
-              <td><%= "#{day_month(sheduling.date)} às #{time(sheduling.date)}" %></td>
-              <td><%= sheduling.service.amount %></td>
-              <td><%= link_to :detalhes, admin_scheduling_path(sheduling), class: 'is-capitalized' %></td>
+              <td><%= scheduling.service.title %></td>
+              <td><%= scheduling.user&.name %></td>
+              <td><%= scheduling.professional_service.service.establishment.name %></td>
+              <td><%= "#{day_month(scheduling.date)} às #{time(scheduling.date)}" %></td>
+              <td><%= scheduling.service.amount %></td>
+              <td><%= link_to :detalhes, admin_scheduling_path(scheduling), class: 'is-capitalized' %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
-    <% if @shedulings.present? %>
+    <% if @schedulings.present? %>
       <%= pagy_bulma_nav(@pagy).html_safe %>
     <% end %>
   </div>

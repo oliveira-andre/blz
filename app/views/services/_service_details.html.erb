@@ -50,6 +50,9 @@
     <div class="box">
       <div class="columns is-multiline info">
         <div class="column is-12">
+          <% if @service.start_from %>
+            <p>A partir de</p>
+          <% end %>
           <p class="title">R$ <%= @service.amount %>
             <p>
             </div>

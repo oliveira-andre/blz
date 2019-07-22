@@ -29,6 +29,9 @@
             </p>
           </div>
         </article>
+        <% if service.start_from %>
+          <p class="start_from">A partir de</p>
+        <% end %>
         <p class="infos has-text-black">
           <span class="is-size-4">R$ <%= service.amount %></span>
           <span class="is-size-1 dot">.</span>
@@ -38,5 +41,4 @@
       </div>
     </div>
   </div>
-  
 </div>

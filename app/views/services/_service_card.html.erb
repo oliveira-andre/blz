@@ -23,6 +23,9 @@
           <span class="is-size-6 has-text-black has-text-weight-semibold"><%= service.t_status %></span>
         </div>
         <div class="column is-6">
+          <% if service.start_from %>
+            <p>A partir de</p>
+          <% end %>
           <p class="is-size-5 has-text-black has-text-weight-semibold">R$ <%= service.amount %></p>
         </div>
         <div class="column is-6 has-text-centered">

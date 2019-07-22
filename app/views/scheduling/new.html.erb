@@ -37,7 +37,7 @@
           <span class="is-size-6 has-text-black"><%= @scheduling.service.duration %> min</span>
         </div>
         <div class="column is-4">
-          <p class="is-size-6 has-text-grey">Valor</p>
+          <p class="is-size-6 has-text-grey">Valor <%= "a partir de" if @scheduling.service.start_from %></p>
           <span class="is-size-6 has-text-black">R$ <%= @scheduling.service.amount %></span>
         </div>
         <% if @scheduling.service.both? %>

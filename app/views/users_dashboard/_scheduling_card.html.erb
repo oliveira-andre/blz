@@ -53,6 +53,9 @@
         </div>
       </div>
       <div class="column is-12">
+        <% if scheduling.service.start_from %>
+          <p class="is-size-5 has-text-white start_from">A partir de</p>
+        <% end %>
         <p class="is-size-3 has-text-white">R$ <%= scheduling.service.amount %></p>
       </div>
       <div class="column is-12 actions">
