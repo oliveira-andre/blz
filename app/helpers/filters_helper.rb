@@ -9,7 +9,7 @@ module FiltersHelper
 
   def local_type_collection
     [
-      { name: 'Em casa', value: :home },
+      { name: 'A domicílio', value: :home },
       { name: 'No estabelecimento', value: :establishment }
     ].collect do |local_type|
       [local_type[:name], local_type[:value]]

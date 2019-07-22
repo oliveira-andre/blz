@@ -41,7 +41,7 @@
       Onde
     </p>
     <p class="has-text-centered has-text-black is-size-5">
-      <%= @scheduling.in_home? ? "Na sua casa: #{@scheduling.address.full}" : "No estabelecimento: #{@scheduling.service.establishment.address.full}" %>
+      <%= @scheduling.in_home? ? "A domicílio: #{@scheduling.address.full}" : "No estabelecimento: #{@scheduling.service.establishment.address.full}" %>
     </p>
   </div>
   <div class="item has-text-centered">

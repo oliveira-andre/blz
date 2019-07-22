@@ -15,6 +15,20 @@
           </div>
         <% end %>
       </li>
+      <li class="tab <%= tab == 'professionals' ? 'is-active' : ''%>">
+        <%= link_to establishment_professionals_path(current_user.establishment) do %>
+          <div class="columns is-multiline is-gapless has-text-centered">
+            <div class="column is-12">
+              <span class="icon is-small is-size-4">
+                <i class="fas fa-user-tie"></i>
+              </span>
+            </div>
+            <div class="column is-12">
+              <span>Profissionais</span>
+            </div>
+          </div>
+        <% end %>
+      </li>
       <li class="tab <%= tab == 'services' ? 'is-active' : ''%>">
         <%= link_to establishment_services_path(current_user.establishment) do %>
           <div class="columns is-multiline is-gapless has-text-centered">
@@ -25,20 +39,6 @@
             </div>
             <div class="column is-12">
               <span>Serviços</span>
-            </div>
-          </div>
-        <% end %>
-      </li>
-      <li class="tab <%= tab == 'professionals' ? 'is-active' : ''%>">
-         <%= link_to establishment_professionals_path(current_user.establishment) do %>
-          <div class="columns is-multiline is-gapless has-text-centered">
-            <div class="column is-12">
-              <span class="icon is-small is-size-4">
-                <i class="fas fa-user-tie"></i>
-              </span>
-            </div>
-            <div class="column is-12">
-              <span>Profissionais</span>
             </div>
           </div>
         <% end %>

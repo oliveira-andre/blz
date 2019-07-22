@@ -36,11 +36,11 @@
         <p>Local de atendimento</p>
         <p class='is-size-5'><i class="fas fa-map-marker-alt has-text-grey"></i></p>
         <% if @service.home? %>
-          <p>Em casa</p>
+          <p>A domicílio</p>
         <% elsif @service.establishment? %>
           <p>No estabelecimento: <%= @service.establishment.address.full %></p>
         <% else %>
-          Em casa ou no estabelecimento: <%= @service.establishment.address.full %>
+          A domicílio ou no estabelecimento: <%= @service.establishment.address.full %>
         <% end %>
       </div>
     </div>
@@ -70,11 +70,11 @@
                 <p>Local de atendimento</p>
                 <p class='is-size-5'><i class="fas fa-map-marker-alt"></i></p>
                 <% if @service.home? %>
-                  <p>Em casa</p>
+                  <p>A domicílio</p>
                 <% elsif @service.establishment? %>
                   <p>No estabelecimento: <%= @service.establishment.address.full %></p>
                 <% else %>
-                  Em casa ou no estabelecimento: <%= @service.establishment.address.full %>
+                  A domicílio ou no estabelecimento: <%= @service.establishment.address.full %>
                 <% end %>
               </div>
               <div class="column is-12">
