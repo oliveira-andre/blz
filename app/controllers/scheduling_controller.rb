@@ -7,6 +7,7 @@ class SchedulingController < ApplicationController
     if current_user.registration_ok?
       @scheduling = Scheduling.new scheduling_new_params
       @scheduling.address = Address.new
+      authorize @scheduling
     else
       redirect_to edit_service_users_path(service, scheduling_new_params)
     end
