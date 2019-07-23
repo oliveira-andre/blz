@@ -3,6 +3,10 @@ class SchedulingPolicy < ApplicationPolicy
     user.establishment.nil? && user.registration_ok?
   end
 
+  def update?
+    record.service.establishment.user == user
+  end
+
   def show?
     record.user == user ||
       record.service.establishment.user == user

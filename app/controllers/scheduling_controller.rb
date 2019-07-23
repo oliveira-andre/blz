@@ -34,6 +34,7 @@ class SchedulingController < ApplicationController
   end
 
   def update
+    authorize @scheduling
     if params[:status] == 'finished'
       @scheduling.finished!
       flash[:success] = 'Finalizado com sucesso'
