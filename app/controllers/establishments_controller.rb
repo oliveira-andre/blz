@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 class EstablishmentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[new create]
-  before_action :load_establishment, only: %i[edit update success]
+  skip_before_action :authenticate_user!, only: %i[new create show]
+  before_action :load_establishment, only: %i[edit update success show]
+
+  def show; end
 
   def new
     @establishment = Establishment.new
@@ -13,8 +17,8 @@ class EstablishmentsController < ApplicationController
     @establishment.save!
 
     redirect_to feedbacks_path(email: @establishment.user.email)
-  rescue ActiveRecord::RecordInvalid => error
-    @messages_errors = error.record.errors.full_messages
+  rescue ActiveRecord::RecordInvalid => e
+    @messages_errors = e.record.errors.full_messages
     render 'new'
   end
 
@@ -25,8 +29,8 @@ class EstablishmentsController < ApplicationController
     @user.update edit_establishment_params[:user_attributes]
     redirect_to edit_establishment_path(@establishment),
                 notice: 'Atualização realizada com sucesso'
-  rescue ActiveRecord::RecordInvalid => error
-    @errors = error.record.errors
+  rescue ActiveRecord::RecordInvalid => e
+    @errors = e.record.errors
     render 'new'
   end
 
