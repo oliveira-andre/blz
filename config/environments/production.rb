@@ -68,10 +68,11 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL_OPTIONS') }
   config.action_mailer.smtp_settings = {
-    port: ENV.fetch('SMTP_PORT', 587),
-    address: Rails.application.credentials[Rails.env.to_sym][:smtp][:address],
     user_name: Rails.application.credentials[Rails.env.to_sym][:smtp][:username],
-    password: Rails.application.credentials[Rails.env.to_sym][:smtp][:password]
+    password: Rails.application.credentials[Rails.env.to_sym][:smtp][:password],
+    domain: 'blz.life',
+    address: 'smtp.sendgrid.net',
+    port: 587
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
