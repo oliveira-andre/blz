@@ -1,0 +1,42 @@
+<div class="column is-4">
+  <div class="card">
+    <div class="">
+      <div class="service-image">
+        <% if service.photos.attached? %>
+          <%= image_tag service.thumbnail(service.photos.sample, custom: '320x320!') %>
+        <% else %>
+          <%= image_tag default_image_service(service, size: :small) %>
+        <% end %>
+      </div>
+      <div class="service-content">
+        <p class="title is-size-5"><%= service.title %></p>
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img src="https://bulma.io/images/placeholders/128x128.png" class="is-rounded">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-size-6 has-text-weight-normal"><%= service.establishment.name %></p>
+            <p class="subtitle is-size-6">
+              <% if service.reviews.any? %>
+                <% service.reviews.average(:rating).to_i.times do |number| %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              <% else %>
+                <span class="is-size-7">sem avaliação</span>
+              <% end %>
+            </p>
+          </div>
+        </article>
+        <p class="infos has-text-black">
+          <span class="is-size-4">R$ <%= service.amount %></span>
+          <span class="is-size-1 dot">.</span>
+          <span class="is-size-5"><%= service.category.name %></span>
+        </p>
+        <%= link_to 'Detalhes', service_path(service), class: 'button is-light is-size-6' %>
+      </div>
+    </div>
+  </div>
+  
+</div>

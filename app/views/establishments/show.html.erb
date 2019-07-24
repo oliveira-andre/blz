@@ -1,0 +1,43 @@
+<%= render 'shared/header', to_back: false, fixed: true %>
+<div class="establishment-details-public">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-12 logo has-text-centered">
+        <figure class="image is-256x256">
+          <img class="is-rounded" src="/images/256x256.png">
+        </figure>
+        <h1 class="title is-size-4"><%= @establishment.name %></h1>
+      </div>
+      <div class="column is-12 about">
+        <p class="has-text-grey">
+          <%= @establishment.about %>
+        </p>
+      </div>
+      <div class="column is-12 contacts">
+        <p class="has-text-grey">
+          <span class="icon"><i class="far fa-clock"></i></span>
+          Atendimento <%= @establishment.timetable %>
+        </p>
+        <p class="has-text-grey">
+          <span class="icon"><i class="fas fa-map-marker-alt has-text-grey"></i></span>
+          <%= @establishment.address.full %>
+        </p>
+      </div>
+      <div class="column is-12 professionals">
+        <div class="columns is-centered">
+          <% @establishment.professionals.each do |professional| %>
+            <%= render 'professional_avatar', professional: professional %>
+          <% end %>
+        </div>
+      </div>
+      <div class="column is-12 services">
+        <div class="columns is-multiline">
+          <% @establishment.services.each do |service| %>
+            <%= render 'service_card', service: service %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'shared/footer' %>

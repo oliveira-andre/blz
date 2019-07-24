@@ -1,0 +1,12 @@
+<div class="column is-1 has-text-centered">
+  <figure class="image is-64x64">
+    <% if professional.photo.attached? %>
+      <%= image_tag professional.photo, class:'image is-rounded' %>
+    <% else %>
+      <img src="/images/128x128.png" class="is-rounded">
+    <% end %>
+  </figure>
+  <p class="has-text-grey">
+    <%= first_name(professional)%>
+  </p>
+</div>

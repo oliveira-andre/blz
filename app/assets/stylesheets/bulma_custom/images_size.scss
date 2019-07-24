@@ -4,7 +4,7 @@
     max-height: 64px;
     min-width: 64px;
     max-width: 64px;
-    object-fit: cover;
+    object-fit: fill;
   }
 }
 
@@ -14,6 +14,16 @@
     max-height: 128px;
     min-width: 128px;
     max-width: 128px;
-    object-fit: cover;
+    object-fit: fill;
+  }
+}
+
+.is-256x256 {
+  img {
+    min-height: 256px;
+    max-height: 256px;
+    min-width: 256px;
+    max-width: 256px;
+    object-fit: fill;
   }
 }
