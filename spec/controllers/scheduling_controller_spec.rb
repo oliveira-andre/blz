@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SchedulingController, type: :controller do
   before(:each) do
+    Rails.application.load_seed
     @schedule = FactoryBot.create(:schedule)
     @scheduling = FactoryBot.create(:scheduling)
     @current_user = FactoryBot.create(:completed_user)
