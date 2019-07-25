@@ -8,9 +8,10 @@ RSpec.describe SchedulingController, type: :controller do
         sign_in @current_user
       end
 
-      it 'should redirect to root page, not login and show error' do
+      it 'redirect to root page, not login and show error' do
         get :new
         expect(flash[:error]).to eq('Seu usuário está bloqueado')
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -21,6 +22,7 @@ RSpec.describe SchedulingController, type: :controller do
         expect(flash[:alert]).to eq(
           'Para continuar, efetue login ou registre-se.'
         )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
       end
     end
 
@@ -40,6 +42,7 @@ RSpec.describe SchedulingController, type: :controller do
                                 .professional_service.id }
           expect(response).to have_http_status(:found)
           expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
         end
       end
 
@@ -49,7 +52,13 @@ RSpec.describe SchedulingController, type: :controller do
           get :new, params: { date: @schedule.date,
                               professional_service_id: @schedule
                                 .professional_service.id }
-          expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(
+          edit_service_users_pt_br_path(
+            service_id: @schedule.professional_service.service.id,
+            date: @schedule.date,
+            professional_service_id: @schedule.professional_service.id
+          )
+        )
         end
       end
 
