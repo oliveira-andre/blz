@@ -28,7 +28,6 @@ RSpec.describe SchedulingController, type: :controller do
     context 'when user is authenticated' do
       before(:each) do
         @schedule = FactoryBot.create(:schedule)
-        @scheduling = FactoryBot.create(:scheduling)
         @current_user = FactoryBot.create(:completed_user)
         sign_in @current_user
       end
