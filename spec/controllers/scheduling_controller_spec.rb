@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe SchedulingController, type: :controller do
-  before(:each) do
-    Rails.application.load_seed
-    @schedule = FactoryBot.create(:schedule)
-    @scheduling = FactoryBot.create(:scheduling)
-    @current_user = FactoryBot.create(:completed_user)
-    sign_in @current_user
-  end
-
   describe 'new scheduling' do
+    before(:each) do
+      @schedule = FactoryBot.create(:schedule)
+      @scheduling = FactoryBot.create(:scheduling)
+      @current_user = FactoryBot.create(:completed_user)
+      sign_in @current_user
+    end
+  
     context 'when user is blocked' do
       it 'should redirect to root page, not login and show error' do
         sign_out @current_user
