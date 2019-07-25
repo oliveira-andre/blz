@@ -6,7 +6,7 @@ FactoryBot.define do
     description         { FFaker::Lorem.sentence }
     amount              { 111 }
     duration            { 30 }
-    category
+    category            { Category.find(rand(1..6)) }
     establishment
   end
 end
