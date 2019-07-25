@@ -44,7 +44,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context "user registration isn't ok" do
         it 'redirect to complete registration page' do
-          sign_in FactoryBot.create(:uncompleted_user)
+          sign_in FactoryBot.create(:user)
           get :new, params: { date: @schedule.date,
                               professional_service_id: @schedule
                                 .professional_service.id }
