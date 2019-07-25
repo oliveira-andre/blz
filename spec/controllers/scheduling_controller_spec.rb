@@ -18,7 +18,6 @@ RSpec.describe SchedulingController, type: :controller do
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
         get :new
-        expect(response).to have_http_status(:found)
         expect(flash[:alert]).to eq(
           'Para continuar, efetue login ou registre-se.'
         )
