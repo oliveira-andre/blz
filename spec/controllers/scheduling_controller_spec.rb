@@ -2,18 +2,13 @@ require 'rails_helper'
 
 RSpec.describe SchedulingController, type: :controller do
   describe 'new scheduling' do
-    before(:each) do
-      @schedule = FactoryBot.create(:schedule)
-      @scheduling = FactoryBot.create(:scheduling)
-      @current_user = FactoryBot.create(:completed_user)
-      sign_in @current_user
-    end
-  
     context 'when user is blocked' do
-      it 'should redirect to root page, not login and show error' do
-        sign_out @current_user
-        @current_user.blocked!
+      before(:each) do
+        @current_user = FactoryBot.create(:blocked_user)
         sign_in @current_user
+      end
+
+      it 'should redirect to root page, not login and show error' do
         get :new
         expect(flash[:error]).to eq('Seu usuário está bloqueado')
       end
@@ -21,7 +16,6 @@ RSpec.describe SchedulingController, type: :controller do
 
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
-        sign_out @current_user
         get :new
         expect(response).to have_http_status(:found)
         expect(flash[:alert]).to eq(
@@ -31,6 +25,13 @@ RSpec.describe SchedulingController, type: :controller do
     end
 
     context 'when user is authenticated' do
+      before(:each) do
+        @schedule = FactoryBot.create(:schedule)
+        @scheduling = FactoryBot.create(:scheduling)
+        @current_user = FactoryBot.create(:completed_user)
+        sign_in @current_user
+      end
+
       context 'when user is a estabishment' do
         it 'should redirect to root path and show error' do
           sign_in @scheduling.service.establishment.user
