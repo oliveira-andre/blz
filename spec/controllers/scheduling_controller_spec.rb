@@ -2,9 +2,6 @@ require 'rails_helper'
 
 RSpec.describe SchedulingController, type: :controller do
   describe 'new scheduling' do
-    let(:date) { DateTime.now }
-    let(:professional_service) { FactoryBot.create(:professional_service) }
-
     context 'when user is blocked' do
       before(:each) do
         @current_user = FactoryBot.create(:blocked_user)
@@ -29,6 +26,9 @@ RSpec.describe SchedulingController, type: :controller do
     end
 
     context 'when user is authenticated' do
+      let(:date) { DateTime.now }
+      let(:professional_service) { FactoryBot.create(:professional_service) }
+
       context 'when user is a estabishment' do
         it 'should redirect to root path and show error' do
           sign_in professional_service.service.establishment.user
