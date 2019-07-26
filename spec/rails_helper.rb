@@ -34,6 +34,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ActiveSupport::Testing::TimeHelpers
 
+  config.before(:each) { DatabaseCleaner.start }
+  config.before(:suite) { Rails.application.load_seed }
+  config.append_after(:each) { DatabaseCleaner.clean }
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
