@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe SchedulingController, type: :controller do
   describe 'new scheduling' do
+    let(:date) { DateTime.now }
+    let(:professional_service) { FactoryBot.create(:professional_service) }
+
     context 'when user is blocked' do
       before(:each) do
         @current_user = FactoryBot.create(:blocked_user)
@@ -26,18 +29,12 @@ RSpec.describe SchedulingController, type: :controller do
     end
 
     context 'when user is authenticated' do
-      before(:each) do
-        @schedule = FactoryBot.create(:schedule)
-        @current_user = FactoryBot.create(:completed_user)
-        sign_in @current_user
-      end
-
       context 'when user is a estabishment' do
         it 'should redirect to root path and show error' do
-          sign_in @scheduling.service.establishment.user
-          get :new, params: { date: @schedule.date,
-                              professional_service_id: @schedule
-                                .professional_service.id }
+          sign_in professional_service.service.establishment.user
+          get :new, params: { date: date,
+                              professional_service_id: professional_service.id
+                            }
           expect(response).to have_http_status(:found)
           expect(flash[:error]).to eq('Não autorizado')
           expect(response).to redirect_to(root_path)
@@ -47,14 +44,14 @@ RSpec.describe SchedulingController, type: :controller do
       context "user registration isn't ok" do
         it 'redirect to complete registration page' do
           sign_in FactoryBot.create(:user)
-          get :new, params: { date: @schedule.date,
-                              professional_service_id: @schedule
-                                .professional_service.id }
+          get :new, params: { date: date,
+                              professional_service_id: professional_service.id
+                            }
         expect(response).to redirect_to(
           edit_service_users_pt_br_path(
-            service_id: @schedule.professional_service.service.id,
-            date: @schedule.date,
-            professional_service_id: @schedule.professional_service.id
+            service_id: professional_service.id,
+            date: date,
+            professional_service_id: professional_service.id
           )
         )
         end
@@ -62,9 +59,10 @@ RSpec.describe SchedulingController, type: :controller do
 
       context 'when user registration is ok!' do
         it 'render page to create scheduling' do
-          get :new, params: { date: @schedule.date,
-                              professional_service_id: @schedule
-                                .professional_service.id }
+          sign_in FactoryBot.create(:completed_user)
+          get :new, params: { date: date,
+                              professional_service_id: professional_service.id
+                            }
           expect(response).to have_http_status(:successful)
         end
       end
