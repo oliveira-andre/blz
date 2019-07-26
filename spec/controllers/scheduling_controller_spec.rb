@@ -3,12 +3,8 @@ require 'rails_helper'
 RSpec.describe SchedulingController, type: :controller do
   describe 'new scheduling' do
     context 'when user is blocked' do
-      before(:each) do
-        @current_user = FactoryBot.create(:blocked_user)
-        sign_in @current_user
-      end
-
       it 'redirect to root page, not login and show error' do
+        sign_in FactoryBot.create(:blocked_user)
         get :new
         expect(flash[:error]).to eq('Seu usuário está bloqueado')
         expect(response).to redirect_to(root_path)
