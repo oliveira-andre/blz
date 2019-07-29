@@ -303,6 +303,8 @@ RSpec.describe SchedulingController, type: :controller do
   end
 
   describe 'destroy scheduling' do
+    let(:scheduling) { FactoryBot.create(:scheduling) }
+
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
         delete :destroy, params: { id: scheduling.id }
@@ -314,14 +316,71 @@ RSpec.describe SchedulingController, type: :controller do
     end
 
     context 'when user is authenticated' do
-      let(:scheduling) { FactoryBot.create(:scheduling) }
-
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
           sign_in FactoryBot.create(:blocked_user)
           delete :destroy, params: { id: scheduling.id }
           expect(flash[:error]).to eq('Seu usuário está bloqueado')
           expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context "when user don't have relation with scheduling" do
+        it 'show error and redirect to root_path' do
+          sign_in FactoryBot.create(:user)
+          delete :destroy, params: { id: scheduling.id }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when try to cancel after the scheduling date' do
+        it 'show error and stay in the same page' do
+          travel_to scheduling.date + 1.hour
+          sign_in scheduling.user
+          delete :destroy, params: { id: scheduling.id,
+                                     scheduling: {
+                                       canceled_reason: FFaker::BaconIpsum
+                                         .sentence
+                                     } }
+          expect(flash[:error]).to eq(
+            'Agendamento não pode ser cancelado após a data combinada'
+          )
+          expect(response).to redirect_to(scheduling_pt_br_path(scheduling.id))
+        end
+      end
+
+      context 'canceling as a establishment' do
+        it 'cancel with success and not block the user' do
+          sign_in scheduling.professional_service.service.establishment.user
+          delete :destroy, params: { id: scheduling.id,
+                                     scheduling: {
+                                       canceled_reason: FFaker::BaconIpsum
+                                         .sentence
+                                     } }
+          expect(flash[:error]).to eq(nil)
+          expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
+          expect(scheduling.user.status).not_to eq('blocked')
+          expect(scheduling.professional_service.service.establishment.user
+                 .status).not_to eq('blocked')
+          expect(response).to redirect_to(scheduling_pt_br_path(scheduling))
+        end
+      end
+
+      context 'canceling as a user falting at least 4 hours to scheduling' do
+        it 'cancel the scheduling with success and block user' do
+          @scheduling = FactoryBot.create(:scheduling)
+          travel_to @scheduling.date - 3.hour
+          sign_in @scheduling.user
+          delete :destroy, params: { id: @scheduling.id,
+                                     scheduling: {
+                                       canceled_reason: FFaker::BaconIpsum
+                                         .sentence
+                                     } }
+          expect(flash[:error]).to eq(nil)
+          expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
+          expect(@scheduling.user.status).to eq('blocked')
+          expect(response).to redirect_to(scheduling_pt_br_path(@scheduling))
         end
       end
     end
