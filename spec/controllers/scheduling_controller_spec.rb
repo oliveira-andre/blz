@@ -298,7 +298,9 @@ RSpec.describe SchedulingController, type: :controller do
 
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
-        get :show, params: { id: scheduling.id }
+        get :show, params: {
+          id: scheduling.id
+        }
         expect(flash[:alert]).to eq(
           'Para continuar, efetue login ou registre-se.'
         )
@@ -310,7 +312,9 @@ RSpec.describe SchedulingController, type: :controller do
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
           sign_in FactoryBot.create(:blocked_user)
-          get :show, params: { id: scheduling.id }
+          get :show, params: {
+            id: scheduling.id
+          }
           expect(flash[:error]).to eq('Seu usuário está bloqueado')
           expect(response).to redirect_to(root_path)
         end
@@ -328,7 +332,9 @@ RSpec.describe SchedulingController, type: :controller do
       context 'when user is the establishment of scheduling' do
         it 'show the scheduling with success' do
           sign_in scheduling.professional_service.service.establishment.user
-          get :show, params: { id: scheduling.id }
+          get :show, params: {
+            id: scheduling.id
+          }
           expect(flash[:error]).to eq(nil)
           expect(assigns(:report)).not_to be_nil
         end
@@ -337,7 +343,9 @@ RSpec.describe SchedulingController, type: :controller do
       context 'when user is the user of scheduling' do
         it 'show the scheduling with success' do
           sign_in scheduling.user
-          get :show, params: { id: scheduling.id }
+          get :show, params: {
+            id: scheduling.id
+          }
           expect(flash[:error]).to eq(nil)
           expect(assigns(:report)).not_to be_nil
         end
