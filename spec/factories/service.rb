@@ -8,5 +8,11 @@ FactoryBot.define do
     duration            { 30 }
     category            { Category.find(rand(1..6)) }
     establishment
+
+    trait :home do
+      local_type        { :home }
+    end
+
+    factory :service_in_home, traits: [:home]
   end
 end
