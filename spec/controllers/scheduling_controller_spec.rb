@@ -261,7 +261,6 @@ RSpec.describe SchedulingController, type: :controller do
             expect(response).to redirect_to(
               users_dashboard_pt_br_path(id: user.id)
             )
-            expect(flash[:error]).to eq(nil)
             expect(flash[:success]).to eq('Agendamento realizado com sucesso!')
           end
         end
