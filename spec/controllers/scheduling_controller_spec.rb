@@ -301,4 +301,29 @@ RSpec.describe SchedulingController, type: :controller do
       end
     end
   end
+
+  describe 'destroy scheduling' do
+    context "when user isn't authenticated" do
+      it 'redirect to sign in' do
+        delete :destroy, params: { id: scheduling.id }
+        expect(flash[:alert]).to eq(
+          'Para continuar, efetue login ou registre-se.'
+        )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
+      end
+    end
+
+    context 'when user is authenticated' do
+      let(:scheduling) { FactoryBot.create(:scheduling) }
+
+      context 'when user is blocked' do
+        it 'redirect to root page, not login and show error' do
+          sign_in FactoryBot.create(:blocked_user)
+          delete :destroy, params: { id: scheduling.id }
+          expect(flash[:error]).to eq('Seu usuário está bloqueado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+    end
+  end
 end
