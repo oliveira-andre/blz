@@ -251,6 +251,8 @@ RSpec.describe SchedulingController, type: :controller do
   end
 
   describe 'show scheduling' do
+    let(:scheduling) { FactoryBot.create(:scheduling) }
+
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
         get :show, params: { id: scheduling.id }
@@ -262,8 +264,6 @@ RSpec.describe SchedulingController, type: :controller do
     end
 
     context 'when user is authenticated' do
-      let(:scheduling) { FactoryBot.create(:scheduling) }
-
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
           sign_in FactoryBot.create(:blocked_user)
