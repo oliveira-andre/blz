@@ -90,10 +90,12 @@ RSpec.describe SchedulingController, type: :controller do
       context 'when user is a estabishment' do
         it 'redirect to root page and show error message' do
           sign_in schedule.professional_service.service.establishment.user
-          params = { scheduling:
-                      { professional_service_id: schedule.professional_service
-                                                         .id,
-                        date: schedule.date, in_home: 0 } }
+          params = {
+            scheduling: {
+              professional_service_id: schedule.professional_service.id,
+              date: schedule.date, in_home: 0
+            }
+          }
           post :create, params: params
           expect(flash[:error]).to eq('Não autorizado')
           expect(response).to redirect_to(root_path)
@@ -118,10 +120,11 @@ RSpec.describe SchedulingController, type: :controller do
           sign_in FactoryBot.create(:completed_user)
 
           travel_to schedule.date + 1.month
-          post :create, params: { scheduling: {
-            professional_service_id: schedule.professional_service.id,
-            date: schedule.date, in_home: 0
-          } }
+          post :create, params: {
+            scheduling: { professional_service_id: schedule.professional_service
+                                                           .id,
+                          date: schedule.date, in_home: 0 }
+          }
           expect(response).to redirect_to(
             new_scheduling_pt_br_path(
               date: schedule.date,
@@ -136,10 +139,11 @@ RSpec.describe SchedulingController, type: :controller do
         it 'show error message staying in the same page' do
           sign_in FactoryBot.create(:completed_user)
 
-          post :create, params: { scheduling: {
-            professional_service_id: schedule.professional_service.id,
-            date: (schedule.date + 1.month), in_home: 0
-          } }
+          post :create, params: {
+            scheduling: { professional_service_id: schedule.professional_service
+                                                           .id,
+                          date: (schedule.date + 1.month), in_home: 0 }
+          }
           expect(response).to redirect_to(
             new_scheduling_pt_br_path(
               date: (schedule.date + 1.month),
@@ -157,10 +161,11 @@ RSpec.describe SchedulingController, type: :controller do
           @scheduling = FactoryBot.create(:scheduling)
           sign_in FactoryBot.create(:completed_user)
 
-          post :create, params: { scheduling: {
-            professional_service_id: @scheduling.professional_service.id,
-            date: @scheduling.date, in_home: 0
-          } }
+          post :create, params: {
+            scheduling: { professional_service_id: @scheduling
+              .professional_service.id,
+                          date: @scheduling.date, in_home: 0 }
+          }
           expect(response).to redirect_to(
             new_scheduling_pt_br_path(
               date: @scheduling.date,
@@ -178,9 +183,11 @@ RSpec.describe SchedulingController, type: :controller do
           it 'create the scheduling with success' do
             user = FactoryBot.create(:completed_user)
             sign_in user
-            params = { scheduling:
-                      { professional_service_id: schedule.professional_service.id,
-                        date: schedule.date, in_home: 0 } }
+            params = {
+              scheduling: { professional_service_id: schedule
+                     .professional_service.id,
+                            date: schedule.date, in_home: 0 }
+            }
             post :create, params: params
             expect(response).to redirect_to(
               users_dashboard_pt_br_path(id: user.id)
@@ -196,10 +203,11 @@ RSpec.describe SchedulingController, type: :controller do
           it 'show error and stay in the same page' do
             sign_in FactoryBot.create(:completed_user)
 
-            post :create, params: { scheduling: {
-              professional_service_id: schedule.professional_service.id,
-              date: schedule.date, in_home: 1
-            } }
+            post :create, params: {
+              scheduling: { professional_service_id: schedule
+                .professional_service.id,
+                            date: schedule.date, in_home: 1 }
+            }
             expect(response).to redirect_to(
               new_scheduling_pt_br_path(
                 date: schedule.date,
@@ -217,11 +225,12 @@ RSpec.describe SchedulingController, type: :controller do
             sign_in FactoryBot.create(:completed_user)
             home_schedule = FactoryBot.create(:schedule_in_home)
 
-            post :create, params: { scheduling: {
-              professional_service_id: home_schedule.professional_service.id,
-              date: home_schedule.date, in_home: 1,
-              address_attributes: { street: '' }
-            } }
+            post :create, params: {
+              scheduling: { professional_service_id: home_schedule
+                .professional_service.id,
+                            date: home_schedule.date, in_home: 1,
+                            address_attributes: { street: '' } }
+            }
             expect(response).to redirect_to(
               new_scheduling_pt_br_path(
                 date: home_schedule.date,
@@ -240,14 +249,15 @@ RSpec.describe SchedulingController, type: :controller do
             sign_in user
             home_schedule = FactoryBot.create(:schedule_in_home)
 
-            post :create, params: { scheduling: {
-              professional_service_id: home_schedule.professional_service.id,
-              date: home_schedule.date, in_home: 1,
-              address_attributes: {
-                zipcode: '76807152', street: 'teste', neighborhood: 'teste',
-                number: '4135'
-              }
-            } }
+            post :create, params: {
+              scheduling: { professional_service_id: home_schedule
+                .professional_service.id,
+                            date: home_schedule.date, in_home: 1,
+                            address_attributes: {
+                              zipcode: '76807152', street: 'teste',
+                              neighborhood: 'teste', number: '4135'
+                            } }
+            }
             expect(response).to redirect_to(
               users_dashboard_pt_br_path(id: user.id)
             )
