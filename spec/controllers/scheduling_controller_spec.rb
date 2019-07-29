@@ -78,6 +78,15 @@ RSpec.describe SchedulingController, type: :controller do
     context 'when user is authenticated' do
       let(:schedule) { FactoryBot.create(:schedule) }
 
+      context 'when user is blocked' do
+        it 'redirect to root page, not login and show error' do
+          sign_in FactoryBot.create(:blocked_user)
+          get :new
+          expect(flash[:error]).to eq('Seu usuário está bloqueado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
       context 'when user is a estabishment' do
         it 'redirect to root page and show error message' do
           sign_in schedule.professional_service.service.establishment.user
