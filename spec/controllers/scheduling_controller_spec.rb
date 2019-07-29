@@ -143,46 +143,6 @@ RSpec.describe SchedulingController, type: :controller do
         end
       end
 
-      context "when date isn't on schedule" do
-        it 'show error message staying in the same page' do
-          sign_in FactoryBot.create(:completed_user)
-
-          post :create, params: { scheduling: {
-            professional_service_id: schedule.professional_service.id,
-            date: (schedule.date + 1.month), in_home: 0
-          } }
-          expect(response).to redirect_to(
-            new_scheduling_pt_br_path(
-              date: (schedule.date + 1.month),
-              professional_service_id: schedule.professional_service.id
-            )
-          )
-          expect(flash[:error]).to eq(
-            'Horário inválido ou indisponível, tente novamente'
-          )
-        end
-      end
-
-      context "when date isn't on schedule" do
-        it 'show error message staying in the same page' do
-          sign_in FactoryBot.create(:completed_user)
-
-          post :create, params: { scheduling: {
-            professional_service_id: schedule.professional_service.id,
-            date: (schedule.date + 1.month), in_home: 0
-          } }
-          expect(response).to redirect_to(
-            new_scheduling_pt_br_path(
-              date: (schedule.date + 1.month),
-              professional_service_id: schedule.professional_service.id
-            )
-          )
-          expect(flash[:error]).to eq(
-            'Horário inválido ou indisponível, tente novamente'
-          )
-        end
-      end
-
       context 'when professional already busy' do
         it 'show error message staying in the same page' do
           @scheduling = FactoryBot.create(:scheduling)
@@ -274,7 +234,7 @@ RSpec.describe SchedulingController, type: :controller do
             post :create, params: { scheduling: {
               professional_service_id: home_schedule.professional_service.id,
               date: home_schedule.date, in_home: 1,
-              address_attributes: { 
+              address_attributes: {
                 zipcode: '76807152', street: 'teste', neighborhood: 'teste',
                 number: '4135'
               }
