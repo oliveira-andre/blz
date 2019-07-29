@@ -336,7 +336,9 @@ RSpec.describe SchedulingController, type: :controller do
             id: scheduling.id
           }
           expect(flash[:error]).to eq(nil)
+          expect(assigns(:scheduling)).not_to be_nil
           expect(assigns(:report)).not_to be_nil
+          expect(response).to have_http_status(:successful)
         end
       end
 
@@ -347,7 +349,9 @@ RSpec.describe SchedulingController, type: :controller do
             id: scheduling.id
           }
           expect(flash[:error]).to eq(nil)
+          expect(assigns(:scheduling)).not_to be_nil
           expect(assigns(:report)).not_to be_nil
+          expect(response).to have_http_status(:successful)
         end
       end
     end
