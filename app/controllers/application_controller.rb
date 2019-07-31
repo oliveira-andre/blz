@@ -44,4 +44,8 @@ class ApplicationController < ActionController::Base
       flash[:error] = 'Seu usuário está bloqueado'
     end
   end
+
+  def redirect_if_logged_in
+    redirect_to root_path, alert: 'Você já está logado' if user_signed_in?
+  end
 end

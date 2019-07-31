@@ -2,6 +2,7 @@
 
 class EstablishmentsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[new create show]
+  before_action :redirect_if_logged_in, only: %i[new create show]
   before_action :load_establishment, only: %i[edit update success show]
 
   def show; end
