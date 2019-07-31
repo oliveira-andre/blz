@@ -4,21 +4,7 @@ require 'rails_helper'
 
 RSpec.describe EstablishmentsController, type: :controller do
   describe 'new establishment' do
-    context "when user isn't logged" do
-      it 'access page with success' do
-        get :new
-        expect(response).to have_http_status(:successful)
-      end
-    end
-
-    context 'when user is logged' do
-      it 'show error and redirect to root page' do
-        sign_in FactoryBot.create(:user)
-        get :new
-        expect(flash[:alert]).to eq('Você já está logado')
-        expect(response).to redirect_to(root_path)
-      end
-    end
+    pending
   end
 
   describe 'create establishment' do
