@@ -402,6 +402,7 @@ RSpec.describe SchedulingController, type: :controller do
           expect(flash[:error]).to eq(
             'Agendamento não pode ser cancelado após a data combinada'
           )
+          expect(scheduing.status).not_to eq('canceled')
           expect(response).to redirect_to(scheduling_pt_br_path(scheduling.id))
         end
       end
@@ -418,8 +419,10 @@ RSpec.describe SchedulingController, type: :controller do
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
           expect(scheduling.user.status).not_to eq('blocked')
-          expect(scheduling.professional_service.service.establishment.user
-                 .status).not_to eq('blocked')
+          expect(scheduing.status).to eq('canceled')
+          expect(
+            scheduling.professional_service.service.establishment.user.status
+          ).not_to eq('blocked')
           expect(response).to redirect_to(scheduling_pt_br_path(scheduling))
         end
       end
@@ -437,6 +440,7 @@ RSpec.describe SchedulingController, type: :controller do
           }
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
+          expect(@scheduing.status).to eq('canceled')
           expect(@scheduling.user.status).to eq('blocked')
           expect(response).to redirect_to(scheduling_pt_br_path(@scheduling))
         end
