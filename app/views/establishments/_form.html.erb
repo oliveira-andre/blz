@@ -10,13 +10,36 @@
         <% end %>
       </div>
     <% end %>
-    <div class="column is-12">
-      <h1 class="title is-size-5 has-text-weight-normal">
-        <span class="icon"><i class="fas fa-store-alt"></i></span>
-        Sobre o estabelecimento
-      </h1>
-    </div>
-    <% if @establishment.new_record? %>
+    <% unless @establishment.new_record? %>
+      <div class="column is-12">
+        <div class="field">
+          <label class="file-label">
+            <%= f.file_field :photo, class: 'file-input', accept: "image/x-png,image/jpeg", id: 'establishment-photo-add' %>
+            <figure class="image is-256x256" id="temporary_image">
+              <% if @establishment.photo.attached? %>
+                <%= image_tag @establishment.photo, class: "is-rounded" %>
+              <% else %>
+                <img class="is-rounded" src="/images/256x256.png">
+              <% end %>
+            </figure>
+          </label>
+        </div>
+      </div>
+      <div class="column is-12">
+        <div class="field">
+          <label class="label has-text-grey has-text-weight-normal">Biográfia (bio)</label>
+          <div class="control">
+            <%= f.text_area :about, class: 'textarea', placeholder:"Fale um pouco sobre seu estabelecimento"%>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="column is-12">
+        <h1 class="title is-size-5 has-text-weight-normal">
+          <span class="icon"><i class="fas fa-store-alt"></i></span>
+          Sobre o estabelecimento
+        </h1>
+      </div>
       <div class="column is-12">
         <div class="field">
           <label class="label has-text-grey has-text-weight-normal">Nome do estabelecimento <small class="is-danger">*</small></label>

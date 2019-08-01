@@ -35,6 +35,11 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop'
   gem 'capistrano-dotenv-tasks', require: false
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
+  gem 'ffaker'
+  gem 'database_cleaner'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -57,6 +62,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

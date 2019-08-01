@@ -7,6 +7,7 @@ class Establishment < ApplicationRecord
   validates :name, presence: true
   validates :timetable, presence: true
   validates :user_id, uniqueness: true
+  validate :photo_type
 
   belongs_to :user
 
@@ -39,5 +40,11 @@ class Establishment < ApplicationRecord
 
   def send_registration_success
     EstablishmentMailer.registration_success(self).deliver_later
+  end
+
+  def photo_type
+    if photo.attached? && !photo.content_type.in?(%(image/jpeg image/png))
+      errors.add(:photo, 'com formato inválido')
+    end
   end
 end

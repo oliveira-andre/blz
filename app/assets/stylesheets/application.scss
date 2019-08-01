@@ -1,52 +1,55 @@
 // *= require toastr
-@import 'bulma/bulma';
-@import 'bulma-extensions/dist/css/bulma-extensions.min';
-@import 'bulma-extensions/bulma-calendar/dist/css/bulma-calendar.min';
+@import "bulma/bulma";
+@import "bulma-extensions/dist/css/bulma-extensions.min";
+@import "bulma-extensions/bulma-calendar/dist/css/bulma-calendar.min";
 @import "bulma-carousel/dist/css/bulma-carousel.min";
-@import 'bulma-modal-fx/dist/css/modal-fx.min';
-@import 'inter-ui/inter.scss';
+@import "bulma-modal-fx/dist/css/modal-fx.min";
 
-@import 'utils/*';
-@import 'bulma_custom/*';
-@import 'shared/*';
-@import 'admin/*';
+@import "utils/*";
+@import "bulma_custom/*";
+@import "shared/*";
+@import "admin/*";
 
-@import 'services';
-@import 'devise';
-@import 'establishment';
-@import 'service_details';
-@import 'users_dashboard';
-@import 'establishments_dashboard';
-@import 'professionals';
-@import 'scheduling';
-@import 'five_stars_rating';
-@import 'payment_card';
-@import 'use_rules';
-@import 'new_scheduling';
-@import 'filter_services';
-@import 'home';
-@import 'feedbacks';
-@import 'notify_header';
-@import 'establishment_welcome';
-@import 'pagy';
-@import 'sales';
+@import "services";
+@import "devise";
+@import "establishment";
+@import "service_details";
+@import "users_dashboard";
+@import "establishments_dashboard";
+@import "professionals";
+@import "scheduling";
+@import "five_stars_rating";
+@import "payment_card";
+@import "use_rules";
+@import "new_scheduling";
+@import "filter_services";
+@import "home";
+@import "feedbacks";
+@import "notify_header";
+@import "establishment_welcome";
+@import "pagy";
+@import "sales";
+
+@import url("https://rsms.me/inter/inter.css");
 
 html {
-  font-family: 'Inter', sans-serif !important;
+  font-family: "Inter", sans-serif;
 }
 
 @supports (font-variation-settings: normal) {
-  html { font-family: 'Inter var', sans-serif; }
+  html {
+    font-family: "Inter var", sans-serif;
+  }
 }
 
 body {
-  font-family: 'Inter UI Medium', sans-serif !important;
+  font-family: "Inter UI Medium", sans-serif !important;
 }
 
-h1, h2 {
-  font-family: 'Inter UI Bold', sans-serif !important;
+h1,
+h2 {
+  font-family: "Inter UI Bold", sans-serif !important;
 }
-
 
 *:focus {
   outline: none !important;
