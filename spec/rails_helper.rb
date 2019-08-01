@@ -31,6 +31,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ActiveSupport::Testing::TimeHelpers
 

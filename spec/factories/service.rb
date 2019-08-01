@@ -10,7 +10,7 @@ FactoryBot.define do
     establishment
 
     trait :home do
-      local_type        { :home }
+      local_type { :home }
     end
 
     factory :service_in_home, traits: [:home]
