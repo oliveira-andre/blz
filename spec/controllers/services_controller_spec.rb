@@ -26,7 +26,7 @@ RSpec.describe ::ServicesController, type: :controller do
 
       it 'update service to archived' do
         service.reload
-        expect(service.status).to eql('archived')
+        expect(service.status).to eq('archived')
       end
     end
 
