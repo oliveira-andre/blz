@@ -402,47 +402,79 @@ RSpec.describe SchedulingController, type: :controller do
           expect(flash[:error]).to eq(
             'Agendamento não pode ser cancelado após a data combinada'
           )
-          expect(scheduing.status).not_to eq('canceled')
+          scheduling.reload
+          expect(scheduling.status).not_to eq('canceled')
           expect(response).to redirect_to(scheduling_pt_br_path(scheduling.id))
         end
       end
 
       context 'canceling as a establishment' do
         it 'cancel with success and not block the user' do
-          sign_in scheduling.professional_service.service.establishment.user
+          local_scheduling = create(:scheduling)
+          sign_in local_scheduling.professional_service.service.establishment
+                                                               .user
           delete :destroy, params: {
-            id: scheduling.id,
+            id: local_scheduling.id,
             scheduling: {
               canceled_reason: FFaker::BaconIpsum.sentence
             }
           }
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
-          expect(scheduling.user.status).not_to eq('blocked')
-          expect(scheduing.status).to eq('canceled')
+          expect(local_scheduling.user.status).not_to eq('blocked')
+          local_scheduling.reload
+          expect(local_scheduling.status).to eq('canceled')
           expect(
-            scheduling.professional_service.service.establishment.user.status
+            local_scheduling.professional_service.service.establishment.user
+                                                                       .status
           ).not_to eq('blocked')
-          expect(response).to redirect_to(scheduling_pt_br_path(scheduling))
+          expect(response).to redirect_to(
+            scheduling_pt_br_path(local_scheduling)
+          )
         end
       end
 
       context 'canceling as a user falting at least 4 hours to scheduling' do
         it 'cancel the scheduling with success and block user' do
-          @scheduling = create(:scheduling)
-          travel_to @scheduling.date - 3.hour
-          sign_in @scheduling.user
+          local_scheduling = create(:scheduling)
+          travel_to local_scheduling.date - 3.hour
+          sign_in local_scheduling.user
           delete :destroy, params: {
-            id: @scheduling.id,
+            id: local_scheduling.id,
             scheduling: {
               canceled_reason: FFaker::BaconIpsum.sentence
             }
           }
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
-          expect(@scheduing.status).to eq('canceled')
-          expect(@scheduling.user.status).to eq('blocked')
-          expect(response).to redirect_to(scheduling_pt_br_path(@scheduling))
+          local_scheduling.reload
+          expect(local_scheduling.status).to eq('canceled')
+          expect(local_scheduling.user.status).to eq('blocked')
+          expect(response).to redirect_to(
+            scheduling_pt_br_path(local_scheduling)
+          )
+        end
+      end
+
+      context 'canceling as a user falting more than 4 hours to scheduling' do
+        it 'cancel the scheduling with success and block user' do
+          local_scheduling = create(:scheduling)
+          travel_to local_scheduling.date - rand(8..15).hours
+          sign_in local_scheduling.user
+          delete :destroy, params: {
+            id: local_scheduling.id,
+            scheduling: {
+              canceled_reason: FFaker::BaconIpsum.sentence
+            }
+          }
+          expect(flash[:error]).to eq(nil)
+          expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
+          local_scheduling.reload
+          expect(local_scheduling.status).to eq('canceled')
+          expect(local_scheduling.user.status).not_to eq('blocked')
+          expect(response).to redirect_to(
+            scheduling_pt_br_path(local_scheduling)
+          )
         end
       end
     end
