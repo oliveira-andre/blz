@@ -445,7 +445,7 @@ RSpec.describe SchedulingController, type: :controller do
               canceled_reason: FFaker::BaconIpsum.sentence
             }
           }
-          expect(flash[:error]).to eq(nil)
+          expect(flash[:error]).to be_nil
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
           local_scheduling.reload
           expect(local_scheduling.status).to eq('canceled')
