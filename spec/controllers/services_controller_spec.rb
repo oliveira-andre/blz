@@ -3,6 +3,29 @@
 require 'rails_helper'
 
 RSpec.describe ::ServicesController, type: :controller do
+  describe 'show service' do
+    context 'when service_id sended is approved' do
+      it 'render show page with right service' do
+        service = create(:service)
+
+        get :show, params: { id: service.id }
+
+        expect(assigns(:service).id).to eq(service.id)
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context 'when service_id sended is not approved' do
+      it 'show error message and redirect to home page' do
+        service = create(:service, :not_approved)
+
+        get :show, params: { id: service.id }
+
+        expect(flash[:error]).to eq('Serviço não encontrado!')
+        expect(response).to redirect_to(root_path(service.establishment))
+      end
+    end
+  end
 
   describe 'destroy service' do
     context 'when user is authenticated and owner of service' do
