@@ -6,7 +6,7 @@ RSpec.describe SchedulingController, type: :controller do
   describe 'new scheduling' do
     context 'when user is blocked' do
       it 'redirect to root page, not login and show error' do
-        sign_in FactoryBot.create(:blocked_user)
+        sign_in create(:blocked_user)
         get :new
         expect(flash[:error]).to eq('Seu usuário está bloqueado')
         expect(response).to redirect_to(root_path)
@@ -25,7 +25,7 @@ RSpec.describe SchedulingController, type: :controller do
 
     context 'when user is authenticated' do
       let(:date) { DateTime.now }
-      let(:professional_service) { FactoryBot.create(:professional_service) }
+      let(:professional_service) { create(:professional_service) }
 
       context 'when user is a establishment' do
         it 'should redirect to root path and show error' do
@@ -42,7 +42,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context "user registration isn't ok" do
         it 'redirect to complete registration page' do
-          sign_in FactoryBot.create(:user)
+          sign_in create(:user)
           get :new, params: {
             date: date,
             professional_service_id: professional_service.id
@@ -59,7 +59,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context 'when user registration is ok!' do
         it 'render page to create scheduling' do
-          sign_in FactoryBot.create(:completed_user)
+          sign_in create(:completed_user)
           get :new, params: {
             date: date,
             professional_service_id: professional_service.id
@@ -82,11 +82,11 @@ RSpec.describe SchedulingController, type: :controller do
     end
 
     context 'when user is authenticated' do
-      let(:schedule) { FactoryBot.create(:schedule) }
+      let(:schedule) { create(:schedule) }
 
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
-          sign_in FactoryBot.create(:blocked_user)
+          sign_in create(:blocked_user)
           get :create
           expect(flash[:error]).to eq('Seu usuário está bloqueado')
           expect(response).to redirect_to(root_path)
@@ -110,7 +110,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context "user registration isn't ok" do
         it 'redirect to root page and show error' do
-          sign_in FactoryBot.create(:user)
+          sign_in create(:user)
           params = {
             scheduling: {
               professional_service_id: schedule.professional_service.id,
@@ -126,7 +126,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context 'when date in the past' do
         it 'show error message staying in the same page' do
-          sign_in FactoryBot.create(:completed_user)
+          sign_in create(:completed_user)
 
           travel_to schedule.date + 1.month
           post :create, params: {
@@ -148,7 +148,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context "when date isn't on schedule" do
         it 'show error message staying in the same page' do
-          sign_in FactoryBot.create(:completed_user)
+          sign_in create(:completed_user)
 
           post :create, params: {
             scheduling: {
@@ -171,8 +171,8 @@ RSpec.describe SchedulingController, type: :controller do
 
       context 'when professional already busy' do
         it 'show error message staying in the same page' do
-          @scheduling = FactoryBot.create(:scheduling)
-          sign_in FactoryBot.create(:completed_user)
+          @scheduling = create(:scheduling)
+          sign_in create(:completed_user)
 
           post :create, params: {
             scheduling: {
@@ -196,7 +196,7 @@ RSpec.describe SchedulingController, type: :controller do
       context "when isn't in home" do
         context 'when user registration is ok' do
           it 'create the scheduling with success' do
-            user = FactoryBot.create(:completed_user)
+            user = create(:completed_user)
             sign_in user
             params = {
               scheduling: {
@@ -218,7 +218,7 @@ RSpec.describe SchedulingController, type: :controller do
       context 'when is in home' do
         context 'when the service not accept in home' do
           it 'show error and stay in the same page' do
-            sign_in FactoryBot.create(:completed_user)
+            sign_in create(:completed_user)
 
             post :create, params: {
               scheduling: {
@@ -241,8 +241,8 @@ RSpec.describe SchedulingController, type: :controller do
 
         context 'without address' do
           it 'show error and stay in the same page' do
-            sign_in FactoryBot.create(:completed_user)
-            home_schedule = FactoryBot.create(:schedule_in_home)
+            sign_in create(:completed_user)
+            home_schedule = create(:schedule_in_home)
 
             post :create, params: {
               scheduling: {
@@ -266,9 +266,9 @@ RSpec.describe SchedulingController, type: :controller do
 
         context 'with address' do
           it 'create the scheduling with success' do
-            user = FactoryBot.create(:completed_user)
+            user = create(:completed_user)
             sign_in user
-            home_schedule = FactoryBot.create(:schedule_in_home)
+            home_schedule = create(:schedule_in_home)
 
             post :create, params: {
               scheduling: {
@@ -294,7 +294,7 @@ RSpec.describe SchedulingController, type: :controller do
   end
 
   describe 'show scheduling' do
-    let(:scheduling) { FactoryBot.create(:scheduling) }
+    let(:scheduling) { create(:scheduling) }
 
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
@@ -311,7 +311,7 @@ RSpec.describe SchedulingController, type: :controller do
     context 'when user is authenticated' do
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
-          sign_in FactoryBot.create(:blocked_user)
+          sign_in create(:blocked_user)
           get :show, params: {
             id: scheduling.id
           }
@@ -322,7 +322,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context "when user isn't the establishment or user of scheduling" do
         it 'show error and be redirected to root_path' do
-          sign_in FactoryBot.create(:user)
+          sign_in create(:user)
           get :show, params: { id: scheduling.id }
           expect(flash[:error]).to eq('Não autorizado')
           expect(response).to redirect_to(root_path)
@@ -358,7 +358,7 @@ RSpec.describe SchedulingController, type: :controller do
   end
 
   describe 'destroy scheduling' do
-    let(:scheduling) { FactoryBot.create(:scheduling) }
+    let(:scheduling) { create(:scheduling) }
 
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
@@ -373,7 +373,7 @@ RSpec.describe SchedulingController, type: :controller do
     context 'when user is authenticated' do
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
-          sign_in FactoryBot.create(:blocked_user)
+          sign_in create(:blocked_user)
           delete :destroy, params: { id: scheduling.id }
           expect(flash[:error]).to eq('Seu usuário está bloqueado')
           expect(response).to redirect_to(root_path)
@@ -382,7 +382,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context "when user don't have relation with scheduling" do
         it 'show error and redirect to root_path' do
-          sign_in FactoryBot.create(:user)
+          sign_in create(:user)
           delete :destroy, params: { id: scheduling.id }
           expect(flash[:error]).to eq('Não autorizado')
           expect(response).to redirect_to(root_path)
@@ -393,11 +393,12 @@ RSpec.describe SchedulingController, type: :controller do
         it 'show error and stay in the same page' do
           travel_to scheduling.date + 1.hour
           sign_in scheduling.user
-          delete :destroy, params: { id: scheduling.id,
-                                     scheduling: {
-                                       canceled_reason: FFaker::BaconIpsum
-                                         .sentence
-                                     } }
+          delete :destroy, params: {
+            id: scheduling.id,
+            scheduling: {
+              canceled_reason: FFaker::BaconIpsum.sentence
+            }
+          }
           expect(flash[:error]).to eq(
             'Agendamento não pode ser cancelado após a data combinada'
           )
@@ -408,11 +409,12 @@ RSpec.describe SchedulingController, type: :controller do
       context 'canceling as a establishment' do
         it 'cancel with success and not block the user' do
           sign_in scheduling.professional_service.service.establishment.user
-          delete :destroy, params: { id: scheduling.id,
-                                     scheduling: {
-                                       canceled_reason: FFaker::BaconIpsum
-                                         .sentence
-                                     } }
+          delete :destroy, params: {
+            id: scheduling.id,
+            scheduling: {
+              canceled_reason: FFaker::BaconIpsum.sentence
+            }
+          }
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
           expect(scheduling.user.status).not_to eq('blocked')
@@ -424,14 +426,15 @@ RSpec.describe SchedulingController, type: :controller do
 
       context 'canceling as a user falting at least 4 hours to scheduling' do
         it 'cancel the scheduling with success and block user' do
-          @scheduling = FactoryBot.create(:scheduling)
+          @scheduling = create(:scheduling)
           travel_to @scheduling.date - 3.hour
           sign_in @scheduling.user
-          delete :destroy, params: { id: @scheduling.id,
-                                     scheduling: {
-                                       canceled_reason: FFaker::BaconIpsum
-                                         .sentence
-                                     } }
+          delete :destroy, params: {
+            id: @scheduling.id,
+            scheduling: {
+              canceled_reason: FFaker::BaconIpsum.sentence
+            }
+          }
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
           expect(@scheduling.user.status).to eq('blocked')
