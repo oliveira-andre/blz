@@ -358,10 +358,9 @@ RSpec.describe SchedulingController, type: :controller do
   end
 
   describe 'destroy scheduling' do
-    let(:scheduling) { create(:scheduling) }
-
     context "when user isn't authenticated" do
       it 'redirect to sign in' do
+        scheduling = create(:scheduling)
         delete :destroy, params: { id: scheduling.id }
         expect(flash[:alert]).to eq(
           'Para continuar, efetue login ou registre-se.'
@@ -373,6 +372,7 @@ RSpec.describe SchedulingController, type: :controller do
     context 'when user is authenticated' do
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
+          scheduling = create(:scheduling)
           sign_in create(:blocked_user)
           delete :destroy, params: { id: scheduling.id }
           expect(flash[:error]).to eq('Seu usuário está bloqueado')
@@ -382,6 +382,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context "when user don't have relation with scheduling" do
         it 'show error and redirect to root_path' do
+          scheduling = create(:scheduling)
           sign_in create(:user)
           delete :destroy, params: { id: scheduling.id }
           expect(flash[:error]).to eq('Não autorizado')
@@ -391,6 +392,7 @@ RSpec.describe SchedulingController, type: :controller do
 
       context 'when try to cancel after the scheduling date' do
         it 'show error and stay in the same page' do
+          scheduling = create(:scheduling)
           travel_to scheduling.date + 1.hour
           sign_in scheduling.user
           delete :destroy, params: {
@@ -410,70 +412,70 @@ RSpec.describe SchedulingController, type: :controller do
 
       context 'canceling as a establishment' do
         it 'cancel with success and not block the user' do
-          local_scheduling = create(:scheduling)
-          sign_in local_scheduling.professional_service.service.establishment
+          scheduling = create(:scheduling)
+          sign_in scheduling.professional_service.service.establishment
                                                                .user
           delete :destroy, params: {
-            id: local_scheduling.id,
+            id: scheduling.id,
             scheduling: {
               canceled_reason: FFaker::BaconIpsum.sentence
             }
           }
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
-          expect(local_scheduling.user.status).not_to eq('blocked')
-          local_scheduling.reload
-          expect(local_scheduling.status).to eq('canceled')
+          expect(scheduling.user.status).not_to eq('blocked')
+          scheduling.reload
+          expect(scheduling.status).to eq('canceled')
           expect(
-            local_scheduling.professional_service.service.establishment.user
+            scheduling.professional_service.service.establishment.user
                                                                        .status
           ).not_to eq('blocked')
           expect(response).to redirect_to(
-            scheduling_pt_br_path(local_scheduling)
+            scheduling_pt_br_path(scheduling)
           )
         end
       end
 
       context 'canceling as a user falting at least 4 hours to scheduling' do
         it 'cancel the scheduling with success and block user' do
-          local_scheduling = create(:scheduling)
-          travel_to local_scheduling.date - 3.hour
-          sign_in local_scheduling.user
+          scheduling = create(:scheduling)
+          travel_to scheduling.date - 3.hour
+          sign_in scheduling.user
           delete :destroy, params: {
-            id: local_scheduling.id,
+            id: scheduling.id,
             scheduling: {
               canceled_reason: FFaker::BaconIpsum.sentence
             }
           }
           expect(flash[:error]).to be_nil
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
-          local_scheduling.reload
-          expect(local_scheduling.status).to eq('canceled')
-          expect(local_scheduling.user.status).to eq('blocked')
+          scheduling.reload
+          expect(scheduling.status).to eq('canceled')
+          expect(scheduling.user.status).to eq('blocked')
           expect(response).to redirect_to(
-            scheduling_pt_br_path(local_scheduling)
+            scheduling_pt_br_path(scheduling)
           )
         end
       end
 
       context 'canceling as a user falting more than 4 hours to scheduling' do
         it 'cancel the scheduling with success and block user' do
-          local_scheduling = create(:scheduling)
-          travel_to local_scheduling.date - rand(8..15).hours
-          sign_in local_scheduling.user
+          scheduling = create(:scheduling)
+          travel_to scheduling.date - rand(8..15).hours
+          sign_in scheduling.user
           delete :destroy, params: {
-            id: local_scheduling.id,
+            id: scheduling.id,
             scheduling: {
               canceled_reason: FFaker::BaconIpsum.sentence
             }
           }
           expect(flash[:error]).to eq(nil)
           expect(flash[:success]).to eq('Agendamento cancelado com sucesso')
-          local_scheduling.reload
-          expect(local_scheduling.status).to eq('canceled')
-          expect(local_scheduling.user.status).not_to eq('blocked')
+          scheduling.reload
+          expect(scheduling.status).to eq('canceled')
+          expect(scheduling.user.status).not_to eq('blocked')
           expect(response).to redirect_to(
-            scheduling_pt_br_path(local_scheduling)
+            scheduling_pt_br_path(scheduling)
           )
         end
       end
