@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="columns is-multiline">
-          <% @establishment.services.each do |service| %>
+          <% @services.each do |service| %>
             <%= render 'service_card', service: service %>
           <% end %>
         </div>
