@@ -22,7 +22,7 @@ RSpec.describe ::ServicesController, type: :controller do
         get :show, params: { id: service.id }
 
         expect(flash[:error]).to eq('Serviço não encontrado!')
-        expect(response).to redirect_to(root_path(service.establishment))
+        expect(response).to redirect_to(root_path)
       end
     end
   end
