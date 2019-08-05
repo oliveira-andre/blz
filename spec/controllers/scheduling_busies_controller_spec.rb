@@ -24,8 +24,8 @@ RSpec.describe SchedulingBusiesController, type: :controller do
         end
       end
 
-      context "can't create a scheduling busy in the past" do
-        it 'create busy with success' do
+      context "when trying to create busy scheduling in the past" do
+        it 'show error and stay in the same page' do
           schedule = FactoryBot.create(:schedule)
           sign_in schedule.professional_service.service.establishment.user
           post :create, params: {
@@ -41,25 +41,6 @@ RSpec.describe SchedulingBusiesController, type: :controller do
             establishments_dashboard_pt_br_path(
               schedule.professional_service.service.establishment.id
             )
-          )
-        end
-      end
-
-      context "when the professional is setted as busy can't make scheduling" do
-        it 'show error and redirect to service' do
-          scheduling = FactoryBot.create(:busy_scheduling)
-          sign_in scheduling.user
-          expect do
-            Scheduling.create!(
-              service_duration: rand(30..480),
-              date: scheduling.date,
-              professional_service: scheduling.professional_service,
-              user: scheduling.user,
-              in_home: 0
-            )
-          end.to raise_error(
-            ActiveRecord::RecordInvalid,
-            /Horário já esta ocupado para esse salão/
           )
         end
       end
