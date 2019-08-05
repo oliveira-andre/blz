@@ -13,6 +13,10 @@ FactoryBot.define do
       local_type { :home }
     end
 
+    trait :not_approved do
+      status { %i[recused awaiting_avaliation archived].sample }
+    end
+
     factory :service_in_home, traits: [:home]
   end
 end
