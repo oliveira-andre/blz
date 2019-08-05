@@ -3,12 +3,12 @@
 class ServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
 
-  before_action :load_establishment, only: %i[new create]
+  before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update destroy]
 
   def index
-    authorize current_user, policy_class: ServicePolicy
-    @services = current_user.establishment.services
+    authorize @establishment, policy_class: ServicePolicy
+    @services = @establishment.services
   end
 
   def show

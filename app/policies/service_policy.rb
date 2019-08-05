@@ -1,6 +1,6 @@
 class ServicePolicy < ApplicationPolicy
   def index?
-    !user.establishment.nil?
+    user.establishment.present? && record.user == user
   end
 
   def new?
