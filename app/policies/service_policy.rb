@@ -1,10 +1,10 @@
 class ServicePolicy < ApplicationPolicy
   def index?
-    !user.establishment.nil?
+    user.establishment.present?
   end
 
   def new?
-    !user.establishment.nil?
+    user.establishment.present?
   end
 
   def create?
