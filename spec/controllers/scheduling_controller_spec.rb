@@ -386,7 +386,7 @@ RSpec.describe SchedulingController, type: :controller do
     end
   end
 
-  describe 'update scheduling' do
+  describe 'finalize scheduling' do
     let(:scheduling) { FactoryBot.create(:scheduling) }
 
     context "when user isn't authenticated" do
@@ -409,16 +409,25 @@ RSpec.describe SchedulingController, type: :controller do
         end
       end
 
-      context "when user don't have relation with scheduling" do
+      context 'when user is common' do
         it 'show error and redirect to root_path' do
-          sign_in FactoryBot.create(:user)
-          delete :update, params: { id: scheduling.id }
+          sign_in scheduling.user
+          post :update, params: { id: scheduling.id }
           expect(flash[:error]).to eq('Não autorizado')
           expect(response).to redirect_to(root_path)
         end
       end
 
-      context 'when user is the stablishment of scheduling' do
+      context "when user don't have relation with scheduling" do
+        it 'show error and redirect to root_path' do
+          sign_in FactoryBot.create(:user)
+          post :update, params: { id: scheduling.id }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when is establishment user and try to finish' do
         context 'establishment user try to finish before the scheduling date' do
           it 'show error staying in the same page' do
             sign_in scheduling.professional_service.service.establishment.user
