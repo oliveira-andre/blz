@@ -44,6 +44,20 @@ RSpec.describe ::ServicesController, type: :controller do
         expect(response).to render_template(:index)
       end
     end
+
+    context 'when try access services of the other establishment' do
+      it 'redirect to root page with erro message' do
+        establishment = create(:establishment)
+        other_establishment = create(:establishment)
+
+        sign_in establishment.user
+
+        get :index, params: { establishment_id: other_establishment.id }
+
+        expect(flash[:error]).to eq('Não autorizado')
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe 'show service' do
