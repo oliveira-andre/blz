@@ -64,6 +64,23 @@ RSpec.describe SchedulingBusiesController, type: :controller do
         end
       end
 
+      context 'when user is common' do
+        it 'show error and redirect to root path' do
+          schedule = FactoryBot.create(:schedule)
+          sign_in FactoryBot.create(:user)
+          post :create, params: {
+            establishment_id: schedule.professional_service.service
+                                      .establishment.id,
+            service_duration: rand(30..480),
+            date_only: schedule.date.strftime('%d/%m/%Y'),
+            time: schedule.date.strftime('%H:%M:%S'),
+            professional_id: schedule.professional_service.professional.id
+          }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
       context 'establishment create a busy time to professional' do
         it 'create busy with success' do
           schedule = FactoryBot.create(:schedule)
