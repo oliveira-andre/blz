@@ -2,6 +2,7 @@
 
 class SchedulingBusiesController < ApplicationController
   def create
+    authorize current_user, policy_class: SchedulingBusiesPolicy
     SchedulingBusiesService.execute(scheduling_params)
     flash[:success] = 'Período marcado como indisponível'
     redirect_to establishments_dashboard_path(params[:establishment_id])
