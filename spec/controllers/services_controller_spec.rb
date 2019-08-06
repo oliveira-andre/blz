@@ -112,11 +112,24 @@ RSpec.describe ::ServicesController, type: :controller do
       end
     end
 
+    context 'when user is a other establishment' do
+      it 'redirect to root page with erro message' do
+        establishment = create(:establishment)
+        other_establishment = create(:establishment)
+
+        sign_in establishment.user
+
+        get :new, params: { establishment_id: other_establishment.id }
+
+        expect(flash[:error]).to eq('Não autorizado')
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
     context 'when user is authenticated and is not a establishment' do
       it 'redirect to home page and show message error' do
         establishment = create(:establishment)
-        user = create(:user)
-        sign_in user
+        sign_in create(:user)
 
         get :new, params: { establishment_id: establishment.id }
         expect(flash[:error]).to eq('Não autorizado')
