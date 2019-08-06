@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :service do
-    title               { FFaker::Lorem.word }
+    title               { FFaker::Lorem.unique.word }
     status              { :approved }
     local_type          { :establishment }
     description         { FFaker::Lorem.sentence }
