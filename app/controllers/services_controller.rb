@@ -19,7 +19,7 @@ class ServicesController < ApplicationController
   end
 
   def new
-    authorize current_user, policy_class: ServicePolicy
+    authorize @establishment, policy_class: ServicePolicy
     @service = @establishment.services.build
   end
 
