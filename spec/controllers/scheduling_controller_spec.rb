@@ -49,7 +49,7 @@ RSpec.describe SchedulingController, type: :controller do
           }
           expect(response).to redirect_to(
             edit_service_users_pt_br_path(
-              service_id: professional_service.id,
+              service_id: professional_service.service.id,
               date: date,
               professional_service_id: professional_service.id
             )
