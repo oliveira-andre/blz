@@ -2,11 +2,11 @@ FactoryBot.define do
   factory :service do
     title               { FFaker::Lorem.unique.word }
     status              { :approved }
-    local_type          { :establishment }
+    local_type          { Service.local_types.keys.sample }
     description         { FFaker::Lorem.sentence }
     amount              { 111 }
     duration            { 30 }
-    category            { Category.find(rand(1..6)) }
+    category_id         { Category.ids.sample }
     establishment
 
     trait :home do
