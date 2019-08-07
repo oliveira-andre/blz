@@ -138,6 +138,127 @@ RSpec.describe ::ServicesController, type: :controller do
     end
   end
 
+  describe 'create service' do
+    context 'when user is not authenticated' do
+      it 'redirect to sign in' do
+        post :create, params: { establishment_id: 0, service: {} }
+        expect(flash[:alert]).to eq(
+          'Para continuar, efetue login ou registre-se.'
+        )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
+      end
+    end
+
+    context 'when user is authenticated and is not a establishment' do
+      it 'redirect to home page and show message error' do
+        establishment = create(:establishment)
+        sign_in create(:user)
+
+        post :create, params: {
+          establishment_id: establishment.id,
+          service: {}
+        }
+
+        expect(flash[:error]).to eq('Não autorizado')
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context 'when user establishment is right' do
+      context 'and all service params is right' do
+        let(:establishment) { create(:establishment) }
+        let(:service_params) do
+          attributes_for(:service, establishment_id: establishment.id)
+        end
+
+        before do
+          sign_in establishment.user
+
+          post :create, params: {
+            establishment_id: establishment.id,
+            service: service_params
+          }
+
+          establishment.reload
+        end
+
+        it 'then is created right service' do
+          service = assigns(:service)
+
+          expect(service.id).not_to be_nil
+          expect(service.title).to eq(service_params[:title])
+          expect(service.local_type).to eq(service_params[:local_type])
+          expect(service.amount).to eq(service_params[:amount])
+          expect(service.duration).to eq(service_params[:duration])
+          expect(service.category_id).to eq(service_params[:category_id])
+          expect(service.description)
+            .to eq(service_params[:description])
+        end
+
+        it 'redirect to edit page with success message' do
+          service = assigns(:service)
+
+          expect(response).to redirect_to(
+            edit_establishment_service_path(
+              establishment, service, anchor: :professional_services
+            )
+          )
+
+          expect(flash[:notice]).to include('Serviço criado com sucesso')
+        end
+      end
+
+      context 'and service params required are not present' do
+        it 'stay in same page with errors messages' do
+          establishment = create(:establishment)
+          sign_in establishment.user
+
+          post :create, params: {
+            establishment_id: establishment.id,
+            service: { title: '' }
+          }
+
+          service = assigns(:service)
+          errors = service.errors.full_messages
+
+          expect(response).to render_template(:new)
+          expect(errors).to include('Categoria é obrigatório(a)')
+          expect(errors).to include('Título não pode ficar em branco')
+          expect(errors).to include('Descrição não pode ficar em branco')
+          expect(errors).to include('Valor não pode ficar em branco')
+          expect(errors).to include('Duração não pode ficar em branco')
+          expect(errors)
+            .to include('Localidade do Serviço não pode ficar em branco')
+        end
+      end
+
+      context 'and service title already exist in the establishment' do
+        it 'stay in same page and show error uniqueness title message' do
+          establishment = create(:establishment)
+          other_service = create(:service, establishment: establishment)
+          service_params = attributes_for(
+            :service,
+            title: other_service.title,
+            establishment_id: establishment.id
+          )
+
+          sign_in establishment.user
+
+          post :create, params: {
+            establishment_id: establishment.id,
+            service: service_params
+          }
+
+          service = assigns(:service)
+          errors = service.errors.full_messages
+
+          expect(response).to render_template(:new)
+          expect(errors).to include('Título já está em uso')
+        end
+      end
+    end
+  end
+
   describe 'destroy service' do
     context 'when user is authenticated and owner of service' do
       let(:service) { create(:service) }
