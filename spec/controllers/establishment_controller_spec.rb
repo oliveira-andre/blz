@@ -17,6 +17,7 @@ RSpec.describe EstablishmentsController, type: :controller do
               address_attributes: FactoryBot.attributes_for(:address)
             )
         }
+        expect(response).to render_template(:new)
         expect(assigns(:messages_errors)).to include(
           'Termos de uso não pode ficar em branco'
         )
@@ -32,8 +33,27 @@ RSpec.describe EstablishmentsController, type: :controller do
               address_attributes: FactoryBot.attributes_for(:address)
             )
         }
+        expect(response).to render_template(:new)
         expect(assigns(:messages_errors)).to include(
           'Email não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Senha não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Nome não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Data de nascimento não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Telefone não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'CPF não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'CPF não é válido'
         )
       end
     end
@@ -47,8 +67,12 @@ RSpec.describe EstablishmentsController, type: :controller do
               address_attributes: FactoryBot.attributes_for(:address)
             )
         }
+        expect(response).to render_template(:new)
         expect(assigns(:messages_errors)).to include(
           'Nome não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Horário de funcionamento não pode ficar em branco'
         )
       end
     end
@@ -62,9 +86,32 @@ RSpec.describe EstablishmentsController, type: :controller do
               address_attributes: FactoryBot.attributes_for(:empty_address)
             )
         }
+        expect(response).to render_template(:new)
         expect(assigns(:messages_errors)).to include(
           'Rua/Logradouro não pode ficar em branco'
         )
+        expect(assigns(:messages_errors)).to include(
+          'Número não pode ficar em branco'
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Bairro não pode ficar em branco'
+        )
+      end
+    end
+
+    context 'user fields that already exist' do
+      it 'stay in the same page and show uniqueness errors' do
+        user = FactoryBot.create(:completed_user)
+        post :create, params: {
+          establishment: FactoryBot
+            .attributes_for(:establishment).merge(
+              user_attributes: user.attributes,
+              address_attributes: FactoryBot.attributes_for(:address)
+            )
+        }
+        expect(response).to render_template(:new)
+        expect(assigns(:messages_errors)).to include('Email já está em uso')
+        expect(assigns(:messages_errors)).to include('CPF já está em uso')
       end
     end
 
