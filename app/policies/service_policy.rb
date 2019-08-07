@@ -8,7 +8,7 @@ class ServicePolicy < ApplicationPolicy
   end
 
   def create?
-    record.establishment.user == user
+    user.establishment.present? && record.user == user
   end
 
   def edit?
