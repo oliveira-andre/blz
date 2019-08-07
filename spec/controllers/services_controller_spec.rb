@@ -84,6 +84,60 @@ RSpec.describe ::ServicesController, type: :controller do
     end
   end
 
+  describe 'new service' do
+    context 'when user is not authenticated' do
+      it 'redirect to sign in' do
+        get :new, params: { establishment_id: 0 }
+        expect(flash[:alert]).to eq(
+          'Para continuar, efetue login ou registre-se.'
+        )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
+      end
+    end
+
+    context 'when user is authenticated and is a establishment' do
+      let(:establishment) { create(:establishment) }
+
+      before do
+        sign_in establishment.user
+        get :new, params: { establishment_id: establishment.id }
+      end
+
+      it 'render new template service' do
+        expect(response).to render_template(:new)
+      end
+
+      it 'create @service variable associated to current establishment' do
+        expect(assigns(:service).establishment_id).to eq(establishment.id)
+      end
+    end
+
+    context 'when user is a other establishment' do
+      it 'redirect to root page with erro message' do
+        establishment = create(:establishment)
+        other_establishment = create(:establishment)
+
+        sign_in establishment.user
+
+        get :new, params: { establishment_id: other_establishment.id }
+
+        expect(flash[:error]).to eq('Não autorizado')
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context 'when user is authenticated and is not a establishment' do
+      it 'redirect to home page and show message error' do
+        establishment = create(:establishment)
+        sign_in create(:user)
+
+        get :new, params: { establishment_id: establishment.id }
+        expect(flash[:error]).to eq('Não autorizado')
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
   describe 'destroy service' do
     context 'when user is authenticated and owner of service' do
       let(:service) { create(:service) }
