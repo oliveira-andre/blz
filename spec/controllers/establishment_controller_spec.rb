@@ -26,6 +26,42 @@ RSpec.describe EstablishmentsController, type: :controller do
       end
     end
 
+    context 'without user fields' do
+      it 'show error and not create the establishment' do
+        post :create, params: {
+          establishment: FactoryBot
+            .attributes_for(:establishment).merge(
+              user_attributes: FactoryBot.attributes_for(:empty_user),
+              address_attributes: FactoryBot.attributes_for(:address)
+            )
+        }
+        expect { raise ActiveRecord::RecordInvalid }.to raise_error(
+          ActiveRecord::RecordInvalid
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Email não pode ficar em branco'
+        )
+      end
+    end
+
+    context 'without establishment fields' do
+      it 'show error and not create the establishment' do
+        post :create, params: {
+          establishment: FactoryBot
+            .attributes_for(:empty_establishment).merge(
+              user_attributes: FactoryBot.attributes_for(:completed_user),
+              address_attributes: FactoryBot.attributes_for(:address)
+            )
+        }
+        expect { raise ActiveRecord::RecordInvalid }.to raise_error(
+          ActiveRecord::RecordInvalid
+        )
+        expect(assigns(:messages_errors)).to include(
+          'Nome não pode ficar em branco'
+        )
+      end
+    end
+
     context 'without address fields' do
       it 'show error and not create the establishment' do
         post :create, params: {

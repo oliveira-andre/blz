@@ -12,7 +12,13 @@ FactoryBot.define do
       status        { :disapproved }
     end
 
+    trait :empty do
+      name          { '' }
+      timetable     { '' }
+    end
+
     factory :approved_establishment, traits: [:approved]
     factory :disapproved_establishment, traits: [:disapproved]
+    factory :empty_establishment, traits: [:empty]
   end
 end
