@@ -17,7 +17,9 @@ RSpec.describe EstablishmentsController, type: :controller do
               address_attributes: FactoryBot.attributes_for(:address)
             )
         }
-        subject.stub(:create)
+        expect { raise ActiveRecord::RecordInvalid }.to raise_error(
+          ActiveRecord::RecordInvalid
+        )
         expect(assigns(:messages_errors)).to include(
           'Termos de uso não pode ficar em branco'
         )
@@ -33,7 +35,9 @@ RSpec.describe EstablishmentsController, type: :controller do
               address_attributes: FactoryBot.attributes_for(:empty_address)
             )
         }
-        subject.stub(:create)
+        expect { raise ActiveRecord::RecordInvalid }.to raise_error(
+          ActiveRecord::RecordInvalid
+        )
         expect(assigns(:messages_errors)).to include(
           'Rua/Logradouro não pode ficar em branco'
         )
