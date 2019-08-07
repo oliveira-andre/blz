@@ -8,10 +8,12 @@ class EstablishmentsController < ApplicationController
     @establishment = Establishment.new
     @establishment.address = Address.new
     @establishment.user = User.new
+    authorize @establishment
   end
 
   def create
     @establishment = Establishment.new establishment_params
+    authorize @establishment
     @establishment.save!
 
     redirect_to feedbacks_path(email: @establishment.user.email)
