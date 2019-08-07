@@ -24,8 +24,8 @@ class ServicesController < ApplicationController
   end
 
   def create
+    authorize @establishment, policy_class: ServicePolicy
     @service = @establishment.services.build(service_params)
-    authorize @service
     if @service.save
       redirect_to edit_establishment_service_path(
         @establishment, @service, anchor: :professional_services
