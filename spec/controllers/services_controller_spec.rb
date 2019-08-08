@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe ::ServicesController, type: :controller do
-
   describe 'index service' do
     context 'when user is not authenticated' do
       it 'redirect to sign in' do
@@ -369,7 +368,7 @@ RSpec.describe ::ServicesController, type: :controller do
       end
 
       context 'when try to access self service' do
-        it 'show error and redirect to root_path' do
+        it 'get edit with success' do
           service = create(:service)
           sign_in service.establishment.user
           get :edit, params: {
@@ -378,6 +377,98 @@ RSpec.describe ::ServicesController, type: :controller do
           }
           expect(response).to have_http_status(:successful)
           expect(response).to render_template(:edit)
+        end
+      end
+    end
+  end
+
+  describe 'update service' do
+    context 'when user is not logged in' do
+      it 'show error and redirect to sign_in page' do
+        service = create(:service)
+        patch :update, params: {
+          establishment_id: service.establishment_id,
+          id: service.id,
+          service: {
+            description: FFaker::Lorem.sentence
+          }
+        }
+        expect(flash[:alert]).to eq(
+          'Para continuar, efetue login ou registre-se.'
+        )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
+      end
+    end
+
+    context 'when user is logged in' do
+      context 'when user is blocked' do
+        it 'show error and redirect to root_path' do
+          service = create(:service)
+          sign_in create(:blocked_user)
+          patch :update, params: {
+            establishment_id: service.establishment_id,
+            id: service.id,
+            service: {
+              description: FFaker::Lorem.sentence
+            }
+          }
+          expect(flash[:error]).to eq('Seu usuário está bloqueado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when user is common' do
+        it 'show error and redirect to root_path' do
+          service = create(:service)
+          sign_in create(:user)
+          patch :update, params: {
+            establishment_id: service.establishment_id,
+            id: service.id,
+            service: {
+              description: FFaker::Lorem.sentence
+            }
+          }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when is a establishment' do
+        context 'when try to update a service of another establishment' do
+          it 'show error and redirect to root_path' do
+            service = create(:service)
+            another_service = create(:service)
+            sign_in service.establishment.user
+            patch :update, params: {
+              establishment_id: another_service.establishment_id,
+              id: another_service.id,
+              service: {
+                description: FFaker::Lorem.sentence
+              }
+            }
+            expect(flash[:error]).to eq('Não autorizado')
+            expect(response).to redirect_to(root_path)
+          end
+        end
+
+        context 'when try to update self service' do
+          it 'update with success and stay in the same page' do
+            service = create(:service)
+            sign_in service.establishment.user
+            patch :update, params: {
+              establishment_id: service.establishment_id,
+              id: service.id,
+              service: {
+                description: ''
+              }
+            }
+            expect(flash[:notice]).to eq('Serviço atualizado com sucesso')
+            expect(response).to redirect_to(
+              establishment_services_pt_br_path(
+                establishment_id: service.establishment_id
+              )
+            )
+          end
         end
       end
     end
