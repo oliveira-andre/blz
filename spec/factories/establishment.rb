@@ -12,7 +12,20 @@ FactoryBot.define do
       status        { :disapproved }
     end
 
+    trait :empty do
+      name          { '' }
+      timetable     { '' }
+    end
+  
+    trait :with_services do
+      after(:create) do |establishment, _evaluator|
+        create_list(:service, 10, establishment: establishment)
+      end
+    end
+
     factory :approved_establishment, traits: [:approved]
     factory :disapproved_establishment, traits: [:disapproved]
+    factory :empty_establishment, traits: [:empty]
+    factory :establishment_with_services, traits: %i[approved with_services]
   end
 end

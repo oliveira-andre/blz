@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 class EstablishmentsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[new create show]
-  before_action :redirect_if_logged_in, only: %i[new create show]
   before_action :load_establishment, only: %i[edit update success show]
 
   def show; end
@@ -11,10 +8,12 @@ class EstablishmentsController < ApplicationController
     @establishment = Establishment.new
     @establishment.address = Address.new
     @establishment.user = User.new
+    authorize @establishment
   end
 
   def create
     @establishment = Establishment.new establishment_params
+    authorize @establishment
     @establishment.save!
 
     redirect_to feedbacks_path(email: @establishment.user.email)
@@ -26,8 +25,7 @@ class EstablishmentsController < ApplicationController
   def edit; end
 
   def update
-    @address.update edit_establishment_params[:address_attributes]
-    @user.update edit_establishment_params[:user_attributes]
+    @establishment.update edit_establishment_params
     redirect_to edit_establishment_path(@establishment),
                 notice: 'Atualização realizada com sucesso'
   rescue ActiveRecord::RecordInvalid => e
@@ -52,6 +50,7 @@ class EstablishmentsController < ApplicationController
   def edit_establishment_params
     params.require(:establishment)
           .permit(
+            :photo, :about,
             address_attributes: %i[id street number neighborhood zipcode],
             user_attributes: %i[id phone]
           )

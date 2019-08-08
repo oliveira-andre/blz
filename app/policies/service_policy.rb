@@ -1,15 +1,14 @@
 class ServicePolicy < ApplicationPolicy
-
   def index?
-    record.user == user
+    user.establishment.present? && record.user == user
   end
 
   def new?
-    record.user == user
+    user.establishment.present? && record.user == user
   end
 
   def create?
-    record.establishment.user == user
+    user.establishment.present? && record.user == user
   end
 
   def edit?
