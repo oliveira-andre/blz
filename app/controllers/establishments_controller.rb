@@ -22,9 +22,12 @@ class EstablishmentsController < ApplicationController
     render 'new'
   end
 
-  def edit; end
+  def edit
+    authorize @establishment
+  end
 
   def update
+    authorize @establishment
     @establishment.update edit_establishment_params
     redirect_to edit_establishment_path(@establishment),
                 notice: 'Atualização realizada com sucesso'
