@@ -146,13 +146,13 @@ RSpec.describe EstablishmentsController, type: :controller do
     end
   end
 
-  describe 'show scheduling' do
+  describe 'show establishhment' do
     context 'pending' do
       pending
     end
   end
 
-  describe 'edit scheduling' do
+  describe 'edit establishhment' do
     context 'when user is not logged in' do
       it 'show error and redirect to sign_in page' do
         establishment = create(:establishment)
