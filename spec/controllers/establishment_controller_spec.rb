@@ -209,4 +209,89 @@ RSpec.describe EstablishmentsController, type: :controller do
       end
     end
   end
+
+  describe 'edit establishhment' do
+    context 'when user is not logged in' do
+      it 'show error and redirect to sign_in page' do
+        establishment = create(:establishment)
+        patch :update, params: {
+          id: establishment.id,
+          establishment: {
+            about: FFaker::Lorem.sentence
+          }
+        }
+        expect(flash[:alert]).to eq(
+          'Para continuar, efetue login ou registre-se.'
+        )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
+      end
+    end
+
+    context 'when user is logged in' do
+      context 'when user is blocked' do
+        it 'show error and redirect to root_path' do
+          establishment = create(:establishment)
+          sign_in create(:blocked_user)
+          patch :update, params: {
+            id: establishment.id,
+            establishment: {
+              about: FFaker::Lorem.sentence
+            }
+          }
+          expect(flash[:error]).to eq('Seu usuário está bloqueado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when user is common' do
+        it 'show error and redirecto to root_path' do
+          establishment = create(:establishment)
+          sign_in create(:user)
+          patch :update, params: {
+            id: establishment.id,
+            establishment: {
+              about: FFaker::Lorem.sentence
+            }
+          }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when user is a establishment' do
+        context 'when try to access id of another establishment' do
+          it 'show error and redirect to root_path' do
+            establishment = create(:establishment)
+            another_establishment = create(:establishment)
+            sign_in establishment.user
+            patch :update, params: {
+              id: another_establishment.id,
+              establishment: {
+                about: FFaker::Lorem.sentence
+              }
+            }
+            expect(flash[:error]).to eq('Não autorizado')
+            expect(response).to redirect_to(root_path)
+          end
+        end
+
+        context 'when try to update your self establishment' do
+          it 'update with success and stay in the same page' do
+            establishment = create(:establishment)
+            sign_in establishment.user
+            patch :update, params: {
+              id: establishment.id,
+              establishment: {
+                about: FFaker::Lorem.sentence
+              }
+            }
+            expect(flash[:notice]).to eq('Atualização realizada com sucesso')
+            expect(response).to redirect_to(
+              edit_establishment_pt_br_path(establishment.id)
+            )
+          end
+        end
+      end
+    end
+  end
 end
