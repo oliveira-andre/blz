@@ -15,7 +15,7 @@ RSpec.describe EstablishmentsController, type: :controller do
       it 'show error and redirect to root page' do
         sign_in FactoryBot.create(:user)
         get :new
-        expect(flash[:alert]).to eq('Você já está logado')
+        expect(flash[:error]).to eq('Não autorizado')
         expect(response).to redirect_to(root_path)
       end
     end
