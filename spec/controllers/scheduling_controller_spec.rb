@@ -82,7 +82,7 @@ RSpec.describe SchedulingController, type: :controller do
     end
 
     context 'when user is authenticated' do
-      let(:schedule) { create(:schedule) }
+      let(:schedule) { create(:schedule_in_establishment) }
 
       context 'when user is blocked' do
         it 'redirect to root page, not login and show error' do
@@ -99,7 +99,8 @@ RSpec.describe SchedulingController, type: :controller do
           params = {
             scheduling: {
               professional_service_id: schedule.professional_service.id,
-              date: schedule.date, in_home: 0
+              date: schedule.date,
+              in_home: 0
             }
           }
           post :create, params: params
@@ -178,7 +179,7 @@ RSpec.describe SchedulingController, type: :controller do
             scheduling: {
               professional_service_id: @scheduling.professional_service.id,
               date: @scheduling.date,
-              in_home: 0
+              in_home: @scheduling.in_home
             }
           }
           expect(response).to redirect_to(

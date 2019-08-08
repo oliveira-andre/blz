@@ -9,6 +9,11 @@ FactoryBot.define do
       association :professional_service, :in_home
     end
 
+    trait :in_establishment do
+      association :professional_service, :in_establishment
+    end
+
     factory :schedule_in_home, traits: [:in_home]
+    factory :schedule_in_establishment, traits: [:in_establishment]
   end
 end
