@@ -176,7 +176,7 @@ RSpec.describe EstablishmentsController, type: :controller do
       end
 
       context 'when user is common' do
-        it 'show error and redirecto to root_path' do
+        it 'show error and redirect to root_path' do
           establishment = create(:establishment)
           sign_in create(:user)
           get :edit, params: { id: establishment.id }
