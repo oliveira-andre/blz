@@ -10,4 +10,12 @@ class EstablishmentPolicy < ApplicationPolicy
   def create?
     user.nil?
   end
+
+  def edit?
+    record.user.id == user.id
+  end
+
+  def update?
+    record.user.id == user.id
+  end
 end
