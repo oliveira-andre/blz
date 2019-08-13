@@ -369,7 +369,7 @@ RSpec.describe ::ServicesController, type: :controller do
       end
 
       context 'when try to access self service' do
-        it 'show error and redirect to root_path' do
+        it 'render template edit and show page with success' do
           service = create(:service)
           sign_in service.establishment.user
           get :edit, params: {
