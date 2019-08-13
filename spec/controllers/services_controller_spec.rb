@@ -452,22 +452,43 @@ RSpec.describe ::ServicesController, type: :controller do
         end
 
         context 'when try to update self service' do
-          it 'update with success and stay in the same page' do
-            service = create(:service)
-            sign_in service.establishment.user
-            patch :update, params: {
-              establishment_id: service.establishment_id,
-              id: service.id,
-              service: {
-                description: ''
+          context 'trying to update fields that cant be updated' do
+            it 'show error messages and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              another_service = create(:service)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
+                  title: another_service.title,
+                  status: 'approved'
+                }
               }
-            }
-            expect(flash[:notice]).to eq('Serviço atualizado com sucesso')
-            expect(response).to redirect_to(
-              establishment_services_pt_br_path(
-                establishment_id: service.establishment_id
+              expect(assigns(:service).errors.full_messages).to include(
+                'Serviço não pode ser aprovado sem profissionais com agenda.'
               )
-            )
+            end
+          end
+
+          context 'when update the fields that can be updated' do
+            it 'update with success and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
+                  description: 'teste'
+                }
+              }
+              expect(flash[:notice]).to eq('Serviço atualizado com sucesso')
+              expect(response).to redirect_to(
+                establishment_services_pt_br_path(
+                  establishment_id: service.establishment_id
+                )
+              )
+            end
           end
         end
       end
