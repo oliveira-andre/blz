@@ -311,4 +311,75 @@ RSpec.describe ::ServicesController, type: :controller do
       end
     end
   end
+
+  describe 'edit service' do
+    context 'when user is not logged in' do
+      it 'show error and redirect to sign_in page' do
+        service = create(:service)
+        get :edit, params: {
+          establishment_id: service.establishment_id,
+          id: service.id
+        }
+        expect(flash[:alert]).to eq(
+          'Para continuar, efetue login ou registre-se.'
+        )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
+      end
+    end
+
+    context 'when user is logged in' do
+      context 'when user is blocked' do
+        it 'show error and redirect to root_path' do
+          service = create(:service)
+          sign_in create(:blocked_user)
+          get :edit, params: {
+            establishment_id: service.establishment_id,
+            id: service.id
+          }
+          expect(flash[:error]).to eq('Seu usuário está bloqueado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when user is common' do
+        it 'show error and redirect to root_path' do
+          service = create(:service)
+          sign_in create(:user)
+          get :edit, params: {
+            establishment_id: service.establishment_id,
+            id: service.id
+          }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when try to access service of another estabishment' do
+        it 'show error and redirect to root_path' do
+          service = create(:service)
+          another_service = create(:service)
+          sign_in service.establishment.user
+          get :edit, params: {
+            establishment_id: another_service.establishment_id,
+            id: another_service.id
+          }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when try to access self service' do
+        it 'render template edit and show page with success' do
+          service = create(:service)
+          sign_in service.establishment.user
+          get :edit, params: {
+            establishment_id: service.establishment_id,
+            id: service.id
+          }
+          expect(response).to have_http_status(:successful)
+          expect(response).to render_template(:edit)
+        end
+      end
+    end
+  end
 end
