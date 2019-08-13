@@ -277,7 +277,7 @@ RSpec.describe EstablishmentsController, type: :controller do
 
         context 'when try to update your self establishment' do
           context 'trying to update fields that cant be updated' do
-            it 'update with success and stay in the same page' do
+            it 'not changed those fields, but update with success' do
               establishment = create(:establishment)
               cpf = FFaker::IdentificationBR.cpf
               name = FFaker::Lorem.unique.word
