@@ -1,3 +1,11 @@
+.establishment-new {
+  padding-bottom: 40px;
+
+  @include mobile {
+    padding-bottom: 80px;
+  }
+}
+
 form.establishment {
   .file-label {
     width: fit-content;
