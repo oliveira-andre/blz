@@ -368,7 +368,7 @@ RSpec.describe ::ServicesController, type: :controller do
       end
 
       context 'when try to access self service' do
-        it 'get edit with success' do
+        it 'render template edit and show page with success' do
           service = create(:service)
           sign_in service.establishment.user
           get :edit, params: {

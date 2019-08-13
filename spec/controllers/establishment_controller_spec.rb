@@ -176,7 +176,7 @@ RSpec.describe EstablishmentsController, type: :controller do
       end
 
       context 'when user is common' do
-        it 'show error and redirecto to root_path' do
+        it 'show error and redirect to root_path' do
           establishment = create(:establishment)
           sign_in create(:user)
           get :edit, params: { id: establishment.id }
@@ -244,7 +244,7 @@ RSpec.describe EstablishmentsController, type: :controller do
       end
 
       context 'when user is common' do
-        it 'show error and redirecto to root_path' do
+        it 'show error and redirect to root_path' do
           establishment = create(:establishment)
           sign_in create(:user)
           patch :update, params: {
@@ -276,19 +276,54 @@ RSpec.describe EstablishmentsController, type: :controller do
         end
 
         context 'when try to update your self establishment' do
-          it 'update with success and stay in the same page' do
-            establishment = create(:establishment)
-            sign_in establishment.user
-            patch :update, params: {
-              id: establishment.id,
-              establishment: {
-                about: FFaker::Lorem.sentence
+          context 'trying to update fields that cant be updated' do
+            it 'not changed those fields, but update with success' do
+              establishment = create(:establishment)
+              cpf = FFaker::IdentificationBR.cpf
+              name = FFaker::Lorem.unique.word
+              email = FFaker::Internet.email
+              sign_in establishment.user
+              patch :update, params: {
+                id: establishment.id,
+                establishment: {
+                  name: name,
+                  timetable: 'Das 12:00 às 16:00',
+                  user_attributes: {
+                    name: name,
+                    birth_date: '30/05/2005',
+                    email: email,
+                    cpf: cpf
+                  }
+                }
               }
-            }
-            expect(flash[:notice]).to eq('Atualização realizada com sucesso')
-            expect(response).to redirect_to(
-              edit_establishment_pt_br_path(establishment.id)
-            )
+              expect(flash[:notice]).to eq('Atualização realizada com sucesso')
+              expect(response).to redirect_to(
+                edit_establishment_pt_br_path(establishment.id)
+              )
+              expect(establishment.name).not_to eq(name)
+              expect(establishment.timetable).not_to eq('Das 12:00 às 16:00')
+              expect(establishment.user.cpf).not_to eq(cpf)
+              expect(establishment.user.name).not_to eq(name)
+              expect(establishment.user.email).not_to eq(email)
+              expect(establishment.user.birth_date).not_to eq('30/05/2005')
+            end
+          end
+
+          context 'when update the fields that can be updated' do
+            it 'update with success and stay in the same page' do
+              establishment = create(:establishment)
+              sign_in establishment.user
+              patch :update, params: {
+                id: establishment.id,
+                establishment: {
+                  about: FFaker::Lorem.sentence
+                }
+              }
+              expect(flash[:notice]).to eq('Atualização realizada com sucesso')
+              expect(response).to redirect_to(
+                edit_establishment_pt_br_path(establishment.id)
+              )
+            end
           end
         end
       end
