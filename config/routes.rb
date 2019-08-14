@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   localized do
     devise_for :users, controllers: {
-      omniauth_callbacks: 'callbacks',
+      omniauth_callbacks: 'users/omniauth_callbacks',
       registrations: 'users/registrations'
     }
 
