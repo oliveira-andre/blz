@@ -51,6 +51,10 @@ class ServicesController < ApplicationController
       return
     end
 
+    if params[:cover_image_id]
+      @service.update(cover_image_id: params[:cover_image_id])
+    end
+
     if @service.update_and_rebuild_schedule(service_params)
       redirect_to establishment_services_path(@service.establishment),
                   notice: 'Serviço atualizado com sucesso'
