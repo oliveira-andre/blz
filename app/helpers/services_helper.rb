@@ -24,4 +24,12 @@ module ServicesHelper
       professional_service_id: professional_services_ids
     ).ids.any?
   end
+
+  def load_cover(service)
+    if service.cover_image_id?
+      ActiveStorage::Attachment.find(service.cover_image_id)
+    else
+      service.photos.sample
+    end
+  end
 end
