@@ -22,6 +22,7 @@ pt-BR:
     dashboard: painel
     sign_in: acessar
     sign_up: cadastrar
+    auth: autenticacao
   pagy:
     nav:
       prev: "&lsaquo;&nbsp;Anterior"
