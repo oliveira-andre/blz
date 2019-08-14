@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'open-uri'
 
 class User < ApplicationRecord
   scope :no_establishment, -> { where.not(id: establishement_users_ids) }
@@ -6,8 +7,9 @@ class User < ApplicationRecord
   enum profile: %i[common admin]
   enum status: %i[active blocked]
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, :trackable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :validatable, :trackable, :omniauthable,
+         omniauth_providers: [:facebook]
 
   validates :name, presence: true
   validates :birth_date, presence: true, unless: :skip_validation_to_user?
@@ -37,6 +39,16 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.name = auth.info.name
       user.password = Devise.friendly_token[0, 20]
+      user.terms_acceptation = true
+      downloaded_image = open(auth.info.image) if auth.info.image.present?
+
+      if downloaded_image
+        user.photo.attach(
+          io: downloaded_image,
+          filename: 'avatar.jpg',
+          content_type: downloaded_image.content_type
+        )
+      end
     end
   end
 
