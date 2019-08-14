@@ -2,7 +2,7 @@
   <div class="image-mobile box" style="<%= 
     (scheduling.service.photos.attached?) ?
         liner_gradiente_card_img_dashboard_user(
-          url_for(scheduling.thumbnail(scheduling.service.photos.sample, custom: '960x640!'))
+          url_for(scheduling.thumbnail(load_cover(scheduling.service), custom: '960x640!'))
         ) : liner_gradiente_card_img_dashboard_user(default_image_service(scheduling.service)) %>">
     <div class="columns content is-multiline">
       <div class="column is-12">

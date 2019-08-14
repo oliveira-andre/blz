@@ -54,6 +54,14 @@ class Service < ApplicationRecord
     where('title ILIKE ?', "%#{query}%")
   end
 
+  def load_cover(service)
+    if service.cover_image_id?
+      ActiveStorage::Attachment.find(service.cover_image_id)
+    else
+      service.photos.sample
+    end
+  end
+
   private
 
   def limit_number_photos
