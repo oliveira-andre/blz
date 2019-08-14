@@ -452,16 +452,33 @@ RSpec.describe ::ServicesController, type: :controller do
         end
 
         context 'when try to update self service' do
-          context 'trying to update fields that cant be updated' do
+          context 'when exist another service with the same title' do
             it 'show error messages and stay in the same page' do
               service = create(:service_awating_avaliation)
-              another_service = create(:service)
+              another_service = create(:service,
+                                       establishment: service.establishment)
               sign_in service.establishment.user
               patch :update, params: {
                 establishment_id: service.establishment_id,
                 id: service.id,
                 service: {
-                  title: another_service.title,
+                  title: another_service.title
+                }
+              }
+              expect(assigns(:service).errors.full_messages).to include(
+                'Título já está em uso'
+              )
+            end
+          end
+
+          context 'when try to approve without user with schedule' do
+            it 'show error messages and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
                   status: 'approved'
                 }
               }

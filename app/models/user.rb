@@ -19,7 +19,6 @@ class User < ApplicationRecord
   validates :cpf, uniqueness: true, unless: :skip_validation_to_user?
 
   validate :photo_type, unless: :skip_validation_to_user?
-  validate :cpf_change, on: :update
 
   has_many :scheduling
   has_many :payment_cards
@@ -47,10 +46,6 @@ class User < ApplicationRecord
 
   def self.establishement_users_ids
     Establishment.all.pluck(:user_id)
-  end
-
-  def cpf_change
-    errors.add(:cpf, 'Não pode ser atualizado') if cpf_changed?
   end
 
   private
