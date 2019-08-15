@@ -1,6 +1,6 @@
 $(document).on("turbolinks:load", function () {
   $('.is-dropdown').click(function () {
-    renderDropdown($(this).data('target'));
+    renderDropdown(this.dataset.target);
   });
 });
 
