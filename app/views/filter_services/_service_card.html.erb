@@ -3,7 +3,7 @@
     <div class="">
       <div class="service-image">
         <% if service.photos.attached? %>
-          <%= image_tag service.thumbnail(service.photos.sample, custom: '320x320!') %>
+          <%= image_tag service.thumbnail(load_cover(service), custom: '320x320!') %>
         <% else %>
           <%= image_tag default_image_service(service, size: :small) %>
         <% end %>

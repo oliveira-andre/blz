@@ -52,8 +52,14 @@ class ServicesController < ApplicationController
     end
 
     if @service.update_and_rebuild_schedule(service_params)
-      redirect_to establishment_services_path(@service.establishment),
-                  notice: 'Serviço atualizado com sucesso'
+      respond_to do |format|
+        format.html {
+          redirect_to establishment_services_path(
+            @service.establishment
+          ), notice: 'Serviço atualizado com sucesso'
+        }
+        format.js
+      end
     else
       @professionals = @service.professionals_to_link
       render 'edit'
@@ -85,6 +91,6 @@ class ServicesController < ApplicationController
   def service_params
     params.require(:service).permit(:title, :description, :amount, :duration,
                                     :category_id, :local_type, :status,
-                                    :start_from, photos: [])
+                                    :start_from, :cover_image_id, photos: [])
   end
 end

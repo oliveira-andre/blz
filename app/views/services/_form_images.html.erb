@@ -22,20 +22,26 @@
               <figure class="image is-96x96">
                 <%= image_tag(@service.thumbnail(photo, :small)) %>
               </figure>
-              <div class="options">
-                <% unless photo.new_record? %>
-                  <%= link_to photo_path(photo), remote: true, method: :delete,
+                <button class="button is-light is-dropdown options" type="button" data-target="dropdown-photo-<%= photo.id %>">
+                  <span class="icon is-size-7">
+                    <%= 'Capa' if @service.cover_image_id == photo.id %>
+                    <i class="fas fa-ellipsis-v has-text-white"></i>
+                  </span>
+                </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-photo-<%= photo.id %>" role="menu">
+              <div class="dropdown-content">
+                <a class="dropdown-item modal-button" data-target="photo-show-<%= photo.id %>">
+                  Visualizar
+                </a>
+                <%= link_to photo_path(photo), remote: true, method: :delete,
                               data: { confirm: 'Você tem certeza?' },
-                              class: "button is-light" do %>
-                    <span class="icon">
-                      <i class="fas fa-times has-text-danger is-size-4"></i>
-                    </span>
-                  <% end %>
-                  <a class="button is-light modal-button" data-target="photo-show-<%=photo.id%>">
-                    <span class="icon">
-                      <i class="far fa-eye has-text-white is-size-4"></i>
-                    </span>
-                  </a>
+                              class: "dropdown-item" do %>
+                  Remover
+                <% end %>
+                <%= link_to establishment_service_path(@service, service: { cover_image_id: photo.id }),
+                 class: 'dropdown-item', remote: true, method: :patch do %>
+                  Marcar como capa
                 <% end %>
               </div>
             </div>

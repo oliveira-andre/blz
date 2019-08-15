@@ -3,7 +3,7 @@
     <div class="card-image">
       <figure class="image is-4by3">
         <% if service.photos.attached? %>
-          <%= image_tag service.thumbnail(service.photos.sample, :medium) %>
+          <%= image_tag service.thumbnail(load_cover(service), :medium) %>
         <% else %>
           <img src="<%= default_image_service(service) %>">
         <% end %>

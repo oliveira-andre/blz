@@ -77,22 +77,34 @@ html, body {
       margin-left: 5px;
       margin-right: 10px;
 
+      .dropdown-menu {
+        position: absolute;
+        top: auto;
+        left: auto;
+      }
+
       .options {
         position: relative;
-        top: -96px;
+        top: -22px;
         background-color: rgba(0, 0, 0, 0.4);
-        opacity: 0;
+        opacity: 1;
         min-width: 96px;
-        min-height: 96px;
+        min-height: 20px;
         max-width: 96px;
-        max-height: 96px;
-        transition: all .5ms;
-
-        &:hover {
-          opacity: 1;
+        max-height: 20px;
+        
+        .icon {
+          top: -3px;
+          position: relative;
+          color: #fff;
         }
 
-        a.button.is-light {
+        i {
+          left: 50px;
+          position: absolute;
+        }
+
+        .button.is-light {
           margin-left: 30px;
           margin-top: 5px;
           background: transparent;
