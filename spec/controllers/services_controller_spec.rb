@@ -488,6 +488,40 @@ RSpec.describe ::ServicesController, type: :controller do
             end
           end
 
+          context 'when try to approve with blank required fields' do
+            it 'show error messages and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
+                  title: '',
+                  description: '',
+                  amount: '',
+                  duration: '',
+                  category: '',
+                  local_type: ''
+                }
+              }
+              expect(assigns(:service).errors.full_messages).to include(
+                'Título não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Descrição não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Valor não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Duração não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Localidade do Serviço não pode ficar em branco'
+              )
+            end
+          end
+
           context 'when update the fields that can be updated' do
             it 'update with success and stay in the same page' do
               service = create(:service_awating_avaliation)
