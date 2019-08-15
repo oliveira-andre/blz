@@ -1,6 +1,6 @@
 <div class="galery">
     <% if @service.photos.attached? %>
-    <div class="image-mobile" style='background: url("<%= url_for(load_cover(@service)%>"); background-size: cover;'>
+    <div class="image-mobile" style='background: url("<%= url_for(load_cover(@service))%>"); background-size: cover;'>
       <button class="button is-ligth modal-button" data-target="modal-photos">MAIS FOTOS</button>
     </div>
     <div class="modal" id="modal-photos">
