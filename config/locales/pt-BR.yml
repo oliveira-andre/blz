@@ -103,9 +103,11 @@ pt-BR:
 
     enums:
       scheduling:
+        analyze: Em análise        
         scheduled: Agendado
         finished: Finalizado
         canceled: Cancelado
+        recused: recusado
         busy: Ocupado
       establishment:
         analyze: Em análise
