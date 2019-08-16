@@ -24,8 +24,11 @@ class Establishment < ApplicationRecord
       professional_id: professionals.ids,
       service_id: services.ids
     ).ids.uniq
-    ::Scheduling.where(professional_service_id: professional_services_ids)
-                .scheduled.order(:date)
+
+    Scheduling.where(
+      professional_service_id: professional_services_ids,
+      status: %i[scheduled analyze]
+    ).order(:date).reorder(:status)
   end
 
   def self.search(query)

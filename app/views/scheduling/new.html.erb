@@ -73,6 +73,14 @@
             <% end %>
           </div>
         <% end %>
+        <div class="field-body">
+          <div class="column is-12">
+            <i class="fas fa-question-circle is-size-4 has-text-danger"></i>
+            <span class="has-text-danger">
+              O agendamento será confirmado após aceitação do profissional
+            </span>
+          </div>
+        </div>
         <div class="column is-12 actions">
           <%= f.hidden_field :professional_service_id, value: @scheduling.professional_service.id %>
           <%= f.hidden_field :date, value:  @scheduling.date %>
