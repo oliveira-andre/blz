@@ -41,6 +41,8 @@
       <div class="column is-12 actions">
         <%= link_to 'Ver detalhes', scheduling_path(scheduling), class: 'button is-light' %>
         <%= link_to :finalizar, scheduling_path(scheduling, status: :finished), class: 'button is-primary-custom is-pulled-right is-capitalized', method: :put if Time.now > scheduling.date %>
+        <%= link_to :aceitar, scheduling_path(scheduling, status: :scheduled), class: 'button is-primary is-pulled-right is-capitalized', method: :put if scheduling.analyze? %>
+        <%= link_to :recusar, scheduling_path(scheduling, status: :recused), class: 'button is-danger is-pulled-right is-capitalized', method: :put if scheduling.analyze? %>
       </div>
     </div>
   </div>
