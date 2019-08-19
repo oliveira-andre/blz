@@ -72,6 +72,18 @@ html, body {
     }
 
     .actions {
+      @media (min-width: 360px) {
+        .button.is-primary {
+          margin-left: 5px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .button.is-primary {
+          margin-top: -40px;
+        }
+      }
+
       .button.is-light {
         background-color: transparent;
         border: 1px solid $primary-color;

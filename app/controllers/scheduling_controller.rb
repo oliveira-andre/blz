@@ -36,11 +36,6 @@ class SchedulingController < ApplicationController
 
   def update
     authorize @scheduling
-    if params[:status] == 'finished'
-      @scheduling.finished!
-      flash[:success] = 'Finalizado com sucesso'
-    end
-
     redirect_to establishments_dashboard_path(
       @scheduling.professional_service.service.establishment
     )
