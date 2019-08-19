@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       resources :reviews, only: :create
       resources :report_problems, only: :create,
                                   controller: :report_scheduling_problems
+      resources :status, only: :update, controller: :scheduling_status
       collection do
         resources :busies, only: :create, controller: :scheduling_busies
       end
