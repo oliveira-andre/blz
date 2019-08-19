@@ -39,6 +39,8 @@ class Scheduling < ApplicationRecord
   after_save :block_user
   after_save :set_schedule_free
   after_save :cancel_notification
+  after_save :accepted_notification
+  after_save :recused_notification
   after_create :notifications
 
   accepts_nested_attributes_for :address, allow_destroy: true,
@@ -172,9 +174,22 @@ class Scheduling < ApplicationRecord
   def notifications
     return if busy?
 
-    SchedulingMailer.to_user(self).deliver_later
     SchedulingMailer.to_establishment(self).deliver_later
     NotificationBroadcastJob.perform_later(self)
+  end
+
+  def accepted_notification
+    return unless scheduled?
+
+    AcceptedSchedulingMailer.to_establishment(self).deliver_later
+    AcceptedSchedulingMailer.to_user(self).deliver_later
+  end
+
+  def recused_notification
+    return unless recused?
+
+    RecusedSchedulingMailer.to_establishment(self).deliver_later
+    RecusedSchedulingMailer.to_user(self).deliver_later
   end
 
   def in_establishment?
