@@ -60,7 +60,7 @@ class Scheduling < ApplicationRecord
 
     schedulings = Scheduling.where(
       professional_service_id: professional_services_ids,
-      status: %i[scheduled busy]
+      status: %i[scheduled busy analyze]
     )
 
     schedulings.each do |s|
@@ -76,8 +76,9 @@ class Scheduling < ApplicationRecord
 
   def user_date_busy?
     scheduling_ids = user.scheduling.where(
-      date: (date..(date + service_duration.minutes - 1.second))
-    ).scheduled.ids
+      date: (date..(date + service_duration.minutes - 1.second)),
+      status: %i[scheduled analyze]
+    ).ids
 
     return if scheduling_ids.empty?
 
