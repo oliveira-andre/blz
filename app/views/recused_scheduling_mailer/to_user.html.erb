@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="title has-text-centered has-text-primary is-size-2">BLZ</h1>
-  <h2 class="subtitle has-text-centered has-text-white  is-size-4">Agendamento realizado</h2>
+  <h2 class="subtitle has-text-centered has-text-white  is-size-4">Seu agendamento foi recusado</h2>
   <div class="item">
     <p class=" has-text-centered has-text-primary is-size-4">
       Olá, <%= @scheduling.user.name %>!
@@ -9,8 +9,8 @@
   <div class="item">
     <p class="has-text-centered has-text-black is-size-5">
       O agendamento do serviço <strong><%= @scheduling.service.title %></strong>
-      com <strong><%= @scheduling.service.establishment.name %></strong> foi
-      realizado com sucesso.
+      com <strong><%= @scheduling.service.establishment.name %></strong> infelizmente
+      foi recusado, por favor tente agendar em outro horário e/ou com outro estabelecimento ou profissional.
     </p>
   </div>
   <div class="item">
