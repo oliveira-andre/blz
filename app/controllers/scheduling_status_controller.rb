@@ -4,11 +4,17 @@ class SchedulingStatusController < ApplicationController
   before_action :load_scheduling, only: %i[update]
 
   def update
+    authorize @scheduling, policy_class: SchedulingStatusPolicy
     if send "set_status_#{params[:status]}"
       redirect_to establishments_dashboard_path(
         @scheduling.professional_service.service.establishment
       )
     end
+  rescue ActiveRecord::RecordInvalid => e
+    @scheduling.errors.full_messages.each { |error| flash[:error] = error }
+    redirect_to establishments_dashboard_path(
+      @scheduling.professional_service.service.establishment
+    )
   end
 
   private
