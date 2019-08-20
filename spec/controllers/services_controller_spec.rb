@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe ::ServicesController, type: :controller do
-
   describe 'index service' do
     context 'when user is not authenticated' do
       it 'redirect to sign in' do
@@ -378,6 +377,170 @@ RSpec.describe ::ServicesController, type: :controller do
           }
           expect(response).to have_http_status(:successful)
           expect(response).to render_template(:edit)
+        end
+      end
+    end
+  end
+
+  describe 'update service' do
+    context 'when user is not logged in' do
+      it 'show error and redirect to sign_in page' do
+        service = create(:service)
+        patch :update, params: {
+          establishment_id: service.establishment_id,
+          id: service.id,
+          service: {
+            description: FFaker::Lorem.sentence
+          }
+        }
+        expect(flash[:alert]).to eq(
+          'Para continuar, efetue login ou registre-se.'
+        )
+        expect(response).to redirect_to(new_user_session_pt_br_path)
+      end
+    end
+
+    context 'when user is logged in' do
+      context 'when user is blocked' do
+        it 'show error and redirect to root_path' do
+          service = create(:service)
+          sign_in create(:blocked_user)
+          patch :update, params: {
+            establishment_id: service.establishment_id,
+            id: service.id,
+            service: {
+              description: FFaker::Lorem.sentence
+            }
+          }
+          expect(flash[:error]).to eq('Seu usuário está bloqueado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when user is common' do
+        it 'show error and redirect to root_path' do
+          service = create(:service)
+          sign_in create(:user)
+          patch :update, params: {
+            establishment_id: service.establishment_id,
+            id: service.id,
+            service: {
+              description: FFaker::Lorem.sentence
+            }
+          }
+          expect(flash[:error]).to eq('Não autorizado')
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'when is a establishment' do
+        context 'when try to update a service of another establishment' do
+          it 'show error and redirect to root_path' do
+            service = create(:service)
+            another_service = create(:service)
+            sign_in service.establishment.user
+            patch :update, params: {
+              establishment_id: another_service.establishment_id,
+              id: another_service.id,
+              service: {
+                description: FFaker::Lorem.sentence
+              }
+            }
+            expect(flash[:error]).to eq('Não autorizado')
+            expect(response).to redirect_to(root_path)
+          end
+        end
+
+        context 'when try to update self service' do
+          context 'when exist another service with the same title' do
+            it 'show error messages and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              another_service = create(:service,
+                                       establishment: service.establishment)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
+                  title: another_service.title
+                }
+              }
+              expect(assigns(:service).errors.full_messages).to include(
+                'Título já está em uso'
+              )
+            end
+          end
+
+          context 'when try to approve without user with schedule' do
+            it 'show error messages and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
+                  status: 'approved'
+                }
+              }
+              expect(assigns(:service).errors.full_messages).to include(
+                'Serviço não pode ser aprovado sem profissionais com agenda.'
+              )
+            end
+          end
+
+          context 'when try to approve with blank required fields' do
+            it 'show error messages and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
+                  title: '',
+                  description: '',
+                  amount: '',
+                  duration: '',
+                  category: '',
+                  local_type: ''
+                }
+              }
+              expect(assigns(:service).errors.full_messages).to include(
+                'Título não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Descrição não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Valor não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Duração não pode ficar em branco'
+              )
+              expect(assigns(:service).errors.full_messages).to include(
+                'Localidade do Serviço não pode ficar em branco'
+              )
+            end
+          end
+
+          context 'when update the fields that can be updated' do
+            it 'update with success and stay in the same page' do
+              service = create(:service_awating_avaliation)
+              sign_in service.establishment.user
+              patch :update, params: {
+                establishment_id: service.establishment_id,
+                id: service.id,
+                service: {
+                  description: 'teste'
+                }
+              }
+              expect(flash[:notice]).to eq('Serviço atualizado com sucesso')
+              expect(response).to redirect_to(
+                establishment_services_pt_br_path(
+                  establishment_id: service.establishment_id
+                )
+              )
+            end
+          end
         end
       end
     end
