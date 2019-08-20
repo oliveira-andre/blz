@@ -3,6 +3,6 @@ class SchedulingMailer < ApplicationMailer
     @scheduling = scheduling
 
     mail to: @scheduling.service.establishment.user.email,
-         subject: 'BLZ - Solicitação agendamento'
+         subject: 'BLZ - Solicitação de agendamento'
   end
 end
