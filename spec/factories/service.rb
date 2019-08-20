@@ -21,7 +21,12 @@ FactoryBot.define do
       status { %i[recused awaiting_avaliation archived].sample }
     end
 
+    trait :awating_avaliation do
+      status { :awaiting_avaliation }
+    end
+
     factory :service_in_home, traits: [:home]
     factory :service_in_establishment, traits: [:establishment]
+    factory :service_awating_avaliation, traits: [:awating_avaliation]
   end
 end
