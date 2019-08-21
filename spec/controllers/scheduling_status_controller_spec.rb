@@ -124,7 +124,7 @@ RSpec.describe SchedulingStatusController, type: :controller do
       end
 
       context 'when is establishment user and try to recuse' do
-        it 'accept with success' do
+        it 'recuse with success' do
           sign_in scheduling.professional_service.service.establishment.user
           patch :update, params: {
             scheduling_id: scheduling.id,
