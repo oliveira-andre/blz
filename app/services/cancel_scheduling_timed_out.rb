@@ -2,10 +2,11 @@ module CancelSchedulingTimedOut
   class << self
     def execute
       schedulings = Scheduling.analyze
+      time = Time.now - 4.hours
       schedulings.each do |scheduling|
-        if Time.now > scheduling.date
+        if time > scheduling.date
           scheduling.update(
-            status: :canceled, canceled_at: Time.now, canceled_by: 1,
+            status: :canceled, canceled_at: time, canceled_by: 1,
             canceled_reason: canceled_sentece
           )
           scheduling.professional_service.service.establishment.user.blocked!
