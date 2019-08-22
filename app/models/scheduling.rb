@@ -105,6 +105,10 @@ class Scheduling < ApplicationRecord
     unless (Time.now.utc - 4.hours) > date
       @errors.add(:scheduling, 'não pode ser finalizado antes a data combinada')
     end
+
+    unless Scheduling.find(id).scheduled?
+      @errors.add(:scheduling, 'não pode ser finalizado se não foi aceito')
+    end
   end
 
   def cancel_fields
