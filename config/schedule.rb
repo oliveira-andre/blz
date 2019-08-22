@@ -5,3 +5,7 @@ end
 every 59.minutes do
   command 'backup perform -c /var/www/blz/backup/config.rb --trigger blzbackup'
 end
+
+every 1.hour do
+  runner 'CancelSchedulingTimedOut.execute'
+end
