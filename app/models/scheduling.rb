@@ -102,7 +102,7 @@ class Scheduling < ApplicationRecord
   def verify_finishing
     return unless finished?
 
-    unless (Time.now - 4.hours) > date
+    unless (Time.now.utc - 4.hours) > date
       @errors.add(:scheduling, 'não pode ser finalizado antes a data combinada')
     end
   end
@@ -126,7 +126,7 @@ class Scheduling < ApplicationRecord
   def verify_canceling
     return unless canceled?
 
-    if (Time.now - 4.hours) > date
+    if (Time.now.utc - 4.hours) > date
       @errors.add(:scheduling, 'não pode ser cancelado após a data combinada')
     end
   end
@@ -142,7 +142,7 @@ class Scheduling < ApplicationRecord
   def verify_accepting
     return unless scheduled?
 
-    if (Time.now - 4.hours) > date
+    if (Time.now.utc - 4.hours) > date
       @errors.add(:scheduling, 'não pode ser aceito após a data combinada')
     end
   end
@@ -150,7 +150,7 @@ class Scheduling < ApplicationRecord
   def verify_recusing
     return unless recused?
 
-    if (Time.now - 4.hours) > date
+    if (Time.now.utc - 4.hours) > date
       @errors.add(:scheduling, 'não pode ser recusado após a data combinada')
     end
   end

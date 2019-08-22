@@ -2,7 +2,7 @@ module CancelSchedulingTimedOut
   class << self
     def execute
       schedulings = Scheduling.analyze
-      time = Time.now - 4.hours
+      time = Time.now.utc - 4.hours
       schedulings.each do |scheduling|
         if time > scheduling.date
           scheduling.update(
