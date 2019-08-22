@@ -34,6 +34,8 @@ class Scheduling < ApplicationRecord
   validate :cancel_fields
   validate :verify_canceling
   validate :verify_in_home, unless: :busy?
+  validate :verify_accepting
+  validate :verify_recusing
 
   after_create :set_schedule_busy
   after_save :block_user
@@ -134,6 +136,22 @@ class Scheduling < ApplicationRecord
       @errors.add(:service, 'não permite essa localidade')
     elsif in_establishment? && service.home?
       @errors.add(:service, 'não permite essa localidade')
+    end
+  end
+
+  def verify_accepting
+    return unless scheduled?
+
+    if Time.now > date
+      @errors.add(:scheduling, 'não pode ser aceito após a data combinada')
+    end
+  end
+
+  def verify_recusing
+    return unless recused?
+
+    if Time.now > date
+      @errors.add(:scheduling, 'não pode ser recusado após a data combinada')
     end
   end
 
