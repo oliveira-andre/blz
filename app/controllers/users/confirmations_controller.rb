@@ -5,9 +5,9 @@ module Users
     def show
       @user.confirm
       if current_user
-        redirect_to new_user_session_path
-      else
         redirect_to root_path
+      else
+        redirect_to new_user_session_path
       end
       flash[:success] = 'Email confirmado com sucesso!'
     end
