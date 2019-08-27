@@ -1,5 +1,15 @@
-<div class="notify_header">
-  <nav class="is-white has-text-centered">
-    <p>Para finalizar seu cadastro acesse a página de perfil e preencha os campos obrigatórios.</p>
-  </nav>
-</div>
+<% unless current_user.confirmed? %>
+  <div class="notify_header">
+    <nav class="is-white has-text-centered">
+      <p>Por favor confirme seu email, para reenviar email de confirmação <%= link_to 'clique aqui', new_user_confirmation_path %>.</p>
+    </nav>
+  </div>
+<% else %>
+  <% unless current_user.registration_ok? %>
+  <div class="notify_header">
+    <nav class="is-white has-text-centered">
+      <p>Para finalizar seu cadastro acesse a página de perfil e preencha os campos obrigatórios.</p>
+    </nav>
+  </div>
+  <% end %>
+<% end %>

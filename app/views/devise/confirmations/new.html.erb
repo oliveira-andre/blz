@@ -10,13 +10,13 @@
           <div class="field">
             <label class="label has-text-grey has-text-weight-normal">Email <small class="is-danger">*</small></label>
             <div class="control">
-              <%= f.email_field :email, class: "input", placeholder: "ex: exemplo@blz.life", required: true %>
+              <%= f.email_field :email, class: "input", placeholder: "ex: exemplo@blz.life", required: true, value: current_user.email %>
             </div>
           </div>
         </div>
         <div class="column is-12 has-text-centered">
           <%= link_to 'Voltar', :back, class: 'button is-text has-text-grey' %>
-          <%= f.submit 'Salvar', class: 'button is-light' %>
+          <%= f.submit 'Enviar', class: 'button is-light' %>
         </div>
       </div>
     <% end %>

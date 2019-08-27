@@ -8,7 +8,7 @@ class User < ApplicationRecord
   enum status: %i[active blocked]
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :validatable, :trackable, :omniauthable,
+         :validatable, :trackable, :omniauthable, :confirmable,
          omniauth_providers: [:facebook]
 
   validates :name, presence: true
