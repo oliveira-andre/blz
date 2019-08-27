@@ -4,7 +4,7 @@ module Users
 
     def show
       @user.confirm
-      if current_user
+      if signed_in?
         redirect_to root_path
       else
         redirect_to new_user_session_path
@@ -13,6 +13,14 @@ module Users
     end
 
     private
+
+    def after_resending_confirmation_instructions_path_for(resource_name)
+      if signed_in?
+        root_path
+      else
+        new_user_session_path(resource_name)
+      end
+    end
 
     def load_user
       @user = User.find_by(confirmation_token: params[:confirmation_token])
