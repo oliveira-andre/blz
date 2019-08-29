@@ -11,7 +11,12 @@ function listeningInputs() {
   var localTypeSelect = $('select[id="filter-services-local-type"]')
 
   categorySelect.on('change', sendSubmit);
-  dateField.on('change', sendSubmit);
+  dateField.on('change', function() {
+    var year = parseInt(dateField.val().substring(0, 4));
+    if(year.toString().length == 4) {
+      sendSubmit
+    }
+  });
   localTypeSelect.on('change', sendSubmit);
 }
 
