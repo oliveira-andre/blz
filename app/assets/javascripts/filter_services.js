@@ -14,7 +14,6 @@ function listeningInputs() {
   dateField.on('change', function(e) {
     var year = parseInt(dateField.val().substring(0, 4));
     if(year.toString().length == 4) {
-      console.log('this');
       sendSubmit(e);
     }
   });
