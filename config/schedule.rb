@@ -9,3 +9,7 @@ end
 every 1.hour do
   runner 'CancelSchedulingTimedOut.execute'
 end
+
+every 1.minute do
+  runner 'SchedulingReminder.execute'  
+end
