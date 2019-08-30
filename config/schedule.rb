@@ -11,5 +11,5 @@ every 1.hour do
 end
 
 every 1.minute do
-  runner 'SchedulingReminder.execute'  
+  runner 'SchedulingReminder.execute'
 end
