@@ -1,0 +1,64 @@
+<div class="container">
+  <h1 class="title has-text-centered has-text-primary is-size-2">BLZ</h1>
+  <h2 class="subtitle has-text-centered has-text-white  is-size-4">Lembrete do agendamento</h2>
+
+  <div class="item">
+    <p class=" has-text-centered has-text-primary is-size-4">
+      Olá, <%= @scheduling.service.establishment.user.email %>!
+    </p>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-black is-size-5">
+      O seu agendamento será atendido em 24 horas
+    </p>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-5">
+      Serviço
+    </p>
+    <p class="has-text-centered has-text-black is-size-5">
+      <%= @scheduling.service.title %>
+    </p>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-5">
+      Profissional
+    </p>
+    <p class="has-text-centered has-text-black is-size-5">
+      <%= @scheduling.professional.name %>
+    </p>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-5">
+      Quando
+    </p>
+    <p class="has-text-centered has-text-black is-size-5">
+      <%= "#{I18n.l(@scheduling.date, format: :day_month)} às #{I18n.l(@scheduling.date, format: :time)}" %>
+    </p>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-5">
+      Onde
+    </p>
+    <p class="has-text-centered has-text-black is-size-5">
+      <%= @scheduling.in_home? ? "A domicílio: #{@scheduling.address.full}" : "No estabelecimento: #{@scheduling.service.establishment.address.full}" %>
+    </p>
+  </div>
+
+
+  <div class="item has-text-centered">
+    <%= link_to 'Mais detalhes', establishments_dashboard_url(@scheduling.service.establishment), class: 'button is-primary is-size-5' %>
+  </div>
+
+  <div class="item">
+    <p class="has-text-centered has-text-grey is-size-5">
+      Abraços, </br>
+      Equipe BLZ
+    </p>
+  </div>
+</div>
