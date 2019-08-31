@@ -1,4 +1,4 @@
-class SchedulingReminder < ApplicationMailer
+class SchedulingReminderMailer < ApplicationMailer
   def twenty_four_hours(scheduling)
     @scheduling = scheduling
 
