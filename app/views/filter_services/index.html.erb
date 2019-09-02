@@ -57,6 +57,20 @@
             </div>
           </div>
         </div>
+        <div class="column is-3">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Preço</label>
+            <div class="control">
+              <div class="select">
+                <%= select_tag :price,
+                               options_for_select(
+                                price_collection,
+                                selected: @filter['price']
+                               ), { id: 'filter-services-price' } %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
     <% if @filter['query'] || @filter['category'] || @filter['date'] %>
@@ -77,6 +91,12 @@
           <% if @filter['local_type'].present? %>
             <span class='tag is-rounded'>
               <%= @filter['local_type'] == 'home' ? "A domicílio" : "No estabelecimento" %></span>
+          <% end %>
+
+          <% if @filter['price'] && !@filter['price'].to_i.zero? %>
+            <span class='tag is-rounded'>Maior Preço</span>
+          <% else %>
+            <span class='tag is-rounded'>Menor Preço</span>
           <% end %>
 
           <span>
