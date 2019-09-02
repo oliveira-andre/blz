@@ -15,4 +15,8 @@ module FiltersHelper
       [local_type[:name], local_type[:value]]
     end
   end
+
+  def price_collection
+    [['Menor preço', 0], ['Maior preço', 1]]
+  end
 end

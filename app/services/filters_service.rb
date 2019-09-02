@@ -5,11 +5,13 @@ module FiltersService
       date = filter_params.fetch('date', '')
       category = filter_params.fetch('category', '')
       local_type = filter_params.fetch('local_type', [])
+      price = filter_params.fetch('price', '')
 
       services = Service.approved
       services.where!(local_type: [local_type, :both]) if local_type.present?
       services.where!('title ILIKE ?', "%#{query}%") if query.present?
       services.where!(category_id: category) if category.present?
+      services.order!(amount: :desc) if price.present? && !price.to_i.zero?
 
       apply_date_filter(services, date) if date.present?
       services
