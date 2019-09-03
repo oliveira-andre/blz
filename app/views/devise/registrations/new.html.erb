@@ -56,6 +56,18 @@
             Já possui uma conta? <%= link_to "Faça o acesso", new_user_session_path %>
           </p>
         </div>
+        <div class="column is-12 has-text-centered">
+          <span class="has-text-weight-bold">
+            ou cadastre-se com
+          </span>
+        </div>
+        <div class="column is-12 has-text-centered">
+          <span class="icon is-rounded is-size-1">
+            <%= link_to user_facebook_omniauth_authorize_pt_br_path do %>
+              <i class="fab fa-facebook"></i>
+            <% end %>
+          </span>
+        </div>
       </div>
     <% end %>
   </div>
