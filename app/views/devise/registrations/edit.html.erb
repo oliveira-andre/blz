@@ -5,6 +5,9 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'custom' }) do |f| %>
       <div class="columns is-multiline">
         <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="column is-12 has-text-centered">
+          <i class="fas fa-question-circle" data-tooltip="Tamanho recomendado: 640x640"></i>
+        </div>
         <div class="column is-12">
           <div class="field">
             <label class="file-label">
