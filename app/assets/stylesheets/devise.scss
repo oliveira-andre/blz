@@ -32,4 +32,21 @@
     margin-left: auto;
     margin-right: auto
   }
+
+  [data-tooltip]:after {
+    display: none;
+    position: absolute;
+    top: 32px;
+    padding: 5px;
+    border-radius: 3px;
+    left: 350px;
+    content: attr(data-tooltip);
+    white-space: nowrap;
+    background-color: #0095ff;
+    color: White;
+  }
+  
+  [data-tooltip]:hover:after {
+    display: block;
+  }
 }
