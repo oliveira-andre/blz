@@ -36,4 +36,8 @@ module ApplicationHelper
   def self_employed?
     current_user.establishment.self_employed?
   end
+
+  def valid_public_key
+    Rails.application.credentials[Rails.env.to_sym][:vapid][:public_key]
+  end
 end

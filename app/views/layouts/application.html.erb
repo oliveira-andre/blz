@@ -8,6 +8,7 @@
     <%= render 'layouts/google_analytics' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" 
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
@@ -20,5 +21,8 @@
         data-userEmail="<%= (user_signed_in? ? current_user.email : '')%>">
     <%= render 'shared/flashs' %>
     <%= yield %>
+    <script>
+      window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(valid_public_key).bytes %>);
+    </script>
   </body>
 </html>

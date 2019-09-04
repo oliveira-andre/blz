@@ -1,29 +1,19 @@
-class PushNotificationsController < Application
-  def create
-    Webpush.payload_send webpush_params
+class PushNotificationsController < ApplicationController
+  skip_before_action :authenticate_user!
 
-    head :ok
+  def index
+    Webpush.payload_send(
+      message: params[:message],
+      endpoint: params[:subscription][:endpoint],
+      p256dh: params[:subscription][:keys][:p256dh],
+      auth: params[:subscription][:keys][:auth],
+      ttl: 24 * 60 * 60,
+      vapid: {
+        subject: 'mailto:sender@example.com',
+        public_key: Rails.application.credentials[Rails.env.to_sym][:vapid][:public_key],
+        private_key: Rails.application.credentials[Rails.env.to_sym][:vapid][:private_key]
+      }
+    )
   end
-
-  private
-
-  def webpush_params
-    subscription_params = fetch_subscription
-    message = "Hello world, the time is #{Time.zone.now}"
-    endpoint = subscription_params[:endpoint],
-    p256dh = subscription_params.dig(:keys, :p256dh)
-    auth = subscription_params.dig(:keys, :auth)
-    api_key = Rails.application.credentials[Rails.env.to_sym][:google][:app_id]
-
-    { message: message, endpoint: endpoint, p256dh: p256dh, auth: auth,
-      api_key: api_key }
-  end
-
-  def fetch_subscription
-    encoded_subscription = session.fetch(:subscription) do
-      raise 'Não foi possível criar a notificação'
-    end
-
-    JSON.parse(Base64.urlsafe_decode64(encoded_subscription)).with_indifferent_access
-  end
+  
 end
