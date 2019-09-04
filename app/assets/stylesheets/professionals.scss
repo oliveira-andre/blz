@@ -1,4 +1,21 @@
 .professionals_form {
+  [data-tooltip]:after {
+    display: none;
+    position: absolute;
+    top: 115px;
+    padding: 5px;
+    border-radius: 3px;
+    left: 550px;
+    content: attr(data-tooltip);
+    white-space: nowrap;
+    background-color: #0095ff;
+    color: White;
+  }
+  
+  [data-tooltip]:hover:after {
+    display: block;
+  }
+
   .container {
     @include touch {
       padding: 15px;

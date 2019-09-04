@@ -8,6 +8,23 @@ html, body {
   padding-top: 35px;
   padding-bottom: 60px;
 
+  [data-tooltip]:after {
+    display: none;
+    position: absolute;
+    top: 70px;
+    padding: 5px;
+    border-radius: 3px;
+    left: 150px;
+    content: attr(data-tooltip);
+    white-space: nowrap;
+    background-color: #0095ff;
+    color: White;
+  }
+  
+  [data-tooltip]:hover:after {
+    display: block;
+  }
+
   form:nth-child(1) {
     padding-bottom: 30px;
   }

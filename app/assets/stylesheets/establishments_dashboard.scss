@@ -9,6 +9,23 @@ html, body {
   background-color: #f2f2f2;
   padding-bottom: 100px;
 
+  [data-tooltip]:after {
+    display: none;
+    position: absolute;
+    top: 32px;
+    padding: 5px;
+    border-radius: 3px;
+    left: 550px;
+    content: attr(data-tooltip);
+    white-space: nowrap;
+    background-color: #0095ff;
+    color: White;
+  }
+  
+  [data-tooltip]:hover:after {
+    display: block;
+  }
+
   .button.is-danger-custom {
     background-color: transparent;
     border: 1px solid #ff3860;
