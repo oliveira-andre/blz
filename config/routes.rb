@@ -61,6 +61,8 @@ Rails.application.routes.draw do
         to: 'pages#sales',
         as: :sales_page
 
+    post '/push' => 'push_notifications#create'
+
     resources :callbacks, only: :index
     resources :use_rules, only: :index
 
