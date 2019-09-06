@@ -1,0 +1,12 @@
+{  
+  "name":"BLZ",
+      "short_name":"BLZ",
+      "start_url":"/",
+      "icons":[  
+           {  
+                    "src":"/images/icon-192x192.png",
+                    "sizes":"192x192",
+                    "type":"image/png"
+     }      
+  ]
+}

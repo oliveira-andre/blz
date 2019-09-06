@@ -1,24 +1,24 @@
 $(document).on("turbolinks:load", function () {
   navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
     serviceWorkerRegistration.pushManager
-    .subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: window.vapidPublicKey
-    });
+      .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: window.vapidPublicKey
+      });
   });
 
 
   $(".btn-push").on("click", (e) => {
-    window.sendNotification('Titilo da notificação', 'Conteúdo da notificação');
+    window.sendNotification('BLZ', 'Testing!');
   });
 
   if (!("Notification" in window)) {
     console.error("This browser does not support desktop notification");
     return;
   }
-  
+
   if (window.hasNotificationPermission()) return;
-  
+
   if (Notification.permission !== 'denied') {
     Notification.requestPermission();
   }
@@ -28,10 +28,10 @@ window.hasNotificationPermission = hasNotificationPermission;
 window.sendNotification = sendNotification;
 
 function sendNotification(title, body = '') {
-  if(!window.hasNotificationPermission()) return;
+  if (!window.hasNotificationPermission()) return;
 
   navigator.serviceWorker.ready.then((swRegistration) => {
-      swRegistration.showNotification(title, { body });
+    swRegistration.showNotification(title, { body });
   });
 }
 
