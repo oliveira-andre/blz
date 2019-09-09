@@ -127,7 +127,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_170254) do
     t.index ["establishment_id"], name: "index_professionals_on_establishment_id"
   end
 
-<<<<<<< HEAD
   create_table "report_problems", force: :cascade do |t|
     t.integer "category", null: false
     t.text "body"
@@ -138,8 +137,6 @@ ActiveRecord::Schema.define(version: 2019_08_26_170254) do
     t.index ["user_id"], name: "index_report_problems_on_user_id"
   end
 
-=======
->>>>>>> b7a601633b5a0778e8e19b7bcdb7336c676947d5
   create_table "reviews", force: :cascade do |t|
     t.text "body", null: false
     t.string "reviewable_type"
