@@ -7,11 +7,6 @@ $(document).on("turbolinks:load", function () {
       });
   });
 
-
-  $(".btn-push").on("click", (e) => {
-    window.sendNotification('BLZ', 'Testing!');
-  });
-
   if (!("Notification" in window)) {
     console.error("This browser does not support desktop notification");
     return;
