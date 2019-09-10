@@ -11,7 +11,7 @@ $(document).on("turbolinks:load", function () {
     },
     {
       received: function(data) {
-        toastr.info(data.message);
+        sendNotification('BLZ', data.message);
       }
     }
   )

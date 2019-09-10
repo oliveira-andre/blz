@@ -9,7 +9,7 @@
 //= require bulma-extensions/bulma-calendar/dist/js/bulma-calendar.min
 //= require bulma-extensions/bulma-steps/dist/js/bulma-steps.min
 //= require bulma-carousel/dist/js/bulma-carousel.min
-
+//= require serviceworker-companion
 
 toastr.options = {
   "closeButton": true,
@@ -28,4 +28,3 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
-//= require serviceworker-companion
