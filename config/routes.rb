@@ -65,8 +65,6 @@ Rails.application.routes.draw do
   post '/push',
     to: 'push_notifications#index'
 
-  resources :callbacks, only: :index
-
     resources :callbacks, only: :index
     resources :use_rules, only: :index
 
