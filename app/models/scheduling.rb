@@ -43,6 +43,7 @@ class Scheduling < ApplicationRecord
   after_save :cancel_notification
   after_save :accepted_notification
   after_save :recused_notification
+  after_save :finished_notification
   after_create :notifications
 
   accepts_nested_attributes_for :address, allow_destroy: true,
@@ -213,6 +214,13 @@ class Scheduling < ApplicationRecord
 
     RecusedSchedulingMailer.to_establishment(self).deliver_later
     RecusedSchedulingMailer.to_user(self).deliver_later
+  end
+
+  def finished_notification
+    return unless finished?
+
+    FinishedSchedulingMailer.to_establishment(self).deliver_later
+    FinishedSchedulingMailer.to_user(self).deliver_later
   end
 
   def in_establishment?
