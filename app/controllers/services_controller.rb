@@ -5,6 +5,7 @@ class ServicesController < ApplicationController
 
   before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update destroy]
+  before_action :count_click, only: :show
 
   def index
     authorize @establishment, policy_class: ServicePolicy
@@ -92,5 +93,9 @@ class ServicesController < ApplicationController
     params.require(:service).permit(:title, :description, :amount, :duration,
                                     :category_id, :local_type, :status,
                                     :start_from, :cover_image_id, photos: [])
+  end
+
+  def count_click
+    Click.create @service.id
   end
 end
