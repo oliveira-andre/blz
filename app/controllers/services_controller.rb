@@ -96,6 +96,6 @@ class ServicesController < ApplicationController
   end
 
   def count_click
-    Click.create @service.id
+    Click.create Service.approved.find(params[:id]).id
   end
 end
