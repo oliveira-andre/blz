@@ -5,19 +5,14 @@ class ServicesController < ApplicationController
 
   before_action :load_establishment, only: %i[index new create]
   before_action :load_service, only: %i[edit update destroy]
-  before_action :count_click, only: :show
+  before_action :count_view, only: :show
 
   def index
     authorize @establishment, policy_class: ServicePolicy
     @services = @establishment.services
   end
 
-  def show
-    @service = Service.approved.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Serviço não encontrado!'
-    redirect_to root_path
-  end
+  def show; end
 
   def new
     authorize @establishment, policy_class: ServicePolicy
@@ -95,7 +90,16 @@ class ServicesController < ApplicationController
                                     :start_from, :cover_image_id, photos: [])
   end
 
-  def count_click
-    Click.create Service.approved.find(params[:id]).id
+  def count_view
+    @service = Service.approved.find(params[:id])
+    if @service.view.present?
+      viewable = @service.view
+      viewable.update(viewable_count: (viewable.viewable_count + 1))
+    else
+      View.create(viewable: @service, viewable_count: 1)
+    end
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Serviço não encontrado!'
+    redirect_to root_path
   end
 end
