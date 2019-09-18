@@ -14,9 +14,6 @@ class ServicesController < ApplicationController
   def show
     @service = Service.approved.find(params[:id])
     CountViewService.execute(@service)
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Serviço não encontrado!'
-    redirect_to root_path
   end
 
   def new

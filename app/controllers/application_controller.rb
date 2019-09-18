@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   skip_around_action :set_locale_from_url
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   before_action :check_user
@@ -14,6 +15,12 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def not_found_error
+    model = t("activerecord.models.#{params[:controller].singularize}")
+    flash[:error] = "#{model} não encontrado!"
+    redirect_to root_path
+  end
 
   def after_sign_in_path_for(resource)
     if resource.establishment.nil?
