@@ -33,6 +33,5 @@ function toggleFilters() {
 }
 
 function sendSubmit(e) {
-  console.log(e);
   e.currentTarget.form.submit();
 }

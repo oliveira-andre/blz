@@ -7,6 +7,8 @@ class Service < ApplicationRecord
   belongs_to :category
   belongs_to :establishment
 
+  has_one :view, as: :viewable
+
   has_many :professional_services
   has_many :professionals, through: :professional_services
 
