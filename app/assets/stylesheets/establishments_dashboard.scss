@@ -38,6 +38,12 @@ html, body {
     }
   }
 
+  @media (max-width: 666px) {
+    .is-checkradio[type=radio] + label {
+      display: table-cell;
+    }
+  }
+
   @include desktop {
     padding-bottom: 80px;
   }
