@@ -1,11 +1,10 @@
 <div id="rating" class="column is-12">
-  <h1 class="is-size-4 has-text-grey">Avaliar</h>
+  <h1 class="is-size-4 has-text-grey">Sua avaliação</h1>
     <%= form_with url: scheduling_reviews_path(schedule), class: :custom, local: true do |f| %>
       <div class="column is-12">
         <div class="field">
-          <label class="label has-text-grey has-text-weight-normal">Comentário <small class="is-danger">*</small></label>
           <div class="control">
-            <%= f.text_area :body, class: :textarea, placeholder: 'O que achou do serviço?', required: true  %>
+            <%= f.text_area :body, class: :textarea, placeholder: 'O que achou do serviço prestado?', required: true  %>
           </div>
         </div>
       </div>

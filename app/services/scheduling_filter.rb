@@ -9,9 +9,9 @@ module SchedulingFilter
                         current_user
                       end
       schedulings = @current_user.scheduling
-      schedulings.where!(status: status) if status.present?
+      schedulings.where!(status: status.to_sym) if status.present?
       schedulings.where!(date: apply_date_filter(date)) if date.present?
-      schedulings = @current_user.scheduling unless schedulings.present?
+      schedulings = @current_user.scheduling if schedulings.empty?
       schedulings
     end
 
