@@ -40,4 +40,11 @@ module ApplicationHelper
   def valid_public_key
     Rails.application.credentials[Rails.env.to_sym][:vapid][:public_key]
   end
+
+  def scheduling_status
+    Scheduling.statuses.map do |status|
+      [I18n.t("activerecord.enums.scheduling.#{status.first}"),
+       status.first]
+    end
+  end
 end

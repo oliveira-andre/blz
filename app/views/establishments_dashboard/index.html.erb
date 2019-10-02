@@ -22,11 +22,11 @@
                 </div>
               </div>
               <div class="column is-6 control">
-                <%= f.radio_button(:date, 'today', class: 'is-checkradio radio_filter_cards', id: 'date_today', checked: @date == 'today') %>
+                <%= f.radio_button(:date, 'today', class: 'is-checkradio radio_filter_scheduling_cards', id: 'date_today', checked: @date == 'today') %>
                 <label class="has-text-grey" for="date_today">Hoje</label>
-                <%= f.radio_button(:date, 'week', class: 'is-checkradio radio_filter_cards', id: 'date_week', checked: @date == 'week') %>
+                <%= f.radio_button(:date, 'week', class: 'is-checkradio radio_filter_scheduling_cards', id: 'date_week', checked: @date == 'week') %>
                 <label class="has-text-grey" for="date_week">Semana</label>
-                <%= f.radio_button(:date, 'month', class: 'is-checkradio radio_filter_cards', id: 'date_month', checked: @date == 'month') %>
+                <%= f.radio_button(:date, 'month', class: 'is-checkradio radio_filter_scheduling_cards', id: 'date_month', checked: @date == 'month') %>
                 <label class="has-text-grey" for="date_month">Mês</label>
               </div>
             <% end %>
