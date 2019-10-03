@@ -3,7 +3,7 @@
 module SchedulingFilter
   class << self
     def execute(status, date, user)
-      @user = user
+      @current_user = user
       schedulings = current_user.scheduling
       schedulings.where!(status: status.to_sym) if status.present?
       schedulings.where!(date: apply_date_filter(date)) if date.present?
@@ -12,8 +12,6 @@ module SchedulingFilter
     end
 
     private
-
-    attr_accessor :user
 
     def apply_date_filter(date)
       t = (Time.now - 4.hours)
@@ -31,9 +29,9 @@ module SchedulingFilter
     end
 
     def current_user
-      return user.establishment if user.establishment.present?
+      return @current_user.establishment if @current_user.establishment.present?
 
-      user
+      @current_user
     end
   end
 end
