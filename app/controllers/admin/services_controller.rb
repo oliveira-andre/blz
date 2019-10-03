@@ -2,13 +2,15 @@
 
 module Admin
   class ServicesController < AdminController
-    before_action :load_service, only: %i[show update]
+    before_action :load_service, only: %i[show edit update]
 
     def index
       @pagy, @services = pagy(services)
     end
 
     def show; end
+
+    def edit; end
 
     def update
       if params[:status] == 'approved'
@@ -21,6 +23,9 @@ module Admin
         flash[:success] = 'Recusado com sucesso'
       end
 
+      if @service.update_and_rebuild_schedule(service_params)
+        flash[:success] = 'Serviço atualizado com sucesso'
+      end
       redirect_to admin_services_path
     rescue ActiveRecord::RecordInvalid => e
       e.record.errors.full_messages.each { |error| flash[:error] = error }
@@ -41,6 +46,12 @@ module Admin
       else
         Service.awaiting_avaliation
       end
+    end
+
+    def service_params
+      params.require(:service).permit(:title, :description, :amount, :duration,
+                                      :category_id, :local_type, :status,
+                                      :start_from, :cover_image_id, photos: [])
     end
   end
 end
