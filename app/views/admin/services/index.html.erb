@@ -42,7 +42,10 @@
               <td><%= service.category.name %></td>
               <td><%= service.t_status %></td>
               <td><%= service.establishment.name %></td>
-              <td><%= link_to :detalhes, admin_service_path(service), class: 'is-capitalized' %></td>
+              <td>
+              <%= link_to :detalhes, admin_service_path(service), class: 'is-capitalized' %>
+              <%= link_to :editar, edit_admin_service_path(service), class: 'is-capitalized' %>
+              </td>
             </tr>
           <% end %>
         </tbody>
