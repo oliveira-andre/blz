@@ -1,5 +1,5 @@
 $(document).on("turbolinks:load", function () {
-  var establishemntSelect = $('#establishments_dashboard_status');
+  var establishemntSelect = $('#scheduling_status');
   var establishmentDate = $('.radio_filter_scheduling_cards');
 
   establishemntSelect.on('change', function (e) {
