@@ -11,6 +11,8 @@ module SchedulingFilter
       schedulings
     end
 
+    private
+
     def apply_date_filter(date)
       t = (Time.now - 4.hours)
       case date
@@ -28,11 +30,8 @@ module SchedulingFilter
   end
 
   def load_user(current_user)
-    load_user = if current_user.establishment.present?
-                  current_user.establishment
-                else
-                  current_user
-                end
-    load_user
+    return current_user.establishment if current_user.establishment.present?
+
+    current_user
   end
 end
