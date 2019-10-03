@@ -1,0 +1,123 @@
+<%= render 'shared/header', to_back: false, fixed: true %>
+<div class="services_form">
+  <div class="container">
+    <%= form_with model: @service, url: admin_service_path(@service), class: :custom, local: true do |form| %>
+      <div class="columns is-multiline">
+        <% if @service.errors.any? %>
+          <div class="column is-12">
+            <div id="error_explanation">
+              <ul>
+                <% @service.errors.full_messages.each do |msg| %>
+                  <div class="notification is-danger">
+                    <button class="delete" type="button"></button>
+                    <%= msg %>
+                  </div>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+        <div class="column is-12">
+          <% if @service.new_record? %>
+            <h1 class="is-size-4 has-text-grey">Novo Serviço</h1>
+          <% else %>
+            <h1 class="is-size-4 has-text-grey">Editar Serviço</h1>
+          <% end %>
+        </div>
+        <% unless @service.new_record? %>
+          <div class="column is-12">
+            <%= render 'form_images', form: form %>
+          </div>
+        <% end %>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Título <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form.text_field :title, class: "input", placeholder: "Qual o título do serviço ? (obrigatório)", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Descrição <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form.text_area :description, class: "textarea", placeholder: "Dê uma descrição para esse serviço (obrigatório)", required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Valor <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= form.number_field :amount, class: "input", placeholder: "ex: R$ 109.0 (obrigatório)", required: true %>
+              <%= form.check_box(:start_from, class: 'is-checkradio', id: :start_from) %>
+              <label class="has-text-grey" for="start_from">A partir de?</label>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Duração <small>(tempo em minutos)</small></label>
+            <div class="control">
+              <div class="select">
+                <%= form.select :duration, duration_service_range, include_blank: true, required: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Categoria <small class="is-danger">*</small></label>
+            <div class="control">
+              <div class="select">
+                <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, { prompt: "Selecione (obrigatório)" }, { required: true } %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="columns is-mobile">
+            <div class="column">
+              <p class="has-text-grey">Onde <small class="is-danger">*</small></p>
+            </div>
+            <div class="column is-9">
+              <div class="field">
+                <%= form.radio_button(:local_type, 'home', class: 'is-checkradio', id: 'local_type_home', required: true) %>
+                <label class="has-text-grey" for="local_type_home">A domicílio</label>
+              </div>
+              <div class="field">
+                <%= form.radio_button(:local_type, 'establishment', class: 'is-checkradio', id: 'local_type_establishment', required: true) %>
+                <label class="has-text-grey" for="local_type_establishment">No estabelecimento</label>
+              </div>
+              <div class="field">
+                <%= form.radio_button(:local_type, 'both', class: 'is-checkradio', id: 'local_type_both', required: true) %>
+                <label class="has-text-grey" for="local_type_both">Ambos lugares</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <% unless @service.new_record? %>
+            <% unless @service.archived? %>
+              <%= link_to 'Arquivar', establishment_service_path(@service.establishment, @service), method: :delete,
+                      class: 'button is-text has-text-danger',
+                      data: {
+                        confirm: 'Tem certeza disso ?',
+                        tooltip: 'Com esse ação o serviço não aparerá nas buscas.'
+                      } %>
+            <% else %>
+              <%= link_to 'Desarquivar', establishment_service_path(@service.establishment, @service), method: :put,
+                      class: 'button is-text has-text-grey',
+                      data: {
+                        confirm: 'Tem certeza disso ?',
+                        tooltip: 'Com esse ação o serviço aparerá nas buscas.'
+                      } %>
+            <% end %>
+          <% end %>
+          <%= form.submit @service.new_record? ? :continuar : :salvar, class: 'button is-light is-pulled-right is-capitalized' %>
+          <%= link_to 'Voltar', admin_services_path, class: 'button is-text has-text-grey  is-pulled-right' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

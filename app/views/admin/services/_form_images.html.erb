@@ -1,0 +1,65 @@
+<div class="columns is-mobile is-gapless service-images is-multiline">
+  <div class="column is-12">
+    <i class="fas fa-question-circle" data-tooltip="Tamanho recomendado: 640x640"></i>
+  </div>
+  <div class="column is-narrow">
+    <div class="image-item field" id="preview">
+      <figure class="image is-96x96">
+        <label class="file-label">
+          <%= form.file_field :photos, multiple: true, id: "files", class:"file-input", accept: "image/x-png,image/jpeg" %>
+          <span class="file-cta">
+            <span class="file-label is-size-1">
+              <i class="fas fa-plus"></i>
+            </span>
+          </span>
+        </label>
+      </figure>
+    </div>
+  </div>
+  <div class="column content-images">
+    <% if @service.photos.present? %>
+      <div class="columns is-multiline is-mobile is-gapless">
+        <% @service.photos.each do |photo| %>
+          <div class="column is-narrow" id="photo-<%= photo.id %>">
+            <div class="image-item">
+              <figure class="image is-96x96">
+                <%= image_tag(@service.thumbnail(photo, :small)) %>
+              </figure>
+                <button class="button is-light is-dropdown options" type="button" data-target="dropdown-photo-<%= photo.id %>">
+                  <span class="icon is-size-7">
+                    <%= 'Capa' if @service.cover_image_id == photo.id %>
+                    <i class="fas fa-ellipsis-v has-text-white"></i>
+                  </span>
+                </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-photo-<%= photo.id %>" role="menu">
+              <div class="dropdown-content">
+                <a class="dropdown-item modal-button" data-target="photo-show-<%= photo.id %>">
+                  Visualizar
+                </a>
+                <%= link_to photo_path(photo), remote: true, method: :delete,
+                              data: { confirm: 'Você tem certeza?' },
+                              class: "dropdown-item" do %>
+                  Remover
+                <% end %>
+                <%= link_to establishment_service_path(@service, service: { cover_image_id: photo.id }),
+                 class: 'dropdown-item', remote: true, method: :patch do %>
+                  Marcar como capa
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="photo-show-<%= photo.id %>">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <p class="image is-4by3">
+                <%= image_tag(@service.thumbnail(photo, :large)) %>
+              </p>
+            </div>
+            <a class="modal-close is-large" aria-label="close"></a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
