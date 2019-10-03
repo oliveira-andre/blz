@@ -13,6 +13,23 @@
               <%= link_to :ocupado, '#busy-scheduling-modal', class: 'button is-danger-custom is-pulled-right is-capitalized modal-button',
                           data: { target: 'busy-scheduling-modal' }%>
             </div>
+            <%= form_with url: establishments_dashboard_path(current_user.establishment), local: true, method: :get, class: 'column is-12 field is-grouped' do |f| %>
+              <div class="column is-6">
+                <div class="control">
+                  <div class="select">
+                    <%= select_tag :scheduling_status, options_for_select(scheduling_status, selected: @status), prompt: "Todos" %>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-6 control">
+                <%= f.radio_button(:date, 'today', class: 'is-checkradio radio_filter_scheduling_cards', id: 'date_today', checked: @date == 'today') %>
+                <label class="has-text-grey" for="date_today">Hoje</label>
+                <%= f.radio_button(:date, 'week', class: 'is-checkradio radio_filter_scheduling_cards', id: 'date_week', checked: @date == 'week') %>
+                <label class="has-text-grey" for="date_week">Semana</label>
+                <%= f.radio_button(:date, 'month', class: 'is-checkradio radio_filter_scheduling_cards', id: 'date_month', checked: @date == 'month') %>
+                <label class="has-text-grey" for="date_month">Mês</label>
+              </div>
+            <% end %>
             <% @scheduling.each do |s| %>
               <%= render 'scheduling_card', scheduling: s %>
             <% end %>
@@ -34,5 +51,4 @@
   </div>
   <%= render 'shared/establishment_bottom_navigation_bar', tab: 'scheduling' %>
 </div>
-
 <%= render 'busy_scheduling' %>
