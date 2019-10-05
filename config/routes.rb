@@ -61,16 +61,15 @@ Rails.application.routes.draw do
         to: 'pages#sales',
         as: :sales_page
 
-
-  post '/push',
-    to: 'push_notifications#index'
+    post '/push',
+         to: 'push_notifications#index'
 
     resources :callbacks, only: :index
     resources :use_rules, only: :index
 
     namespace :admin do
       resources :scheduling, only: %i[index show]
-      resources :services, only: %i[index show update]
+      resources :services, only: %i[index show update edit update]
       resources :users, only: %i[index show update]
       resources :establishments, only: %i[update index show]
       resources :reviews, only: %i[index show update]
