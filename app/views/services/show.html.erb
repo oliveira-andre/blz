@@ -63,24 +63,11 @@
       <div class="column is-12">
         <h2 class=" has-text-weight-semibold is-size-4">Explore mais serviços</h2>
       </div>
-      <div class="column is-5">
-        <a class="">Cabelo</a>
-      </div>
-      <div class="column is-5">
-        <a class="">Unhas</a>
-      </div>
-      <div class="column is-5">
-        <a class="">Barbearia</a>
-      </div>
-      <div class="column is-5">
-        <a class="">Maquiagem</a>
-      </div>
-      <div class="column is-5">
-        <a class="">Corpo</a>
-      </div>
-      <div class="column is-5">
-        <a class="">Outros</a>
-      </div>
+      <% Category.all.each do |category| %>
+        <div class="column is-5">
+          <%= link_to category.name, filter_services_path({ category: category.id }) %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="bottom-navigation-bar is-hidden-desktop">
