@@ -23,14 +23,14 @@ module Admin
         flash[:success] = 'Reprovado com sucesso'
       end
 
-      if @establishment.update(establishment_params)
+      if @establishment.update!(establishment_params)
         flash[:success] = 'Estabelecimento atualizado com sucesso'
       end
 
       redirect_to admin_establishments_path
     rescue ActiveRecord::RecordInvalid => e
       @establishment.errors.full_messages.each { |error| flash[:error] = error }
-      redirect_to admin_establishment_path(@establishment)
+      redirect_to admin_establishments_path
     end
 
     private
