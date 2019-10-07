@@ -8,12 +8,10 @@
           <p class="control is-expanded">
             <%= text_field_tag :query, params[:query], class:'input', placeholder:'Pesquise algum estabelecimento...' %>
           </p>
-
           <p class="control is-expanded">
             <%= select_tag :status, options_for_select([['Aprovado','approved'],["Em analise",'analyze'],[
             'Desaprovado', 'disapproved'],['Cancelado', 'canceled']]), class:'input', include_blank:'Pesquise por status...' %>
           </p>
-
           <p class="control">
             <% if @establishments.present? || params[:status].nil? || params[:query].nil? %>
               <%= submit_tag 'Buscar',  class: 'button is-info' %>
@@ -40,7 +38,10 @@
               <td><%= establishment.user.name %></td>
               <td><%= establishment.t_status %></td>
               <td class="is-capitalized"><%= establishment.self_employed? ? :sim : :não %></td>
-              <td><%= link_to :detalhes, admin_establishment_path(establishment), class: 'is-capitalized' %></td>
+              <td>
+                <%= link_to :detalhes, admin_establishment_path(establishment), class: 'is-capitalized' %>
+                <%= link_to :editar, edit_admin_establishment_path(establishment), class: 'is-capitalized' %>
+              </td>
             </tr>
           <% end %>
         </tbody>
