@@ -97,7 +97,8 @@ header {
 .users-edit, .scheduling-new, .establishment_feedbacks-index,
 .adminestablishments-index, .adminestablishments-show, .adminreviews-index,
 .adminreviews-show, .establishment_welcomes-index, .establishments-show,
-.adminservices-edit, .adminestablishments-edit, .adminprofessionals-index {
+.adminservices-edit, .adminestablishments-edit, .adminprofessionals-index,
+.adminprofessionals-edit {
   header {
     background-color: $primary-color;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
@@ -132,7 +133,8 @@ header {
 .professionals-new, .professionals-edit, .establishments-edit,
 .scheduling-show, .services-index, .users_dashboard-index,
 .users-index, .payment_cards, .use_rules-index, .professionals-index,
-.filter_services-index, .establishments-show, .adminestablishments-edit {
+.filter_services-index, .establishments-show, .adminestablishments-edit,
+.adminprofessionals-edit {
   &.is-fixed-top {
     padding-top: 3.25rem;
   }
