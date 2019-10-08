@@ -10,6 +10,10 @@ class Professional < ApplicationRecord
   validate :self_employed_restriction, on: :create
   validate :photo_type
 
+  def self.search(query)
+    where('name ILIKE ?', "%#{query}%")
+  end
+
   private
 
   def self_employed_restriction
