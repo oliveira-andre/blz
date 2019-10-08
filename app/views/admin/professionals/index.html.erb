@@ -30,7 +30,7 @@
             <td><%= professional.name %></td>
             <td><%= professional.establishment.name %></td>
             <td>
-              <%= link_to :editar, '#', class: 'is-capitalized' %>
+              <%= link_to :editar, edit_admin_professional_path(professional), class: 'is-capitalized' %>
             </td>
           </tr>
         <% end %>
