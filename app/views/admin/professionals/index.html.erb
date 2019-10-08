@@ -1,0 +1,40 @@
+<%= render 'admin/shared/header'%>
+<div class="container">
+  <div class="content">
+    <h1 class="has-text-grey">Profissionais</h1>
+    <%= form_tag(admin_professionals_path, method: :get, id: 'form_search', class:'custom') do %>
+      <div class="field is-grouped">
+        <p class="control is-expanded">
+          <%= text_field_tag :query, params[:query], class:'input', placeholder:'Pesquise algum estabelecimento...' %>
+        </p>
+        <p class="control">
+          <% if @professionals.present? || params[:query].nil? %>
+            <%= submit_tag 'Buscar',  class: 'button is-info' %>
+          <% else %>
+            <a class="button is-info" type="submit" href="/admin/profissionais">Limpar filtros</a>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>nome</th>
+          <th>Estabelecimento</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @professionals.each do |professional| %>
+          <tr>
+            <td><%= professional.name %></td>
+            <td><%= professional.establishment.name %></td>
+            <td>
+              <%= link_to :editar, '#', class: 'is-capitalized' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
