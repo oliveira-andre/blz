@@ -72,7 +72,7 @@ Rails.application.routes.draw do
       resources :services, only: %i[index show update edit update]
       resources :users, only: %i[index show update]
       resources :establishments, only: %i[edit update index show]
-      resources :professionals, only: %i[index]
+      resources :professionals, only: %i[index edit update]
       resources :reviews, only: %i[index show update]
     end
   end
