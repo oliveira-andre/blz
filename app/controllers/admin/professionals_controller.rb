@@ -37,7 +37,7 @@ module Admin
     end
 
     def professional_params
-      params.require(:professional).permit(:name, :description)
+      params.require(:professional).permit(:name, :description, :photo)
     end
   end
 end
