@@ -2,7 +2,7 @@
 
 module Admin
   class ProfessionalsController < AdminController
-    before_action :professional, only: %i[edit update]
+    before_action :load_professional, only: %i[edit update]
 
     def index
       @professionals = if params[:query]
@@ -32,7 +32,7 @@ module Admin
 
     private
 
-    def professional
+    def load_professional
       @professional = Professional.find(params[:id])
     end
 
