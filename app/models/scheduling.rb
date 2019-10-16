@@ -207,6 +207,7 @@ class Scheduling < ApplicationRecord
 
     AcceptedSchedulingMailer.to_establishment(self).deliver_later
     AcceptedSchedulingMailer.to_user(self).deliver_later
+    AcceptedSchedulingMailer.to_contact(self).deliver_later
   end
 
   def recused_notification
