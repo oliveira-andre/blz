@@ -199,6 +199,7 @@ class Scheduling < ApplicationRecord
     return if busy?
 
     SchedulingMailer.to_establishment(self).deliver_later
+    SchedulingMailer.to_contact(self).deliver_later
     NotificationBroadcastJob.perform_later(self)
   end
 
