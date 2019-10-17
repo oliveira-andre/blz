@@ -1,0 +1,50 @@
+<%= render 'shared/header', to_back: false, fixed: true %>
+<div class="container">
+  <%= form_with model: @professional, url: admin_professional_path(@professional) do |f| %>
+    <div class="professionals_form">
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <div class="field">
+            <div class="file is-warning is-boxed">
+              <label class="file-label">
+                <%= f.file_field :photo, class: "file-input", id: "user-photo-add", accept: "image/x-png,image/jpeg" %>
+                <figure class="image is-128x128" id="temporary_image">
+                  <% if @professional.photo.attached? %>
+                    <%= image_tag @professional.photo, class: "is-rounded" %>
+                  <% else %>
+                    <img class="is-rounded" src="/images/128x128.png">
+                  <% end %>
+                </figure>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Nome <small class="is-danger">*</small></label>
+            <div class="control">
+              <%= f.text_field :name, class: "input", placeholder: 'Qual o nome do profissional ? (obrigatório)', required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <div class="field">
+            <label class="label has-text-grey has-text-weight-normal">Descrição</label>
+            <div class="control">
+              <%= f.text_area :description, class: "textarea", placeholder: 'Dê uma descrição para esse profissional (opcional)' %>
+            </div>
+          </div>
+        </div>
+        <div class="column is-12">
+          <%= link_to :excluir,
+                  establishment_professional_path(@professional.establishment, @professional),
+                  class: 'button is-text has-text-danger is-capitalized',
+                  method: :delete,
+                  data: { confirm: 'Você tem certeza?' } %>
+          <%= f.submit :salvar, class: 'button is-primary is-pulled-right is-capitalized' %>
+          <%= link_to 'Voltar', admin_professionals_path, class: 'button is-text has-text-grey  is-pulled-right' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
