@@ -19,6 +19,6 @@ class AcceptedSchedulingMailer < ApplicationMailer
     @scheduling = scheduling
 
     mail to: 'contato@blz.life',
-         subject: "BLZ - há uma atualização sobre um agendamento"
+         subject: 'BLZ - há uma atualização sobre um agendamento'
   end
 end
