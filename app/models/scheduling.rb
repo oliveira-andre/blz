@@ -199,6 +199,7 @@ class Scheduling < ApplicationRecord
     return if busy?
 
     SchedulingMailer.to_establishment(self).deliver_later
+    SchedulingMailer.to_contact(self).deliver_later
     NotificationBroadcastJob.perform_later(self)
   end
 
@@ -207,6 +208,7 @@ class Scheduling < ApplicationRecord
 
     AcceptedSchedulingMailer.to_establishment(self).deliver_later
     AcceptedSchedulingMailer.to_user(self).deliver_later
+    AcceptedSchedulingMailer.to_contact(self).deliver_later
   end
 
   def recused_notification
