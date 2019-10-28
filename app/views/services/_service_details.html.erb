@@ -1,6 +1,15 @@
 <div class="columns is-multiline">
   <div class="column is-12 is-8-desktop">
-    <h1 class="title"><%= @service.title %></h1>
+    <h1 class="title">
+      <%= @service.title %>
+    <span id="service-sharing"
+      data-tile="<%= @service.title %>"
+      data-text="Faça seu agendamento no BLZ com <%= @service.establishment.name %>"
+      data-url="<%= service_url(@service) %>"
+      class="icon is-size-5 has-text-grey">
+        <i class="fas fa-share-alt"></i>
+      </span>
+    </h1>
     <p class="subtitle"><%= @service.establishment.name %></p>
     <p class="description"><%= @service.description %></p>
   </div>

@@ -10,6 +10,12 @@
   h1.title {
     margin-top: 20px;
     margin-bottom: 30px;
+
+    .icon {
+      position: relative;
+      float: right;
+      cursor: pointer;
+    }
   }
 
   p.subtitle, p.description {
