@@ -1,4 +1,4 @@
-module CancelSchedulingTimedOut
+module CancelSchedulingTimedOutService
   class << self
     def execute
       schedulings = Scheduling.analyze
