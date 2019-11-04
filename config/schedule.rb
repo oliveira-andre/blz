@@ -1,5 +1,5 @@
 every 1.day, at: '00:01 am' do
-  runner 'RebuildAllSchedulesService.execute'
+  runner 'RebuildAllSchedulesJob.perform_later'
 end
 
 every 59.minutes do
@@ -7,9 +7,9 @@ every 59.minutes do
 end
 
 every 1.hour do
-  runner 'CancelSchedulingTimedOut.execute'
+  runner 'CancelSchedulingTimedOutJob.perform_later'
 end
 
 every 1.minute do
-  runner 'SchedulingReminder.execute'
+  runner 'SchedulingReminderJob.perform_later'
 end
