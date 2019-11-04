@@ -9,7 +9,7 @@ class FinishedSchedulingMailer < ApplicationMailer
   def to_user(scheduling)
     @scheduling = scheduling
 
-    mail to: @scheduling.service.establishment.user.email,
+    mail to: @scheduling.user.email,
          subject: 'BLZ - Seu agendamento foi finalizado'
   end
 end

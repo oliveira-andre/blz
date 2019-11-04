@@ -9,7 +9,7 @@ class RecusedSchedulingMailer < ApplicationMailer
   def to_user(scheduling)
     @scheduling = scheduling
 
-    mail to: @scheduling.service.establishment.user.email,
+    mail to: @scheduling.user.email,
          subject: 'BLZ - Seu agendamento foi recusado'
   end
 end
