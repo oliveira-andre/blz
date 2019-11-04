@@ -9,7 +9,7 @@ class SchedulingReminderMailer < ApplicationMailer
   def four_hours(scheduling)
     @scheduling = scheduling
 
-    mail to: @scheduling.service.establishment.user.email,
+    mail to: @scheduling.user.email,
     subject: 'BLZ - Lembrete do agendamento'
   end
 end
