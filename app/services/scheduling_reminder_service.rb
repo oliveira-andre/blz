@@ -1,4 +1,4 @@
-module SchedulingReminder
+module SchedulingReminderService
   class << self
     def execute
       schedulings_twenty_four_hours = Scheduling.where(
