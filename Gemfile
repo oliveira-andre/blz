@@ -23,12 +23,12 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'redis'
 gem 'sidekiq'
 gem 'serviceworker-rails'
+gem 'sentry-raven'
 gem 'validates_cpf_cnpj'
 gem 'whenever', require: false
 gem 'pagy'
 gem 'toastr-rails'
 gem 'autocomplete_zipcode'
-gem 'newrelic_rpm'
 gem 'route_translator'
 gem 'webpush'
 

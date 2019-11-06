@@ -26,5 +26,9 @@ module Blz
     config.generators.helper = false
     config.active_job.queue_adapter = :sidekiq
     config.active_record.default_timezone = :local
+
+    Raven.configure do |config|
+      config.dsn = ENV.fetch('SENTRY_DSN')
+    end
   end
 end

@@ -3,9 +3,11 @@
 class ApplicationController < ActionController::Base
   skip_around_action :set_locale_from_url
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
+  before_action :set_raven_context
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   before_action :check_user
+
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError do
@@ -50,5 +52,12 @@ class ApplicationController < ActionController::Base
       sign_out_and_redirect('user')
       flash[:error] = 'Seu usuário está bloqueado'
     end
+  end
+
+  private
+
+  def set_raven_context
+    Raven.user_context(email: current_user.email) if current_user
+    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
   end
 end
