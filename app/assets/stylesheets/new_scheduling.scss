@@ -49,8 +49,8 @@
   }
 
   .custom_form {
-    input {
-      padding-right: 210px;
+    input.readonly {
+      border: 0px;
     }    
   }
 }

@@ -1,33 +1,36 @@
 <div class="columns is-multiline custom_form">
   <div class="column is-12">
+    <p class="is-size-5 has-text-weight-medium has-text-black">Local para atendimento</p>
+  </div>
+  <div class="column is-6">
     <div class="field">
       <label class="label has-text-grey has-text-weight-normal">CEP <small class="is-danger">*</small></label>
       <div class="control">
-        <%= f.text_field :zipcode, class: 'input zipcode address_field', required: true, placeholder:"Qual o CEP do endereço do estabelecimento ?", data: { provider: :zipcode } %>
+        <%= f.text_field :zipcode, class: 'input zipcode address_field', required: true, placeholder:"Qual o CEP ?", data: { provider: :zipcode } %>
       </div>
     </div>
   </div>
-  <div class="column is-12">
-    <div class="field">
-      <label class="label has-text-grey has-text-weight-normal">Rua <small class="is-danger">*</small></label>
-      <div class="control">
-        <%= f.text_field :street, class: 'input address_field', required: true, placeholder:"Rua do seu estabelecimento ?", data: { provider: :street }, readonly: true %>
-      </div>
-    </div>
-  </div>
-  <div class="column is-12">
-    <div class="field">
-      <label class="label has-text-grey has-text-weight-normal">Bairro <small class="is-danger">*</small></label>
-      <div class="control">
-        <%= f.text_field :neighborhood, class: 'input address_field', required: true, placeholder:"Bairro do seu estabelecimento", data: { provider: :neighborhood }, readonly: true %>
-      </div>
-    </div>
-  </div>
-  <div class="column is-12">
+  <div class="column is-6">
     <div class="field">
       <label class="label has-text-grey has-text-weight-normal">Numero <small class="is-danger">*</small></label>
       <div class="control">
-        <%= f.text_field :number, class: 'input address_field', required: true, placeholder:"Numero do seu estabelecimento ?" %>
+        <%= f.text_field :number, class: 'input address_field', required: true, placeholder:"informe o número" %>
+      </div>
+    </div>
+  </div>
+  <div class="column is-6">
+    <div class="field">
+      <label class="label has-text-grey has-text-weight-normal">Rua</label>
+      <div class="control">
+        <%= f.text_field :street, class: 'input address_field readonly', required: true, placeholder:"busca a partir do CEP", data: { provider: :street }, readonly: true %>
+      </div>
+    </div>
+  </div>
+  <div class="column is-6">
+    <div class="field">
+      <label class="label has-text-grey has-text-weight-normal">Bairro</label>
+      <div class="control">
+        <%= f.text_field :neighborhood, class: 'input address_field readonly', required: true, placeholder:"busca a partir do CEP", data: { provider: :neighborhood }, readonly: true %>
       </div>
     </div>
   </div>
