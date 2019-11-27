@@ -8,6 +8,16 @@ header {
     }
 
     .navbar-brand {
+      @include touch {
+        width: 30%;
+        display: inline-block;
+        height: 50px;
+
+        .navbar-item {
+          padding: 0px;
+        }
+      }
+
       a.is-center {
         flex-grow: 1;
         flex-direction: column;
@@ -19,28 +29,21 @@ header {
       }
     }
 
-    .navbar-brand > a.navbar-item, .navbar-menu {
-      opacity: 1;
-      -webkit-transition: opacity .2s ease-in-out;
-      -moz-transition: opacity .2s ease-in-out;
-      -ms-transition: opacity .2s ease-in-out;
-      -o-transition: opacity .2s ease-in-out;
-      transition: opacity .2s ease-in-out;
-
-      &.is-unactive {
-        @include mobile {
-          opacity: .2;
-        }
-      }
-    }
-
     .navbar-menu {
       background-color: transparent;
 
       @include touch {
-        margin-top: -68px;
-        padding-bottom: 44px;
+        width: 65%;
+        display: inline-block;
         box-shadow: none;
+        padding: 0px;
+        margin: 0px;
+        min-height: 3.25rem;
+        height: 50px;
+
+        .navbar-end {
+          display: inline-block;
+        }
       }
 
       .navbar-item {
@@ -49,29 +52,6 @@ header {
         }
       }
 
-      @include mobile {
-        a:nth-child(2) {
-          margin-left: 0px;
-        }
-      }
-
-      @include desktop {
-        a:nth-child(2) {
-          margin-right: 15px;
-          margin-left: 15px;
-        }
-      }
-
-      @include touch {
-        a.button:first-child, a.button:nth-child(3) {
-          margin-right: 50px;
-          margin-left: 5px;
-        }
-
-        a.button:last-child {
-          margin-right: 5px;
-        }
-      }
     }
 
     a {

@@ -16,6 +16,15 @@
       <% end %>
     </div>
   </div>
+  <div class="hs-wrapper">  
+    <div class="hs full">
+      <% @services.each do |service| %>
+        <div class="item">
+          <%= render 'service_card', service: service %>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <div class="section-category">
     <div class="container">
       <h1 class="has-text-grey is-size-4 has-text-centered">Explore nossos serviços</h1>

@@ -11,14 +11,9 @@
         <% end %>
         <a class="navbar-item is-size-3 <%= to_back ? 'is-center' : '' %>" href="/">
           BLZ
-        </a>
-        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+        </a>        
       </div>
-      <div class="navbar-menu" id="navMenu">
+      <div class="navbar-menu <%= to_back ? '' : 'is-active' %>">
         <div class="navbar-end">
           <div class="navbar-item">
             <% if user_signed_in? && establishment? %>
