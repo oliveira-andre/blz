@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Establishment < ApplicationRecord
   enum status: %i[analyze approved disapproved canceled]
 
@@ -46,8 +48,6 @@ class Establishment < ApplicationRecord
   end
 
   def photo_type
-    if photo.attached? && !photo.content_type.in?(%(image/jpeg image/png))
-      errors.add(:photo, 'com formato inválido')
-    end
+    errors.add(:photo, 'com formato inválido') if photo.attached? && !photo.content_type.in?(%(image/jpeg image/png))
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfessionalServicesController < ApplicationController
   def create
     @p_s = ProfessionalService.new professional_service_params

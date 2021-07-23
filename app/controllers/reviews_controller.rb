@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   before_action :load_scheduling
 
@@ -6,7 +8,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
 
     if @review.save
-      flash[:success] =  'Avaliado com sucesso!'
+      flash[:success] = 'Avaliado com sucesso!'
     else
       @review.errors.full_messages.each { |error| flash[:error] = error }
     end

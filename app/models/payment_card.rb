@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentCard < ApplicationRecord
   enum status: %i[active inactive]
 

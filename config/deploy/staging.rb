@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :branch, 'master'
 set :server_address, '34.95.219.48'
 ask(:password, nil, echo: false)

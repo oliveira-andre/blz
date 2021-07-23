@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PushNotificationsController < ApplicationController
   skip_before_action :authenticate_user!
 
@@ -15,5 +17,4 @@ class PushNotificationsController < ApplicationController
       }
     )
   end
-  
 end

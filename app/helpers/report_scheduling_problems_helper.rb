@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReportSchedulingProblemsHelper
   def report_problem_category_collection
     ReportProblem.categories.map do |category|

@@ -24,7 +24,7 @@ RSpec.describe SchedulingBusiesController, type: :controller do
         end
       end
 
-      context "when trying to create busy scheduling in the past" do
+      context 'when trying to create busy scheduling in the past' do
         it 'show error and stay in the same page' do
           schedule = FactoryBot.create(:schedule)
           sign_in schedule.professional_service.service.establishment.user

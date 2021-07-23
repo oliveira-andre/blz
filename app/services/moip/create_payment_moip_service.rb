@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CreatePaymentMoipService
   class << self
     def execute(moip_order_id, payment_card)

@@ -415,7 +415,7 @@ RSpec.describe SchedulingController, type: :controller do
         it 'cancel with success and not block the user' do
           scheduling = create(:scheduling)
           sign_in scheduling.professional_service.service.establishment
-                                                               .user
+                            .user
           delete :destroy, params: {
             id: scheduling.id,
             scheduling: {

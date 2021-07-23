@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CountViewService
   class << self
     def execute(service)

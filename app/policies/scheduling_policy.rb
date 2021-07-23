@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchedulingPolicy < ApplicationPolicy
   def new?
     user.establishment.nil?

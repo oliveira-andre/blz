@@ -6,11 +6,11 @@ module ServicesHelper
     (30..300).step(15).each do |i|
       hora = (i / 60.0).divmod 1
       minutos = (hora[1].round(2) * 60).floor
-      if hora[0] < 1
-        duration_service_range << ["#{i} m", i]
-      else
-        duration_service_range << ["#{hora[0]}h#{minutos}m", i]
-      end
+      duration_service_range << if hora[0] < 1
+                                  ["#{i} m", i]
+                                else
+                                  ["#{hora[0]}h#{minutos}m", i]
+                                end
     end
     duration_service_range
   end

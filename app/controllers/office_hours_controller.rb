@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OfficeHoursController < ApplicationController
   before_action :clean_hours, only: :create
 
@@ -26,6 +28,7 @@ class OfficeHoursController < ApplicationController
     params[:hour_begin].delete!(':')
     params[:hour_end].delete!(':')
   end
+
   def office_hours_params
     params.permit(:hour_begin, :hour_end, :week_day, :professional_id)
   end

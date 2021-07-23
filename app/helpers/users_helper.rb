@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def first_name(record)
     record.name.split(' ').first

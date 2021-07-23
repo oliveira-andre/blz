@@ -23,9 +23,7 @@ module Admin
         flash[:success] = 'Reprovado com sucesso'
       end
 
-      if @establishment.update!(establishment_params)
-        flash[:success] = 'Estabelecimento atualizado com sucesso'
-      end
+      flash[:success] = 'Estabelecimento atualizado com sucesso' if @establishment.update!(establishment_params)
 
       redirect_to admin_establishments_path
     rescue ActiveRecord::RecordInvalid => e

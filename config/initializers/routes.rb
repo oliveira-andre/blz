@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RouteTranslator.config do |config|
   config.available_locales = ['pt-BR']
   config.force_locale = true

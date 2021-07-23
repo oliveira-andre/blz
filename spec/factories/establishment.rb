@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :establishment do
     name          { FFaker::Lorem.word }
@@ -16,7 +18,7 @@ FactoryBot.define do
       name          { '' }
       timetable     { '' }
     end
-  
+
     trait :with_services do
       after(:create) do |establishment, _evaluator|
         create_list(:service, 10, establishment: establishment)

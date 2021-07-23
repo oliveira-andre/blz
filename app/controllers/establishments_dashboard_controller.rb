@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EstablishmentsDashboardController < ApplicationController
   def index
     @establishment = Establishment.find(params[:id])

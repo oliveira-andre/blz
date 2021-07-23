@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BuildScheduleJob < ApplicationJob
   queue_as :critical
 

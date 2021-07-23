@@ -23,9 +23,7 @@ module Admin
         flash[:success] = 'Recusado com sucesso'
       end
 
-      if @service.update_and_rebuild_schedule(service_params)
-        flash[:success] = 'Serviço atualizado com sucesso'
-      end
+      flash[:success] = 'Serviço atualizado com sucesso' if @service.update_and_rebuild_schedule(service_params)
       redirect_to admin_services_path
     rescue ActiveRecord::RecordInvalid => e
       e.record.errors.full_messages.each { |error| flash[:error] = error }

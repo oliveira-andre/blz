@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RebuildAllSchedulesJob < ApplicationJob
   queue_as :critical
 

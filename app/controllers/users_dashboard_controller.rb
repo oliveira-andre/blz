@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersDashboardController < ApplicationController
   def index
     @status = params[:users_dashboard_status]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ## Categories
 Category.find_or_create_by!(
   name: 'Barbearia',

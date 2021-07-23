@@ -103,37 +103,25 @@ class Scheduling < ApplicationRecord
   def verify_finishing
     return unless finished?
 
-    unless (Time.now.utc - 4.hours) > date
-      @errors.add(:scheduling, 'não pode ser finalizado antes a data combinada')
-    end
+    @errors.add(:scheduling, 'não pode ser finalizado antes a data combinada') unless (Time.now.utc - 4.hours) > date
 
-    unless Scheduling.find(id).scheduled?
-      @errors.add(:scheduling, 'não pode ser finalizado se não foi aceito')
-    end
+    @errors.add(:scheduling, 'não pode ser finalizado se não foi aceito') unless Scheduling.find(id).scheduled?
   end
 
   def cancel_fields
     return unless canceled?
 
-    if !canceled_reason || canceled_reason.blank?
-      @errors.add(:canceled_reason, 'não pode ficar em branco')
-    end
+    @errors.add(:canceled_reason, 'não pode ficar em branco') if !canceled_reason || canceled_reason.blank?
 
-    if !canceled_at || canceled_at.blank?
-      @errors.add(:canceled_at, 'não pode ficar em branco')
-    end
+    @errors.add(:canceled_at, 'não pode ficar em branco') if !canceled_at || canceled_at.blank?
 
-    if !canceled_by || canceled_by.blank?
-      @errors.add(:canceled_by, 'não pode ficar em branco')
-    end
+    @errors.add(:canceled_by, 'não pode ficar em branco') if !canceled_by || canceled_by.blank?
   end
 
   def verify_canceling
     return unless canceled?
 
-    if (Time.now.utc - 4.hours) > date
-      @errors.add(:scheduling, 'não pode ser cancelado após a data combinada')
-    end
+    @errors.add(:scheduling, 'não pode ser cancelado após a data combinada') if (Time.now.utc - 4.hours) > date
   end
 
   def verify_in_home
@@ -147,17 +135,13 @@ class Scheduling < ApplicationRecord
   def verify_accepting
     return unless scheduled?
 
-    if (Time.now.utc - 4.hours) > date
-      @errors.add(:scheduling, 'não pode ser aceito após a data combinada')
-    end
+    @errors.add(:scheduling, 'não pode ser aceito após a data combinada') if (Time.now.utc - 4.hours) > date
   end
 
   def verify_recusing
     return unless recused?
 
-    if (Time.now.utc - 4.hours) > date
-      @errors.add(:scheduling, 'não pode ser recusado após a data combinada')
-    end
+    @errors.add(:scheduling, 'não pode ser recusado após a data combinada') if (Time.now.utc - 4.hours) > date
   end
 
   def set_schedule_busy

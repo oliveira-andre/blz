@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FiltersService
   class << self
     def execute(filter_params)

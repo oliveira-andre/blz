@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Views < ActiveRecord::Migration[5.2]
   def self.up
     create_table :views do |t|

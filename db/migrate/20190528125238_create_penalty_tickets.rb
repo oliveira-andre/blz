@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePenaltyTickets < ActiveRecord::Migration[5.2]
   def change
     create_table :penalty_tickets do |t|

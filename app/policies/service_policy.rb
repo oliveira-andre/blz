@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ServicePolicy < ApplicationPolicy
   def index?
     user.establishment.present? && record.user == user

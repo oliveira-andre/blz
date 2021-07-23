@@ -1,33 +1,35 @@
+# frozen_string_literal: true
+
 module PaymentsHelper
   ESTADOS_BRASILEIROS = [
-    ['Rondônia', 'RO'],
-    ['Acre', 'AC'],
-    ['Alagoas', 'AL'],
-    ['Amapá', 'AP'],
-    ['Amazonas', 'AM'],
-    ['Bahia', 'BA'],
-    ['Ceará', 'CE'],
+    %w[Rondônia RO],
+    %w[Acre AC],
+    %w[Alagoas AL],
+    %w[Amapá AP],
+    %w[Amazonas AM],
+    %w[Bahia BA],
+    %w[Ceará CE],
     ['Distrito Federal', 'DF'],
     ['Espírito Santo', 'ES'],
-    ['Goiás', 'GO'],
-    ['Maranhão', 'MA'],
+    %w[Goiás GO],
+    %w[Maranhão MA],
     ['Mato Grosso', 'MT'],
     ['Mato Grosso do Sul', 'MS'],
     ['Minas Gerais', 'MG'],
-    ['Pará', 'PA'],
-    ['Paraíba', 'PB'],
-    ['Paraná', 'PR'],
-    ['Pernambuco', 'PE'],
-    ['Piauí', 'PI'],
+    %w[Pará PA],
+    %w[Paraíba PB],
+    %w[Paraná PR],
+    %w[Pernambuco PE],
+    %w[Piauí PI],
     ['Rio de Janeiro', 'RJ'],
     ['Rio Grande do Norte', 'RN'],
     ['Rio Grande do Sul', 'RS'],
-    ['Roraima', 'RR'],
+    %w[Roraima RR],
     ['Santa Catarina', 'SC'],
     ['São Paulo', 'SP'],
-    ['Sergipe', 'SE'],
-    ['Tocantins', 'TO']
-  ]
+    %w[Sergipe SE],
+    %w[Tocantins TO]
+  ].freeze
 
   def render_states(name)
     select_tag(name, options_for_select(ESTADOS_BRASILEIROS))

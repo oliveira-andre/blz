@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportSchedulingProblemsController < ApplicationController
   before_action :load_scheduling
 
@@ -17,8 +19,8 @@ class ReportSchedulingProblemsController < ApplicationController
 
   def report_params
     params.require(:report_problem).permit(:category, :body)
-                                   .merge(user: current_user,
-                                          reportable: @scheduling)
+          .merge(user: current_user,
+                 reportable: @scheduling)
   end
 
   def load_scheduling

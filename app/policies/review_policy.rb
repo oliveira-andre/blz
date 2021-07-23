@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewPolicy < ApplicationPolicy
   def new?(scheduling)
     scheduling.finished? && scheduling.user == user && scheduling.review.nil?

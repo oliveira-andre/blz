@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Service < ApplicationRecord
   enum status: %i[approved recused awaiting_avaliation archived]
   enum local_type: %i[home establishment both]

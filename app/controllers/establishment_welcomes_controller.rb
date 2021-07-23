@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EstablishmentWelcomesController < ApplicationController
   before_action :load_establishment
 

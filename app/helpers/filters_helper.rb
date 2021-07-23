@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FiltersHelper
   def category?(key)
     key == 'category_id'

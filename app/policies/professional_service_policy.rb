@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfessionalServicePolicy < ApplicationPolicy
   def create?
     record.service.establishment.user == user &&

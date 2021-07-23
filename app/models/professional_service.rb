@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfessionalService < ApplicationRecord
   belongs_to :professional
   belongs_to :service
@@ -15,7 +17,6 @@ class ProfessionalService < ApplicationRecord
 
     schedules.order(:date).pluck(:date)
              .uniq { |date| date.strftime('%d/%m/%Y') }.map! do |date|
-
       schedule = schedules.select(:date, :free).where(date: date.all_day).order(:date)
       {
         I18n.l(date, format: :day_month) => schedule

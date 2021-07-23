@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RecusedSchedulingMailer < ApplicationMailer
   def to_establishment(scheduling)
     @scheduling = scheduling

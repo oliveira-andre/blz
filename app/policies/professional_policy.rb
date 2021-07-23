@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfessionalPolicy < ApplicationPolicy
   def new?
     record.establishment.user == user

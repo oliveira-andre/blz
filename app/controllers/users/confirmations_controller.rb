@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   class ConfirmationsController < Devise::ConfirmationsController
     before_action :load_user, only: :show

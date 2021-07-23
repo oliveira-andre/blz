@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  skip_around_action :set_locale_from_url
+  # skip_around_action :set_locale_from_url
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
   before_action :set_raven_context
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -27,12 +27,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.establishment.nil?
       stored_location_for(resource) || root_path
+    elsif resource.sign_in_count <= 1
+      establishment_welcomes_path(resource.establishment)
     else
-      if resource.sign_in_count <= 1
-        establishment_welcomes_path(resource.establishment)
-      else
-        establishments_dashboard_path(resource.establishment)
-      end
+      establishments_dashboard_path(resource.establishment)
     end
   end
 

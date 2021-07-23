@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FilterServicesController < ApplicationController
   skip_before_action :authenticate_user!
   include Pagy::Backend

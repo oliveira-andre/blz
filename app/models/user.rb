@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 
 class User < ApplicationRecord
@@ -58,11 +59,8 @@ class User < ApplicationRecord
   end
 
   def cpf_change
-    if cpf_changed? && User.find(id).cpf.present?
-      errors.add(:cpf, 'Não pode ser atualizado')
-    end
+    errors.add(:cpf, 'Não pode ser atualizado') if cpf_changed? && User.find(id).cpf.present?
   end
-
 
   def self.establishement_users_ids
     Establishment.all.pluck(:user_id)
@@ -78,8 +76,6 @@ class User < ApplicationRecord
   end
 
   def photo_type
-    if photo.attached? && !photo.content_type.in?(%(image/jpeg image/png))
-      errors.add(:photo, 'com formato inválido')
-    end
+    errors.add(:photo, 'com formato inválido') if photo.attached? && !photo.content_type.in?(%(image/jpeg image/png))
   end
 end

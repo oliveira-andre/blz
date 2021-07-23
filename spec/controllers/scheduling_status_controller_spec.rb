@@ -4,10 +4,10 @@ RSpec.describe SchedulingStatusController, type: :controller do
   describe 'nonexistent status error' do
     let(:scheduling) { FactoryBot.create(:scheduling) }
 
-    context "try to access a nonexistent status" do
+    context 'try to access a nonexistent status' do
       it 'show error and stay in the same page' do
         sign_in scheduling.professional_service.service.establishment.user
-        patch :update, params: { 
+        patch :update, params: {
           scheduling_id: scheduling.id,
           status: :finalized
         }

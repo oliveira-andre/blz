@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchedulingReminderJob < ApplicationJob
   queue_as :critical
 

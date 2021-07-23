@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportProblem < ApplicationRecord
   enum category: %i[not_appear bad_treatment]
 

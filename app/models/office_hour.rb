@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OfficeHour < ApplicationRecord
   default_scope { order(:week_day, :hour_begin) }
 
@@ -20,13 +22,9 @@ class OfficeHour < ApplicationRecord
   private
 
   def during_hour_work
-    if hour_end > begin_work && hour_end < end_work
-      errors.add(:hour_end, 'já está sendo usada!')
-    end
+    errors.add(:hour_end, 'já está sendo usada!') if hour_end > begin_work && hour_end < end_work
 
-    if hour_begin < end_work && hour_begin > begin_work
-      errors.add(:hour_begin, 'já está sendo usada!')
-    end
+    errors.add(:hour_begin, 'já está sendo usada!') if hour_begin < end_work && hour_begin > begin_work
   end
 
   def hours_validate

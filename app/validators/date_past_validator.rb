@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DatePastValidator < ActiveModel::Validator
   def validate(record)
     @record = record

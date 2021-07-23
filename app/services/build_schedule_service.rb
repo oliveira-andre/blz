@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BuildScheduleService
   class << self
     def execute(professional)
@@ -32,7 +34,7 @@ class BuildScheduleService
 
     def date_join_time(date, hour_int)
       hour = hour_int.to_s.insert(hour_int.to_s.length - 2, ':')
-      (date.to_s + ' ' + hour).to_datetime
+      "#{date} #{hour}".to_datetime
     end
 
     def duration_to_day(service)

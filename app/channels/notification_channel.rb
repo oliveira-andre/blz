@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationChannel < ApplicationCable::Channel
   def subscribed
     return unless user_authorized?

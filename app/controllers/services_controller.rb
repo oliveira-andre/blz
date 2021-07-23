@@ -51,11 +51,11 @@ class ServicesController < ApplicationController
 
     if @service.update_and_rebuild_schedule(service_params)
       respond_to do |format|
-        format.html {
+        format.html do
           redirect_to establishment_services_path(
             @service.establishment
           ), notice: 'Serviço atualizado com sucesso'
-        }
+        end
         format.js
       end
     else

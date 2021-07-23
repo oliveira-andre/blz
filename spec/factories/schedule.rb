@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # doc to datetime ffaker: https://www.rubydoc.info/github/ffaker/ffaker/FFaker/Time#datetime-instance_method
 
 FactoryBot.define do

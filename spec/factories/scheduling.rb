@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :scheduling do
     association :user, :completed
@@ -5,11 +7,11 @@ FactoryBot.define do
       schedule = create(:schedule)
       scheduling.professional_service = schedule.professional_service
       scheduling.date = schedule.date
-      if schedule.professional_service.service.home?
-        scheduling.in_home = 1
-      else
-        scheduling.in_home = 0
-      end
+      scheduling.in_home = if schedule.professional_service.service.home?
+                             1
+                           else
+                             0
+                           end
     end
 
     trait :busy do

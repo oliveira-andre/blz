@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EstablishmentMailer < ApplicationMailer
   def registration_success(establishment)
     @establishment = establishment
