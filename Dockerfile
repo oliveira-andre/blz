@@ -1,36 +1,49 @@
-FROM ruby:2.5.3-slim
- 
-# Instala nossas dependencias
-RUN apt-get update && apt-get install -qq -y --no-install-recommends \
-    build-essential libpq-dev imagemagick curl
- 
-# Instalar o GNUPG
-RUN apt-get install -y gnupg
- 
-# Instalar NodeJS v8
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-    && apt-get install -y nodejs
- 
-# Instalar o Yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update && apt-get install -y yarn
- 
- 
-# Seta nosso path
-ENV INSTALL_PATH /blz
- 
-# Cria nosso diretório
-RUN mkdir -p $INSTALL_PATH
- 
-# Seta o nosso path como o diretório principal
-WORKDIR $INSTALL_PATH
- 
-# Copia o nosso Gemfile para dentro do container
-COPY Gemfile ./
- 
-# Seta o path para as Gems
-ENV BUNDLE_PATH /box
- 
-# Copia nosso código para dentro do container
+FROM ruby:2.6.1-alpine AS builder
+
+LABEL maintainer="jeanine@littleforestconsulting.com"
+
+RUN apk update && apk upgrade && apk add --update --no-cache \
+  build-base \
+  curl-dev \
+  nodejs \
+  postgresql-dev \
+  tzdata \
+  vim \
+  yarn && rm -rf /var/cache/apk/*
+
+ARG RAILS_ROOT=/usr/src/app/
+WORKDIR $RAILS_ROOT
+
+COPY package*.json yarn.lock $RAILS_ROOT
+RUN yarn install --check-files
+
+COPY Gemfile* $RAILS_ROOT
+RUN bundle config --global frozen 1 && bundle install
+
 COPY . .
+
+### BUILD STEP DONE ###
+
+FROM ruby:2.6.1-alpine
+
+ARG RAILS_ROOT=/usr/src/app/
+
+RUN apk update && apk upgrade && apk add --update --no-cache \
+  bash \
+  imagemagick \
+  nodejs \
+  postgresql-client \
+  tzdata \
+  vim \
+  yarn && rm -rf /var/cache/apk/*
+
+WORKDIR $RAILS_ROOT
+
+COPY --from=builder $RAILS_ROOT $RAILS_ROOT
+COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
+
+EXPOSE 3000
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+
