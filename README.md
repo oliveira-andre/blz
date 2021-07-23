@@ -1,24 +1,35 @@
-# README
+# BLZ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+This project initialized as a new business the idea was store all people that works with beauty like
+hairdresser or barber, then customers would search by your required service and search your available time,
+but we didnt won enough cash to keep the business open, then we converted this project to open source
+```
 
-Things you may want to cover:
+## How to run
 
-* Ruby version
+build and run the server
 
-* System dependencies
+```
+sudo docker-compose up --build
+```
 
-* Configuration
+create and migrate database
 
-* Database creation
+```
+sudo docker-compose run --rm web_app rails db:create db:migrate
+```
 
-* Database initialization
+## How to test
 
-* How to run the test suite
+rspec
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+sudo docker-compose run --rm web_app rspec
+```
 
-* Deployment instructions
+rubocop
 
-* ...
+```
+sudo docker-compose run --rm web_app rubocop -A
+```
