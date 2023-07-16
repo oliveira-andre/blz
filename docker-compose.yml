@@ -11,8 +11,12 @@ services:
       - config/docker.env
     depends_on:
       - database
+      - redis
+      - jobs
     stdin_open: true
     tty: true
+    networks:
+      - network
 
   database:
     image: postgres:12.3
@@ -22,6 +26,37 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - '5435:5432'
+    networks:
+      - network
+
+  redis:
+    image: 'redis:7.0.5-alpine'
+    command: redis-server
+    ports:
+      - '6379:6379'
+    env_file:
+      - config/docker.env
+    volumes:
+      - 'redis_client:/var/lib/redis/data'
+    networks:
+      - network
+
+  jobs:
+    depends_on:
+      - 'redis'
+    build: .
+    command: bundle exec sidekiq -q default
+    env_file:
+      - config/docker.env
+    volumes:
+      - '.:/usr/src/app'
+    networks:
+      - network
 
 volumes:
   db_data:
+  redis_client:
+
+networks:
+  network:
+    driver: bridge

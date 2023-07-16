@@ -44,7 +44,7 @@ class Establishment < ApplicationRecord
   end
 
   def send_registration_success
-    EstablishmentMailer.registration_success(self).deliver_later
+    #EstablishmentMailer.registration_success(self).deliver_later
   end
 
   def photo_type

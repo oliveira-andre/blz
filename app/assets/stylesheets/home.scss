@@ -104,6 +104,10 @@
     overflow-y: scroll;
     padding: 20px 0;    
 
+    .is-light {
+      width: 100%;
+    }
+
     .hs {
       display: grid;
       grid-gap: calc(20px / 2);

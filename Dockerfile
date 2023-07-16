@@ -1,7 +1,5 @@
 FROM ruby:2.6.1-alpine AS builder
 
-LABEL maintainer="jeanine@littleforestconsulting.com"
-
 RUN apk update && apk upgrade && apk add --update --no-cache \
   build-base \
   curl-dev \
@@ -9,6 +7,7 @@ RUN apk update && apk upgrade && apk add --update --no-cache \
   postgresql-dev \
   tzdata \
   vim \
+  python2 \
   yarn && rm -rf /var/cache/apk/*
 
 ARG RAILS_ROOT=/usr/src/app/
@@ -35,6 +34,7 @@ RUN apk update && apk upgrade && apk add --update --no-cache \
   postgresql-client \
   tzdata \
   vim \
+  python2 \
   yarn && rm -rf /var/cache/apk/*
 
 WORKDIR $RAILS_ROOT
